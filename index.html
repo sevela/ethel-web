@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ET/HEL — AI asistentka pro Helios iNuvio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08080a;
+    --bg-elevated: #0e0e12;
+    --bg-card: #111116;
+    --bg-card-hover: #16161d;
+    --border: #1c1c24;
+    --border-hover: #2a2a36;
+    --text: #eaeaf0;
+    --text-secondary: #9494a8;
+    --text-dim: #5c5c72;
+    --accent: #06b6d4;
+    --accent-light: #22d3ee;
+    --accent-glow: rgba(6, 182, 212, 0.10);
+    --accent-glow-strong: rgba(6, 182, 212, 0.22);
+    --green: #34d399;
+    --green-dim: rgba(52, 211, 153, 0.15);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 20px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Sora', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ===== GRAIN OVERLAY ===== */
+  body::after {
+    content: '';
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.5;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 0 2rem; height: 64px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(8, 8, 10, 0.75); backdrop-filter: blur(24px) saturate(1.4);
+    border-bottom: 1px solid rgba(28, 28, 36, 0.6);
+    transition: all 0.3s;
+  }
+  nav.scrolled { background: rgba(8, 8, 10, 0.92); }
+  .nav-logo {
+    font-family: 'Space Mono', monospace; font-size: 1.25rem;
+    font-weight: 700; letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 0;
+  }
+  .nav-logo .et {
+    color: var(--text);
+  }
+  .nav-logo .sep {
+    color: var(--text-dim);
+    margin: 0 0.05em; font-weight: 400;
+  }
+  .nav-logo .hel {
+    color: var(--accent);
+    text-shadow: 0 0 18px rgba(6,182,212,0.4);
+  }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+  /* ===== BRAND MARK INLINE ===== */
+  .brand {
+    font-family: 'Space Mono', monospace; font-weight: 700;
+    letter-spacing: 0.04em; white-space: nowrap;
+  }
+  .brand .et { color: var(--text); }
+  .brand .sep { color: var(--text-dim); font-weight: 400; }
+  .brand .hel { color: var(--accent); }
+
+  .nav-links a {
+    color: var(--text-dim); text-decoration: none;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.02em;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--accent) !important; color: #0a0f0e !important;
+    padding: 0.5rem 1.3rem !important; border-radius: var(--radius-sm) !important;
+    font-weight: 600 !important; transition: all 0.25s !important;
+  }
+  .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(6,182,212,0.3); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 8rem 2rem 4rem; position: relative; overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 900px;
+    background: radial-gradient(ellipse at center, rgba(6,182,212,0.07) 0%, rgba(6,182,212,0.025) 30%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(28,28,36,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(28,28,36,0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.45rem 1.1rem; border: 1px solid var(--border-hover);
+    border-radius: 100px; font-size: 0.78rem; color: var(--text-secondary);
+    margin-bottom: 2.5rem; background: var(--bg-elevated);
+    animation: fadeSlideDown 0.6s ease-out;
+  }
+  .hero-badge .pulse-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+    box-shadow: 0 0 8px rgba(52,211,153,0.5);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800;
+    letter-spacing: -0.01em; line-height: 1.12; margin-bottom: 1.5rem;
+    animation: fadeSlideUp 0.7s ease-out;
+  }
+  .hero h1 .accent {
+    color: var(--accent);
+    text-shadow: 0 0 60px rgba(6,182,212,0.3), 0 0 120px rgba(6,182,212,0.1);
+  }
+  .hero-sub {
+    font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text-secondary);
+    max-width: 560px; margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.75;
+    animation: fadeSlideUp 0.8s ease-out 0.1s both;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeSlideUp 0.9s ease-out 0.2s both;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    padding: 0.9rem 2rem; border-radius: var(--radius-sm); font-size: 0.92rem;
+    font-weight: 600; text-decoration: none; transition: all 0.3s;
+    cursor: pointer; border: none; font-family: 'Sora', sans-serif;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary {
+    background: var(--accent); color: #0a0f0e;
+    box-shadow: 0 0 0 0 rgba(6,182,212,0), 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(6,182,212,0.2), 0 8px 30px rgba(0,0,0,0.4);
+  }
+  .btn-ghost {
+    background: transparent; color: var(--text-secondary);
+    border: 1px solid var(--border-hover);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--text-dim); background: var(--bg-card); }
+
+  /* ===== CHAT MOCKUP ===== */
+  .chat-wrap {
+    padding: 0 2rem 6rem; display: flex; justify-content: center;
+    animation: fadeSlideUp 1s ease-out 0.35s both;
+  }
+  .chat-window {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); width: 100%; max-width: 440px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03) inset;
+    display: flex; flex-direction: column;
+  }
+  .chat-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--border);
+    background: rgba(14, 14, 18, 0.6);
+  }
+  .chat-avatar {
+    width: 34px; height: 34px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), rgba(6,182,212,0.4));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.65rem;
+    color: #0a0f0e; letter-spacing: 0.02em;
+  }
+  .chat-header-info { flex: 1; }
+  .chat-header-name { font-size: 0.85rem; font-weight: 600; }
+  .chat-header-status {
+    font-size: 0.68rem; color: var(--green); display: flex; align-items: center; gap: 0.3rem;
+  }
+  .chat-header-status .online-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .chat-header-ctx {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+    color: var(--text-dim); background: var(--bg); padding: 0.2rem 0.55rem;
+    border-radius: 5px; border: 1px solid var(--border);
+  }
+  .chat-body {
+    padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem;
+    min-height: 280px;
+  }
+  .chat-msg {
+    max-width: 82%; padding: 0.6rem 0.9rem; border-radius: 16px;
+    font-size: 0.84rem; line-height: 1.5;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .chat-msg.visible { opacity: 1; transform: translateY(0); }
+  .chat-msg.user {
+    align-self: flex-end; background: var(--accent); color: #0a0f0e;
+    border-bottom-right-radius: 4px; font-weight: 500;
+  }
+  .chat-msg.bot {
+    align-self: flex-start; background: var(--bg-elevated); color: var(--text-secondary);
+    border: 1px solid var(--border); border-bottom-left-radius: 4px; font-weight: 300;
+  }
+  .chat-msg.bot strong { color: var(--text); font-weight: 600; }
+  .chat-msg.bot .hl { color: var(--accent); font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.82em; }
+  .chat-typing {
+    align-self: flex-start; padding: 0.65rem 0.9rem;
+    background: var(--bg-elevated); border: 1px solid var(--border);
+    border-radius: 16px; border-bottom-left-radius: 4px;
+    display: none; gap: 0.28rem; align-items: center;
+  }
+  .chat-typing.visible { display: flex; }
+  .chat-typing span {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--text-dim);
+    animation: typingDot 1.4s ease-in-out infinite;
+  }
+  .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingDot {
+    0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(-3px); }
+  }
+  .chat-input-bar {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 0.9rem; border-top: 1px solid var(--border);
+    background: rgba(14, 14, 18, 0.4);
+  }
+  .chat-input-fake {
+    flex: 1; padding: 0.55rem 0.9rem; border-radius: 10px;
+    background: var(--bg); border: 1px solid var(--border);
+    font-size: 0.8rem; color: var(--text-dim); font-family: 'Sora', sans-serif;
+  }
+  .chat-send-btn {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--accent); border: none; cursor: default;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .chat-send-btn svg { width: 14px; height: 14px; fill: #0a0f0e; }
+
+  /* ===== SECTIONS COMMON ===== */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent);
+    margin-bottom: 1rem; font-weight: 500;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700;
+    letter-spacing: -0.015em; margin-bottom: 1rem; line-height: 1.18;
+  }
+  .section-desc {
+    color: var(--text-secondary); font-size: 1.05rem; font-weight: 300;
+    max-width: 580px; margin-bottom: 3.5rem; line-height: 1.7;
+  }
+
+  /* ===== FEATURES ===== */
+  .features { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .feature-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2rem 1.8rem;
+    transition: all 0.35s ease; position: relative; overflow: hidden;
+  }
+  .feature-card::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0; transition: opacity 0.35s;
+  }
+  .feature-card:hover {
+    border-color: var(--border-hover); background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.3), 0 0 0 1px rgba(6,182,212,0.06);
+  }
+  .feature-card:hover::after { opacity: 1; }
+  .feature-icon {
+    width: 44px; height: 44px; border-radius: 11px;
+    background: var(--accent-glow); border: 1px solid rgba(6,182,212,0.12);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.3rem; font-size: 1.2rem;
+  }
+  .feature-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+  .feature-card p { color: var(--text-secondary); font-size: 0.88rem; font-weight: 300; line-height: 1.6; }
+
+  /* ===== HOW IT WORKS ===== */
+  .how { padding: 6rem 2rem; max-width: 860px; margin: 0 auto; }
+  .steps { margin-top: 1rem; }
+  .step {
+    display: flex; gap: 2rem; padding: 2rem 0;
+    border-bottom: 1px solid var(--border); align-items: flex-start;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+    color: var(--accent); font-weight: 700; min-width: 50px; padding-top: 0.15rem;
+  }
+  .step-content h3 { font-size: 1.08rem; font-weight: 600; margin-bottom: 0.4rem; letter-spacing: -0.01em; }
+  .step-content p { color: var(--text-secondary); font-size: 0.92rem; font-weight: 300; line-height: 1.65; }
+
+  /* ===== USE CASES ===== */
+  .usecases { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .usecase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
+  .usecase {
+    padding: 1.6rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--bg-card); transition: all 0.3s;
+  }
+  .usecase:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateY(-2px); }
+  .usecase-q {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    color: var(--accent-light); margin-bottom: 0.7rem; line-height: 1.55;
+  }
+  .usecase-a { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+  /* ===== DATA SAFETY ===== */
+  .safety {
+    padding: 6rem 2rem; max-width: 860px; margin: 0 auto;
+    text-align: center;
+  }
+  .safety-box {
+    background: linear-gradient(180deg, rgba(234,179,8,0.04) 0%, var(--bg-card) 60%);
+    border: 1px solid rgba(234,179,8,0.16);
+    border-radius: var(--radius-lg); padding: 3.5rem 3rem;
+    position: relative; overflow: hidden;
+    box-shadow: 0 0 50px rgba(234,179,8,0.04);
+  }
+  .safety-box::before {
+    content: ''; position: absolute; top: -1px; left: 15%; right: 15%; height: 2px;
+    background: linear-gradient(90deg, transparent, #eab308, transparent);
+  }
+  .safety-icon { font-size: 2.5rem; margin-bottom: 1.5rem; }
+  .safety-box h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 1rem; color: #eab308;
+  }
+  .safety-box p { color: var(--text-secondary); font-size: 1rem; font-weight: 300; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+  .safety-pills {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem;
+    margin-top: 2rem;
+  }
+  .safety-pill {
+    padding: 0.45rem 1rem; border-radius: 100px; font-size: 0.78rem;
+    font-weight: 500; background: rgba(234,179,8,0.1); color: #eab308;
+    border: 1px solid rgba(234,179,8,0.18);
+  }
+
+  /* ===== PRICING ===== */
+  .pricing { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; text-align: center; }
+  .pricing .section-desc { margin-left: auto; margin-right: auto; }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items: stretch; }
+  .price-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 2.5rem 2rem;
+    position: relative; overflow: hidden; text-align: center;
+    display: flex; flex-direction: column;
+    transition: all 0.35s;
+  }
+  .price-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+  .price-card.featured {
+    border-color: var(--accent);
+    box-shadow: 0 0 40px rgba(6,182,212,0.08), 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .price-card.featured::before {
+    content: ''; position: absolute; top: -1px; left: 15%; right: 15%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+  .price-badge {
+    position: absolute; top: 1rem; right: 1rem;
+    font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 0.3rem 0.8rem; border-radius: 100px;
+    background: var(--accent); color: #0a0f0e;
+  }
+  .price-tier { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .price-subtitle { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1.2rem; font-weight: 300; }
+  .price-amount {
+    font-size: clamp(2.2rem, 4vw, 2.8rem); font-weight: 800;
+    letter-spacing: -0.04em; margin: 0.5rem 0 0.2rem;
+  }
+  .price-amount .currency { font-size: 0.45em; font-weight: 600; color: var(--text-secondary); vertical-align: super; }
+  .price-period { color: var(--text-dim); font-size: 0.82rem; font-weight: 400; margin-bottom: 0.2rem; }
+  .price-note { color: var(--text-dim); font-size: 0.75rem; margin-bottom: 1.5rem; }
+  .price-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 1.5rem; }
+  .price-features {
+    text-align: left; margin: 0 0 auto; padding: 0;
+    list-style: none; display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .price-features li {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    font-size: 0.85rem; color: var(--text-secondary); font-weight: 300; line-height: 1.45;
+  }
+  .price-features li .check {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--green-dim); color: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  .price-cta { margin-top: 2rem; }
+  .price-cta .btn { width: 100%; justify-content: center; font-size: 0.92rem; padding: 0.85rem; }
+  .price-cta .btn-outline {
+    background: transparent; color: var(--accent); border: 1px solid var(--accent);
+  }
+  .price-cta .btn-outline:hover { background: var(--accent-glow); }
+  .price-sub { color: var(--text-dim); font-size: 0.75rem; margin-top: 2.5rem; }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    padding: 8rem 2rem; text-align: center; position: relative;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 500px;
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .cta-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 1rem; position: relative; z-index: 1;
+  }
+  .cta-section p {
+    color: var(--text-secondary); font-size: 1.05rem; font-weight: 300;
+    margin-bottom: 2.5rem; position: relative; z-index: 1;
+    max-width: 480px; margin-left: auto; margin-right: auto;
+  }
+  .cta-section .btn { position: relative; z-index: 1; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 3rem 2rem; border-top: 1px solid var(--border);
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-left { font-size: 0.78rem; color: var(--text-dim); line-height: 1.8; }
+  .footer-left a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .footer-left a:hover { color: var(--text); }
+  .footer-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; color: var(--text-dim);
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .nav-links { gap: 0.8rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .features, .how, .usecases, .safety, .pricing { padding: 4rem 1.5rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .step { flex-direction: column; gap: 0.5rem; }
+    .safety-box { padding: 2.5rem 1.5rem; }
+    .price-card { padding: 2.5rem 1.5rem; }
+    .price-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    footer { flex-direction: column; text-align: center; }
+    .hero-grid { background-size: 40px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></div>
+  <div class="nav-links">
+    <a href="#features">Co umí</a>
+    <a href="#how">Jak to funguje</a>
+    <a href="#usecases">Příklady</a>
+    <a href="#pricing">Cena</a>
+    <a href="#cta" class="nav-cta">Vyzkoušet</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="pulse-dot"></span>
+      <span class="mono" style="font-size: 0.76rem;">Early access · Q2 2026</span>
+    </div>
+    <h1>Zeptejte se<br><span class="accent">Heliosu</span></h1>
+    <p class="hero-sub">
+      Kolik přišlo objednávek? Co znamená tahle sestava? Proč synchronizace stojí?
+      ET/HEL je AI asistentka, která rozumí vašemu Heliosu — a&nbsp;odpovídá česky.
+    </p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn btn-primary">Zjistit cenu</a>
+      <a href="#how" class="btn btn-ghost">Jak to funguje →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT MOCKUP -->
+<div class="chat-wrap">
+  <div class="chat-window">
+    <div class="chat-header">
+      <div class="chat-avatar">E/H</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">ET/HEL</div>
+        <div class="chat-header-status"><span class="online-dot"></span> online</div>
+      </div>
+      <div class="chat-header-ctx">Fakturace</div>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <div class="chat-typing" id="chat-typing"><span></span><span></span><span></span></div>
+    </div>
+    <div class="chat-input-bar">
+      <div class="chat-input-fake">Napište dotaz…</div>
+      <div class="chat-send-btn"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features reveal" id="features">
+  <div class="section-label">Funkce</div>
+  <h2 class="section-title">Váš Helios, konečně<br>s&nbsp;rozumem</h2>
+  <p class="section-desc">ET/HEL nenahrazuje váš ERP. Přidává mu inteligenci — nad daty, kódem i procesy. Vy se ptáte, ona odpovídá.</p>
+  <div class="features-grid">
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon">⚡</div>
+      <h3>Dotazy přirozeným jazykem</h3>
+      <p>Ptejte se na stav objednávek, skladu nebo faktur. Odpověď přijde česky, v celé větě — ne jako tabulka s tisíci řádky.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-icon">🧭</div>
+      <h3>Vysvětlí, na co se díváte</h3>
+      <p>Nevíte, co znamenají sloupce v sestavě? ET/HEL přečte definici a vysvětlí vám to lidsky — ideální pro nové kolegy.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-3">
+      <div class="feature-icon">🔍</div>
+      <h3>Čte váš kód</h3>
+      <p>Stored procedury, views, triggery. Vysvětlí logiku, najde závislosti a popíše chování — ať se nemusíte hrabat v SQL.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon">📊</div>
+      <h3>Hlídá logy za vás</h3>
+      <p>Povolte ET/HEL přístup k vybraným logům a dostanete upozornění, když něco nehraje. Anomálie, výpadky, skoky v sekvenci.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-icon">🛡️</div>
+      <h3>Data zůstávají u vás</h3>
+      <p>AI vidí strukturu databáze, ale ne vaše čísla. Do cloudu jdou jen metadata — výsledky se skládají lokálně na vašem serveru.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-3">
+      <div class="feature-icon">🧩</div>
+      <h3>Akce s vaším souhlasem</h3>
+      <p>ET/HEL může vygenerovat popis produktu, zkontrolovat adresu nebo klasifikovat doklad. Ale jen když kliknete na „ano".</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how reveal" id="how">
+  <div class="section-label">Jak to funguje</div>
+  <h2 class="section-title">Od instalace k prvnímu dotazu,<br>než dopijete kafe</h2>
+  <p class="section-desc">Žádná měsíční implementace. ET/HEL se napojí na váš Helios a začne odpovídat.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num mono">01</div>
+      <div class="step-content">
+        <h3>Spustíte instalační skript</h3>
+        <p>Jeden SQL skript nasadí ET/HEL do vaší databáze. Připojení k Heliosu přes standardní konfiguraci — bez zásahů do jádra systému.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num mono">02</div>
+      <div class="step-content">
+        <h3>ET/HEL se rozhlédne</h3>
+        <p>Automaticky projde strukturu databáze, stored procedury a konfiguraci. Vytvoří si znalostní mapu vaší konkrétní instance Heliosu.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num mono">03</div>
+      <div class="step-content">
+        <h3>Zadáte aktivační token</h3>
+        <p>Token dostanete po objednávce. O AI se staráme my — žádné vlastní API klíče, žádné technické nastavování. Prostě to funguje.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num mono">04</div>
+      <div class="step-content">
+        <h3>Ptejte se</h3>
+        <p>Otevřete ET/HEL přímo z Heliosu, napíšete otázku česky a dostanete odpověď s kontextem vaší firmy. Jako byste se ptali kolegy, který zná celý systém.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="usecases reveal" id="usecases">
+  <div class="section-label">Příklady</div>
+  <h2 class="section-title">Co se lidé ptají</h2>
+  <p class="section-desc">Reálné dotazy, reálné odpovědi — z vaší databáze, ne z internetu.</p>
+  <div class="usecase-grid">
+    <div class="usecase reveal">
+      <div class="usecase-q">"Kolik objednávek přišlo včera z e-shopu?"</div>
+      <div class="usecase-a">→ Včera 47 objednávek za 128 450 Kč. Tři čekají na ruční párování. Hotová odpověď, žádné otevírání sestav.</div>
+    </div>
+    <div class="usecase reveal">
+      <div class="usecase-q">"Na co se tady dívám? Co jsou tyhle sloupce?"</div>
+      <div class="usecase-a">→ ET/HEL přečte definici sestavy a popíše každý sloupec, doplněk i filtr. Ideální, když nastupuje nový kolega.</div>
+    </div>
+    <div class="usecase reveal">
+      <div class="usecase-q">"Vysvětli mi proceduru hp_DosleObj_NovaHlavicka02."</div>
+      <div class="usecase-a">→ Rozebere logiku krok po kroku, identifikuje závislosti na dalších objektech a popíše, co se stane při spuštění.</div>
+    </div>
+    <div class="usecase reveal">
+      <div class="usecase-q">"Je v synchronizačních logech něco divného?"</div>
+      <div class="usecase-a">→ Analyzuje logy a upozorní na skoky v sekvenci, chybové stavy nebo výpadky. Bez ručního scrollování.</div>
+    </div>
+    <div class="usecase reveal">
+      <div class="usecase-q">"Kolik faktur je po splatnosti víc než 30 dnů?"</div>
+      <div class="usecase-a">→ Odpověď s rozpadem podle odběratelů — bez jediného otevřeného reportu. Jeden dotaz, kompletní přehled.</div>
+    </div>
+    <div class="usecase reveal">
+      <div class="usecase-q">"Vygeneruj SEO popis pro tento produkt."</div>
+      <div class="usecase-a">→ ET/HEL si přečte vlastnosti produktu a navrhne text. Vy schválíte, upravíte nebo zahodíte — nic se nezmění bez vašeho souhlasu.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA SAFETY -->
+<section class="safety reveal">
+  <div class="safety-box">
+    <div class="safety-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4" stroke-opacity="0.9"/></svg></div>
+    <h2>Vaše data nikam neodchází</h2>
+    <p>ET/HEL zná strukturu vašeho Heliosu, ale nevidí reálná čísla. Do cloudu jde jen dotaz — odpověď se sestaví lokálně na vašem serveru. Žádné kopírování databáze, žádná rizika.</p>
+    <div class="safety-pills">
+      <span class="safety-pill">SQL běží u vás</span>
+      <span class="safety-pill">Žádný export dat</span>
+      <span class="safety-pill">Metadata only</span>
+      <span class="safety-pill">Vy rozhodujete</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing reveal" id="pricing">
+  <div class="section-label">Ceník</div>
+  <h2 class="section-title">Vyberte si, co potřebujete</h2>
+  <p class="section-desc">Bez skrytých poplatků. Měsíční předplatné, bez závazku — můžete zrušit kdykoliv.</p>
+  <div class="price-grid">
+
+    <!-- SOLO -->
+    <div class="price-card reveal reveal-delay-1">
+      <div class="price-tier">Solo</div>
+      <div class="price-subtitle">1 uživatel · 1 databáze</div>
+      <div class="price-amount">990 <span class="currency">Kč</span></div>
+      <div class="price-period">měsíčně</div>
+      <div class="price-note">bez DPH</div>
+      <hr class="price-divider">
+      <ul class="price-features">
+        <li><span class="check">✓</span>Neomezené dotazy</li>
+        <li><span class="check">✓</span>1 uživatel, 1 databáze (IČO)</li>
+        <li><span class="check">✓</span>Aktivace za minutu</li>
+        <li><span class="check">✓</span>Podpora emailem</li>
+        <li><span class="check">✓</span>Pravidelné aktualizace</li>
+      </ul>
+      <div class="price-cta">
+        <a href="{STRIPE_CHECKOUT_URL_SOLO}" class="btn btn-outline">Vybrat Solo</a>
+      </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="price-card featured reveal reveal-delay-2">
+      <div class="price-badge">Nejoblíbenější</div>
+      <div class="price-tier">Team</div>
+      <div class="price-subtitle">Neomezení uživatelé · 1 databáze</div>
+      <div class="price-amount">2 490 <span class="currency">Kč</span></div>
+      <div class="price-period">měsíčně</div>
+      <div class="price-note">bez DPH</div>
+      <hr class="price-divider">
+      <ul class="price-features">
+        <li><span class="check">✓</span>Neomezené dotazy</li>
+        <li><span class="check">✓</span>Neomezený počet uživatelů</li>
+        <li><span class="check">✓</span>1 databáze (IČO)</li>
+        <li><span class="check">✓</span>Prioritní podpora</li>
+        <li><span class="check">✓</span>Pravidelné aktualizace</li>
+      </ul>
+      <div class="price-cta">
+        <a href="{STRIPE_CHECKOUT_URL_TEAM}" class="btn btn-primary">Vybrat Team</a>
+      </div>
+    </div>
+
+    <!-- ENTERPRISE -->
+    <div class="price-card reveal reveal-delay-3">
+      <div class="price-tier">Enterprise</div>
+      <div class="price-subtitle">Neomezení uživatelé · více databází</div>
+      <div class="price-amount">4 990 <span class="currency">Kč</span></div>
+      <div class="price-period">měsíčně</div>
+      <div class="price-note">bez DPH</div>
+      <hr class="price-divider">
+      <ul class="price-features">
+        <li><span class="check">✓</span>Neomezené dotazy</li>
+        <li><span class="check">✓</span>Neomezený počet uživatelů</li>
+        <li><span class="check">✓</span>Více databází / IČO</li>
+        <li><span class="check">✓</span>Prioritní podpora</li>
+        <li><span class="check">✓</span>Onboarding call</li>
+        <li><span class="check">✓</span>Vlastní konfigurace promptů</li>
+      </ul>
+      <div class="price-cta">
+        <a href="{STRIPE_CHECKOUT_URL_ENTERPRISE}" class="btn btn-outline">Vybrat Enterprise</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="price-sub">Vyzkoušejte zdarma — prvních 20 dotazů bez registrace a bez platební karty.</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal" id="cta">
+  <h2>Chcete to zkusit?</h2>
+  <p>Napište nám a&nbsp;domluvíme se na připojení vaší instance. Nebo si rovnou stáhněte instalační skript.</p>
+  <a href="mailto:info@ethel.cz?subject=ET%2FHEL%20%E2%80%94%20m%C3%A1m%20z%C3%A1jem" class="btn btn-primary">
+    info@ethel.cz →
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    &copy; 2026 ET/HEL &middot; <a href="https://jakubsevela.cz">Jakub Ševela</a>
+    <br><span style="font-size: 0.72rem;">ET/HEL není produktem společnosti Asseco Solutions. Helios a Helios iNuvio jsou registrované ochranné známky.</span>
+  </div>
+  <div class="footer-right">v0.2 &middot; brno, cz</div>
+</footer>
+
+<script>
+/* ===== NAV SCROLL ===== */
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ===== REVEAL ON SCROLL ===== */
+var revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(function(el) {
+  revealObserver.observe(el);
+});
+
+/* ===== CHAT ANIMATION ===== */
+(function() {
+  var msgs = [
+    { from: 'user', text: 'Kolik objednávek přišlo včera z e-shopu?' },
+    { from: 'bot', text: 'Včera přijato <span class="hl">47 objednávek</span> z Upgates (e-shop Alfa). Celková hodnota <span class="hl">128 450 Kč</span> bez DPH.' },
+    { from: 'bot', text: '3 objednávky čekají na ruční párování. Chcete je zobrazit?' },
+    { from: 'user', text: 'Kolik faktur je po splatnosti víc než 30 dnů?' },
+    { from: 'bot', text: '<span class="hl">12 faktur</span> po splatnosti delší než 30 dnů, celkem <span class="hl">847 200 Kč</span>. Největší dlužník: <strong>ABC Trade s.r.o.</strong> — 3 faktury, 312 000 Kč.' }
+  ];
+
+  var body = document.getElementById('chat-body');
+  var typing = document.getElementById('chat-typing');
+  var i = 0;
+
+  function showNext() {
+    if (i >= msgs.length) return;
+    var msg = msgs[i];
+
+    if (msg.from === 'bot') {
+      typing.classList.add('visible');
+      setTimeout(function() {
+        typing.classList.remove('visible');
+        appendMsg(msg);
+        i++;
+        setTimeout(showNext, 1200);
+      }, 900 + Math.random() * 400);
+    } else {
+      appendMsg(msg);
+      i++;
+      setTimeout(showNext, 700);
+    }
+  }
+
+  function appendMsg(msg) {
+    var div = document.createElement('div');
+    div.className = 'chat-msg ' + msg.from;
+    div.innerHTML = msg.text;
+    body.insertBefore(div, typing);
+    requestAnimationFrame(function() {
+      div.classList.add('visible');
+    });
+    body.scrollTop = body.scrollHeight;
+  }
+
+  setTimeout(showNext, 1400);
+})();
+</script>
+
+</body>
+</html>
