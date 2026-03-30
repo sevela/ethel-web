@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ET/HEL — AI asistentka pro Helios iNuvio</title>
-<meta name="description" content="Zeptejte se Heliosu místo proklikávání. ET/HEL je AI asistentka, která rozumí vašim datům, sestavám i SQL — a odpovídá česky.">
+<meta name="description" content="ET/HEL je AI asistentka pro Helios iNuvio. Zeptejte se místo proklikávání — rozumí vašim datům, sestavám i SQL a odpovídá česky.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Jakub Ševela">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -14,7 +14,7 @@
 
 <!-- Open Graph -->
 <meta property="og:title" content="ET/HEL — AI asistentka pro Helios iNuvio">
-<meta property="og:description" content="Místo klikání se prostě zeptáte. ET/HEL odpoví na dotazy, vysvětlí sestavy a pomůže s orientací v datech — během sekund, česky.">
+<meta property="og:description" content="ET/HEL je AI asistentka pro Helios iNuvio. Místo klikání se prostě zeptáte — odpoví na dotazy, vysvětlí sestavy a pomůže s daty. Česky, během sekund.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ethel.cz">
 <meta property="og:locale" content="cs_CZ">
@@ -23,7 +23,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ET/HEL — AI asistentka pro Helios iNuvio">
-<meta name="twitter:description" content="Místo klikání se prostě zeptáte. ET/HEL odpoví na dotazy, vysvětlí sestavy a pomůže s orientací v datech — během sekund, česky.">
+<meta name="twitter:description" content="ET/HEL je AI asistentka pro Helios iNuvio. Místo klikání se prostě zeptáte — odpoví na dotazy, vysvětlí sestavy a pomůže s daty. Česky, během sekund.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -782,10 +782,82 @@
     .hero-grid { background-size: 40px 40px; }
   }
 </style>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "ET/HEL",
+      "alternateName": "Embedded Thinking for Helios",
+      "description": "AI asistentka pro Helios iNuvio ERP. Odpovídá na dotazy, vysvětluje sestavy a pomáhá s orientací v datech — česky, během sekund.",
+      "url": "https://ethel.cz",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows",
+      "inLanguage": "cs",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Standard",
+          "price": "1490",
+          "priceCurrency": "CZK",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Enterprise",
+          "price": "4990",
+          "priceCurrency": "CZK",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock"
+        }
+      ],
+      "creator": {
+        "@type": "Person",
+        "name": "Jakub Ševela",
+        "url": "https://jakubsevela.cz"
+      }
+    },
+    {
+      "@type": "Organization",
+      "name": "ET/HEL",
+      "url": "https://ethel.cz",
+      "logo": "https://ethel.cz/favicon.svg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info@ethel.cz",
+        "contactType": "sales"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Jakub Ševela",
+        "jobTitle": "Solution Architect",
+        "url": "https://jakubsevela.cz"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Brno",
+        "addressCountry": "CZ"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "name": "ET/HEL — AI asistentka pro Helios iNuvio",
+      "description": "Zeptejte se Heliosu místo proklikávání. ET/HEL je AI asistentka, která rozumí vašim datům, sestavám i SQL — a odpovídá česky.",
+      "url": "https://ethel.cz",
+      "inLanguage": "cs"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
 <!-- NAV -->
+<header>
 <nav id="nav">
   <div class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></div>
   <div class="nav-links">
@@ -796,6 +868,9 @@
     <a href="#" class="nav-cta" data-modal="trial">Vyzkoušet zdarma</a>
   </div>
 </nav>
+</header>
+
+<main>
 
 <!-- HERO -->
 <section class="hero">
@@ -806,7 +881,7 @@
       <span class="pulse-dot"></span>
       <span class="mono" style="font-size: 0.76rem;">Embedded Thinking for Helios</span>
     </div>
-    <h1>Zeptejte se <span class="accent">Heliosu</span><br><span class="dim">Místo hledání a klikání</span></h1>
+    <h1>AI pro <span class="accent">Helios</span><br><span class="dim">Zeptejte se místo klikání</span></h1>
     <p class="hero-sub">
       ET/HEL je AI asistentka nad vaším Heliosem.
       Odpoví na dotazy, vysvětlí sestavy a&nbsp;pomůže s&nbsp;orientací v&nbsp;datech — během sekund, česky.
@@ -870,7 +945,7 @@
 <!-- FEATURES -->
 <section class="features reveal" id="features">
   <div class="section-label">Funkce</div>
-  <h2 class="section-title">Místo klikání se prostě<br>zeptáte</h2>
+  <h2 class="section-title">AI asistentka, která rozumí<br>vašemu Heliosu</h2>
   <p class="section-desc">ET/HEL nenahrazuje váš ERP. Přidává mu inteligenci — nad daty, kódem i procesy. Vy se ptáte, ona odpovídá.</p>
   <div class="features-grid">
     <div class="feature-card reveal reveal-delay-1">
@@ -1150,6 +1225,8 @@
     </div>
   </div>
 </div>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
