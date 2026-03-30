@@ -4,7 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ET/HEL — AI asistentka pro Helios iNuvio</title>
+<meta name="description" content="Zeptejte se Heliosu místo proklikávání. ET/HEL je AI asistentka, která rozumí vašim datům, sestavám i SQL — a odpovídá česky.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Jakub Ševela">
+<link rel="canonical" href="https://ethel.cz">
+
+<!-- Open Graph -->
+<meta property="og:title" content="ET/HEL — AI asistentka pro Helios iNuvio">
+<meta property="og:description" content="Místo klikání se prostě zeptáte. ET/HEL odpoví na dotazy, vysvětlí sestavy a pomůže s orientací v datech — během sekund, česky.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ethel.cz">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="ET/HEL">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ET/HEL — AI asistentka pro Helios iNuvio">
+<meta name="twitter:description" content="Místo klikání se prostě zeptáte. ET/HEL odpoví na dotazy, vysvětlí sestavy a pomůže s orientací v datech — během sekund, česky.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -64,28 +82,10 @@
     font-weight: 700; letter-spacing: 0.06em;
     display: flex; align-items: center; gap: 0;
   }
-  .nav-logo .et {
-    color: var(--text);
-  }
-  .nav-logo .sep {
-    color: var(--text-dim);
-    margin: 0 0.05em; font-weight: 400;
-  }
-  .nav-logo .hel {
-    color: var(--accent);
-    text-shadow: 0 0 18px rgba(6,182,212,0.4);
-  }
+  .nav-logo .et { color: var(--text); }
+  .nav-logo .sep { color: var(--text-dim); margin: 0 0.05em; font-weight: 400; }
+  .nav-logo .hel { color: var(--accent); text-shadow: 0 0 18px rgba(6,182,212,0.4); }
   .nav-links { display: flex; gap: 2rem; align-items: center; }
-
-  /* ===== BRAND MARK INLINE ===== */
-  .brand {
-    font-family: 'Space Mono', monospace; font-weight: 700;
-    letter-spacing: 0.04em; white-space: nowrap;
-  }
-  .brand .et { color: var(--text); }
-  .brand .sep { color: var(--text-dim); font-weight: 400; }
-  .brand .hel { color: var(--accent); }
-
   .nav-links a {
     color: var(--text-dim); text-decoration: none;
     font-size: 0.82rem; font-weight: 500; letter-spacing: 0.02em;
@@ -124,17 +124,17 @@
   .hero-content { position: relative; z-index: 2; max-width: 800px; }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 0.6rem;
-    padding: 0.45rem 1.1rem; border: 1px solid var(--border-hover);
-    border-radius: 100px; font-size: 0.78rem; color: var(--text-secondary);
-    margin-bottom: 2.5rem; background: var(--bg-elevated);
+    padding: 0.45rem 1.1rem; border: 1px solid rgba(6,182,212,0.2);
+    border-radius: 100px; font-size: 0.78rem; color: var(--accent-light);
+    margin-bottom: 2.5rem; background: var(--accent-glow);
     animation: fadeSlideDown 0.6s ease-out;
   }
   .hero-badge .pulse-dot {
-    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
-    box-shadow: 0 0 8px rgba(52,211,153,0.5);
+    width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 6px rgba(6,182,212,0.9), 0 0 16px rgba(6,182,212,0.5), 0 0 32px rgba(6,182,212,0.25);
     animation: pulse 2s ease-in-out infinite;
   }
-  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.45); } }
 
   .hero h1 {
     font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800;
@@ -145,10 +145,22 @@
     color: var(--accent);
     text-shadow: 0 0 60px rgba(6,182,212,0.3), 0 0 120px rgba(6,182,212,0.1);
   }
+  .hero h1 .dim { color: var(--text-dim); font-weight: 600; }
+  .hero-acronym {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeSlideUp 0.85s ease-out 0.12s both;
+  }
   .hero-sub {
     font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text-secondary);
-    max-width: 560px; margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.75;
+    max-width: 560px; margin: 0 auto 1.2rem; font-weight: 300; line-height: 1.75;
     animation: fadeSlideUp 0.8s ease-out 0.1s both;
+  }
+  .hero-value {
+    font-size: 0.92rem; color: var(--accent); font-weight: 500;
+    margin-bottom: 2.5rem; letter-spacing: 0.01em;
+    animation: fadeSlideUp 0.85s ease-out 0.15s both;
   }
   .hero-actions {
     display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
@@ -178,7 +190,7 @@
 
   /* ===== CHAT MOCKUP ===== */
   .chat-wrap {
-    padding: 0 2rem 6rem; display: flex; justify-content: center;
+    padding: 0 2rem 4rem; display: flex; justify-content: center;
     animation: fadeSlideUp 1s ease-out 0.35s both;
   }
   .chat-window {
@@ -233,8 +245,8 @@
     align-self: flex-start; background: var(--bg-elevated); color: var(--text-secondary);
     border: 1px solid var(--border); border-bottom-left-radius: 4px; font-weight: 300;
   }
-  .chat-msg.bot strong { color: var(--text); font-weight: 600; }
-  .chat-msg.bot .hl { color: var(--accent); font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.82em; }
+  .chat-msg.bot strong { color: var(--text); font-weight: 400; }
+  .chat-msg.bot .hl { color: var(--accent-light); font-weight: 400; }
   .chat-typing {
     align-self: flex-start; padding: 0.65rem 0.9rem;
     background: var(--bg-elevated); border: 1px solid var(--border);
@@ -268,6 +280,73 @@
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .chat-send-btn svg { width: 14px; height: 14px; fill: #0a0f0e; }
+
+  /* ===== CHAT CAROUSEL ===== */
+  .chat-carousel {
+    position: relative; max-width: 440px; width: 100%;
+  }
+  .chat-nav-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-secondary); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.25s; z-index: 5;
+    font-size: 0.9rem; font-family: 'Sora', sans-serif;
+  }
+  .chat-nav-btn:hover {
+    background: var(--bg-card-hover); border-color: var(--border-hover);
+    color: var(--text);
+  }
+  .chat-nav-prev { left: -48px; }
+  .chat-nav-next { right: -48px; }
+  .chat-dots {
+    display: flex; justify-content: center; gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .chat-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--text-dim); transition: all 0.3s;
+    cursor: pointer;
+  }
+  .chat-dot.active {
+    background: var(--accent); box-shadow: 0 0 8px rgba(6,182,212,0.4);
+    width: 20px; border-radius: 3px;
+  }
+  @media (max-width: 560px) {
+    .chat-nav-prev { left: -6px; }
+    .chat-nav-next { right: -6px; }
+    .chat-nav-btn {
+      width: 30px; height: 30px; font-size: 0.75rem;
+      background: rgba(17, 17, 22, 0.9); backdrop-filter: blur(8px);
+    }
+  }
+
+  /* ===== VALUE STRIP ===== */
+  .value-strip {
+    padding: 3rem 2rem 5rem; max-width: 800px; margin: 0 auto;
+  }
+  .value-strip-title {
+    text-align: center; font-size: 1.1rem; font-weight: 600;
+    color: var(--text); margin-bottom: 2rem; letter-spacing: -0.01em;
+  }
+  .value-items {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .value-item {
+    text-align: center; padding: 1.5rem 1rem;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--bg-card); transition: all 0.3s;
+  }
+  .value-item:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+  .value-before {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+    color: var(--text-dim); text-decoration: line-through; margin-bottom: 0.4rem;
+  }
+  .value-arrow { color: var(--accent); font-size: 1rem; margin-bottom: 0.4rem; }
+  .value-after {
+    font-size: 0.92rem; font-weight: 600; color: var(--text);
+  }
 
   /* ===== SECTIONS COMMON ===== */
   .section-label {
@@ -312,6 +391,29 @@
   .feature-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
   .feature-card p { color: var(--text-secondary); font-size: 0.88rem; font-weight: 300; line-height: 1.6; }
 
+  /* ===== AUDIENCE ===== */
+  .audience { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; text-align: center; }
+  .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .audience-card {
+    padding: 2.5rem 2rem; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); background: var(--bg-card);
+    text-align: left; transition: all 0.35s; position: relative; overflow: hidden;
+  }
+  .audience-card:hover {
+    border-color: var(--border-hover); background: var(--bg-card-hover);
+    transform: translateY(-3px);
+  }
+  .audience-card::before {
+    content: ''; position: absolute; top: -1px; left: 20%; right: 20%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .audience-card:hover::before { opacity: 0.6; }
+  .audience-icon { font-size: 1.8rem; margin-bottom: 1.2rem; }
+  .audience-role { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.6rem; }
+  .audience-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.6rem; }
+  .audience-card p { color: var(--text-secondary); font-size: 0.88rem; font-weight: 300; line-height: 1.65; }
+
   /* ===== HOW IT WORKS ===== */
   .how { padding: 6rem 2rem; max-width: 860px; margin: 0 auto; }
   .steps { margin-top: 1rem; }
@@ -340,6 +442,10 @@
     color: var(--accent-light); margin-bottom: 0.7rem; line-height: 1.55;
   }
   .usecase-a { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+  .usecase-benefit {
+    margin-top: 0.6rem; font-size: 0.78rem; color: var(--accent);
+    font-weight: 500;
+  }
 
   /* ===== DATA SAFETY ===== */
   .safety {
@@ -373,10 +479,55 @@
     border: 1px solid rgba(234,179,8,0.18);
   }
 
+  /* ===== AUTHOR ===== */
+  .author {
+    padding: 5rem 2rem 2rem; max-width: 700px; margin: 0 auto;
+  }
+  .author-box {
+    display: flex; align-items: center; gap: 2rem;
+    padding: 2.5rem 2.5rem; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); background: var(--bg-card);
+  }
+  .author-photo {
+    width: 156px; height: 156px; border-radius: var(--radius-lg); flex-shrink: 0;
+    object-fit: cover; object-position: center 32%;
+    border: 2px solid var(--border-hover);
+  }
+  .author-info { flex: 1; }
+  .author-name {
+    font-size: 1.05rem; font-weight: 600; margin-bottom: 0.15rem;
+  }
+  .author-role {
+    font-size: 0.78rem; color: var(--accent); font-weight: 500;
+    margin-bottom: 0.7rem;
+  }
+  .author-text {
+    font-size: 0.88rem; color: var(--text-secondary); font-weight: 300;
+    line-height: 1.65;
+  }
+  @media (max-width: 768px) {
+    .author-box { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+  }
+
+  /* ===== TRUST ===== */
+  .trust { padding: 2rem 2rem 2rem; max-width: 700px; margin: 0 auto; text-align: center; }
+  .trust-box {
+    padding: 2.5rem 2rem; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); background: var(--bg-card);
+  }
+  .trust-box h3 {
+    font-size: 1.2rem; font-weight: 600; margin-bottom: 0.8rem; letter-spacing: -0.01em;
+  }
+  .trust-box p { color: var(--text-secondary); font-size: 0.92rem; font-weight: 300; line-height: 1.7; max-width: 500px; margin: 0 auto; }
+
   /* ===== PRICING ===== */
   .pricing { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; text-align: center; }
   .pricing .section-desc { margin-left: auto; margin-right: auto; }
-  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items: stretch; }
+  .pricing-intro {
+    font-size: 1rem; color: var(--accent); font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .price-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; align-items: stretch; max-width: 860px; margin: 0 auto; }
   .price-card {
     background: var(--bg-card); border: 1px solid var(--border);
     border-radius: var(--radius-lg); padding: 2.5rem 2rem;
@@ -429,7 +580,45 @@
     background: transparent; color: var(--accent); border: 1px solid var(--accent);
   }
   .price-cta .btn-outline:hover { background: var(--accent-glow); }
-  .price-sub { color: var(--text-dim); font-size: 0.75rem; margin-top: 2.5rem; }
+  .price-sub { color: var(--text-dim); font-size: 0.82rem; margin-top: 2.5rem; }
+
+  /* ===== PRICING TOGGLE ===== */
+  .price-toggle {
+    display: inline-flex; align-items: center; gap: 0.9rem;
+    margin-bottom: 2.5rem;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 100px; padding: 0.35rem;
+  }
+  .price-toggle-label {
+    font-size: 0.85rem; font-weight: 500; color: var(--text-dim);
+    padding: 0.5rem 1.2rem; border-radius: 100px;
+    cursor: pointer; transition: all 0.25s; user-select: none;
+  }
+  .price-toggle-label.active {
+    color: #0a0f0e; background: var(--accent);
+    font-weight: 600;
+  }
+  .price-toggle-label .save-tag {
+    font-size: 0.65rem; font-weight: 700; color: var(--green);
+    background: var(--green-dim); padding: 0.15rem 0.45rem;
+    border-radius: 100px; white-space: nowrap; letter-spacing: 0.02em;
+    margin-left: 0.4rem; vertical-align: middle;
+    transition: all 0.25s;
+  }
+  .price-toggle-label.active .save-tag {
+    color: #0a0f0e; background: rgba(0,0,0,0.18);
+  }
+  .price-amount-wrap {
+    position: relative; display: inline-block;
+  }
+  .price-amount-wrap .price-amount {
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .price-amount-wrap .price-original {
+    font-size: 0.85rem; color: var(--text-dim); text-decoration: line-through;
+    font-weight: 400; display: none; margin-bottom: 0.15rem;
+  }
+  .pricing.annual .price-original { display: block; }
 
   /* ===== CTA ===== */
   .cta-section {
@@ -450,7 +639,10 @@
     margin-bottom: 2.5rem; position: relative; z-index: 1;
     max-width: 480px; margin-left: auto; margin-right: auto;
   }
-  .cta-section .btn { position: relative; z-index: 1; }
+  .cta-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    position: relative; z-index: 1;
+  }
 
   /* ===== FOOTER ===== */
   footer {
@@ -466,6 +658,87 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.72rem; color: var(--text-dim);
   }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  .modal-overlay.open {
+    opacity: 1; visibility: visible;
+  }
+  .modal {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 2.5rem;
+    width: 100%; max-width: 460px; position: relative;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+    transform: translateY(20px); transition: transform 0.3s;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--bg-elevated); border: 1px solid var(--border);
+    color: var(--text-dim); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; font-family: 'Sora', sans-serif;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { color: var(--text); border-color: var(--border-hover); }
+  .modal-title {
+    font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem;
+    letter-spacing: -0.01em;
+  }
+  .modal-subtitle {
+    font-size: 0.88rem; color: var(--text-secondary); font-weight: 300;
+    margin-bottom: 2rem; line-height: 1.6;
+  }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-label {
+    display: block; font-size: 0.78rem; font-weight: 500;
+    color: var(--text-secondary); margin-bottom: 0.4rem;
+  }
+  .form-input {
+    width: 100%; padding: 0.7rem 1rem; border-radius: var(--radius-sm);
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--text); font-family: 'Sora', sans-serif; font-size: 0.88rem;
+    transition: border-color 0.2s; outline: none;
+  }
+  .form-input:focus { border-color: var(--accent); }
+  .form-input::placeholder { color: var(--text-dim); }
+  textarea.form-input { resize: vertical; min-height: 70px; }
+  .form-submit {
+    width: 100%; padding: 0.85rem; margin-top: 0.5rem;
+    background: var(--accent); color: #0a0f0e; border: none;
+    border-radius: var(--radius-sm); font-family: 'Sora', sans-serif;
+    font-size: 0.92rem; font-weight: 600; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(6,182,212,0.2), 0 8px 30px rgba(0,0,0,0.4);
+  }
+  .form-note {
+    font-size: 0.72rem; color: var(--text-dim); text-align: center;
+    margin-top: 1rem;
+  }
+  .modal-success {
+    text-align: center; padding: 2rem 0; display: none;
+  }
+  .modal-success.show { display: block; }
+  .modal-success .check-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--green-dim); color: var(--green);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 1rem;
+  }
+  .modal-success h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .modal-success p { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; }
+  .modal-form.hidden { display: none; }
 
   /* ===== ANIMATIONS ===== */
   @keyframes fadeSlideUp {
@@ -487,15 +760,17 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
-    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .features-grid, .audience-grid { grid-template-columns: repeat(2, 1fr); }
+    .value-items { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
   }
   @media (max-width: 768px) {
     nav { padding: 0 1rem; }
     .nav-links a:not(.nav-cta) { display: none; }
     .nav-links { gap: 0.8rem; }
     .hero { padding: 7rem 1.5rem 3rem; }
-    .features, .how, .usecases, .safety, .pricing { padding: 4rem 1.5rem; }
-    .features-grid { grid-template-columns: 1fr; }
+    .features, .how, .usecases, .safety, .pricing, .audience { padding: 4rem 1.5rem; }
+    .features-grid, .audience-grid { grid-template-columns: 1fr; }
+    .value-items { grid-template-columns: 1fr; }
     .step { flex-direction: column; gap: 0.5rem; }
     .safety-box { padding: 2.5rem 1.5rem; }
     .price-card { padding: 2.5rem 1.5rem; }
@@ -512,10 +787,10 @@
   <div class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></div>
   <div class="nav-links">
     <a href="#features">Co umí</a>
+    <a href="#audience">Pro koho</a>
     <a href="#how">Jak to funguje</a>
-    <a href="#usecases">Příklady</a>
     <a href="#pricing">Cena</a>
-    <a href="#cta" class="nav-cta">Vyzkoušet</a>
+    <a href="#" class="nav-cta" data-modal="trial">Vyzkoušet zdarma</a>
   </div>
 </nav>
 
@@ -526,37 +801,65 @@
   <div class="hero-content">
     <div class="hero-badge">
       <span class="pulse-dot"></span>
-      <span class="mono" style="font-size: 0.76rem;">Early access · Q2 2026</span>
+      <span class="mono" style="font-size: 0.76rem;">Embedded Thinking for Helios</span>
     </div>
-    <h1>Zeptejte se<br><span class="accent">Heliosu</span></h1>
+    <h1>Zeptejte se <span class="accent">Heliosu</span><br><span class="dim">Místo hledání a klikání</span></h1>
     <p class="hero-sub">
-      Kolik přišlo objednávek? Co znamená tahle sestava? Proč synchronizace stojí?
-      ET/HEL je AI asistentka, která rozumí vašemu Heliosu — a&nbsp;odpovídá česky.
+      ET/HEL je AI asistentka nad vaším Heliosem.
+      Odpoví na dotazy, vysvětlí sestavy a&nbsp;pomůže s&nbsp;orientací v&nbsp;datech — během sekund, česky.
     </p>
+    <p class="hero-value">Ušetří hodiny, které trávíte hledáním v Heliosu.</p>
     <div class="hero-actions">
-      <a href="#pricing" class="btn btn-primary">Zjistit cenu</a>
+      <a href="#" class="btn btn-primary" data-modal="trial">Vyzkoušet zdarma</a>
       <a href="#how" class="btn btn-ghost">Jak to funguje →</a>
     </div>
   </div>
 </section>
 
-<!-- CHAT MOCKUP -->
+<!-- CHAT MOCKUP CAROUSEL -->
 <div class="chat-wrap">
-  <div class="chat-window">
-    <div class="chat-header">
-      <div class="chat-avatar">E/H</div>
-      <div class="chat-header-info">
-        <div class="chat-header-name">ET/HEL</div>
-        <div class="chat-header-status"><span class="online-dot"></span> online</div>
+  <div class="chat-carousel">
+    <button class="chat-nav-btn chat-nav-prev" id="chat-prev" aria-label="Předchozí konverzace">←</button>
+    <button class="chat-nav-btn chat-nav-next" id="chat-next" aria-label="Další konverzace">→</button>
+    <div class="chat-window">
+      <div class="chat-header">
+        <div class="chat-avatar">E/H</div>
+        <div class="chat-header-info">
+          <div class="chat-header-name">ET/HEL</div>
+          <div class="chat-header-status"><span class="online-dot"></span> online</div>
+        </div>
+        <div class="chat-header-ctx" id="chat-ctx" style="display:none">Objednávky</div>
       </div>
-      <div class="chat-header-ctx">Fakturace</div>
+      <div class="chat-body" id="chat-body">
+        <div class="chat-typing" id="chat-typing"><span></span><span></span><span></span></div>
+      </div>
+      <div class="chat-input-bar">
+        <div class="chat-input-fake">Napište dotaz…</div>
+        <div class="chat-send-btn"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></div>
+      </div>
     </div>
-    <div class="chat-body" id="chat-body">
-      <div class="chat-typing" id="chat-typing"><span></span><span></span><span></span></div>
+    <div class="chat-dots" id="chat-dots"></div>
+  </div>
+</div>
+
+<!-- VALUE STRIP -->
+<div class="value-strip reveal">
+  <div class="value-strip-title">Co vám to reálně ušetří</div>
+  <div class="value-items">
+    <div class="value-item">
+      <div class="value-before">10 kliků v sestavách</div>
+      <div class="value-arrow">↓</div>
+      <div class="value-after">1 otázka</div>
     </div>
-    <div class="chat-input-bar">
-      <div class="chat-input-fake">Napište dotaz…</div>
-      <div class="chat-send-btn"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></div>
+    <div class="value-item">
+      <div class="value-before">Hledání v reportech</div>
+      <div class="value-arrow">↓</div>
+      <div class="value-after">Okamžitá odpověď</div>
+    </div>
+    <div class="value-item">
+      <div class="value-before">Závislost na IT oddělení</div>
+      <div class="value-arrow">↓</div>
+      <div class="value-after">Odpovědi pro každého</div>
     </div>
   </div>
 </div>
@@ -564,28 +867,28 @@
 <!-- FEATURES -->
 <section class="features reveal" id="features">
   <div class="section-label">Funkce</div>
-  <h2 class="section-title">Váš Helios, konečně<br>s&nbsp;rozumem</h2>
+  <h2 class="section-title">Místo klikání se prostě<br>zeptáte</h2>
   <p class="section-desc">ET/HEL nenahrazuje váš ERP. Přidává mu inteligenci — nad daty, kódem i procesy. Vy se ptáte, ona odpovídá.</p>
   <div class="features-grid">
     <div class="feature-card reveal reveal-delay-1">
       <div class="feature-icon">⚡</div>
-      <h3>Dotazy přirozeným jazykem</h3>
-      <p>Ptejte se na stav objednávek, skladu nebo faktur. Odpověď přijde česky, v celé větě — ne jako tabulka s tisíci řádky.</p>
+      <h3>Zeptejte se místo klikání</h3>
+      <p>Nehledáte v sestavách. Prostě se zeptáte — ET/HEL odpoví česky, s&nbsp;kontextem vaší firmy. Žádné tabulky s tisíci řádky.</p>
     </div>
     <div class="feature-card reveal reveal-delay-2">
       <div class="feature-icon">🧭</div>
-      <h3>Vysvětlí, na co se díváte</h3>
-      <p>Nevíte, co znamenají sloupce v sestavě? ET/HEL přečte definici a vysvětlí vám to lidsky — ideální pro nové kolegy.</p>
+      <h3>Vysvětlí Helios novým lidem</h3>
+      <p>Nový kolega? ET/HEL vysvětlí sestavy, pole i&nbsp;logiku systému — bez školení. Ideální onboarding do Heliosu.</p>
     </div>
     <div class="feature-card reveal reveal-delay-3">
       <div class="feature-icon">🔍</div>
-      <h3>Čte váš kód</h3>
-      <p>Stored procedury, views, triggery. Vysvětlí logiku, najde závislosti a popíše chování — ať se nemusíte hrabat v SQL.</p>
+      <h3>Rozumí vašemu SQL</h3>
+      <p>Stored procedury, views, triggery. Vysvětlí logiku a závislosti — bez čtení stovek řádků kódu.</p>
     </div>
     <div class="feature-card reveal reveal-delay-1">
       <div class="feature-icon">📊</div>
       <h3>Hlídá logy za vás</h3>
-      <p>Povolte ET/HEL přístup k vybraným logům a dostanete upozornění, když něco nehraje. Anomálie, výpadky, skoky v sekvenci.</p>
+      <p>Povolte ET/HEL přístup k vybraným logům a&nbsp;dostanete upozornění, když něco nehraje. Anomálie, výpadky, skoky v sekvenci.</p>
     </div>
     <div class="feature-card reveal reveal-delay-2">
       <div class="feature-icon">🛡️</div>
@@ -600,11 +903,38 @@
   </div>
 </section>
 
+<!-- PRO KOHO -->
+<section class="audience reveal" id="audience">
+  <div class="section-label">Pro koho to je</div>
+  <h2 class="section-title">ET/HEL pomáhá celé firmě</h2>
+  <p class="section-desc" style="margin-left: auto; margin-right: auto;">Od managementu po IT — každý dostane odpovědi, které potřebuje.</p>
+  <div class="audience-grid">
+    <div class="audience-card reveal reveal-delay-1">
+      <div class="audience-icon">📈</div>
+      <div class="audience-role">Management</div>
+      <h3>Rychlé odpovědi bez čekání na reporty</h3>
+      <p>Chcete vědět, co se děje ve firmě — hned. ET/HEL vám řekne stav objednávek, faktur nebo skladu jedním dotazem. Bez čekání na IT.</p>
+    </div>
+    <div class="audience-card reveal reveal-delay-2">
+      <div class="audience-icon">🧾</div>
+      <div class="audience-role">Operativa &amp; účetní</div>
+      <h3>Konec ztrácení se v sestavách</h3>
+      <p>Nechcete proklikávat složité sestavy. Stačí se zeptat a dostanete konkrétní odpověď — s&nbsp;čísly, kontextem a bez otevírání deseti oken.</p>
+    </div>
+    <div class="audience-card reveal reveal-delay-3">
+      <div class="audience-icon">💻</div>
+      <div class="audience-role">IT &amp; Helios admin</div>
+      <h3>Nemusíte vysvětlovat systém dokola</h3>
+      <p>ET/HEL vysvětlí kolegům sestavy, sloupce i logiku systému za vás. A vám pomůže s kódem — rozebere procedury, views i triggery.</p>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="how reveal" id="how">
   <div class="section-label">Jak to funguje</div>
   <h2 class="section-title">Od instalace k prvnímu dotazu,<br>než dopijete kafe</h2>
-  <p class="section-desc">Žádná měsíční implementace. ET/HEL se napojí na váš Helios a začne odpovídat.</p>
+  <p class="section-desc">Žádná měsíční implementace. ET/HEL se napojí na váš Helios a&nbsp;začne odpovídat.</p>
   <div class="steps">
     <div class="step reveal">
       <div class="step-num mono">01</div>
@@ -631,7 +961,7 @@
       <div class="step-num mono">04</div>
       <div class="step-content">
         <h3>Ptejte se</h3>
-        <p>Otevřete ET/HEL přímo z Heliosu, napíšete otázku česky a dostanete odpověď s kontextem vaší firmy. Jako byste se ptali kolegy, který zná celý systém.</p>
+        <p>Otevřete ET/HEL přímo z Heliosu, napíšete otázku česky a&nbsp;dostanete odpověď s kontextem vaší firmy. Jako byste se ptali kolegy, který zná celý systém.</p>
       </div>
     </div>
   </div>
@@ -645,27 +975,33 @@
   <div class="usecase-grid">
     <div class="usecase reveal">
       <div class="usecase-q">"Kolik objednávek přišlo včera z e-shopu?"</div>
-      <div class="usecase-a">→ Včera 47 objednávek za 128 450 Kč. Tři čekají na ruční párování. Hotová odpověď, žádné otevírání sestav.</div>
+      <div class="usecase-a">→ Včera 47 objednávek za 128 450 Kč. Tři čekají na ruční párování.</div>
+      <div class="usecase-benefit">↗ Bez otevírání jediné sestavy</div>
     </div>
     <div class="usecase reveal">
       <div class="usecase-q">"Na co se tady dívám? Co jsou tyhle sloupce?"</div>
-      <div class="usecase-a">→ ET/HEL přečte definici sestavy a popíše každý sloupec, doplněk i filtr. Ideální, když nastupuje nový kolega.</div>
+      <div class="usecase-a">→ ET/HEL přečte definici sestavy a popíše každý sloupec, doplněk i filtr.</div>
+      <div class="usecase-benefit">↗ Nový kolega se zorientuje sám</div>
     </div>
     <div class="usecase reveal">
       <div class="usecase-q">"Vysvětli mi proceduru hp_DosleObj_NovaHlavicka02."</div>
-      <div class="usecase-a">→ Rozebere logiku krok po kroku, identifikuje závislosti na dalších objektech a popíše, co se stane při spuštění.</div>
+      <div class="usecase-a">→ Rozebere logiku krok po kroku, identifikuje závislosti na dalších objektech.</div>
+      <div class="usecase-benefit">↗ Nemusíte číst 300 řádků SQL</div>
     </div>
     <div class="usecase reveal">
       <div class="usecase-q">"Je v synchronizačních logech něco divného?"</div>
-      <div class="usecase-a">→ Analyzuje logy a upozorní na skoky v sekvenci, chybové stavy nebo výpadky. Bez ručního scrollování.</div>
+      <div class="usecase-a">→ Analyzuje logy a upozorní na skoky v sekvenci, chybové stavy nebo výpadky.</div>
+      <div class="usecase-benefit">↗ Bez ručního scrollování tisíců řádků</div>
     </div>
     <div class="usecase reveal">
       <div class="usecase-q">"Kolik faktur je po splatnosti víc než 30 dnů?"</div>
-      <div class="usecase-a">→ Odpověď s rozpadem podle odběratelů — bez jediného otevřeného reportu. Jeden dotaz, kompletní přehled.</div>
+      <div class="usecase-a">→ Odpověď s rozpadem podle odběratelů — jeden dotaz, kompletní přehled.</div>
+      <div class="usecase-benefit">↗ Bez jediného otevřeného reportu</div>
     </div>
     <div class="usecase reveal">
-      <div class="usecase-q">"Vygeneruj SEO popis pro tento produkt."</div>
-      <div class="usecase-a">→ ET/HEL si přečte vlastnosti produktu a navrhne text. Vy schválíte, upravíte nebo zahodíte — nic se nezmění bez vašeho souhlasu.</div>
+      <div class="usecase-q">"Který zákazník měl letos největší obrat?"</div>
+      <div class="usecase-a">→ ABC Trade s.r.o. — obrat 4,2 mil. Kč, meziročně +18 %. Druhý je Delta Elektro s 3,1 mil. Kč.</div>
+      <div class="usecase-benefit">↗ Odpověď za sekundy místo ručního exportu</div>
     </div>
   </div>
 </section>
@@ -685,95 +1021,140 @@
   </div>
 </section>
 
+<!-- AUTHOR -->
+<section class="author reveal">
+  <div class="author-box">
+    <img class="author-photo" src="data:image/jpeg;base64,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" alt="Jakub Ševela" width="156" height="156">
+    <div class="author-info">
+      <div class="author-name">Jakub Ševela</div>
+      <div class="author-role">Solution architect · Helios iNuvio</div>
+      <p class="author-text">Přes 18 let pracuju s&nbsp;Heliosem — implementace, integrace, SQL na denní bázi. ET/HEL stavím, protože vím, kolik času lidi tráví proklikáváním sestav. A&nbsp;věřím, že to jde líp.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST — placeholder pro budoucí loga / reference -->
+<section class="trust reveal">
+  <div class="trust-box">
+    <h3>Nasazeno u reálných firem</h3>
+    <p>ET/HEL testujeme v ostrém provozu. Časem zde přibydou reference — zatím nás posuzujte podle kvality trialu.</p>
+  </div>
+</section>
+
 <!-- PRICING -->
 <section class="pricing reveal" id="pricing">
   <div class="section-label">Ceník</div>
-  <h2 class="section-title">Vyberte si, co potřebujete</h2>
-  <p class="section-desc">Bez skrytých poplatků. Měsíční předplatné, bez závazku — můžete zrušit kdykoliv.</p>
+  <div class="pricing-intro">14 dní zdarma, bez omezení, bez karty.</div>
+  <h2 class="section-title">Dva tarify podle velikosti provozu</h2>
+  <p class="section-desc">Jedna cena pro běžný provoz, druhá pro firmy s více databázemi nebo širším týmem.</p>
+
+  <div class="price-toggle" id="price-toggle">
+    <span class="price-toggle-label active" data-period="monthly">Měsíčně</span>
+    <span class="price-toggle-label" data-period="annual">Ročně <span class="save-tag">−17 %</span></span>
+  </div>
+
   <div class="price-grid">
 
-    <!-- SOLO -->
-    <div class="price-card reveal reveal-delay-1">
-      <div class="price-tier">Solo</div>
-      <div class="price-subtitle">1 uživatel · 1 databáze</div>
-      <div class="price-amount">990 <span class="currency">Kč</span></div>
-      <div class="price-period">měsíčně</div>
-      <div class="price-note">bez DPH</div>
-      <hr class="price-divider">
-      <ul class="price-features">
-        <li><span class="check">✓</span>Neomezené dotazy</li>
-        <li><span class="check">✓</span>1 uživatel, 1 databáze (IČO)</li>
-        <li><span class="check">✓</span>Aktivace za minutu</li>
-        <li><span class="check">✓</span>Podpora emailem</li>
-        <li><span class="check">✓</span>Pravidelné aktualizace</li>
-      </ul>
-      <div class="price-cta">
-        <a href="{STRIPE_CHECKOUT_URL_SOLO}" class="btn btn-outline">Vybrat Solo</a>
+    <!-- STANDARD -->
+    <div class="price-card reveal reveal-delay-1" data-monthly="1 490" data-annual="1 242" data-monthly-period="měsíčně" data-annual-period="1 242 Kč / měs. · 14 900 Kč / rok" data-monthly-note="bez DPH" data-annual-note="platba jednou ročně" data-monthly-extra="Každý další uživatel: +249 Kč / měsíc" data-annual-extra="Každý další uživatel: +209 Kč / měsíc">
+      <div class="price-tier">Standard</div>
+      <div class="price-subtitle">1 databáze · 5 uživatelů v ceně</div>
+      <div class="price-amount-wrap">
+        <div class="price-original"></div>
+        <div class="price-amount">1 490 <span class="currency">Kč</span></div>
       </div>
-    </div>
-
-    <!-- TEAM -->
-    <div class="price-card featured reveal reveal-delay-2">
-      <div class="price-badge">Nejoblíbenější</div>
-      <div class="price-tier">Team</div>
-      <div class="price-subtitle">Neomezení uživatelé · 1 databáze</div>
-      <div class="price-amount">2 490 <span class="currency">Kč</span></div>
       <div class="price-period">měsíčně</div>
       <div class="price-note">bez DPH</div>
       <hr class="price-divider">
       <ul class="price-features">
-        <li><span class="check">✓</span>Neomezené dotazy</li>
-        <li><span class="check">✓</span>Neomezený počet uživatelů</li>
-        <li><span class="check">✓</span>1 databáze (IČO)</li>
-        <li><span class="check">✓</span>Prioritní podpora</li>
-        <li><span class="check">✓</span>Pravidelné aktualizace</li>
+        <li><span class="check">✓</span>1 databáze</li>
+        <li><span class="check">✓</span>5 uživatelů v ceně</li>
+        <li class="price-extra"><span class="check">✓</span>Každý další uživatel: +249 Kč / měsíc</li>
+        <li><span class="check">✓</span>Průběžné aktualizace</li>
       </ul>
       <div class="price-cta">
-        <a href="{STRIPE_CHECKOUT_URL_TEAM}" class="btn btn-primary">Vybrat Team</a>
+        <a href="#" class="btn btn-primary" data-modal="trial">Vyzkoušet zdarma</a>
       </div>
     </div>
 
     <!-- ENTERPRISE -->
-    <div class="price-card reveal reveal-delay-3">
+    <div class="price-card reveal reveal-delay-2" data-monthly="4 990" data-annual="4 158" data-monthly-period="měsíčně" data-annual-period="4 158 Kč / měs. · 49 900 Kč / rok" data-monthly-note="bez DPH" data-annual-note="platba jednou ročně">
       <div class="price-tier">Enterprise</div>
-      <div class="price-subtitle">Neomezení uživatelé · více databází</div>
-      <div class="price-amount">4 990 <span class="currency">Kč</span></div>
+      <div class="price-subtitle">Multi-DB provoz · neomezený tým</div>
+      <div class="price-amount-wrap">
+        <div class="price-original"></div>
+        <div class="price-amount">4 990 <span class="currency">Kč</span></div>
+      </div>
       <div class="price-period">měsíčně</div>
       <div class="price-note">bez DPH</div>
       <hr class="price-divider">
       <ul class="price-features">
-        <li><span class="check">✓</span>Neomezené dotazy</li>
+        <li><span class="check">✓</span>Neomezený počet databází</li>
         <li><span class="check">✓</span>Neomezený počet uživatelů</li>
-        <li><span class="check">✓</span>Více databází / IČO</li>
+        <li><span class="check">✓</span>Onboarding call + asistované nasazení</li>
         <li><span class="check">✓</span>Prioritní podpora</li>
-        <li><span class="check">✓</span>Onboarding call</li>
         <li><span class="check">✓</span>Vlastní konfigurace promptů</li>
       </ul>
       <div class="price-cta">
-        <a href="{STRIPE_CHECKOUT_URL_ENTERPRISE}" class="btn btn-outline">Vybrat Enterprise</a>
+        <a href="#" class="btn btn-outline" data-modal="demo">Domluvit nasazení</a>
       </div>
     </div>
 
   </div>
-  <div class="price-sub">Vyzkoušejte zdarma — prvních 20 dotazů bez registrace a bez platební karty.</div>
+  <div class="price-sub">Early access — trial 14 dní zdarma bez omezení.</div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section reveal" id="cta">
-  <h2>Chcete to zkusit?</h2>
-  <p>Napište nám a&nbsp;domluvíme se na připojení vaší instance. Nebo si rovnou stáhněte instalační skript.</p>
-  <a href="mailto:info@ethel.cz?subject=ET%2FHEL%20%E2%80%94%20m%C3%A1m%20z%C3%A1jem" class="btn btn-primary">
-    info@ethel.cz →
-  </a>
+  <h2>Přestaňte hledat v&nbsp;Heliosu</h2>
+  <p>Začněte se ptát. ET/HEL vám odpoví během sekund.</p>
+  <div class="cta-actions">
+    <a href="#" class="btn btn-primary" data-modal="trial">Vyzkoušet zdarma</a>
+    <a href="#" class="btn btn-ghost" data-modal="demo">Domluvit demo →</a>
+  </div>
 </section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">×</button>
+    <div class="modal-form" id="modal-form">
+      <div class="modal-title" id="modal-title">Vyzkoušet ET/HEL zdarma</div>
+      <div class="modal-subtitle" id="modal-subtitle">Vyplňte údaje a ozveme se vám do 24 hodin s aktivačním tokenem.</div>
+      <div class="form-group">
+        <label class="form-label" for="f-name">Jméno</label>
+        <input class="form-input" type="text" id="f-name" placeholder="Jan Novák" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-email">E-mail</label>
+        <input class="form-input" type="email" id="f-email" placeholder="jan@firma.cz" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-company">Firma</label>
+        <input class="form-input" type="text" id="f-company" placeholder="Název firmy">
+      </div>
+      <div class="form-group" id="msg-group" style="display:none">
+        <label class="form-label" for="f-msg">Zpráva</label>
+        <textarea class="form-input" id="f-msg" placeholder="Na co se chcete zeptat?"></textarea>
+      </div>
+      <button class="form-submit" id="form-submit">Odeslat</button>
+      <div class="form-note">Žádný spam. Odpovídáme osobně.</div>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="check-icon">✓</div>
+      <h3>Díky!</h3>
+      <p>Ozveme se vám co nejdříve na zadaný e-mail.</p>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-left">
-    &copy; 2026 ET/HEL &middot; <a href="https://jakubsevela.cz">Jakub Ševela</a>
+    &copy; 2026 ET/HEL &middot; Embedded Thinking for Helios &middot; <a href="https://jakubsevela.cz">Jakub Ševela</a>
     <br><span style="font-size: 0.72rem;">ET/HEL není produktem společnosti Asseco Solutions. Helios a Helios iNuvio jsou registrované ochranné známky.</span>
   </div>
-  <div class="footer-right">v0.2 &middot; brno, cz</div>
+  <div class="footer-right">v0.5 &middot; brno, cz</div>
 </footer>
 
 <script>
@@ -796,37 +1177,121 @@ document.querySelectorAll('.reveal').forEach(function(el) {
   revealObserver.observe(el);
 });
 
-/* ===== CHAT ANIMATION ===== */
+/* ===== CHAT CAROUSEL ===== */
 (function() {
-  var msgs = [
-    { from: 'user', text: 'Kolik objednávek přišlo včera z e-shopu?' },
-    { from: 'bot', text: 'Včera přijato <span class="hl">47 objednávek</span> z Upgates (e-shop Alfa). Celková hodnota <span class="hl">128 450 Kč</span> bez DPH.' },
-    { from: 'bot', text: '3 objednávky čekají na ruční párování. Chcete je zobrazit?' },
-    { from: 'user', text: 'Kolik faktur je po splatnosti víc než 30 dnů?' },
-    { from: 'bot', text: '<span class="hl">12 faktur</span> po splatnosti delší než 30 dnů, celkem <span class="hl">847 200 Kč</span>. Největší dlužník: <strong>ABC Trade s.r.o.</strong> — 3 faktury, 312 000 Kč.' }
+  var conversations = [
+    {
+      ctx: 'Objednávky',
+      msgs: [
+        { from: 'user', text: 'Kolik objednávek přišlo včera z e-shopu?' },
+        { from: 'bot', text: 'Včera přijato <span class="hl">47 objednávek</span> za <span class="hl">128 450 Kč</span> bez DPH. Tři z nich čekají na ruční párování — chcete je zobrazit?' },
+        { from: 'user', text: 'Ne, díky. Radši řekni, jestli máme faktury hodně po splatnosti.' },
+        { from: 'bot', text: '<span class="hl">12 faktur</span> je po splatnosti víc než 30 dnů, celkem <span class="hl">847 200 Kč</span>. Největší dlužník je <strong>ABC Trade s.r.o.</strong> — 3 faktury za 312 000 Kč.' }
+      ]
+    },
+    {
+      ctx: 'SQL kód',
+      msgs: [
+        { from: 'user', text: 'Vysvětli mi proceduru hp_DosleObj_NovaHlavicka02.' },
+        { from: 'bot', text: 'Procedura vytváří hlavičku došlé objednávky. Nejdřív ověří oprávnění, pak načte dodavatele podle IČO a založí záznam v <span class="hl">TabDosleObjH02</span> se stavem <span class="hl">0 (koncept)</span>.' },
+        { from: 'user', text: 'A co se stane, když dodavatel neexistuje?' },
+        { from: 'bot', text: 'Vrátí chybu <span class="hl">−1</span> a zapíše warning do <span class="hl">TabLogSynch</span>. Objednávka se nevytvoří — musíte dodavatele nejdřív založit v číselníku.' }
+      ]
+    },
+    {
+      ctx: 'Sklad',
+      msgs: [
+        { from: 'user', text: 'Které produkty mají zásobu pod minimem?' },
+        { from: 'bot', text: '<span class="hl">23 položek</span> je pod minimální zásobou. Nejkritičtější: <strong>Filtr KX-220</strong> — skladem 4 ks, minimum 50 ks. Chcete kompletní seznam?' },
+        { from: 'user', text: 'Ano, seřaď je podle toho, jak moc jsou pod minimem.' },
+        { from: 'bot', text: 'Top 5 podle odchylky: <strong>Filtr KX-220</strong> (−92 %), <strong>Těsnění R-14</strong> (−88 %), <strong>Ventil DN-50</strong> (−76 %), <strong>Ložisko 6204</strong> (−71 %), <strong>Hřídel M-30</strong> (−65 %). Celkem 23 položek.' }
+      ]
+    },
+    {
+      ctx: 'Sestavy',
+      msgs: [
+        { from: 'user', text: 'Co znamenají sloupce v sestavě Přehled tržeb?' },
+        { from: 'bot', text: 'Sestava zobrazuje měsíční tržby podle středisek. Sloupce: <span class="hl">Středisko</span> (org. jednotka), <span class="hl">Tržby netto</span> (bez DPH), <span class="hl">Marže %</span> a <span class="hl">YoY</span> (meziroční změna).' },
+        { from: 'user', text: 'Proč je u střediska 300 marže záporná?' },
+        { from: 'bot', text: 'Středisko 300 (Servis) má marži <span class="hl">−4,2 %</span> — náklady na reklamace v březnu přesáhly tržby o <span class="hl">38 000 Kč</span>. Hlavní položka: 3 reklamace od <strong>Delta Elektro</strong>.' }
+      ]
+    }
   ];
 
   var body = document.getElementById('chat-body');
   var typing = document.getElementById('chat-typing');
-  var i = 0;
+  var ctx = document.getElementById('chat-ctx');
+  var dotsWrap = document.getElementById('chat-dots');
+  var prevBtn = document.getElementById('chat-prev');
+  var nextBtn = document.getElementById('chat-next');
+  var current = 0;
+  var timeouts = [];
 
-  function showNext() {
-    if (i >= msgs.length) return;
-    var msg = msgs[i];
+  // Build dots
+  conversations.forEach(function(_, idx) {
+    var dot = document.createElement('div');
+    dot.className = 'chat-dot' + (idx === 0 ? ' active' : '');
+    dot.addEventListener('click', function() { goTo(idx); });
+    dotsWrap.appendChild(dot);
+  });
 
-    if (msg.from === 'bot') {
-      typing.classList.add('visible');
-      setTimeout(function() {
-        typing.classList.remove('visible');
+  prevBtn.addEventListener('click', function() {
+    goTo(current === 0 ? conversations.length - 1 : current - 1);
+  });
+  nextBtn.addEventListener('click', function() {
+    goTo(current === conversations.length - 1 ? 0 : current + 1);
+  });
+
+  function goTo(idx) {
+    timeouts.forEach(function(t) { clearTimeout(t); });
+    timeouts = [];
+    typing.classList.remove('visible');
+    current = idx;
+    updateDots();
+    clearChat();
+    ctx.textContent = conversations[idx].ctx;
+    playConversation(conversations[idx].msgs);
+  }
+
+  function updateDots() {
+    var dots = dotsWrap.querySelectorAll('.chat-dot');
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function clearChat() {
+    var existing = body.querySelectorAll('.chat-msg');
+    existing.forEach(function(el) { el.remove(); });
+  }
+
+  function playConversation(msgs) {
+    var i = 0;
+
+    function showNext() {
+      if (i >= msgs.length) return;
+      var msg = msgs[i];
+
+      if (msg.from === 'bot') {
+        typing.classList.add('visible');
+        var t = setTimeout(function() {
+          typing.classList.remove('visible');
+          appendMsg(msg);
+          i++;
+          var t2 = setTimeout(showNext, 1000);
+          timeouts.push(t2);
+        }, 800 + Math.random() * 300);
+        timeouts.push(t);
+      } else {
         appendMsg(msg);
         i++;
-        setTimeout(showNext, 1200);
-      }, 900 + Math.random() * 400);
-    } else {
-      appendMsg(msg);
-      i++;
-      setTimeout(showNext, 700);
+        var t = setTimeout(showNext, 600);
+        timeouts.push(t);
+      }
     }
+
+    var t = setTimeout(showNext, 400);
+    timeouts.push(t);
   }
 
   function appendMsg(msg) {
@@ -840,9 +1305,151 @@ document.querySelectorAll('.reveal').forEach(function(el) {
     body.scrollTop = body.scrollHeight;
   }
 
-  setTimeout(showNext, 1400);
+  // Start first conversation
+  setTimeout(function() { playConversation(conversations[0].msgs); }, 1500);
+})();
+
+/* ===== PRICING TOGGLE ===== */
+(function() {
+  var toggle = document.getElementById('price-toggle');
+  var labels = toggle.querySelectorAll('.price-toggle-label');
+  var section = document.querySelector('.pricing');
+  var cards = document.querySelectorAll('.price-card');
+
+  labels.forEach(function(label) {
+    label.addEventListener('click', function() {
+      var period = this.getAttribute('data-period');
+      labels.forEach(function(l) { l.classList.remove('active'); });
+      this.classList.add('active');
+
+      var isAnnual = period === 'annual';
+      section.classList.toggle('annual', isAnnual);
+
+      cards.forEach(function(card) {
+        var amount = card.querySelector('.price-amount');
+        var periodEl = card.querySelector('.price-period');
+        var noteEl = card.querySelector('.price-note');
+        var originalEl = card.querySelector('.price-original');
+        var extraEl = card.querySelector('.price-extra');
+
+        if (isAnnual) {
+          var annualPrice = card.getAttribute('data-annual');
+          var monthlyPrice = card.getAttribute('data-monthly');
+          if (annualPrice) {
+            originalEl.textContent = monthlyPrice + ' Kč';
+            amount.innerHTML = annualPrice + ' <span class="currency">Kč</span>';
+          }
+          var annualPeriod = card.getAttribute('data-annual-period');
+          if (annualPeriod) periodEl.textContent = annualPeriod;
+          var annualNote = card.getAttribute('data-annual-note');
+          if (annualNote) noteEl.textContent = annualNote;
+          var annualExtra = card.getAttribute('data-annual-extra');
+          if (extraEl && annualExtra) extraEl.innerHTML = '<span class="check">✓</span>' + annualExtra;
+        } else {
+          var monthlyPrice = card.getAttribute('data-monthly');
+          if (monthlyPrice) {
+            originalEl.textContent = '';
+            amount.innerHTML = monthlyPrice + ' <span class="currency">Kč</span>';
+          }
+          var monthlyPeriod = card.getAttribute('data-monthly-period');
+          if (monthlyPeriod) periodEl.textContent = monthlyPeriod;
+          var monthlyNote = card.getAttribute('data-monthly-note');
+          if (monthlyNote) noteEl.textContent = monthlyNote;
+          var monthlyExtra = card.getAttribute('data-monthly-extra');
+          if (extraEl && monthlyExtra) extraEl.innerHTML = '<span class="check">✓</span>' + monthlyExtra;
+        }
+      });
+    });
+  });
+})();
+
+/* ===== MODAL ===== */
+(function() {
+  var overlay = document.getElementById('modal-overlay');
+  var closeBtn = document.getElementById('modal-close');
+  var form = document.getElementById('modal-form');
+  var success = document.getElementById('modal-success');
+  var titleEl = document.getElementById('modal-title');
+  var subtitleEl = document.getElementById('modal-subtitle');
+  var msgGroup = document.getElementById('msg-group');
+  var submitBtn = document.getElementById('form-submit');
+  var currentType = 'trial';
+
+  var config = {
+    trial: {
+      title: 'Vyzkoušet ET/HEL zdarma',
+      subtitle: 'Vyplňte údaje a ozveme se vám do 24 hodin s aktivačním tokenem.',
+      showMsg: false,
+      subject: 'ET/HEL — žádost o trial'
+    },
+    demo: {
+      title: 'Domluvit demo nebo nasazení',
+      subtitle: 'Řekneme si o vašem Heliosu a ukážeme, co ET/HEL umí s vašimi daty.',
+      showMsg: true,
+      subject: 'ET/HEL — zájem o demo / nasazení'
+    }
+  };
+
+  document.addEventListener('click', function(e) {
+    var trigger = e.target.closest('[data-modal]');
+    if (!trigger) return;
+    e.preventDefault();
+    currentType = trigger.getAttribute('data-modal');
+    var c = config[currentType] || config.trial;
+    titleEl.textContent = c.title;
+    subtitleEl.textContent = c.subtitle;
+    msgGroup.style.display = c.showMsg ? 'block' : 'none';
+    form.classList.remove('hidden');
+    success.classList.remove('show');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  submitBtn.addEventListener('click', function() {
+    var name = document.getElementById('f-name').value.trim();
+    var email = document.getElementById('f-email').value.trim();
+    var company = document.getElementById('f-company').value.trim();
+    var msg = document.getElementById('f-msg').value.trim();
+
+    if (!name || !email) {
+      if (!name) document.getElementById('f-name').focus();
+      else document.getElementById('f-email').focus();
+      return;
+    }
+
+    var c = config[currentType] || config.trial;
+    var body = 'Jméno: ' + name + '%0D%0A' +
+               'Email: ' + email + '%0D%0A' +
+               'Firma: ' + (company || '—') + '%0D%0A' +
+               'Typ: ' + currentType +
+               (msg ? '%0D%0AZpráva: ' + msg : '');
+
+    window.location.href = 'mailto:ethel@jakubsevela.cz?subject=' +
+      encodeURIComponent(c.subject) + '&body=' + body;
+
+    form.classList.add('hidden');
+    success.classList.add('show');
+
+    setTimeout(function() {
+      document.getElementById('f-name').value = '';
+      document.getElementById('f-email').value = '';
+      document.getElementById('f-company').value = '';
+      document.getElementById('f-msg').value = '';
+    }, 500);
+  });
 })();
 </script>
-
 </body>
 </html>
