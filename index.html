@@ -1380,13 +1380,13 @@ document.querySelectorAll('.reveal').forEach(function(el) {
       title: 'Vyzkoušet ET/HEL zdarma',
       subtitle: 'Vyplňte údaje a ozveme se vám do 24 hodin s aktivačním tokenem.',
       showMsg: false,
-      subject: 'ET/HEL — žádost o trial'
+      endpoint: 'https://formspree.io/f/xgopkapp'
     },
     demo: {
       title: 'Domluvit demo nebo nasazení',
       subtitle: 'Řekneme si o vašem Heliosu a ukážeme, co ET/HEL umí s vašimi daty.',
       showMsg: true,
-      subject: 'ET/HEL — zájem o demo / nasazení'
+      endpoint: 'https://formspree.io/f/xwvwolwj'
     }
   };
 
@@ -1430,24 +1430,39 @@ document.querySelectorAll('.reveal').forEach(function(el) {
     }
 
     var c = config[currentType] || config.trial;
-    var body = 'Jméno: ' + name + '%0D%0A' +
-               'Email: ' + email + '%0D%0A' +
-               'Firma: ' + (company || '—') + '%0D%0A' +
-               'Typ: ' + currentType +
-               (msg ? '%0D%0AZpráva: ' + msg : '');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Odesílám…';
 
-    window.location.href = 'mailto:ethel@jakubsevela.cz?subject=' +
-      encodeURIComponent(c.subject) + '&body=' + body;
+    var data = {
+      name: name,
+      email: email,
+      company: company || '—',
+      type: currentType
+    };
+    if (msg) data.message = msg;
 
-    form.classList.add('hidden');
-    success.classList.add('show');
-
-    setTimeout(function() {
+    fetch(c.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function(res) {
+      if (res.ok) {
+        form.classList.add('hidden');
+        success.classList.remove('show');
+        success.classList.add('show');
+      } else {
+        alert('Něco se nepovedlo. Zkuste to prosím znovu.');
+      }
+    }).catch(function() {
+      alert('Chyba připojení. Zkuste to prosím znovu.');
+    }).finally(function() {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Odeslat';
       document.getElementById('f-name').value = '';
       document.getElementById('f-email').value = '';
       document.getElementById('f-company').value = '';
       document.getElementById('f-msg').value = '';
-    }, 500);
+    });
   });
 })();
 </script>
