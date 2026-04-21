@@ -19,11 +19,20 @@
 <meta property="og:url" content="https://ethel.cz">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="ET/HEL">
+<meta property="og:image" content="https://ethel.cz/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ET/HEL — AI asistentka pro Helios iNuvio">
 
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ET/HEL — AI asistentka pro Helios iNuvio">
 <meta name="twitter:description" content="ET/HEL je AI asistentka pro Helios iNuvio. Místo klikání se prostě zeptáte — odpoví na dotazy, vysvětlí sestavy a pomůže s daty. Česky, během sekund.">
+<meta name="twitter:image" content="https://ethel.cz/og-image.png">
+<meta name="twitter:image:alt" content="ET/HEL — AI asistentka pro Helios iNuvio">
+
+<!-- Performance hints -->
+<link rel="dns-prefetch" href="https://formspree.io">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -780,7 +789,51 @@
     footer { flex-direction: column; text-align: center; }
     .hero-grid { background-size: 40px 40px; }
   }
+
+  /* ===== COOKIE CONSENT ===== */
+  .cookie-banner {
+    position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
+    max-width: 720px; width: calc(100% - 2.5rem);
+    background: var(--bg-card); border: 1px solid var(--border-hover);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    z-index: 9000; display: none; gap: 1rem;
+    align-items: center; flex-wrap: wrap;
+    animation: cookieSlideUp 0.4s ease-out;
+  }
+  .cookie-banner.show { display: flex; }
+  .cookie-banner-text {
+    flex: 1; min-width: 240px;
+    color: var(--text-secondary); font-size: 0.85rem; line-height: 1.55;
+  }
+  .cookie-banner-text strong { color: var(--text); font-weight: 600; }
+  .cookie-banner-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .cookie-btn {
+    padding: 0.55rem 1.1rem; border-radius: var(--radius-sm);
+    font-size: 0.82rem; font-weight: 600; cursor: pointer;
+    border: 1px solid transparent; font-family: 'Sora', sans-serif;
+    transition: all 0.2s;
+  }
+  .cookie-btn-accept { background: var(--accent); color: #0a0f0e; }
+  .cookie-btn-accept:hover { opacity: 0.9; transform: translateY(-1px); }
+  .cookie-btn-reject { background: transparent; color: var(--text-secondary); border-color: var(--border-hover); }
+  .cookie-btn-reject:hover { color: var(--text); border-color: var(--text-dim); }
+  @keyframes cookieSlideUp { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+  @media (max-width: 600px) {
+    .cookie-banner { bottom: 0.75rem; padding: 1rem; }
+    .cookie-banner-actions { width: 100%; }
+    .cookie-btn { flex: 1; }
+  }
 </style>
+
+<!--
+  Google Analytics 4 (gtag.js)
+  -----------------------------
+  ZAPNUTÍ:
+  1. Vyplň GA4 Measurement ID níže (formát G-XXXXXXXXXX) v konstantě GA_MEASUREMENT_ID.
+  2. Volitelně doplň consent banner texty / domény.
+  GA se načítá až po souhlasu uživatele (banner níže). Bez souhlasu žádné requesty na google-analytics.com.
+-->
 
 <!-- Structured Data -->
 <script type="application/ld+json">
@@ -1227,6 +1280,30 @@
 
 </main>
 
+<!-- COOKIE CONSENT BANNER -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
+  <div class="cookie-banner-text">
+    <strong>Sušenky? 🍪</strong> Používáme jen analytické cookies (Google Analytics) k pochopení, jak vám web slouží.
+    Žádný marketing, žádný tracking napříč weby. Můžete je odmítnout — web bude fungovat normálně.
+  </div>
+  <div class="cookie-banner-actions">
+    <button class="cookie-btn cookie-btn-reject" id="cookie-reject" type="button">Odmítnout</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookie-accept" type="button">Přijmout</button>
+  </div>
+</div>
+
+<!-- COOKIE CONSENT BANNER -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
+  <div class="cookie-banner-text">
+    <strong>Sušenky? 🍪</strong> Používáme jen analytické cookies (Google Analytics) k pochopení, jak vám web slouží.
+    Žádný marketing, žádný tracking napříč weby. Můžete je odmítnout — web bude fungovat normálně.
+  </div>
+  <div class="cookie-banner-actions">
+    <button class="cookie-btn cookie-btn-reject" id="cookie-reject" type="button">Odmítnout</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookie-accept" type="button">Přijmout</button>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-left">
@@ -1543,6 +1620,59 @@ document.querySelectorAll('.reveal').forEach(function(el) {
       document.getElementById('f-company').value = '';
       document.getElementById('f-msg').value = '';
     });
+  });
+})();
+
+/* ===== COOKIE CONSENT + GA4 ===== */
+(function() {
+  // === GA4 KONFIGURACE ===
+  // Pro zapnutí: doplň reálné Measurement ID (formát G-XXXXXXXXXX) z https://analytics.google.com.
+  // Dokud je placeholder, GA se nikdy nenacita (banner se ale stejne zobrazi pro budouci pripravu).
+  var GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+  var CONSENT_KEY = 'ethel_cookie_consent_v1';
+
+  var banner = document.getElementById('cookie-banner');
+  var acceptBtn = document.getElementById('cookie-accept');
+  var rejectBtn = document.getElementById('cookie-reject');
+
+  function getConsent() {
+    try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; }
+  }
+  function setConsent(value) {
+    try { localStorage.setItem(CONSENT_KEY, value); } catch (e) { /* private mode */ }
+  }
+  function hideBanner() {
+    if (banner) banner.classList.remove('show');
+  }
+  function loadGA() {
+    if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
+    if (window._ethelGaLoaded) return;
+    window._ethelGaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_MEASUREMENT_ID);
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function() { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+  }
+
+  var existing = getConsent();
+  if (existing === 'accepted') {
+    loadGA();
+  } else if (existing !== 'rejected' && banner) {
+    setTimeout(function() { banner.classList.add('show'); }, 1200);
+  }
+
+  if (acceptBtn) acceptBtn.addEventListener('click', function() {
+    setConsent('accepted');
+    hideBanner();
+    loadGA();
+  });
+  if (rejectBtn) rejectBtn.addEventListener('click', function() {
+    setConsent('rejected');
+    hideBanner();
   });
 })();
 </script>
