@@ -1552,6 +1552,12 @@ document.querySelectorAll('.reveal').forEach(function(el) {
     if (!trigger) return;
     e.preventDefault();
     currentType = trigger.getAttribute('data-modal');
+    if (typeof gtag === 'function') {
+      gtag('event', 'cta_click', {
+        cta_type: currentType,
+        cta_location: trigger.className || 'unknown',
+      });
+    }
     var c = config[currentType] || config.trial;
     titleEl.textContent = c.title;
     subtitleEl.textContent = c.subtitle;
@@ -1561,6 +1567,24 @@ document.querySelectorAll('.reveal').forEach(function(el) {
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   });
+
+  // Konverze: scroll na #pricing (jednorázově za session)
+  var pricingEl = document.getElementById('pricing');
+  if (pricingEl && 'IntersectionObserver' in window) {
+    var pricingFired = false;
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !pricingFired) {
+          pricingFired = true;
+          if (typeof gtag === 'function') {
+            gtag('event', 'pricing_view');
+          }
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(pricingEl);
+  }
 
   function closeModal() {
     overlay.classList.remove('open');
@@ -1607,6 +1631,9 @@ document.querySelectorAll('.reveal').forEach(function(el) {
         form.classList.add('hidden');
         success.classList.remove('show');
         success.classList.add('show');
+        if (typeof gtag === 'function') {
+          gtag('event', 'lead_submit', { lead_type: currentType });
+        }
       } else {
         alert('Něco se nepovedlo. Zkuste to prosím znovu.');
       }
@@ -1628,7 +1655,7 @@ document.querySelectorAll('.reveal').forEach(function(el) {
   // === GA4 KONFIGURACE ===
   // Pro zapnutí: doplň reálné Measurement ID (formát G-XXXXXXXXXX) z https://analytics.google.com.
   // Dokud je placeholder, GA se nikdy nenacita (banner se ale stejne zobrazi pro budouci pripravu).
-  var GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+  var GA_MEASUREMENT_ID = 'G-5YGP0D48W7';
   var CONSENT_KEY = 'ethel_cookie_consent_v1';
 
   var banner = document.getElementById('cookie-banner');
