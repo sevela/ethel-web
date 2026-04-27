@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>OG image template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: 'Sora', sans-serif;
+    background: #08080a;
+    color: #eaeaf0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 96px;
+  }
+
+  /* radial accent glows */
+  body::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(107, 148, 184, 0.28) 0%, rgba(107, 148, 184, 0) 65%);
+    pointer-events: none;
+  }
+  body::after {
+    content: '';
+    position: absolute;
+    bottom: -250px;
+    left: -150px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(107, 148, 184, 0.18) 0%, rgba(107, 148, 184, 0) 65%);
+    pointer-events: none;
+  }
+
+  /* subtle grid */
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(107, 148, 184, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(107, 148, 184, 0.045) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .top-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: #6b94b8;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .top-row .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.7);
+  }
+
+  h1 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 168px;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    background: linear-gradient(180deg, #ffffff 0%, #c8d4e0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 24px;
+  }
+  h1 .slash {
+    color: #6b94b8;
+    -webkit-text-fill-color: #6b94b8;
+  }
+
+  .tagline {
+    font-size: 44px;
+    font-weight: 400;
+    color: #eaeaf0;
+    line-height: 1.25;
+    max-width: 900px;
+    margin-bottom: 20px;
+  }
+  .tagline .accent {
+    color: #8fb3cc;
+    font-weight: 500;
+  }
+
+  .sub {
+    font-size: 22px;
+    color: #9494a8;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-row {
+    position: absolute;
+    bottom: 80px;
+    left: 96px;
+    right: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    color: #5c5c72;
+  }
+  .footer-row .url {
+    color: #8fb3cc;
+  }
+  .badges {
+    display: flex;
+    gap: 12px;
+  }
+  .badge {
+    padding: 8px 16px;
+    border: 1px solid rgba(107, 148, 184, 0.3);
+    border-radius: 8px;
+    background: rgba(107, 148, 184, 0.06);
+    color: #c8d4e0;
+    font-size: 18px;
+  }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+
+  <div class="container">
+    <div class="top-row">
+      <span class="dot"></span>
+      <span>AI asistentka pro Helios iNuvio</span>
+    </div>
+
+    <h1>ET<span class="slash">/</span>HEL</h1>
+
+    <div class="tagline">
+      Místo klikání se prostě <span class="accent">zeptáte</span>.<br>
+      Rozumí vašim datům, sestavám i SQL.
+    </div>
+
+    <div class="sub">// embedded thinking for Helios</div>
+  </div>
+
+  <div class="footer-row">
+    <span class="url">ethel.cz</span>
+    <div class="badges">
+      <span class="badge">česky</span>
+      <span class="badge">on-prem ready</span>
+      <span class="badge">RAG + SQL</span>
+    </div>
+  </div>
+</body>
+</html>
