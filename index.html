@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ET/HEL – AI asistentka pro Helios iNuvio</title>
-<meta name="description" content="ET/HEL je AI asistentka pro Helios iNuvio. Zeptejte se místo proklikávání – rozumí vašim datům, sestavám i SQL a odpovídá česky.">
+<title>Ethel – AI asistentka pro Helios iNuvio</title>
+<meta name="description" content="Ethel je AI asistentka pro Helios iNuvio. Zeptejte se místo proklikávání – rozumí vašim datům, sestavám i SQL a odpovídá česky.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Jakub Ševela">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -13,30 +13,52 @@
 <link rel="canonical" href="https://ethel.cz">
 
 <!-- Open Graph -->
-<meta property="og:title" content="ET/HEL – AI asistentka pro Helios iNuvio">
-<meta property="og:description" content="ET/HEL je AI asistentka pro Helios iNuvio. Místo klikání se prostě zeptáte – odpoví na dotazy, vysvětlí sestavy a pomůže s daty. Česky, během sekund.">
+<meta property="og:title" content="Ethel – AI asistentka pro Helios iNuvio">
+<meta property="og:description" content="Ethel je AI asistentka pro Helios iNuvio. Místo klikání se prostě zeptáte – odpoví na dotazy, vysvětlí sestavy a pomůže s daty. Česky, během sekund.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ethel.cz">
 <meta property="og:locale" content="cs_CZ">
-<meta property="og:site_name" content="ET/HEL">
+<meta property="og:site_name" content="Ethel">
 <meta property="og:image" content="https://ethel.cz/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="ET/HEL – AI asistentka pro Helios iNuvio">
+<meta property="og:image:alt" content="Ethel – AI asistentka pro Helios iNuvio">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ET/HEL – AI asistentka pro Helios iNuvio">
-<meta name="twitter:description" content="ET/HEL je AI asistentka pro Helios iNuvio. Místo klikání se prostě zeptáte – odpoví na dotazy, vysvětlí sestavy a pomůže s daty. Česky, během sekund.">
+<meta name="twitter:title" content="Ethel – AI asistentka pro Helios iNuvio">
+<meta name="twitter:description" content="Ethel je AI asistentka pro Helios iNuvio. Místo klikání se prostě zeptáte – odpoví na dotazy, vysvětlí sestavy a pomůže s daty. Česky, během sekund.">
 <meta name="twitter:image" content="https://ethel.cz/og-image.png">
-<meta name="twitter:image:alt" content="ET/HEL – AI asistentka pro Helios iNuvio">
+<meta name="twitter:image:alt" content="Ethel – AI asistentka pro Helios iNuvio">
 
 <!-- Performance hints -->
 <link rel="dns-prefetch" href="https://formspree.io">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/sora-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sora-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* Self-hosted fonts (was Google Fonts) — see scripts/build-fonts.js to regenerate */
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/jetbrains-mono-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/jetbrains-mono-400-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/jetbrains-mono-500-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/jetbrains-mono-500-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/jetbrains-mono-700-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/jetbrains-mono-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 300; font-display: swap; src: url('/fonts/sora-300-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 300; font-display: swap; src: url('/fonts/sora-300-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/sora-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/sora-400-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/sora-500-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/sora-500-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/sora-600-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/sora-600-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/sora-700-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/sora-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 800; font-display: swap; src: url('/fonts/sora-800-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 800; font-display: swap; src: url('/fonts/sora-800-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/space-mono-700-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/space-mono-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
   :root {
     --bg: #08080a;
     --bg-elevated: #0e0e12;
@@ -848,8 +870,8 @@
   "@graph": [
     {
       "@type": "SoftwareApplication",
-      "name": "ET/HEL",
-      "alternateName": "Embedded Thinking for Helios",
+      "name": "Ethel",
+      "alternateName": ["ET/HEL", "Embedded Thinking for Helios"],
       "description": "AI asistentka pro Helios iNuvio ERP. Odpovídá na dotazy, vysvětluje sestavy a pomáhá s orientací v datech – česky, během sekund.",
       "url": "https://ethel.cz",
       "applicationCategory": "BusinessApplication",
@@ -881,7 +903,8 @@
     },
     {
       "@type": "Organization",
-      "name": "ET/HEL",
+      "name": "Ethel",
+      "alternateName": "ET/HEL",
       "url": "https://ethel.cz",
       "logo": "https://ethel.cz/favicon.svg",
       "contactPoint": {
@@ -903,8 +926,8 @@
     },
     {
       "@type": "WebPage",
-      "name": "ET/HEL – AI asistentka pro Helios iNuvio",
-      "description": "Zeptejte se Heliosu místo proklikávání. ET/HEL je AI asistentka, která rozumí vašim datům, sestavám i SQL – a odpovídá česky.",
+      "name": "Ethel – AI asistentka pro Helios iNuvio",
+      "description": "Zeptejte se Heliosu místo proklikávání. Ethel je AI asistentka, která rozumí vašim datům, sestavám i SQL – a odpovídá česky.",
       "url": "https://ethel.cz",
       "inLanguage": "cs"
     }
@@ -941,7 +964,7 @@
     </div>
     <h1>AI pro <span class="accent">Helios</span><br><span class="dim">Zeptejte se místo klikání</span></h1>
     <p class="hero-sub">
-      ET/HEL je AI asistentka nad vaším Heliosem.
+      Ethel je AI asistentka nad vaším Heliosem.
       Odpoví na dotazy, vysvětlí sestavy a&nbsp;pomůže s&nbsp;orientací v&nbsp;datech – během sekund, česky.
     </p>
     <p class="hero-value">Ušetří hodiny, které trávíte hledáním v Heliosu.</p>
@@ -961,7 +984,7 @@
       <div class="chat-header">
         <div class="chat-avatar"><img src="favicon-96x96.png" alt="Ethel" style="width:26px;height:26px;filter:brightness(0) invert(1);"></div>
         <div class="chat-header-info">
-          <div class="chat-header-name">ET/HEL</div>
+          <div class="chat-header-name">Ethel</div>
           <div class="chat-header-status"><span class="online-dot"></span> online</div>
         </div>
         <div class="chat-header-ctx" id="chat-ctx" style="display:none">Objednávky</div>
@@ -1004,17 +1027,17 @@
 <section class="features reveal" id="features">
   <div class="section-label">Funkce</div>
   <h2 class="section-title">AI asistentka, která rozumí<br>vašemu Heliosu</h2>
-  <p class="section-desc">ET/HEL nenahrazuje váš ERP. Přidává mu inteligenci – nad daty, kódem i procesy. Vy se ptáte, ona odpovídá.</p>
+  <p class="section-desc">Ethel nenahrazuje váš ERP. Přidává mu inteligenci – nad daty, kódem i procesy. Vy se ptáte, ona odpovídá.</p>
   <div class="features-grid">
     <div class="feature-card reveal reveal-delay-1">
       <div class="feature-icon">⚡</div>
       <h3>Zeptejte se místo klikání</h3>
-      <p>Nehledáte v sestavách. Prostě se zeptáte – ET/HEL odpoví česky, s&nbsp;kontextem vaší firmy. Žádné tabulky s tisíci řádky.</p>
+      <p>Nehledáte v sestavách. Prostě se zeptáte – Ethel odpoví česky, s&nbsp;kontextem vaší firmy. Žádné tabulky s tisíci řádky.</p>
     </div>
     <div class="feature-card reveal reveal-delay-2">
       <div class="feature-icon">🧭</div>
       <h3>Vysvětlí Helios novým lidem</h3>
-      <p>Nový kolega? ET/HEL vysvětlí sestavy, pole i&nbsp;logiku systému – bez školení. Ideální onboarding do Heliosu.</p>
+      <p>Nový kolega? Ethel vysvětlí sestavy, pole i&nbsp;logiku systému – bez školení. Ideální onboarding do Heliosu.</p>
     </div>
     <div class="feature-card reveal reveal-delay-3">
       <div class="feature-icon">🔍</div>
@@ -1024,7 +1047,7 @@
     <div class="feature-card reveal reveal-delay-1">
       <div class="feature-icon">📊</div>
       <h3>Hlídá logy za vás</h3>
-      <p>Povolte ET/HEL přístup k vybraným logům a&nbsp;dostanete upozornění, když něco nehraje. Anomálie, výpadky, skoky v sekvenci.</p>
+      <p>Povolte Ethel přístup k vybraným logům a&nbsp;dostanete upozornění, když něco nehraje. Anomálie, výpadky, skoky v sekvenci.</p>
     </div>
     <div class="feature-card reveal reveal-delay-2">
       <div class="feature-icon">🛡️</div>
@@ -1034,7 +1057,7 @@
     <div class="feature-card reveal reveal-delay-3">
       <div class="feature-icon">🧩</div>
       <h3>Akce s vaším souhlasem</h3>
-      <p>ET/HEL může vygenerovat popis produktu, zkontrolovat adresu nebo klasifikovat doklad. Ale jen když kliknete na „ano".</p>
+      <p>Ethel může vygenerovat popis produktu, zkontrolovat adresu nebo klasifikovat doklad. Ale jen když kliknete na „ano".</p>
     </div>
   </div>
 </section>
@@ -1042,14 +1065,14 @@
 <!-- PRO KOHO -->
 <section class="audience reveal" id="audience">
   <div class="section-label">Pro koho to je</div>
-  <h2 class="section-title">ET/HEL pomáhá celé firmě</h2>
+  <h2 class="section-title">Ethel pomáhá celé firmě</h2>
   <p class="section-desc" style="margin-left: auto; margin-right: auto;">Od managementu po IT – každý dostane odpovědi, které potřebuje.</p>
   <div class="audience-grid">
     <div class="audience-card reveal reveal-delay-1">
       <div class="audience-icon">📈</div>
       <div class="audience-role">Management</div>
       <h3>Rychlé odpovědi bez čekání na reporty</h3>
-      <p>Chcete vědět, co se děje ve firmě – hned. ET/HEL vám řekne stav objednávek, faktur nebo skladu jedním dotazem. Bez čekání na IT.</p>
+      <p>Chcete vědět, co se děje ve firmě – hned. Ethel vám řekne stav objednávek, faktur nebo skladu jedním dotazem. Bez čekání na IT.</p>
     </div>
     <div class="audience-card reveal reveal-delay-2">
       <div class="audience-icon">🧾</div>
@@ -1061,7 +1084,7 @@
       <div class="audience-icon">💻</div>
       <div class="audience-role">IT &amp; Helios admin</div>
       <h3>Nemusíte vysvětlovat systém dokola</h3>
-      <p>ET/HEL vysvětlí kolegům sestavy, sloupce i logiku systému za vás. A vám pomůže s kódem – rozebere procedury, views i triggery.</p>
+      <p>Ethel vysvětlí kolegům sestavy, sloupce i logiku systému za vás. A vám pomůže s kódem – rozebere procedury, views i triggery.</p>
     </div>
   </div>
 </section>
@@ -1070,19 +1093,19 @@
 <section class="how reveal" id="how">
   <div class="section-label">Jak to funguje</div>
   <h2 class="section-title">Od instalace k prvnímu dotazu,<br>než dopijete kafe</h2>
-  <p class="section-desc">Žádná měsíční implementace. ET/HEL se napojí na váš Helios a&nbsp;začne odpovídat.</p>
+  <p class="section-desc">Žádná měsíční implementace. Ethel se napojí na váš Helios a&nbsp;začne odpovídat.</p>
   <div class="steps">
     <div class="step reveal">
       <div class="step-num mono">01</div>
       <div class="step-content">
         <h3>Spustíte instalační skript</h3>
-        <p>Jeden SQL skript nasadí ET/HEL do vaší databáze. Připojení k Heliosu přes standardní konfiguraci – bez zásahů do jádra systému.</p>
+        <p>Jeden SQL skript nasadí Ethel do vaší databáze. Připojení k Heliosu přes standardní konfiguraci – bez zásahů do jádra systému.</p>
       </div>
     </div>
     <div class="step reveal">
       <div class="step-num mono">02</div>
       <div class="step-content">
-        <h3>ET/HEL se rozhlédne</h3>
+        <h3>Ethel se rozhlédne</h3>
         <p>Automaticky projde strukturu databáze, stored procedury a konfiguraci. Vytvoří si znalostní mapu vaší konkrétní instance Heliosu.</p>
       </div>
     </div>
@@ -1097,7 +1120,7 @@
       <div class="step-num mono">04</div>
       <div class="step-content">
         <h3>Ptejte se</h3>
-        <p>Otevřete ET/HEL přímo z Heliosu, napíšete otázku česky a&nbsp;dostanete odpověď s kontextem vaší firmy. Jako byste se ptali kolegy, který zná celý systém.</p>
+        <p>Otevřete Ethel přímo z Heliosu, napíšete otázku česky a&nbsp;dostanete odpověď s kontextem vaší firmy. Jako byste se ptali kolegy, který zná celý systém.</p>
       </div>
     </div>
   </div>
@@ -1116,7 +1139,7 @@
     </div>
     <div class="usecase reveal">
       <div class="usecase-q">"Na co se tady dívám? Co jsou tyhle sloupce?"</div>
-      <div class="usecase-a">→ ET/HEL přečte definici sestavy a popíše každý sloupec, doplněk i filtr.</div>
+      <div class="usecase-a">→ Ethel přečte definici sestavy a popíše každý sloupec, doplněk i filtr.</div>
       <div class="usecase-benefit">↗ Nový kolega se zorientuje sám</div>
     </div>
     <div class="usecase reveal">
@@ -1147,7 +1170,7 @@
   <div class="safety-box">
     <div class="safety-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4" stroke-opacity="0.9"/></svg></div>
     <h2>Vaše data nikam neodchází</h2>
-    <p>ET/HEL zná strukturu vašeho Heliosu, ale nevidí reálná čísla. Do cloudu jde jen dotaz – odpověď se sestaví lokálně na vašem serveru. Žádné kopírování databáze, žádná rizika.</p>
+    <p>Ethel zná strukturu vašeho Heliosu, ale nevidí reálná čísla. Do cloudu jde jen dotaz – odpověď se sestaví lokálně na vašem serveru. Žádné kopírování databáze, žádná rizika.</p>
     <div class="safety-pills">
       <span class="safety-pill">SQL běží u vás</span>
       <span class="safety-pill">Žádný export dat</span>
@@ -1164,7 +1187,7 @@
     <div class="author-info">
       <div class="author-name">Jakub Ševela</div>
       <div class="author-role">Solution architect · Helios iNuvio</div>
-      <p class="author-text">Přes 18 let pracuju s&nbsp;Heliosem – implementace, integrace, SQL na denní bázi. ET/HEL stavím, protože vím, kolik času lidi tráví proklikáváním sestav. A&nbsp;věřím, že to jde líp.</p>
+      <p class="author-text">Přes 18 let pracuju s&nbsp;Heliosem – implementace, integrace, SQL na denní bázi. Ethel stavím, protože vím, kolik času lidi tráví proklikáváním sestav. A&nbsp;věřím, že to jde líp.</p>
     </div>
   </div>
 </section>
@@ -1173,7 +1196,7 @@
 <section class="trust reveal">
   <div class="trust-box">
     <h3>Nasazeno u reálných firem</h3>
-    <p>ET/HEL testujeme v ostrém provozu. Časem zde přibydou reference – zatím nás posuzujte podle kvality trialu.</p>
+    <p>Ethel testujeme v ostrém provozu. Časem zde přibydou reference – zatím nás posuzujte podle kvality trialu.</p>
   </div>
 </section>
 
@@ -1243,7 +1266,7 @@
 <!-- CTA -->
 <section class="cta-section reveal" id="cta">
   <h2>Přestaňte hledat v&nbsp;Heliosu</h2>
-  <p>Začněte se ptát. ET/HEL vám odpoví během sekund.</p>
+  <p>Začněte se ptát. Ethel vám odpoví během sekund.</p>
   <div class="cta-actions">
     <a href="#" class="btn btn-primary" data-modal="trial">Vyzkoušet zdarma</a>
     <a href="#" class="btn btn-ghost" data-modal="demo">Domluvit demo →</a>
@@ -1255,7 +1278,7 @@
   <div class="modal">
     <button class="modal-close" id="modal-close">×</button>
     <div class="modal-form" id="modal-form">
-      <div class="modal-title" id="modal-title">Vyzkoušet ET/HEL zdarma</div>
+      <div class="modal-title" id="modal-title">Vyzkoušet Ethel zdarma</div>
       <div class="modal-subtitle" id="modal-subtitle">Vyplňte údaje a ozveme se vám do 24 hodin s aktivačním tokenem.</div>
       <div class="form-group">
         <label class="form-label" for="f-name">Jméno</label>
@@ -1313,9 +1336,9 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-left">
-    &copy; 2026 ET/HEL &middot; Embedded Thinking for Helios
+    &copy; 2026 Ethel &middot; Embedded Thinking for Helios
     <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a>
-    <br><span style="font-size: 0.72rem;">ET/HEL není produktem společnosti Asseco Solutions. Helios a Helios iNuvio jsou registrované ochranné známky.</span>
+    <br><span style="font-size: 0.72rem;">Ethel není produktem společnosti Asseco Solutions. Helios a Helios iNuvio jsou registrované ochranné známky.</span>
   </div>
   <div class="footer-right">v1.0 &middot; brno, cz</div>
 </footer>
@@ -1540,14 +1563,14 @@ document.querySelectorAll('.reveal').forEach(function(el) {
 
   var config = {
     trial: {
-      title: 'Vyzkoušet ET/HEL zdarma',
+      title: 'Vyzkoušet Ethel zdarma',
       subtitle: 'Vyplňte údaje a ozveme se vám do 24 hodin s aktivačním tokenem.',
       showMsg: false,
       endpoint: 'https://formspree.io/f/xgopkapp'
     },
     demo: {
       title: 'Domluvit demo nebo nasazení',
-      subtitle: 'Řekneme si o vašem Heliosu a ukážeme, co ET/HEL umí s vašimi daty.',
+      subtitle: 'Řekneme si o vašem Heliosu a ukážeme, co Ethel umí s vašimi daty.',
       showMsg: true,
       endpoint: 'https://formspree.io/f/xwvwolwj'
     }

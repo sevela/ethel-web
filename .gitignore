@@ -1,3 +1,4 @@
 node_modules/
 .lighthouse/
 .claude/
+scripts/_fonts.css
