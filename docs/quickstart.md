@@ -1,4 +1,4 @@
-# ET/HEL — Rychlý start
+# ET/HEL – Rychlý start
 
 Vítejte v ET/HEL. Tento návod vás za pár minut provede prvními kroky.
 
@@ -20,7 +20,7 @@ V Heliosu stiskněte **CTRL+I** *(nebo akci „ET/HEL" v menu, podle nasazení v
 
 ## 5 příkladů, na co se zeptat
 
-Vyzkoušejte tyto dotazy — pomůžou vám pochopit, co ET/HEL umí:
+Vyzkoušejte tyto dotazy – pomůžou vám pochopit, co ET/HEL umí:
 
 1. **„Kolik faktur jsme vystavili minulý měsíc?"**
    Rychlá odpověď bez nutnosti otevírat sestavu.
@@ -29,7 +29,7 @@ Vyzkoušejte tyto dotazy — pomůžou vám pochopit, co ET/HEL umí:
    Provozní přehled jedním dotazem.
 
 3. **„Vysvětli mi sloupec `Datum_S` v tabulce `TabDokladyZbozi`."**
-   Kontext a význam polí — ideální pro nové kolegy.
+   Kontext a význam polí – ideální pro nové kolegy.
 
 4. **„Najdi všechny faktury od dodavatele ABC za poslední čtvrtletí."**
    Filtrování přes přirozený jazyk.
@@ -39,7 +39,7 @@ Vyzkoušejte tyto dotazy — pomůžou vám pochopit, co ET/HEL umí:
 
 ## Co ET/HEL **NEUMÍ** (a proč)
 
-Ze záměrnosti — bezpečnost vašich dat je priorita.
+Ze záměrnosti – bezpečnost vašich dat je priorita.
 
 - ❌ **Mazat ani měnit data v Heliosu.** ET/HEL umí pouze číst.
 - ❌ **Přistupovat k datům mimo Helios** (souborový systém, jiné aplikace, e-maily).
@@ -51,19 +51,19 @@ Pokud potřebujete akci typu „uprav záznam", ET/HEL navrhne SQL a zeptá se v
 ## Tipy do začátku
 
 - **Pište česky a přirozeně.** „Najdi mi faktury od září" funguje stejně dobře jako technické formulace.
-- **Buďte konkrétní s časem a kontextem.** „Tento týden", „od dodavatele XY", „pro středisko 110" — čím přesněji, tím lepší odpověď.
-- **Použijte follow-up otázky.** Po první odpovědi můžete pokračovat: „A z toho jen ty nezaplacené?" — ET/HEL si pamatuje kontext konverzace.
+- **Buďte konkrétní s časem a kontextem.** „Tento týden", „od dodavatele XY", „pro středisko 110" – čím přesněji, tím lepší odpověď.
+- **Použijte follow-up otázky.** Po první odpovědi můžete pokračovat: „A z toho jen ty nezaplacené?" – ET/HEL si pamatuje kontext konverzace.
 - **Když si nejste jistí, zeptejte se na strukturu.** „Které tabulky obsahují informace o platbách?" vám pomůže pochopit, kde co najít.
 
 ## Něco nefunguje? Máte nápad?
 
 Napište nám na **[ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)**. Reagujeme rychle a každá zpětná vazba pomáhá.
 
-Pokud ET/HEL odpoví špatně nebo divně, dejte palec dolů přímo v chatu — pomůže nám to ladit přesnost.
+Pokud ET/HEL odpoví špatně nebo divně, dejte palec dolů přímo v chatu – pomůže nám to ladit přesnost.
 
 ---
 
 **Další čtení:**
-- [Návod pro IT administrátory](guide-it.md) — instalace, síťové požadavky, troubleshooting
-- [Návod pro Helios partnery](guide-partner.md) — jak nabídnout ET/HEL klientům
-- [ethel.cz](https://ethel.cz) — funkce, ceník, kontakt
+- [Návod pro IT administrátory](guide-it.md) – instalace, síťové požadavky, troubleshooting
+- [Návod pro Helios partnery](guide-partner.md) – jak nabídnout ET/HEL klientům
+- [ethel.cz](https://ethel.cz) – funkce, ceník, kontakt

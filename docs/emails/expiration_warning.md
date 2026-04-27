@@ -1,6 +1,6 @@
-# Email šablona — Platba se nezdařila
+# Email šablona – Platba se nezdařila
 
-**Předmět:** ET/HEL — platba se nezdařila ⚠️
+**Předmět:** ET/HEL – platba se nezdařila ⚠️
 
 **Příjemce:** zákazník, jehož automatická platba neproběhla
 **Odesílatel:** ethel@jakubsevela.cz
@@ -11,7 +11,7 @@
 
 Dobrý den,
 
-automatická platba za vaše předplatné **ET/HEL** se bohužel nezdařila. Nic dramatického — chceme vás jen informovat a dát vám možnost to napravit.
+automatická platba za vaše předplatné **ET/HEL** se bohužel nezdařila. Nic dramatického – chceme vás jen informovat a dát vám možnost to napravit.
 
 ## Co se stalo
 
@@ -30,15 +30,15 @@ Nejčastější příčiny: **expirovaná karta**, nedostatek prostředků, bank
 
 ## Dokdy můžu zaplatit
 
-- Po dobu **{{GRACE_PERIOD_DAYS}} dní** od dnešního data **funguje ET/HEL normálně** — máte čas to v klidu vyřešit.
+- Po dobu **{{GRACE_PERIOD_DAYS}} dní** od dnešního data **funguje ET/HEL normálně** – máte čas to v klidu vyřešit.
 - Pokus o opětovné stržení proběhne **automaticky za 3 a 7 dní**.
-- Po **{{GRACE_PERIOD_DAYS}} dnech** bez úspěšné platby přístup **dočasně pozastavíme**. Data ve vaší databázi (logy, konfigurace) zůstávají — po obnovení platby se vše rozjede tam, kde to skončilo.
+- Po **{{GRACE_PERIOD_DAYS}} dnech** bez úspěšné platby přístup **dočasně pozastavíme**. Data ve vaší databázi (logy, konfigurace) zůstávají – po obnovení platby se vše rozjede tam, kde to skončilo.
 
 ## Potřebujete poradit?
 
-Napište nám na **[ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)** — pomůžeme s řešením, případně domluvíme alternativní platební metodu (bankovní převod, faktura).
+Napište nám na **[ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)** – pomůžeme s řešením, případně domluvíme alternativní platební metodu (bankovní převod, faktura).
 
-Pokud chcete předplatné **zrušit**, stačí odpovědět na tento email — žádné poplatky, žádný stres.
+Pokud chcete předplatné **zrušit**, stačí odpovědět na tento email – žádné poplatky, žádný stres.
 
 ---
 
@@ -58,7 +58,7 @@ Tým ET/HEL
 | `{{ATTEMPT_DATE}}` | datum pokusu, formát `21. 4. 2026` |
 | `{{FAILURE_REASON}}` | text z platební brány, přeložený do češtiny pokud možno |
 | `{{UPDATE_PAYMENT_URL}}` | Stripe Customer Portal link |
-| `{{GRACE_PERIOD_DAYS}}` | konstanta — doporučuji **7 dní** |
+| `{{GRACE_PERIOD_DAYS}}` | konstanta – doporučuji **7 dní** |
 
 ## Pozn. k workflow
 

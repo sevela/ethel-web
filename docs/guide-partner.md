@@ -1,4 +1,4 @@
-# ET/HEL — Návod pro Helios partnery
+# ET/HEL – Návod pro Helios partnery
 
 Průvodce pro implementační partnery Heliosu, kteří chtějí ET/HEL nabízet svým klientům jako přidanou hodnotu k vlastním službám.
 
@@ -9,16 +9,16 @@ Průvodce pro implementační partnery Heliosu, kteří chtějí ET/HEL nabízet
 Pro klienta to znamená:
 - **Operativa a účetní** najdou informace bez čekání na IT
 - **Management** dostane provozní přehled jedním dotazem
-- **Noví kolegové** se rychleji zorientují v Heliosu — ET/HEL vysvětluje sestavy a pole
+- **Noví kolegové** se rychleji zorientují v Heliosu – ET/HEL vysvětluje sestavy a pole
 
 Pro vás jako partnera to znamená:
 - **Méně nudných tiketů** typu „kde najdu fakturu od XY"
-- **Vyšší value** ve vaší implementaci — Helios + AI vrstva
+- **Vyšší value** ve vaší implementaci – Helios + AI vrstva
 - **Možnost provize** za zprostředkování (viz partnerský program níže)
 
 ## Jak to funguje (1 odstavec)
 
-ET/HEL je nativní Windows aplikace (Tauri/Rust, ~12 MB), která se spouští z Heliosu klávesovou zkratkou. SQL dotazy běží **lokálně** na klientově serveru — do cloudu jdou pouze **metadata** (struktura DB) a **text dotazu**. Backend (proxy + Claude API) hostujeme my, klient se nestará o AI klíče ani infrastrukturu.
+ET/HEL je nativní Windows aplikace (Tauri/Rust, ~12 MB), která se spouští z Heliosu klávesovou zkratkou. SQL dotazy běží **lokálně** na klientově serveru – do cloudu jdou pouze **metadata** (struktura DB) a **text dotazu**. Backend (proxy + Claude API) hostujeme my, klient se nestará o AI klíče ani infrastrukturu.
 
 Detailní architektura: [guide-it.md](guide-it.md).
 
@@ -53,7 +53,7 @@ Pro paranoidní klienty: **denylist** v `Tabx_Ethel_Deny` umožní úplně vyřa
 
 ### Není to GPT s omezeními
 
-ET/HEL **rozumí konkrétnímu Heliosu klienta** — ne obecný Helios, ale jeho stored procedurám, číselníkům, customizacím. Po instalaci si „rozhlédne" databázi a postaví znalostní mapu.
+ET/HEL **rozumí konkrétnímu Heliosu klienta** – ne obecný Helios, ale jeho stored procedurám, číselníkům, customizacím. Po instalaci si „rozhlédne" databázi a postaví znalostní mapu.
 
 ## Instalační postup
 
@@ -63,7 +63,7 @@ Instalace je standardní podle [návodu pro IT](guide-it.md). Stručně:
 2. Spustit bez parametrů → wizard projde tokenem, SQL přihlášením, výběrem DB a uživatelů
 3. Nastavit klávesovou zkratku v Heliosu (CTRL+I doporučujeme)
 
-Jako partner můžete instalaci zařadit do svého standardního „Helios setup" balíčku — typicky 30–60 minut práce.
+Jako partner můžete instalaci zařadit do svého standardního „Helios setup" balíčku – typicky 30–60 minut práce.
 
 ## Demo scénář pro prezentaci klientovi
 
@@ -79,7 +79,7 @@ Stačí pár sekund. Klient vidí **svá data**, ne demo. Tohle obvykle utne dis
 
 > **„Vysvětli mi, co znamená sloupec `Zruseno` v `TabKmenZbozi`."**
 
-Klient vidí, že ET/HEL **rozumí jeho konkrétní instanci** — včetně customizací a obvyklého použití pole.
+Klient vidí, že ET/HEL **rozumí jeho konkrétní instanci** – včetně customizací a obvyklého použití pole.
 
 ### 3. Praktický provozní dotaz
 
@@ -98,23 +98,23 @@ Reálný use case z denního provozu. Klient si představí, kdo všechno tohle 
 
 Plné ceny a roční tarif na [ethel.cz](https://ethel.cz#pricing).
 
-**Pro klienty platí 14denní trial bez karty** — perfektní moment pro vaši asistovanou instalaci.
+**Pro klienty platí 14denní trial bez karty** – perfektní moment pro vaši asistovanou instalaci.
 
 ## Partnerský program
 
 Aktuálně připravujeme strukturovaný partnerský program (provize za doporučení, sleva pro vlastní nasazení, přístup do partnerského portálu).
 
-**Předběžně:** zájemci, kteří doporučí klienta v trial fázi, dostanou **20% provizi** z prvního ročního předplatného. Ozvěte se na [partner@jakubsevela.cz](mailto:partner@jakubsevela.cz) — domluvíme se na podmínkách.
+**Předběžně:** zájemci, kteří doporučí klienta v trial fázi, dostanou **20% provizi** z prvního ročního předplatného. Ozvěte se na [partner@jakubsevela.cz](mailto:partner@jakubsevela.cz) – domluvíme se na podmínkách.
 
 > **Pozn.:** Konkrétní podmínky partnerského programu jsou v aktivním vývoji. Aktuálně preferujeme osobní domluvu, podpisy smluv chystáme na Q3 2026.
 
 ## FAQ pro partnery
 
 **Můžu ET/HEL nasadit do bezpečnostně náročného prostředí (banky, zdravotnictví)?**
-Závisí na specifikách. Reálná data nikam neodchází, ale DDL posíláme. Pro on-prem variantu (vlastní LLM provider) nás kontaktujte — zvažujeme enterprise edici.
+Závisí na specifikách. Reálná data nikam neodchází, ale DDL posíláme. Pro on-prem variantu (vlastní LLM provider) nás kontaktujte – zvažujeme enterprise edici.
 
 **Funguje ET/HEL s customizacemi Heliosu?**
-Ano. ET/HEL si při instalaci přečte aktuální DDL — vidí všechny customizační tabulky a sloupce. Custom procedury vidí také.
+Ano. ET/HEL si při instalaci přečte aktuální DDL – vidí všechny customizační tabulky a sloupce. Custom procedury vidí také.
 
 **Co když si klient přeje vlastní úpravy promptu / chování?**
 Enterprise tarif zahrnuje **vlastní konfiguraci promptů**. Pro Standard tarif můžeme udělat menší úpravy ad-hoc.
@@ -131,5 +131,5 @@ Aktuálně ne, ale je to v plánu pro 2026. Ozvěte se, pokud máte konkrétní 
 ---
 
 **Další čtení:**
-- [Rychlý start pro koncové uživatele](quickstart.md) — pošlete klientovi po instalaci
-- [Návod pro IT administrátory](guide-it.md) — technické detaily, troubleshooting, bezpečnost
+- [Rychlý start pro koncové uživatele](quickstart.md) – pošlete klientovi po instalaci
+- [Návod pro IT administrátory](guide-it.md) – technické detaily, troubleshooting, bezpečnost

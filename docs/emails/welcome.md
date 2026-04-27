@@ -1,4 +1,4 @@
-# Email šablona — Welcome (po úspěšné instalaci)
+# Email šablona – Welcome (po úspěšné instalaci)
 
 **Předmět:** Vítejte v ET/HEL! 👋
 
@@ -11,7 +11,7 @@
 
 Dobrý den,
 
-ET/HEL u vás úspěšně **odpověděla na první dotaz** — gratulujeme k zaběhnutí! 🎉
+ET/HEL u vás úspěšně **odpověděla na první dotaz** – gratulujeme k zaběhnutí! 🎉
 
 Tady je rychlý úvod, jak ze služby vytěžit maximum.
 
@@ -35,7 +35,7 @@ Nevíte, kde jsou data? Zeptejte se:
 
 > **„Které tabulky obsahují informace o objednávkách?"**
 
-ET/HEL vysvětlí logiku Heliosu — perfektní pro nové kolegy nebo méně časté oblasti.
+ET/HEL vysvětlí logiku Heliosu – perfektní pro nové kolegy nebo méně časté oblasti.
 
 #### 💡 Tip 3: Pokračujte v konverzaci
 
@@ -46,18 +46,18 @@ ET/HEL si pamatuje předchozí otázky. Po první odpovědi můžete pokračovat
 
 ## Pošlete tip kolegům
 
-Ať si ET/HEL nezůstane jen u vás — největší hodnota je, když se začnou ptát všichni v týmu:
+Ať si ET/HEL nezůstane jen u vás – největší hodnota je, když se začnou ptát všichni v týmu:
 
-- 📖 [Rychlý start pro uživatele](https://ethel.cz/docs/quickstart) — pošlete účetním, skladníkům, obchodu
-- 📊 [Návod pro IT](https://ethel.cz/docs/guide-it) — pro vašeho administrátora
+- 📖 [Rychlý start pro uživatele](https://ethel.cz/docs/quickstart) – pošlete účetním, skladníkům, obchodu
+- 📊 [Návod pro IT](https://ethel.cz/docs/guide-it) – pro vašeho administrátora
 
-V tarifu **{{TIER_NAME}}** máte **{{USER_COUNT}} uživatelů v ceně**. Přidání dalších je otázka pár kliknutí — kontaktujte nás na ethel@jakubsevela.cz.
+V tarifu **{{TIER_NAME}}** máte **{{USER_COUNT}} uživatelů v ceně**. Přidání dalších je otázka pár kliknutí – kontaktujte nás na ethel@jakubsevela.cz.
 
 ## Pomozte nám ET/HEL zlepšovat
 
-Po každé odpovědi v chatu vidíte palce 👍 / 👎. **Klikněte je** — pomáhá nám to ladit přesnost odpovědí pro váš konkrétní Helios.
+Po každé odpovědi v chatu vidíte palce 👍 / 👎. **Klikněte je** – pomáhá nám to ladit přesnost odpovědí pro váš konkrétní Helios.
 
-Cokoli vás napadne, napište nám na **[ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)** — feature requesty, hlášení chyb i pochvaly. Reagujeme rychle.
+Cokoli vás napadne, napište nám na **[ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)** – feature requesty, hlášení chyb i pochvaly. Reagujeme rychle.
 
 ---
 
@@ -68,7 +68,7 @@ Tým ET/HEL
 
 ---
 
-> *Tento e-mail jste obdrželi, protože jste si nainstalovali ET/HEL. Posíláme jen občas — žádný spam, slibujeme.*
+> *Tento e-mail jste obdrželi, protože jste si nainstalovali ET/HEL. Posíláme jen občas – žádný spam, slibujeme.*
 
 ---
 
@@ -81,6 +81,6 @@ Tým ET/HEL
 
 ## Načasování
 
-Doporučený trigger: **první úspěšný `/api/ask` request** (ne při instalaci — počkat až se reálně použije).
+Doporučený trigger: **první úspěšný `/api/ask` request** (ne při instalaci – počkat až se reálně použije).
 
 Alternativně: 24 hodin po aktivaci tokenu, pokud nedojde k použití (jiný welcome content typu „nepoužili jste to ještě, potřebujete pomoct?").

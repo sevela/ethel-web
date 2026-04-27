@@ -1,4 +1,4 @@
-# Email šablona — Aktivace tokenu
+# Email šablona – Aktivace tokenu
 
 **Předmět:** Váš aktivační token pro ET/HEL 🔑
 
@@ -10,7 +10,7 @@
 
 Dobrý den,
 
-děkujeme za vyzkoušení **ET/HEL** — AI asistentky pro Helios iNuvio. Níže najdete váš aktivační token a krátký návod, jak jej použít.
+děkujeme za vyzkoušení **ET/HEL** – AI asistentky pro Helios iNuvio. Níže najdete váš aktivační token a krátký návod, jak jej použít.
 
 ## Váš aktivační token
 
@@ -24,7 +24,7 @@ děkujeme za vyzkoušení **ET/HEL** — AI asistentky pro Helios iNuvio. Níže
 
 1. **Stáhněte `Ethel.exe`** z odkazu: {{DOWNLOAD_URL}}
 2. Soubor uložte na **server, kde běží Helios** (ideálně do stejné složky jako `Helios.exe`).
-3. Spusťte `Ethel.exe` **bez parametrů** — otevře se instalační wizard.
+3. Spusťte `Ethel.exe` **bez parametrů** – otevře se instalační wizard.
 4. Při prvním kroku **zadejte tento token**.
 5. Wizard vás provede zbytkem (přihlášení k SQL Serveru, výběr databází, oprávnění).
 
@@ -32,19 +32,19 @@ Celá instalace trvá obvykle **5–15 minut**.
 
 ## Něco se nepodařilo?
 
-- 📖 [Návod pro IT administrátory](https://ethel.cz/docs/guide-it) — detailní kroky, troubleshooting
-- 🚀 [Rychlý start pro uživatele](https://ethel.cz/docs/quickstart) — pošlete kolegům po instalaci
-- 💬 Napište nám na **[ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)** — odpovídáme do 24 hodin v pracovní dny
+- 📖 [Návod pro IT administrátory](https://ethel.cz/docs/guide-it) – detailní kroky, troubleshooting
+- 🚀 [Rychlý start pro uživatele](https://ethel.cz/docs/quickstart) – pošlete kolegům po instalaci
+- 💬 Napište nám na **[ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)** – odpovídáme do 24 hodin v pracovní dny
 
 ## Důležité info k vašemu předplatnému
 
-- **Trial:** 14 dní zdarma, bez omezení funkcí. Bez automatické fakturace — pokud trial nezaktivujete, jednoduše vyprší.
+- **Trial:** 14 dní zdarma, bez omezení funkcí. Bez automatické fakturace – pokud trial nezaktivujete, jednoduše vyprší.
 - **Placené předplatné:** automatické obnovování měsíčně/ročně. Můžete kdykoli zrušit (mailem nebo přes web).
-- **Tarif:** {{TIER_NAME}} — {{TIER_DESCRIPTION}}
+- **Tarif:** {{TIER_NAME}} – {{TIER_DESCRIPTION}}
 
 ---
 
-Hodně úspěchů s ET/HEL — věříme, že vás (a hlavně vaše kolegy) potěší. 👋
+Hodně úspěchů s ET/HEL – věříme, že vás (a hlavně vaše kolegy) potěší. 👋
 
 Tým ET/HEL
 [ethel.cz](https://ethel.cz) · [ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)
