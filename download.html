@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stáhnout Ethel – AI asistentka pro Helios iNuvio</title>
+<meta name="description" content="Stáhněte si nejnovější verzi Ethel pro Helios iNuvio. Aktuální build, SHA256 checksum a stručný changelog.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="canonical" href="https://ethel.cz/download">
+
+<style>
+  :root {
+    --bg: #08080a;
+    --bg-elevated: #0e0e12;
+    --bg-card: #111116;
+    --border: #1c1c24;
+    --text: #eaeaf0;
+    --text-secondary: #9494a8;
+    --text-dim: #8a8a9e;
+    --accent: #6b94b8;
+    --accent-light: #8fb3cc;
+    --accent-glow: rgba(107, 148, 184, 0.10);
+    --green: #34d399;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Sora', -apple-system, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  nav {
+    padding: 1.4rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+  .nav-logo .et { color: var(--text); }
+  .nav-logo .sep { color: var(--text-dim); margin: 0 0.05em; font-weight: 400; }
+  .nav-logo .hel { color: var(--accent); text-shadow: 0 0 18px rgba(107,148,184,0.4); }
+  nav a.back {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+  nav a.back:hover { color: var(--text); }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  h1 .accent { color: var(--accent); }
+  .lead {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+  }
+
+  .download-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .version-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.4rem;
+  }
+  .version-tag {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.95rem;
+    color: var(--accent-light);
+    font-weight: 600;
+  }
+  .version-date {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  .btn-download {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.95rem 1.8rem;
+    border-radius: 10px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-download:hover { background: var(--accent-light); transform: translateY(-1px); }
+  .btn-meta {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 0.7rem;
+    margin-left: 0.2rem;
+  }
+
+  .checksum {
+    margin-top: 1.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    word-break: break-all;
+  }
+  .checksum-label {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.7rem;
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  ol.steps {
+    list-style: none;
+    counter-reset: step;
+    padding-left: 0;
+  }
+  ol.steps li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 2.4rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+  }
+  ol.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.7rem;
+    height: 1.7rem;
+    background: var(--accent-glow);
+    border: 1px solid var(--accent);
+    color: var(--accent-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  ol.steps li strong { color: var(--text); font-weight: 600; }
+  ol.steps li code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+    color: var(--accent-light);
+    background: var(--bg-elevated);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .changelog {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    margin-top: 1rem;
+  }
+  .changelog h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 0.5rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .changelog p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  .changelog p:last-child { margin-bottom: 0; }
+
+  .smartscreen-note {
+    background: rgba(107, 148, 184, 0.06);
+    border: 1px solid rgba(107, 148, 184, 0.25);
+    border-radius: 10px;
+    padding: 1rem 1.3rem;
+    margin-top: 2rem;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+  }
+  .smartscreen-note strong { color: var(--text); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    margin-top: 4rem;
+  }
+  footer a { color: var(--text-secondary); text-decoration: underline; text-underline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></a>
+  <a href="/" class="back">← zpět na ethel.cz</a>
+</nav>
+
+<main>
+  <h1>Stáhnout <span class="accent">Ethel</span></h1>
+  <p class="lead">
+    Aktuální build pro Windows. Pro instalaci potřebuješ aktivační token –
+    pokud ho ještě nemáš, <a href="/" style="color: var(--accent-light);">vyzkoušej zdarma</a>.
+  </p>
+
+  <div class="download-card">
+    <div class="version-row">
+      <span class="version-tag">v1.0.0</span>
+      <span class="version-date">vydáno 2026-04-27</span>
+    </div>
+    <a href="https://github.com/sevela/ethel-agent/releases/latest/download/ethel.exe"
+       class="btn-download" download>Stáhnout ethel.exe</a>
+    <div class="btn-meta">~12 MB · Windows 10/11 · 64bit</div>
+
+    <div class="checksum">
+      <span class="checksum-label">SHA256 checksum</span>
+      <span id="sha256">— bude doplněno při prvním releasu —</span>
+    </div>
+  </div>
+
+  <div class="smartscreen-note">
+    <strong>Windows SmartScreen warning:</strong> při prvním spuštění může Windows zobrazit
+    „Windows protected your PC" / „Unknown publisher". Klikni na <em>More info</em> →
+    <em>Run anyway</em>. Aplikace zatím nemá EV podpis – řešíme samostatně.
+  </div>
+
+  <h2>Instalace ve 3 krocích</h2>
+  <ol class="steps">
+    <li><strong>Ulož</strong> <code>ethel.exe</code> do složky tvého Heliosu (typicky <code>C:\dev\apps\helios\</code>, vedle <code>Helios.INI</code>).</li>
+    <li><strong>Spusť</strong> <code>ethel.exe</code>. Při prvním spuštění tě provede instalací do databáze (vyžaduje SQL admin práva, jednorázově).</li>
+    <li><strong>Otevři Helios</strong> a v libovolné sestavě zkus klávesovou zkratku, nebo zavolej Ethel z menu. Hotovo.</li>
+  </ol>
+
+  <h2>Changelog</h2>
+  <div class="changelog">
+    <h3>v1.0.0 – 2026-04-27</h3>
+    <p>Initial release.</p>
+  </div>
+
+  <p style="margin-top: 3rem; color: var(--text-dim); font-size: 0.85rem;">
+    Potřebuješ pomoc? Napiš na
+    <a href="mailto:info@ethel.cz" style="color: var(--accent-light);">info@ethel.cz</a>.
+  </p>
+</main>
+
+<footer>
+  &copy; 2026 Ethel · <a href="/">ethel.cz</a> · <a href="mailto:info@ethel.cz">info@ethel.cz</a>
+</footer>
+
+</body>
+</html>
