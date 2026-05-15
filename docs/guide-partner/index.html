@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Návod pro Helios partnery – ET/HEL</title>
+<meta name="description" content="Jak nabídnout ET/HEL klientům: argumenty, demo scénáře, ceník, partnerský program.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Jakub Ševela">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="canonical" href="https://ethel.cz/docs/guide-partner/">
+
+<meta property="og:title" content="Návod pro Helios partnery – ET/HEL">
+<meta property="og:description" content="Jak nabídnout ET/HEL klientům: argumenty, demo scénáře, ceník, partnerský program.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ethel.cz/docs/guide-partner/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Ethel">
+<meta property="og:image" content="https://ethel.cz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Návod pro Helios partnery – ET/HEL">
+<meta name="twitter:description" content="Jak nabídnout ET/HEL klientům: argumenty, demo scénáře, ceník, partnerský program.">
+<meta name="twitter:image" content="https://ethel.cz/og-image.png">
+
+<link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sora-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/docs/_assets/docs.css">
+</head>
+<body>
+
+<header>
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></a>
+  <div class="nav-links">
+    <a href="/#features">Co umí</a>
+    <a href="/#audience">Pro koho</a>
+    <a href="/#pricing">Cena</a>
+    <a href="/docs/" class="nav-docs active">Návody</a>
+    <a href="/blog/" class="nav-blog">Blog</a>
+    <a href="/#contact" class="nav-cta">Kontakt</a>
+  </div>
+</nav>
+</header>
+
+<main class="docs-shell">
+
+  <aside class="docs-sidebar">
+    <div class="sidebar-heading">Návody</div>
+    <ul>
+      <li><a href="/docs/quickstart/" >Rychlý start</a></li>
+      <li><a href="/docs/guide-it/" >Pro IT administrátory</a></li>
+      <li><a href="/docs/guide-partner/" class="active">Pro Helios partnery</a></li>
+    </ul>
+  </aside>
+
+  <article>
+    <div class="docs-breadcrumb">
+      <a href="/">ethel.cz</a><span class="sep">/</span><a href="/docs/">návody</a><span class="sep">/</span>pro partnery
+    </div>
+    <div class="docs-content">
+<h1 id="et-hel-navod-pro-helios-partnery">ET/HEL – Návod pro Helios partnery</h1>
+<p>Průvodce pro implementační partnery Heliosu, kteří chtějí ET/HEL nabízet svým klientům jako přidanou hodnotu k vlastním službám.</p>
+<h2 id="co-je-et-hel-pro-vaseho-klienta">Co je ET/HEL pro vašeho klienta</h2>
+<p><strong>ET/HEL = AI asistentka přímo v Heliosu iNuvio.</strong> Místo proklikávání sestav se uživatel zeptá česky a dostane odpověď.</p>
+<p>Pro klienta to znamená:</p>
+<ul>
+<li><strong>Operativa a účetní</strong> najdou informace bez čekání na IT</li>
+<li><strong>Management</strong> dostane provozní přehled jedním dotazem</li>
+<li><strong>Noví kolegové</strong> se rychleji zorientují v Heliosu – ET/HEL vysvětluje sestavy a pole</li>
+</ul>
+<p>Pro vás jako partnera to znamená:</p>
+<ul>
+<li><strong>Méně nudných tiketů</strong> typu „kde najdu fakturu od XY&quot;</li>
+<li><strong>Vyšší value</strong> ve vaší implementaci – Helios + AI vrstva</li>
+<li><strong>Možnost provize</strong> za zprostředkování (viz partnerský program níže)</li>
+</ul>
+<h2 id="jak-to-funguje-1-odstavec">Jak to funguje (1 odstavec)</h2>
+<p>ET/HEL je nativní Windows aplikace (Tauri/Rust, ~12 MB), která se spouští z Heliosu klávesovou zkratkou. SQL dotazy běží <strong>lokálně</strong> na klientově serveru – do cloudu jdou pouze <strong>metadata</strong> (struktura DB) a <strong>text dotazu</strong>. Backend (proxy + Claude API) hostujeme my, klient se nestará o AI klíče ani infrastrukturu.</p>
+<p>Detailní architektura: <a href="/docs/guide-it/">guide-it.md</a>.</p>
+<h2 id="pro-koho-je-et-hel-idealni">Pro koho je ET/HEL ideální</h2>
+<p>✅ <strong>Hodí se:</strong></p>
+<ul>
+<li>Firmy s 5–500 zaměstnanci na Heliosu iNuvio</li>
+<li>Týmy, kde se hodně <strong>ptají IT na data</strong> (skladníci, účetní, obchod)</li>
+<li>Klienti, kteří <strong>onboardují nové lidi</strong> do Heliosu</li>
+<li>Společnosti, kde se <strong>opakovaně exportují stejné sestavy</strong></li>
+</ul>
+<p>⚠️ <strong>Méně se hodí:</strong></p>
+<ul>
+<li>Firmy, které mají vlastní BI nástroj na všechny dotazy (Power BI, Tableau)</li>
+<li>Specifické nasazení s heavy modifikacemi jádra Heliosu (může vyžadovat custom konfiguraci)</li>
+<li>Klienti s velmi citlivými daty bez možnosti odesílání DDL ven (i když data nikdy neopouští server)</li>
+</ul>
+<h2 id="argumenty-pro-klienta">Argumenty pro klienta</h2>
+<h3 id="time-to-value">Time-to-value</h3>
+<p><strong>Instalace do hodiny.</strong> Žádný projekt, žádné API klíče, žádné integrace na míru. Stáhne <code>Ethel.exe</code>, zadá token, funguje.</p>
+<h3 id="roi-v-jedne-vete">ROI v jedné větě</h3>
+<p><em>„Jeden uživatel ušetří v průměru 30–60 minut týdně hledání v sestavách. Při 5 uživatelích to je 5 hodin týdně, 20 hodin měsíčně. Standard tarif je 1 490 Kč/měs.&quot;</em></p>
+<h3 id="datova-bezpecnost">Datová bezpečnost</h3>
+<p>Klíčová námitka u většiny klientů. <strong>Reálná data nikdy neopouští server klienta.</strong> Posíláme jen DDL (názvy tabulek/sloupců) a text dotazu. SQL se vykoná lokálně.</p>
+<p>Pro paranoidní klienty: <strong>denylist</strong> v <code>Tabx_Ethel_Deny</code> umožní úplně vyřadit citlivé tabulky (mzdy, osobní údaje) ze znalosti AI.</p>
+<h3 id="neni-to-gpt-s-omezenimi">Není to GPT s omezeními</h3>
+<p>ET/HEL <strong>rozumí konkrétnímu Heliosu klienta</strong> – ne obecný Helios, ale jeho stored procedurám, číselníkům, customizacím. Po instalaci si „rozhlédne&quot; databázi a postaví znalostní mapu.</p>
+<h2 id="instalacni-postup">Instalační postup</h2>
+<p>Instalace je standardní podle <a href="/docs/guide-it/">návodu pro IT</a>. Stručně:</p>
+<ol>
+<li>Stáhnout <code>Ethel.exe</code> na server s Heliosem</li>
+<li>Spustit bez parametrů → wizard projde tokenem, SQL přihlášením, výběrem DB a uživatelů</li>
+<li>Nastavit klávesovou zkratku v Heliosu (CTRL+I doporučujeme)</li>
+</ol>
+<p>Jako partner můžete instalaci zařadit do svého standardního „Helios setup&quot; balíčku – typicky 30–60 minut práce.</p>
+<h2 id="demo-scenar-pro-prezentaci-klientovi">Demo scénář pro prezentaci klientovi</h2>
+<p>Tři dotazy, které dělají „wow&quot; efekt:</p>
+<h3 id="1-konkretni-data-z-jeho-db-otevira-oci">1. Konkrétní data z jeho DB (otevírá oči)</h3>
+<blockquote>
+<p><strong>„Kolik faktur jsme vystavili tento měsíc?&quot;</strong></p>
+</blockquote>
+<p>Stačí pár sekund. Klient vidí <strong>svá data</strong>, ne demo. Tohle obvykle utne diskuzi typu „a co kdyby halucinovala&quot;.</p>
+<h3 id="2-vysvetleni-sloupce-kontext">2. Vysvětlení sloupce (kontext)</h3>
+<blockquote>
+<p><strong>„Vysvětli mi, co znamená sloupec <code>Zruseno</code> v <code>TabKmenZbozi</code>.&quot;</strong></p>
+</blockquote>
+<p>Klient vidí, že ET/HEL <strong>rozumí jeho konkrétní instanci</strong> – včetně customizací a obvyklého použití pole.</p>
+<h3 id="3-prakticky-provozni-dotaz">3. Praktický provozní dotaz</h3>
+<blockquote>
+<p><strong>„Které objednávky čekají na vyřízení déle než 14 dnů?&quot;</strong></p>
+</blockquote>
+<p>Reálný use case z denního provozu. Klient si představí, kdo všechno tohle bude používat.</p>
+<p><strong>Tip:</strong> Předem si připravte dotaz, který klient typicky řeší (zeptejte se před demo na bolesti). Pak ho v ET/HEL rovnou ukažte.</p>
+<h2 id="cenik">Ceník</h2>
+<table>
+<thead>
+<tr>
+<th>Tarif</th>
+<th>Cena (měs.)</th>
+<th>Pro koho</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Standard</strong></td>
+<td>1 490 Kč</td>
+<td>1 databáze, 5 uživatelů v ceně. Každý další +249 Kč/měs.</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>4 990 Kč</td>
+<td>Multi-DB, neomezený tým, onboarding call, prioritní podpora.</td>
+</tr>
+</tbody></table>
+<p>Plné ceny a roční tarif na <a href="https://ethel.cz#pricing">ethel.cz</a>.</p>
+<p><strong>Pro klienty platí 14denní trial bez karty</strong> – perfektní moment pro vaši asistovanou instalaci.</p>
+<h2 id="partnersky-program">Partnerský program</h2>
+<p>Aktuálně připravujeme strukturovaný partnerský program (provize za doporučení, sleva pro vlastní nasazení, přístup do partnerského portálu).</p>
+<p><strong>Předběžně:</strong> zájemci, kteří doporučí klienta v trial fázi, dostanou <strong>20% provizi</strong> z prvního ročního předplatného. Ozvěte se na <a href="mailto:info@ethel.cz">info@ethel.cz</a> – domluvíme se na podmínkách.</p>
+<blockquote>
+<p><strong>Pozn.:</strong> Konkrétní podmínky partnerského programu jsou v aktivním vývoji. Aktuálně preferujeme osobní domluvu, podpisy smluv chystáme na Q3 2026.</p>
+</blockquote>
+<h2 id="faq-pro-partnery">FAQ pro partnery</h2>
+<p><strong>Můžu ET/HEL nasadit do bezpečnostně náročného prostředí (banky, zdravotnictví)?</strong>
+Závisí na specifikách. Reálná data nikam neodchází, ale DDL posíláme. Pro on-prem variantu (vlastní LLM provider) nás kontaktujte – zvažujeme enterprise edici.</p>
+<p><strong>Funguje ET/HEL s customizacemi Heliosu?</strong>
+Ano. ET/HEL si při instalaci přečte aktuální DDL – vidí všechny customizační tabulky a sloupce. Custom procedury vidí také.</p>
+<p><strong>Co když si klient přeje vlastní úpravy promptu / chování?</strong>
+Enterprise tarif zahrnuje <strong>vlastní konfiguraci promptů</strong>. Pro Standard tarif můžeme udělat menší úpravy ad-hoc.</p>
+<p><strong>Můžu ET/HEL prodávat pod vlastní značkou (white-label)?</strong>
+Aktuálně ne, ale je to v plánu pro 2026. Ozvěte se, pokud máte konkrétní požadavek.</p>
+<h2 id="kontakt">Kontakt</h2>
+<ul>
+<li><strong>Kontakt</strong>: <a href="mailto:info@ethel.cz">info@ethel.cz</a> (partnerský program i technická podpora)</li>
+<li><strong>Web</strong>: <a href="https://ethel.cz">ethel.cz</a></li>
+</ul>
+<hr>
+<p><strong>Další čtení:</strong></p>
+<ul>
+<li><a href="/docs/quickstart/">Rychlý start pro koncové uživatele</a> – pošlete klientovi po instalaci</li>
+<li><a href="/docs/guide-it/">Návod pro IT administrátory</a> – technické detaily, troubleshooting, bezpečnost</li>
+</ul>
+
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  <div class="footer-left">
+    &copy; 2026 Ethel &middot; Embedded Thinking for Helios
+    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a>
+    <br><span style="font-size: 0.72rem;">Ethel není produktem společnosti Asseco Solutions. Helios a Helios Inuvio jsou registrované ochranné známky.</span>
+  </div>
+  <div class="footer-right">v1.0 &middot; brno, cz</div>
+</footer>
+
+<script>
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+</script>
+
+</body>
+</html>

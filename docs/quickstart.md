@@ -57,7 +57,7 @@ Pokud potřebujete akci typu „uprav záznam", ET/HEL navrhne SQL a zeptá se v
 
 ## Něco nefunguje? Máte nápad?
 
-Napište nám na **[ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)**. Reagujeme rychle a každá zpětná vazba pomáhá.
+Napište nám na **[info@ethel.cz](mailto:info@ethel.cz)**. Reagujeme rychle a každá zpětná vazba pomáhá.
 
 Pokud ET/HEL odpoví špatně nebo divně, dejte palec dolů přímo v chatu – pomůže nám to ladit přesnost.
 

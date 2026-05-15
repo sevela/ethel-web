@@ -130,7 +130,7 @@ ET/HEL pak tyto tabulky/sloupce vůbec nezahrne do své znalosti databáze.
 → Zkontrolujte, zda je nainstalovaný **ODBC Driver 17 nebo 18 for SQL Server** (`odbcad32.exe`). ET/HEL si driver vybere automaticky.
 
 **„Token expired" hláška**
-→ Trial má 14 dní, placené tokeny jsou aktivní podle předplatného. Kontaktujte [ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz) pro obnovení.
+→ Trial má 14 dní, placené tokeny jsou aktivní podle předplatného. Kontaktujte [info@ethel.cz](mailto:info@ethel.cz) pro obnovení.
 
 **Helios neumí spustit `Ethel.exe`**
 → Některé instalace Heliosu zakazují spouštění externích exe. Povolte ho v `Helios.INI` nebo přes uživatelskou akci typu „Externí program".
@@ -163,7 +163,7 @@ Postup aktualizace:
 
 ## Kontakt
 
-- **Podpora**: [ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz) (typická odezva do 24 hodin v pracovní dny)
+- **Podpora**: [info@ethel.cz](mailto:info@ethel.cz) (typická odezva do 24 hodin v pracovní dny)
 - **Web**: [ethel.cz](https://ethel.cz)
 - **Statusová stránka**: zatím neveřejná – incidenty hlásíme e-mailem všem zákazníkům
 

@@ -104,7 +104,7 @@ Plné ceny a roční tarif na [ethel.cz](https://ethel.cz#pricing).
 
 Aktuálně připravujeme strukturovaný partnerský program (provize za doporučení, sleva pro vlastní nasazení, přístup do partnerského portálu).
 
-**Předběžně:** zájemci, kteří doporučí klienta v trial fázi, dostanou **20% provizi** z prvního ročního předplatného. Ozvěte se na [partner@jakubsevela.cz](mailto:partner@jakubsevela.cz) – domluvíme se na podmínkách.
+**Předběžně:** zájemci, kteří doporučí klienta v trial fázi, dostanou **20% provizi** z prvního ročního předplatného. Ozvěte se na [info@ethel.cz](mailto:info@ethel.cz) – domluvíme se na podmínkách.
 
 > **Pozn.:** Konkrétní podmínky partnerského programu jsou v aktivním vývoji. Aktuálně preferujeme osobní domluvu, podpisy smluv chystáme na Q3 2026.
 
@@ -124,8 +124,7 @@ Aktuálně ne, ale je to v plánu pro 2026. Ozvěte se, pokud máte konkrétní 
 
 ## Kontakt
 
-- **Partnerský kontakt**: [partner@jakubsevela.cz](mailto:partner@jakubsevela.cz)
-- **Technická podpora**: [ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)
+- **Kontakt**: [info@ethel.cz](mailto:info@ethel.cz) (partnerský program i technická podpora)
 - **Web**: [ethel.cz](https://ethel.cz)
 
 ---

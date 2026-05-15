@@ -1,1 +1,11 @@
-{"name":"ethel-web","type":"module","private":true}
+{
+  "name": "ethel-web",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build:docs": "node scripts/build-docs.js"
+  },
+  "devDependencies": {
+    "marked": "^18.0.3"
+  }
+}
