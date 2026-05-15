@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap Ethel — co plánujeme pro AI v Helios Inuvio (2026)</title>
+<meta name="description" content="Roadmap Ethel — AI asistentky pro Helios Inuvio — do konce roku 2026: vlastní permission model, partnerský program, automatická fakturace, hlubší integrace s Helios sestavami.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Jakub Ševela">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="canonical" href="https://ethel.cz/blog/roadmap-2026/">
+
+<meta property="og:title" content="Roadmap Ethel — co plánujeme pro AI v Helios Inuvio">
+<meta property="og:description" content="Vlastní permission model, partnerský program, automatická fakturace, hlubší integrace s Helios sestavami. Plán a priority do konce 2026.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ethel.cz/blog/roadmap-2026/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Ethel">
+<meta property="og:image" content="https://ethel.cz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Roadmap Ethel — co plánujeme pro AI v Helios Inuvio">
+<meta name="twitter:description" content="Plán a priority Ethel do konce 2026.">
+<meta name="twitter:image" content="https://ethel.cz/og-image.png">
+
+<link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sora-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blog/_assets/blog.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Roadmap Ethel — co plánujeme pro AI v Helios Inuvio (2026)",
+  "description": "Roadmap Ethel do konce roku 2026: vlastní permission model, partnerský program, automatická fakturace, hlubší integrace s Helios sestavami.",
+  "author": {
+    "@type": "Person",
+    "name": "Jakub Ševela",
+    "url": "https://ethel.cz/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ethel",
+    "url": "https://ethel.cz/"
+  },
+  "datePublished": "2026-05-15",
+  "dateModified": "2026-05-15",
+  "mainEntityOfPage": "https://ethel.cz/blog/roadmap-2026/",
+  "image": "https://ethel.cz/og-image.png",
+  "inLanguage": "cs"
+}
+</script>
+</head>
+<body>
+
+<header>
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></a>
+  <div class="nav-links">
+    <a href="/#features">Co umí</a>
+    <a href="/#audience">Pro koho</a>
+    <a href="/#pricing">Cena</a>
+    <a href="/docs/" class="nav-docs">Návody</a>
+    <a href="/blog/" class="nav-blog active">Blog</a>
+    <a href="/#contact" class="nav-cta">Kontakt</a>
+  </div>
+</nav>
+</header>
+
+<main>
+  <article class="blog-article">
+    <div class="post-breadcrumb">
+      <a href="/">ethel.cz</a><span class="sep">/</span><a href="/blog/">blog</a><span class="sep">/</span>roadmap 2026
+    </div>
+
+    <div class="post-meta">2026-05-15 · Roadmap</div>
+    <h1>Roadmap Ethel — kam směřujeme do konce 2026</h1>
+    <p class="post-lead">
+      Ethel je dnes plně funkční AI asistentka pro <strong>Helios Inuvio</strong> — generuje SQL, vysvětluje sestavy a pomáhá se s daty zorientovat. To, co teď stavíme, posouvá produkt ze stavu „funguje" do stavu „škáluje na desítky klientů a partnerů". Tady je plán na další půlrok, rozdělený podle horizontu.
+    </p>
+
+    <h2>Nejbližších 30 dní</h2>
+
+    <div class="release-block">
+      <h3>SEO a viditelnost</h3>
+      <p>Doménu <code>ethel.cz</code> dotáhnout do indexu Googlu pro klíč <em>„Helios Inuvio AI"</em>. Zahrnuje Google Search Console, Bing Webmaster Tools, doplnění backlinků a tento blog. Tracking v <a href="https://sevela.atlassian.net/browse/ETH-140">ETH-140</a>.</p>
+    </div>
+
+    <div class="release-block">
+      <h3>Prompt caching optimalizace</h3>
+      <p>Anthropic prompt cache je už zapnutý nad DDL a system promptem. Příští krok: měřit hit rate per klient, identifikovat prompt fragmenty které se invalidují zbytečně, zvýšit cache hit ratio z aktuálních ~60 % na 80 %+. Cíl: snížit token cost na klienta z ~48 Kč/měsíc na pod 30 Kč.</p>
+    </div>
+
+    <div class="release-block">
+      <h3>Demo video</h3>
+      <p>30sekundový raw screencast přímo z Heliosu — uživatel klikne na akci, položí dotaz, dostane odpověď. Bez animací, bez voice-over. Použití na landing page, LinkedIn, partnerské materiály.</p>
+    </div>
+
+    <h2>Q3 2026 (červenec až září)</h2>
+
+    <div class="release-block">
+      <h3>Vlastní permission model</h3>
+      <p>Aktuálně Ethel ignoruje citlivé moduly (mzdy, personalistika, banka) plošně. Ve verzi 2 přijde tabulka <code>efx_Ethel_Permissions</code> v Heliosu — admin spravuje, kteří uživatelé mají přístup ke kterým modulům, sync do Supabase, validace na proxy. Defaultně restriktivní (nový uživatel = žádný přístup).</p>
+      <p>Pokus o reverse-engineering Helios binárky práv selhal (Delphi-specifická serializace, 0 matchů). Vlastní zjednodušená práva jsou pragmatičtější cesta.</p>
+    </div>
+
+    <div class="release-block">
+      <h3>Partnerský program</h3>
+      <p>Recurring provize 20–30 % pro Helios partnery a IT konzultanty. Bezplatný přístup k Ethel pro partnera (jeho vlastní Helios), jednoduchý onboarding, materiály pro prezentaci u klientů. Cíl: 5–10 aktivních partnerů do konce Q3.</p>
+    </div>
+
+    <div class="release-block">
+      <h3>Automatická fakturace</h3>
+      <p>Stripe subscription je nasazený, ale fakturace zatím probíhá ručně přes Fakturoid. Cíl: napojení Stripe webhooků na Fakturoid API → faktura se vystaví a pošle automaticky při úspěšné platbě. Včetně variabilního symbolu, IČO/DIČ kontroly, opakovaných odběrů.</p>
+    </div>
+
+    <div class="release-block">
+      <h3>Hlubší integrace s Helios sestavami</h3>
+      <p>Místo „Ethel ti pomůže najít data" → „Ethel ti vysvětlí, co tahle sestava ukazuje a jak je sestavená". Druhá fáze toolu <code>vysvetli</code>: Ethel přečte definici aktuální sestavy z Heliosu (filtr, sloupce, řazení), vysvětlí česky, navrhne úpravy.</p>
+    </div>
+
+    <h2>Q4 2026 a vize</h2>
+
+    <div class="release-block">
+      <h3>AI akce — proaktivní návrhy</h3>
+      <p>Třetí typ funkčnosti vedle dotazů na data a vysvětlování: <strong>akce</strong>. Ethel navrhne založit fakturu, odeslat upomínku, vystavit objednávku — provede to ale jen s explicitním souhlasem. Audit log každé akce v <code>Tabx_Ethel_Log</code>.</p>
+    </div>
+
+    <div class="release-block">
+      <h3>50 platících do konce 2026</h3>
+      <p>Z trhu ~700 potenciálních Helios Inuvio klientů (CRM v Notionu) cílíme na <strong>50 platících odběrů</strong> do konce roku. Konzervativní scénář 15. Distribuce přes osobní brand, Helios partnery, fóra a partnerský program.</p>
+    </div>
+
+    <div class="release-block">
+      <h3>Model-agnostický backend</h3>
+      <p>Ethel je dnes postavená na Claude Sonnet, ale proxy je navržená jako model-agnostická. Až dají smysl alternativy (cena, latence, kvalita pro češtinu), umíme přepnout — pojistka proti vendor lock-inu vůči Anthropicu.</p>
+    </div>
+
+    <h2>Co v roadmapě <em>není</em></h2>
+    <p>Pár věcí, které se ptají často a krátce odpovídám proč ne:</p>
+    <ul>
+      <li><strong>Mobilní aplikace</strong> — Ethel žije v Heliosu na desktopu, kde uživatel reálně pracuje. Mobilní samostatná aplikace nedává smysl.</li>
+      <li><strong>Vlastní LLM trénovaný na Heliosu</strong> — token cost Claude Sonnet je ~48 Kč/klient/měsíc, marže 90 %+. Vlastní model by stál řády víc a kvalitativně by nebyl lepší.</li>
+      <li><strong>Cloud-only verze (data v cloudu)</strong> — proti hlavní hodnotě produktu. Data zákazníka zůstávají u zákazníka, vždy.</li>
+    </ul>
+
+    <h2>Roadmap se může změnit</h2>
+    <p>Tohle je plán z 15. května 2026, ne závazek. Priority může změnit cokoliv: feedback od klientů, technický blocker, nový tah konkurence. Aktuální stav je vždy v <a href="https://sevela.atlassian.net/browse/ETH-1">Jira projektu ETH</a>. Pokud máte nápad nebo prioritu, kterou byste posunuli, <a href="/#contact">napište</a>.</p>
+
+    <div class="post-footer">
+      <a href="/blog/" class="back-link">← Zpět na blog</a>
+      <a href="/#contact" class="cta">Vyzkoušet Ethel zdarma</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="footer-left">
+    &copy; 2026 Ethel &middot; Embedded Thinking for Helios
+    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a>
+    <br><span style="font-size: 0.72rem;">Ethel není produktem společnosti Asseco Solutions. Helios a Helios Inuvio jsou registrované ochranné známky.</span>
+  </div>
+  <div class="footer-right">v1.0 &middot; brno, cz</div>
+</footer>
+
+<script>
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+</script>
+
+</body>
+</html>
