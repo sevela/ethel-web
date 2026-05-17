@@ -502,6 +502,13 @@
     letter-spacing: -0.02em; margin-bottom: 1rem; color: #eab308;
   }
   .safety-box p { color: var(--text-secondary); font-size: 1rem; font-weight: 300; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+  .safety-note {
+    margin-top: 2rem !important;
+    font-size: 0.82rem !important;
+    color: var(--text-dim) !important;
+    opacity: 0.8;
+    font-style: italic;
+  }
   .safety-pills {
     display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem;
     margin-top: 2rem;
@@ -693,6 +700,10 @@
     transition: color 0.2s, text-decoration-color 0.2s;
   }
   .footer-left a:hover { color: var(--text); text-decoration-color: var(--text); }
+  .footer-disclaimer {
+    display: inline-block; margin-top: 0.4rem;
+    font-size: 0.74rem; color: var(--text-dim); opacity: 0.85; line-height: 1.6;
+  }
   .footer-right {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.72rem; color: var(--text-dim);
@@ -1032,7 +1043,7 @@
     <div class="feature-card reveal reveal-delay-1">
       <div class="feature-icon">⚡</div>
       <h3>Zeptejte se místo klikání</h3>
-      <p>Nehledáte v sestavách. Prostě se zeptáte – Ethel odpoví česky, s&nbsp;kontextem vaší firmy. Žádné tabulky s tisíci řádky.</p>
+      <p>Nehledáte v sestavách. Prostě se zeptáte – Ethel odpoví česky, s&nbsp;reálnými daty z vašeho Heliosu. Žádné tabulky s tisíci řádky.</p>
     </div>
     <div class="feature-card reveal reveal-delay-2">
       <div class="feature-icon">🧭</div>
@@ -1041,13 +1052,13 @@
     </div>
     <div class="feature-card reveal reveal-delay-3">
       <div class="feature-icon">🔍</div>
-      <h3>Rozumí vašemu SQL</h3>
-      <p>Stored procedury, views, triggery. Vysvětlí logiku a závislosti – bez čtení stovek řádků kódu.</p>
+      <h3>Rozumí SQL v Heliosu</h3>
+      <p>Standardní procedury, views a&nbsp;triggery Helios iNuvio. Vysvětlí logiku a&nbsp;závislosti – bez čtení stovek řádků kódu.</p>
     </div>
     <div class="feature-card reveal reveal-delay-1">
       <div class="feature-icon">📊</div>
-      <h3>Hlídá logy za vás</h3>
-      <p>Povolte Ethel přístup k vybraným logům a&nbsp;dostanete upozornění, když něco nehraje. Anomálie, výpadky, skoky v sekvenci.</p>
+      <h3>Pomůže najít chyby v logech</h3>
+      <p>Zeptejte se Ethel na synchronizační logy nebo chybové záznamy. Najde anomálie, výpadky a&nbsp;skoky v&nbsp;sekvenci, na které byste hledali ručně.</p>
     </div>
     <div class="feature-card reveal reveal-delay-2">
       <div class="feature-icon">🛡️</div>
@@ -1055,9 +1066,9 @@
       <p>AI vidí strukturu databáze, ale ne vaše čísla. Do cloudu jdou jen metadata – výsledky se skládají lokálně na vašem serveru.</p>
     </div>
     <div class="feature-card reveal reveal-delay-3">
-      <div class="feature-icon">🧩</div>
-      <h3>Akce s vaším souhlasem</h3>
-      <p>Ethel může vygenerovat popis produktu, zkontrolovat adresu nebo klasifikovat doklad. Ale jen když kliknete na „ano".</p>
+      <div class="feature-icon">📍</div>
+      <h3>Ví, kde v Heliosu stojíte</h3>
+      <p>Otevřete Ethel přímo z&nbsp;dokladu nebo browsu – zná aktuální záznam a&nbsp;odpovídá v&nbsp;jeho kontextu. Žádné vysvětlování, na co se ptáte.</p>
     </div>
   </div>
 </section>
@@ -1105,8 +1116,8 @@
     <div class="step reveal">
       <div class="step-num mono">02</div>
       <div class="step-content">
-        <h3>Ethel se rozhlédne</h3>
-        <p>Automaticky projde strukturu databáze, stored procedury a konfiguraci. Vytvoří si znalostní mapu vaší konkrétní instance Heliosu.</p>
+        <h3>Ethel se propojí s Heliosem</h3>
+        <p>Načte připojení k vaší databázi z&nbsp;konfigurace Heliosu. Standardní tabulky a&nbsp;procedury už zná – nemusí nic skenovat ani indexovat.</p>
       </div>
     </div>
     <div class="step reveal">
@@ -1120,7 +1131,7 @@
       <div class="step-num mono">04</div>
       <div class="step-content">
         <h3>Ptejte se</h3>
-        <p>Otevřete Ethel přímo z Heliosu, napíšete otázku česky a&nbsp;dostanete odpověď s kontextem vaší firmy. Jako byste se ptali kolegy, který zná celý systém.</p>
+        <p>Otevřete Ethel přímo z Heliosu, napíšete otázku česky a&nbsp;dostanete odpověď s reálnými daty z&nbsp;vašeho Heliosu. Jako byste se ptali kolegy, který zná celý systém.</p>
       </div>
     </div>
   </div>
@@ -1177,6 +1188,7 @@
       <span class="safety-pill">Metadata only</span>
       <span class="safety-pill">Vy rozhodujete</span>
     </div>
+    <p class="safety-note">Ethel je nezávislý nástroj. Není produktem společnosti Asseco Solutions a za jeho provoz zodpovídáme my.</p>
   </div>
 </section>
 
@@ -1338,7 +1350,7 @@
   <div class="footer-left">
     &copy; 2026 Ethel &middot; Embedded Thinking for Helios
     <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a>
-    <br><span style="font-size: 0.72rem;">Ethel není produktem společnosti Asseco Solutions. Helios a Helios Inuvio jsou registrované ochranné známky.</span>
+    <br><span class="footer-disclaimer">Ethel je nezávislý produkt. Není produktem společnosti Asseco Solutions. Helios a Helios Inuvio jsou registrované ochranné známky.</span>
   </div>
   <div class="footer-right">v1.0 &middot; brno, cz</div>
 </footer>
