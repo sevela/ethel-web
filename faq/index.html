@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Časté dotazy – Ethel</title>
+<meta name="description" content="Odpovědi na časté otázky k Ethel – AI asistentce pro Helios Inuvio. Bezpečnost dat, přesnost odpovědí, nasazení, ceny a podmínky.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Jakub Ševela">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="canonical" href="https://ethel.cz/faq/">
+
+<meta property="og:title" content="Časté dotazy – Ethel">
+<meta property="og:description" content="Odpovědi na časté otázky k Ethel – AI asistentce pro Helios Inuvio. Bezpečnost dat, přesnost odpovědí, nasazení, ceny a podmínky.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ethel.cz/faq/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Ethel">
+<meta property="og:image" content="https://ethel.cz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Časté dotazy – Ethel">
+<meta name="twitter:description" content="Odpovědi na časté otázky k Ethel – AI asistentce pro Helios Inuvio. Bezpečnost dat, přesnost odpovědí, nasazení, ceny a podmínky.">
+<meta name="twitter:image" content="https://ethel.cz/og-image.png">
+
+<link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sora-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/docs/_assets/docs.css">
+
+<style>
+.faq-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 6rem 2rem 5rem;
+}
+.faq-hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.faq-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.faq-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.faq-hero p {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+.faq-hero p a {
+  color: var(--accent-light);
+  text-decoration: underline;
+  text-decoration-color: rgba(143, 179, 204, 0.4);
+  text-underline-offset: 3px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+.faq-hero p a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.faq-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+}
+.faq-toc a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.85rem;
+  transition: all 0.2s;
+}
+.faq-toc a:hover {
+  color: var(--accent);
+  border-color: var(--border-hover);
+}
+.faq-section {
+  margin-bottom: 3rem;
+}
+.faq-section h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.4rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 88px;
+}
+.faq-item {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgba(28, 28, 36, 0.7);
+}
+.faq-item:last-child { border-bottom: none; }
+.faq-item h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.7rem;
+  scroll-margin-top: 88px;
+  line-height: 1.4;
+}
+.faq-item p {
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 0.7rem;
+}
+.faq-item p:last-child { margin-bottom: 0; }
+.faq-item strong { color: var(--text); font-weight: 600; }
+.faq-item a {
+  color: var(--accent-light);
+  text-decoration: underline;
+  text-decoration-color: rgba(143, 179, 204, 0.4);
+  text-underline-offset: 3px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+.faq-item a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.faq-item ol,
+.faq-item ul {
+  color: var(--text-secondary);
+  padding-left: 1.5rem;
+  line-height: 1.75;
+  margin-bottom: 0.7rem;
+}
+.faq-item ol:last-child,
+.faq-item ul:last-child { margin-bottom: 0; }
+.faq-item li { margin-bottom: 0.45rem; }
+.faq-item li:last-child { margin-bottom: 0; }
+.faq-item li::marker { color: var(--text-dim); }
+.faq-item li strong { color: var(--text); }
+@media (max-width: 768px) {
+  .faq-page { padding: 5rem 1.25rem 3rem; }
+  .faq-toc { gap: 0.4rem; }
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Co je Ethel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI asistentka integrovaná přímo do Helios Inuvio. Otevřete ji jako jakoukoliv jinou akci v Heliosu a dál s ní mluvíte přirozeným jazykem. Zeptáte se na svá data – Ethel sestaví dotaz, spustí ho lokálně na vaší databázi a odpoví reálnými čísly. Zná přitom kontext přehledu, ze kterého jste ji otevřeli – když stojíte na faktuře, ví, o které mluvíte. Necháte si vysvětlit Helios – co znamená pole, k čemu slouží sestava, jak jsou tabulky propojené. Mluvíte s ní normálně – žádné promptování, žádné SQL. Když otázka není jednoznačná, Ethel se doptá; a když něco neumí, řekne to rovnou."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pro koho je Ethel vhodná?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pro každého, kdo s Heliosem denně pracuje – účetní, skladníci, obchodníci, asistentky, vedoucí poboček. Ne pro vývojáře, ti mají SSMS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Čím se Ethel liší od ChatGPT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ChatGPT zná Helios jen z obecného povědomí a vaše data nevidí. Ethel má validovanou znalostní bázi konkrétních tabulek a vazeb Helios Inuvio a odpovídá dotazem do vaší skutečné databáze. ChatGPT poradí, kde by odpověď mohla být – Ethel rovnou ukáže čísla."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kdo za Ethel stojí? Je to produkt Asseco Solutions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Není. Ethel je nezávislý produkt – vyrůstá z Helios ekosystému, ale není svázaná cizí roadmapou ani schvalovacími procesy. Vyvíjí ji Jakub Ševela, 18+ let zkušeností s Heliosem, dříve Asseco Solutions, dnes na volné noze. Jeden konzistentní vývojář, ne anonymní studio."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Tečou moje data do cloudu?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ne. Data z vaší databáze nikdy neopustí váš server. Do cloudu jde jen text otázky, zpět se vrátí SQL dotaz, ten se spustí lokálně na vaší databázi a výsledek se zobrazí u vás. Veškerá komunikace je šifrovaná (TLS 1.2+)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Jaká data sbíráte a jak je to s GDPR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Minimum k provozu: texty otázek, vygenerované SQL (ne výsledky), tokeny pro fakturaci a provozní logy. Žádné záznamy z vaší databáze. Dotazy i logy jsou striktně oddělené per zákazník, nepoužívají se k trénování AI modelů a na vyžádání je smažeme. Pokud uživatel do otázky sám napíše jméno, jde do cloudu jako součást textu otázky. Odpověď z databáze už ale nikdy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Co moduly mzdy, banka, personalistika?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ethel je nevidí – dvěma nezávislými vrstvami. Tyto moduly nejsou ve znalostní bázi, takže na ně Ethel neumí sestavit dotaz. A jejich tabulky jsou navíc blokované na úrovni serveru – i kdyby se v SQL nějaká objevila, dotaz se zastaví před spuštěním."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Co když Ethel vygeneruje SQL, který něco změní v databázi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ethel je pouze pro čtení. Každé SQL prochází validační vrstvou, která propustí jen SELECT – zápisové operace (INSERT, UPDATE, DELETE i DDL) neprojdou, ať AI vygeneruje cokoliv. Vrstvu průběžně testujeme i proti záměrným pokusům o obejití."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Jaký AI model za tím stojí?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Modely Claude od společnosti Anthropic. Vstupy přes API se nepoužívají k trénování – Ethel se z vašich dat ani dotazů sama neučí. Znalostní bázi zlepšujeme my, plošně pro všechny zákazníky. Architektura je model-agnostická, případná změna poskytovatele se vás nijak nedotkne."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Respektuje Ethel práva uživatelů nastavená v Heliosu?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "V základní verzi pracuje Ethel s jednotnou úrovní přístupu pro celou instanci – citlivé moduly jsou blokované pro všechny bez výjimky. Granulární práva per uživatel a modul připravujeme. Pokud je to pro vás podmínka nasazení, napište nám."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Co když Ethel odpoví špatně nebo halucinuje?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI modely občas vymýšlejí – Ethel se tomu brání konstrukcí. Odpověď stojí na reálném SQL dotazu do vaší databáze, ne na AI odhadu. Znalostní báze je validovaná, takže Ethel nepracuje s neexistujícími tabulkami. A když si není jistá, doptá se, místo aby si vymýšlela. Jednoduché a typické dotazy zvládá spolehlivě – průběžně je ověřujeme automatizovanou testovací sadou. Komplexní dotazy přes mnoho tabulek berte jako prvotní vhled a u kritických rozhodnutí si výsledek ověřte."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Co když moje verze Heliosu má vlastní úpravy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ethel zná standardní Helios Inuvio – custom sloupce a doplňky externích vývojářů v základu nezná. V tieru Enterprise umíme vaše specifické úpravy doplnit, aby jim Ethel rozuměla."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Co potřebuju a jak dlouho trvá nasazení?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Helios Inuvio s přístupem k SQL Serveru, Windows na klientském počítači a internet. Žádný .NET, ODBC drivery ani runtime – Ethel agent je jeden malý exe. Instalace zabere 15–30 minut: spustíte SQL skript, nakopírujete exe vedle Heliosu, aktivujete tokenem. V tieru Enterprise přidáváme onboarding call a asistované nasazení. Helios partnera nepotřebujete. Podporujeme všechny současné verze Helios Inuvio; starší Helios Orange a Green nejsou na roadmapě."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Co se stane, když vypadne internet nebo AI služba?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ethel neodpoví a zobrazí srozumitelnou chybu – tím to končí. Helios běží dál, vaše data ani práce nejsou dotčené. Po obnovení připojení Ethel funguje okamžitě, bez restartu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Nezatíží Ethel náš SQL Server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ne. Ethel spouští jen čtecí dotazy srovnatelné s běžnou sestavou. Žádná synchronizace na pozadí, žádné kopírování dat – dotaz proběhne, jen když se uživatel zeptá."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Jak Ethel aktualizujete?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Většina vývoje (prompt, znalostní báze, AI modely) probíhá na naší straně a propíše se k vám okamžitě – nic neinstalujete ani nerestartujete. Klientský agent se aktualizuje výjimečně, párkrát ročně, s předchozím upozorněním."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Můžu Ethel vyzkoušet zdarma?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ano. 14 dní, bez omezení funkčnosti, bez platební karty. Vyplníte kontaktní formulář, dostanete aktivační token a začnete. Po skončení Ethel prostě přestane odpovídat – kartu nemáme, takže žádné automatické naúčtování nehrozí. Pokud chcete pokračovat, objednáte si tarif a navážete, kde jste skončili."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Jaké jsou ceny a jak se platí?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard: 1 490 Kč/měsíc, jedna databáze, 5 uživatelů v ceně, další uživatel +249 Kč. Enterprise: 4 990 Kč/měsíc, neomezené databáze i uživatelé, onboarding, vlastní konfigurace. Ceny bez DPH. Měsíční předplatné, faktura v PDF s českými náležitostmi (IČO, DIČ, DPH), platba bankovním převodem; platbu kartou připravujeme."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Co když budu chtít zrušit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kdykoliv k dalšímu fakturačnímu období, bez výpovědních lhůt a penalizací. Odinstalujete agenta a smažete pár SQL objektů – vaše data zůstávají v Heliosu nedotčená, Ethel je nikdy nikam nekopírovala. Na vyžádání smažeme i logy z naší strany."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Jak funguje podpora?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "E-mailem na info@ethel.cz, reagujeme typicky do jednoho pracovního dne. Enterprise má prioritní podporu. Výhoda malého týmu: píšete přímo člověku, který Ethel vyvíjí."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mám další otázky, které tady nejsou zodpovězené.",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Napište na info@ethel.cz nebo přes kontaktní formulář na webu."
+      }
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+
+<header>
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></a>
+  <div class="nav-links">
+    <a href="/#produkt">Produkt</a>
+    <a href="/bezpecnost">Bezpečnost</a>
+    <a href="/faq" class="active">FAQ</a>
+    <a href="/docs/">Nápověda</a>
+    <a href="/#cena">Cena</a>
+    <a href="/#kontakt" class="nav-cta">Kontakt</a>
+  </div>
+</nav>
+</header>
+
+<main class="faq-page">
+
+  <div class="faq-hero">
+    <span class="faq-tag">ČASTÉ DOTAZY</span>
+    <h1>Odpovědi na vaše dotazy</h1>
+    <p>Věcné odpovědi bez marketingu. Nenašli jste, co hledáte? Napište na <a href="mailto:info@ethel.cz">info@ethel.cz</a>.</p>
+  </div>
+
+  <nav class="faq-toc" aria-label="Sekce FAQ">
+    <a href="#o-produktu">O produktu</a>
+    <a href="#bezpecnost-a-data">Bezpečnost a data</a>
+    <a href="#presnost-a-spolehlivost">Přesnost a spolehlivost</a>
+    <a href="#nasazeni-a-kompatibilita">Nasazení a kompatibilita</a>
+    <a href="#obchodni-podminky">Obchodní podmínky</a>
+  </nav>
+
+  <!-- O produktu -->
+  <section class="faq-section" id="o-produktu">
+    <h2>O produktu</h2>
+
+    <div class="faq-item">
+      <h3 id="co-je-ethel">Co je Ethel?</h3>
+      <p>AI asistentka integrovaná přímo do Helios Inuvio. Otevřete ji jako jakoukoliv jinou akci v Heliosu a dál s ní mluvíte přirozeným jazykem:</p>
+      <ol>
+        <li><strong>Zeptáte se na svá data</strong> – „Kolik faktur čeká na schválení?", „Které zboží kleslo pod minimum?". Ethel sestaví dotaz, spustí ho lokálně na vaší databázi a odpoví reálnými čísly. Zná přitom kontext přehledu, ze kterého jste ji otevřeli – když stojíte na faktuře, ví, o které mluvíte.</li>
+        <li><strong>Necháte si vysvětlit Helios</strong> – co znamená pole, k čemu slouží sestava, jak jsou tabulky propojené.</li>
+        <li><strong>Mluvíte s ní normálně</strong> – žádné promptování, žádné SQL. Když otázka není jednoznačná, Ethel se doptá; a když něco neumí, řekne to rovnou.</li>
+      </ol>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="pro-koho-je-ethel-vhodna">Pro koho je Ethel vhodná?</h3>
+      <p>Pro každého, kdo s Heliosem denně pracuje – účetní, skladníci, obchodníci, asistentky, vedoucí poboček. Ne pro vývojáře, ti mají SSMS.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="cim-se-ethel-lisi-od-chatgpt">Čím se Ethel liší od ChatGPT?</h3>
+      <p>ChatGPT zná Helios jen z obecného povědomí a vaše data nevidí. Ethel má validovanou znalostní bázi konkrétních tabulek a vazeb Helios Inuvio a odpovídá dotazem do vaší skutečné databáze. ChatGPT poradí, kde by odpověď mohla být – Ethel rovnou ukáže čísla.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="kdo-za-ethel-stoji">Kdo za Ethel stojí? Je to produkt Asseco Solutions?</h3>
+      <p>Není. Ethel je nezávislý produkt – vyrůstá z Helios ekosystému, ale není svázaná cizí roadmapou ani schvalovacími procesy. Vyvíjí ji Jakub Ševela, 18+ let zkušeností s Heliosem, dříve Asseco Solutions, dnes na volné noze. Jeden konzistentní vývojář, ne anonymní studio.</p>
+    </div>
+  </section>
+
+  <!-- Bezpečnost a data -->
+  <section class="faq-section" id="bezpecnost-a-data">
+    <h2>Bezpečnost a data</h2>
+
+    <div class="faq-item">
+      <h3 id="tecou-moje-data-do-cloudu">Tečou moje data do cloudu?</h3>
+      <p><strong>Ne.</strong> Data z vaší databáze nikdy neopustí váš server. Do cloudu jde jen text otázky, zpět se vrátí SQL dotaz, ten se spustí <strong>lokálně</strong> na vaší databázi a výsledek se zobrazí u vás. Veškerá komunikace je šifrovaná (TLS&nbsp;1.2+). Detailní tok dat popisujeme na <a href="/bezpecnost">bezpečnostní stránce</a>.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="jaka-data-sbirate">Jaká data sbíráte a jak je to s GDPR?</h3>
+      <p>Minimum k provozu: texty otázek, vygenerované SQL (ne výsledky), tokeny pro fakturaci a provozní logy. Žádné záznamy z vaší databáze. Dotazy i logy jsou striktně oddělené per zákazník, nepoužívají se k trénování AI modelů a na vyžádání je smažeme.</p>
+      <p>Jedna poctivost navíc: pokud uživatel do otázky sám napíše jméno („kolik dluží Jan Novák"), jde do cloudu jako součást textu otázky. Odpověď z databáze už ale nikdy. Detaily na stránce <a href="/bezpecnost">Bezpečnost</a>.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="co-moduly-mzdy">Co moduly mzdy, banka, personalistika?</h3>
+      <p><strong>Ethel je nevidí – dvěma nezávislými vrstvami.</strong> Tyto moduly nejsou ve znalostní bázi, takže na ně Ethel neumí sestavit dotaz. A jejich tabulky jsou navíc blokované na úrovni serveru – i kdyby se v SQL nějaká objevila, dotaz se zastaví před spuštěním.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="co-kdyz-ethel-vygeneruje-sql">Co když Ethel vygeneruje SQL, který něco změní v databázi?</h3>
+      <p>Ethel je <strong>pouze pro čtení</strong>. Každé SQL prochází validační vrstvou, která propustí jen SELECT – zápisové operace (INSERT, UPDATE, DELETE i DDL) neprojdou, ať AI vygeneruje cokoliv. Vrstvu průběžně testujeme i proti záměrným pokusům o obejití.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="jaky-ai-model">Jaký AI model za tím stojí?</h3>
+      <p>Modely Claude od společnosti Anthropic. Vstupy přes API se nepoužívají k trénování – Ethel se z vašich dat ani dotazů sama neučí. Znalostní bázi zlepšujeme my, plošně pro všechny zákazníky. Architektura je model-agnostická, případná změna poskytovatele se vás nijak nedotkne.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="respektuje-ethel-prava-uzivatelu">Respektuje Ethel práva uživatelů nastavená v Heliosu?</h3>
+      <p>V základní verzi pracuje Ethel s jednotnou úrovní přístupu pro celou instanci – citlivé moduly jsou blokované pro všechny bez výjimky. Granulární práva per uživatel a modul připravujeme. Pokud je to pro vás podmínka nasazení, napište nám.</p>
+    </div>
+  </section>
+
+  <!-- Přesnost a spolehlivost -->
+  <section class="faq-section" id="presnost-a-spolehlivost">
+    <h2>Přesnost a spolehlivost</h2>
+
+    <div class="faq-item">
+      <h3 id="co-kdyz-ethel-odpovi-spatne">Co když Ethel odpoví špatně nebo halucinuje?</h3>
+      <p>AI modely občas vymýšlejí – Ethel se tomu brání konstrukcí. Odpověď stojí na reálném SQL dotazu do vaší databáze, ne na AI odhadu. Znalostní báze je validovaná, takže Ethel nepracuje s neexistujícími tabulkami. A když si není jistá, doptá se, místo aby si vymýšlela.</p>
+      <p>Jednoduché a typické dotazy zvládá spolehlivě – průběžně je ověřujeme automatizovanou testovací sadou. Komplexní dotazy přes mnoho tabulek berte jako prvotní vhled a u kritických rozhodnutí si výsledek ověřte.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="co-kdyz-moje-verze-heliosu">Co když moje verze Heliosu má vlastní úpravy?</h3>
+      <p>Ethel zná <strong>standardní Helios Inuvio</strong> – custom sloupce a doplňky externích vývojářů v základu nezná. V tieru Enterprise umíme vaše specifické úpravy doplnit, aby jim Ethel rozuměla.</p>
+    </div>
+  </section>
+
+  <!-- Nasazení a kompatibilita -->
+  <section class="faq-section" id="nasazeni-a-kompatibilita">
+    <h2>Nasazení a kompatibilita</h2>
+
+    <div class="faq-item">
+      <h3 id="co-potrebuju-a-jak-dlouho-trva-nasazeni">Co potřebuju a jak dlouho trvá nasazení?</h3>
+      <p>Helios Inuvio s přístupem k SQL Serveru, Windows na klientském počítači a internet. Žádný .NET, ODBC drivery ani runtime – Ethel agent je jeden malý exe.</p>
+      <p>Instalace zabere 15–30 minut: spustíte SQL skript, nakopírujete exe vedle Heliosu, aktivujete tokenem. V tieru Enterprise přidáváme onboarding call a asistované nasazení. Helios partnera nepotřebujete – ale pokud vám systém spravuje, klidně mu nasazení předejte, rádi poskytneme součinnost.</p>
+      <p>Podporujeme všechny současné verze Helios Inuvio; starší Helios Orange a Green nejsou na roadmapě.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="co-se-stane-kdyz-vypadne-internet">Co se stane, když vypadne internet nebo AI služba?</h3>
+      <p>Ethel neodpoví a zobrazí srozumitelnou chybu – tím to končí. Helios běží dál, vaše data ani práce nejsou dotčené. Po obnovení připojení Ethel funguje okamžitě, bez restartu.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="nezatizi-ethel-nas-sql-server">Nezatíží Ethel náš SQL Server?</h3>
+      <p>Ne. Ethel spouští jen čtecí dotazy srovnatelné s běžnou sestavou. Žádná synchronizace na pozadí, žádné kopírování dat – dotaz proběhne, jen když se uživatel zeptá.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="jak-ethel-aktualizujete">Jak Ethel aktualizujete?</h3>
+      <p>Většina vývoje (prompt, znalostní báze, AI modely) probíhá na naší straně a propíše se k vám okamžitě – nic neinstalujete ani nerestartujete. Klientský agent se aktualizuje výjimečně, párkrát ročně, s předchozím upozorněním.</p>
+    </div>
+  </section>
+
+  <!-- Obchodní podmínky -->
+  <section class="faq-section" id="obchodni-podminky">
+    <h2>Obchodní podmínky</h2>
+
+    <div class="faq-item">
+      <h3 id="muzzu-ethel-vyzkousit-zdarma">Můžu Ethel vyzkoušet zdarma?</h3>
+      <p>Ano. 14 dní, bez omezení funkčnosti, <strong>bez platební karty</strong>. Vyplníte kontaktní formulář, dostanete aktivační token a začnete. Po skončení Ethel prostě přestane odpovídat – kartu nemáme, takže žádné automatické naúčtování nehrozí. Pokud chcete pokračovat, objednáte si tarif a navážete, kde jste skončili.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="jake-jsou-ceny-a-jak-se-plati">Jaké jsou ceny a jak se platí?</h3>
+      <ul>
+        <li><strong>Standard</strong> – 1&nbsp;490&nbsp;Kč/měsíc, jedna databáze, 5 uživatelů v ceně, další uživatel +249&nbsp;Kč</li>
+        <li><strong>Enterprise</strong> – 4&nbsp;990&nbsp;Kč/měsíc, neomezené databáze i uživatelé, onboarding, vlastní konfigurace</li>
+      </ul>
+      <p>Ceny bez DPH. Měsíční předplatné, faktura v PDF s českými náležitostmi (IČO, DIČ, DPH), platba bankovním převodem; platbu kartou připravujeme. Detail na stránce <a href="/#cena">Ceny</a>.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="co-kdyz-budu-chtit-zrusit">Co když budu chtít zrušit?</h3>
+      <p>Kdykoliv k dalšímu fakturačnímu období, bez výpovědních lhůt a penalizací. Odinstalujete agenta a smažete pár SQL objektů – vaše data zůstávají v Heliosu nedotčená, Ethel je nikdy nikam nekopírovala. Na vyžádání smažeme i logy z naší strany.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="jak-funguje-podpora">Jak funguje podpora?</h3>
+      <p>E-mailem na <a href="mailto:info@ethel.cz">info@ethel.cz</a>, reagujeme typicky do jednoho pracovního dne. Enterprise má prioritní podporu. Výhoda malého týmu: píšete přímo člověku, který Ethel vyvíjí.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 id="mam-dalsi-otazky">Mám další otázky, které tady nejsou zodpovězené.</h3>
+      <p>Napište na <strong><a href="mailto:info@ethel.cz">info@ethel.cz</a></strong> nebo přes <a href="/#kontakt">kontaktní formulář</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-left">
+    &copy; 2026 Ethel &middot; Embedded Thinking for Helios
+    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a> &middot; <a href="/bezpecnost">Bezpečnost</a> &middot; <a href="/faq">FAQ</a> &middot; <a href="/partneri">Partneři</a>
+    <br><span style="font-size: 0.72rem;">Ethel není produktem společnosti Asseco Solutions. Helios a Helios Inuvio jsou registrované ochranné známky.</span>
+  </div>
+  <div class="footer-right">v1.0 &middot; brno, cz</div>
+</footer>
+
+<script>
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+</script>
+
+</body>
+</html>
