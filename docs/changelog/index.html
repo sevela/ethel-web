@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Co je nového – Ethel</title>
+<meta name="description" content="Přehled změn a vylepšení Ethel pro Helios Inuvio. Cloudová část se nasazuje průběžně — dostanete zlepšení automaticky, bez instalace.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Jakub Ševela">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="canonical" href="https://ethel.cz/docs/changelog/">
+
+<meta property="og:title" content="Co je nového – Ethel">
+<meta property="og:description" content="Přehled změn a vylepšení Ethel pro Helios Inuvio. Cloudová část se nasazuje průběžně — dostanete zlepšení automaticky, bez instalace.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ethel.cz/docs/changelog/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Ethel">
+<meta property="og:image" content="https://ethel.cz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Co je nového – Ethel">
+<meta name="twitter:description" content="Přehled změn a vylepšení Ethel pro Helios Inuvio. Cloudová část se nasazuje průběžně — dostanete zlepšení automaticky, bez instalace.">
+<meta name="twitter:image" content="https://ethel.cz/og-image.png">
+
+<link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sora-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/docs/_assets/docs.css">
+
+<style>
+/* ─── Layout ─── */
+.cl-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 6rem 2rem 5rem;
+}
+
+/* ─── Hero ─── */
+.cl-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+}
+.cl-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.cl-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.cl-hero p {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* ─── Timeline ─── */
+.cl-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Single entry ─── */
+/*
+  Přidání nového zápisu:
+  1. Zkopíruj blok od <!-- ENTRY: RRRR-MM-DD --> po jeho komentář konce
+  2. Vlož ho NA ZAČÁTEK cl-timeline (pod komentář "NOVÝ ZÁPIS PŘIDEJ SEM")
+  3. Uprav id, datum, nadpis a obsah
+*/
+.cl-entry {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.cl-entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.cl-date-line {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.5rem;
+}
+.cl-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(107, 148, 184, 0.5);
+}
+.cl-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.73rem;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+.cl-entry h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.1rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  scroll-margin-top: 88px;
+}
+
+.cl-entry > p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 0.9rem;
+}
+
+/* ─── Bullet lists ─── */
+.cl-entry ul {
+  color: var(--text-secondary);
+  padding-left: 1.5rem;
+  line-height: 1.8;
+  margin-bottom: 0.9rem;
+}
+.cl-entry ul:last-child { margin-bottom: 0; }
+.cl-entry li { margin-bottom: 0.5rem; }
+.cl-entry li:last-child { margin-bottom: 0; }
+.cl-entry li strong { color: var(--text); font-weight: 600; }
+
+/* ─── Links ─── */
+.cl-entry a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(107, 148, 184, 0.35);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+.cl-entry a:hover { text-decoration-color: var(--accent); }
+
+/* ─── Sub-sections within an entry (e.g. "Co Ethel umí", "Bezpečnost") ─── */
+.cl-subsection {
+  margin-top: 1.2rem;
+}
+.cl-subsection h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.65rem;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .cl-page { padding: 5rem 1.25rem 3rem; }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></a>
+  <div class="nav-links">
+    <a href="/#features">Produkt</a>
+    <a href="/bezpecnost">Bezpečnost</a>
+    <a href="/faq">FAQ</a>
+    <a href="/docs/changelog" class="active">Co je nového</a>
+    <a href="/#pricing">Cena</a>
+    <a href="/#contact" class="nav-cta">Kontakt</a>
+  </div>
+</nav>
+</header>
+
+<main>
+<div class="cl-page">
+
+  <!-- HERO -->
+  <div class="cl-hero">
+    <div class="cl-tag">Co je nového</div>
+    <h1>Changelog</h1>
+    <p>Přehled změn a vylepšení Ethel. Cloudová část se nasazuje průběžně — zlepšení dostanete automaticky, bez instalace.</p>
+  </div>
+
+  <div class="cl-timeline">
+
+  <!-- === NOVÝ ZÁPIS PŘIDEJ SEM (zkopíruj blok níže a vlož ho na začátek) === -->
+
+  <!-- ENTRY: 2026-06-10 -->
+  <section class="cl-entry" id="2026-06-10">
+    <div class="cl-date-line">
+      <span class="cl-dot"></span>
+      <span class="cl-date">10. června 2026</span>
+    </div>
+    <h2>Chytřejší porozumění dotazům</h2>
+    <p>Největší změna od vydání: kompletně přepracované jádro, které rozhoduje, co s vaším dotazem udělat.</p>
+    <ul>
+      <li><strong>Přesnější rozpoznání záměru</strong> — Ethel lépe pozná, jestli se ptáte na data, chcete vysvětlení, nebo jen upřesňujete předchozí otázku</li>
+      <li><strong>Přesnější výběr tabulek</strong> — typické dotazy míří rovnou na správná data, méně zbytečného doptávání</li>
+      <li><strong>Žádné slepé uličky</strong> — když si Ethel není jistá, vždy nabídne možnosti nebo se doptá; nikdy neskončí prostým „nevím"</li>
+      <li><strong>„Jak jsi na to přišla?"</strong> — Ethel umí vysvětlit postup, kterým k odpovědi došla</li>
+      <li><strong>Zpřísněná ochrana citlivých modulů</strong> — mzdy, personalistika a banka jsou nově blokované i tvrdou kontrolou na serveru, detail v sekci <a href="/bezpecnost">Bezpečnost</a></li>
+      <li><strong>Přísnější izolace dat mezi zákazníky</strong> na úrovni databáze</li>
+      <li>Rozšířená automatizovaná testovací sada — typické dotazy i pokusy o zneužití</li>
+    </ul>
+  </section>
+  <!-- / ENTRY: 2026-06-10 -->
+
+  <!-- ENTRY: 2026-05-21 -->
+  <section class="cl-entry" id="2026-05-21">
+    <div class="cl-date-line">
+      <span class="cl-dot"></span>
+      <span class="cl-date">21. května 2026</span>
+    </div>
+    <h2>Konverzační mód a bezpečnostní audit</h2>
+    <ul>
+      <li><strong>Konverzační mód</strong> — Ethel drží kontext rozhovoru; můžete navazovat doplňujícími otázkami, upřesňovat a vracet se k předchozím odpovědím</li>
+      <li><strong>Dokončen kompletní bezpečnostní audit</strong> — SQL injection, prompt injection, zabezpečení tokenů, izolace zákazníků, GDPR procesy (retence a mazání logů)</li>
+      <li><strong>Podpora Windows autentizace</strong> k SQL Serveru</li>
+      <li><strong>Ověřena kompatibilita s SQL Server 2025</strong></li>
+    </ul>
+  </section>
+  <!-- / ENTRY: 2026-05-21 -->
+
+  <!-- ENTRY: 2026-04-27 -->
+  <section class="cl-entry" id="2026-04-27">
+    <div class="cl-date-line">
+      <span class="cl-dot"></span>
+      <span class="cl-date">27. dubna 2026</span>
+    </div>
+    <h2>První vlna zlepšení po vydání</h2>
+    <ul>
+      <li><strong>Formátované odpovědi</strong> — přehledné tabulky místo prostého textu</li>
+      <li><strong>Export výsledků do CSV</strong> jedním klikem přímo z odpovědi</li>
+      <li><strong>Tlačítka zpětné vazby</strong> u každé odpovědi — pomáhají nám cíleně zlepšovat znalostní bázi</li>
+      <li><strong>Vysvětlování definic</strong> — Ethel umí popsat, co znamená konkrétní pole nebo sestava, na které se díváte</li>
+      <li><strong>Helios se neblokuje</strong> — Ethel běží jako samostatné okno, práce v Heliosu pokračuje bez čekání</li>
+      <li>Opraveno ukládání volby velikosti písma a tématu</li>
+    </ul>
+  </section>
+  <!-- / ENTRY: 2026-04-27 -->
+
+  <!-- ENTRY: 2026-04-17 -->
+  <section class="cl-entry" id="2026-04-17">
+    <div class="cl-date-line">
+      <span class="cl-dot"></span>
+      <span class="cl-date">17. dubna 2026</span>
+    </div>
+    <h2>Ethel 1.0</h2>
+    <p>První veřejné vydání Ethel pro Helios Inuvio.</p>
+
+    <div class="cl-subsection">
+      <h3>Co Ethel umí</h3>
+      <ul>
+        <li>Odpovídá na dotazy o datech přirozeným jazykem (pouze čtení)</li>
+        <li>Vysvětluje Helios — pole, sestavy, vazby mezi tabulkami</li>
+        <li>Zná kontext aktuálního přehledu v Heliosu</li>
+        <li>Pokrývá standardní moduly: CRM, sklady, nákup a prodej, fakturaci, účetnictví, pokladnu, majetek</li>
+      </ul>
+    </div>
+
+    <div class="cl-subsection">
+      <h3>Bezpečnost</h3>
+      <ul>
+        <li>Data nikdy neopouštějí server zákazníka</li>
+        <li>Mzdy, personalistika a banka jsou mimo dosah Ethel — nejsou ve znalostní bázi a jejich tabulky jsou blokované na serveru</li>
+        <li>Detail v sekci <a href="/bezpecnost">Bezpečnost</a></li>
+      </ul>
+    </div>
+  </section>
+  <!-- / ENTRY: 2026-04-17 -->
+
+  </div><!-- /cl-timeline -->
+
+</div>
+</main>
+
+<footer>
+  <div class="footer-left">
+    &copy; 2026 Ethel &middot; Embedded Thinking for Helios
+    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a> &middot; <a href="/bezpecnost">Bezpečnost</a> &middot; <a href="/faq">FAQ</a> &middot; <a href="/docs/changelog">Co je nového</a> &middot; <a href="/partneri">Partneři</a>
+    <br><span style="font-size: 0.72rem;">Ethel není produktem společnosti Asseco Solutions. Helios a Helios Inuvio jsou registrované ochranné známky.</span>
+  </div>
+  <div class="footer-right">v1.0 &middot; brno, cz</div>
+</footer>
+
+<script>
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+</script>
+
+</body>
+</html>
