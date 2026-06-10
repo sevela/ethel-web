@@ -510,6 +510,18 @@
     opacity: 0.8;
     font-style: italic;
   }
+  .safety-more {
+    display: inline-block;
+    margin-top: 1.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  .safety-more:hover { opacity: 1; }
   .safety-pills {
     display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem;
     margin-top: 2rem;
@@ -1192,6 +1204,7 @@
       <span class="safety-pill">Vy rozhodujete</span>
     </div>
     <p class="safety-note">Ethel je nezávislý nástroj. Není produktem společnosti Asseco Solutions a za jeho provoz zodpovídáme my.</p>
+    <a href="/bezpecnost" class="safety-more">Více o bezpečnosti →</a>
   </div>
 </section>
 
