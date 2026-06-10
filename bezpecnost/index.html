@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jak Ethel chrání vaše data – ET/HEL</title>
+<meta name="description" content="Vaše firemní data nikdy neopustí váš server. Jak funguje architektura Ethel, tok dat, šifrování a hosting v EU.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Jakub Ševela">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="canonical" href="https://ethel.cz/bezpecnost/">
+
+<meta property="og:title" content="Jak Ethel chrání vaše data – ET/HEL">
+<meta property="og:description" content="Vaše firemní data nikdy neopustí váš server. Jak funguje architektura Ethel, tok dat, šifrování a hosting v EU.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ethel.cz/bezpecnost/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Ethel">
+<meta property="og:image" content="https://ethel.cz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jak Ethel chrání vaše data – ET/HEL">
+<meta name="twitter:description" content="Vaše firemní data nikdy neopustí váš server. Jak funguje architektura Ethel, tok dat, šifrování a hosting v EU.">
+<meta name="twitter:image" content="https://ethel.cz/og-image.png">
+
+<link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sora-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/docs/_assets/docs.css">
+
+<style>
+/* ─── Layout ─── */
+.sec-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 6rem 2rem 5rem;
+}
+
+/* ─── Hero ─── */
+.sec-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+}
+.sec-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.sec-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.sec-hero p {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* ─── TL;DR callout ─── */
+.sec-tldr {
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.8rem;
+  margin-bottom: 3rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.sec-tldr strong {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.005em;
+}
+
+/* ─── Section ─── */
+.sec-section {
+  margin-bottom: 3rem;
+}
+.sec-section h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 88px;
+}
+.sec-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 1.6rem 0 0.6rem;
+}
+.sec-section p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 0.9rem;
+}
+.sec-section p:last-child { margin-bottom: 0; }
+.sec-section strong { color: var(--text); font-weight: 600; }
+.sec-section a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(107, 148, 184, 0.35);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+.sec-section a:hover { text-decoration-color: var(--accent); }
+.sec-section ul,
+.sec-section ol {
+  color: var(--text-secondary);
+  padding-left: 1.6rem;
+  line-height: 1.8;
+  margin-bottom: 0.9rem;
+}
+.sec-section li { margin-bottom: 0.5rem; }
+.sec-section li:last-child { margin-bottom: 0; }
+.sec-section li strong { color: var(--text); }
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.83em;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  color: var(--accent);
+}
+
+/* ─── Data flow timeline ─── */
+.data-flow-intro {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 1.4rem;
+  line-height: 1.75;
+}
+.data-flow {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+.flow-step {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(28, 28, 36, 0.6);
+}
+.flow-step:last-child { border-bottom: none; }
+.step-num {
+  min-width: 2.1rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+.step-body {
+  color: var(--text-secondary);
+  line-height: 1.75;
+  font-size: 0.97rem;
+  padding-top: 0.15rem;
+}
+.step-body strong { color: var(--text); }
+.flow-note {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 0.85rem 1.2rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-top: 0.5rem;
+}
+.flow-note strong { color: var(--text); }
+
+/* ─── Cloud split comparison ─── */
+.cloud-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin: 1.2rem 0;
+}
+.cloud-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.4rem;
+}
+.cloud-card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+.cloud-card.sees .cloud-card-label { color: var(--text-dim); }
+.cloud-card.blind .cloud-card-label { color: var(--accent); }
+.cloud-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: var(--text-secondary);
+}
+.cloud-card li {
+  font-size: 0.93rem;
+  line-height: 1.65;
+  padding: 0.3rem 0 0.3rem 1.4rem;
+  position: relative;
+  border-bottom: 1px solid rgba(28, 28, 36, 0.5);
+}
+.cloud-card li:last-child { border-bottom: none; }
+.cloud-card.sees li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+  font-size: 0.8em;
+  top: 0.35rem;
+}
+.cloud-card.blind li::before {
+  content: '✕';
+  position: absolute;
+  left: 0;
+  color: rgba(239, 68, 68, 0.5);
+  font-size: 0.75em;
+  top: 0.35rem;
+}
+.cloud-note {
+  margin-top: 1rem;
+  padding: 0.9rem 1.2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 0.93rem;
+  line-height: 1.75;
+}
+.cloud-note strong { color: var(--text); }
+
+/* ─── Two-layer cards ─── */
+.two-layers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin: 1.2rem 0;
+}
+.layer-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.4rem;
+}
+.layer-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+.layer-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin: 0;
+}
+.layer-card p strong { color: var(--text); }
+
+/* ─── Contact callout ─── */
+.sec-contact {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.8rem;
+  margin-bottom: 3rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 0.97rem;
+}
+.sec-contact a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(107, 148, 184, 0.35);
+  text-underline-offset: 3px;
+}
+.sec-contact a:hover { text-decoration-color: var(--accent); }
+.sec-contact strong { color: var(--text); }
+
+/* ─── Related FAQ ─── */
+.sec-related { margin-bottom: 3rem; }
+.sec-related h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border);
+}
+.sec-related p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; }
+.sec-related a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(107, 148, 184, 0.35); text-underline-offset: 3px; }
+.faq-refs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.faq-refs li {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(28, 28, 36, 0.5);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.faq-refs li:last-child { border-bottom: none; }
+.faq-refs em { font-style: italic; }
+.faq-refs strong { color: var(--text); font-weight: 600; }
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .sec-page { padding: 5rem 1.25rem 3rem; }
+  .cloud-grid { grid-template-columns: 1fr; }
+  .two-layers { grid-template-columns: 1fr; }
+  .sec-tldr { padding: 1.2rem 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></a>
+  <div class="nav-links">
+    <a href="/#features">Produkt</a>
+    <a href="/bezpecnost" class="active">Bezpečnost</a>
+    <a href="/faq">FAQ</a>
+    <a href="/docs/">Nápověda</a>
+    <a href="/#pricing">Cena</a>
+    <a href="/#contact" class="nav-cta">Kontakt</a>
+  </div>
+</nav>
+</header>
+
+<main>
+<div class="sec-page">
+
+  <!-- HERO -->
+  <div class="sec-hero">
+    <div class="sec-tag">Bezpečnost dat</div>
+    <h1>Jak Ethel chrání vaše data</h1>
+    <p>Přehled bezpečnostní architektury, toku dat a provozní infrastruktury. Psáno pro IT adminy, ředitele a právní oddělení.</p>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="sec-tldr">
+    <strong>Vaše firemní data nikdy neopustí váš server.</strong>
+    Ethel komunikuje s cloudem pouze textem vašeho dotazu a vygenerovaným SQL. Samotné výsledky – čísla, jména, ceny, kontakty, jakákoliv data z vaší databáze – zůstávají u vás. Cloud je nikdy nevidí.
+    <br><br>
+    Citlivé moduly Helios (Mzdy, Banka, Personalistika) jsou mimo dosah Ethel dvěma nezávislými vrstvami – nejsou ve znalostní bázi a jejich tabulky jsou blokované na úrovni serveru.
+  </div>
+
+  <!-- HLAVNÍ PRINCIP -->
+  <section class="sec-section" id="hlavni-princip">
+    <h2>Hlavní princip</h2>
+    <p>Klasický přístup k AI nad firemními daty znamená: data se nahrají do cloudu, model nad nimi pracuje, výsledky se vrátí. Tento přístup je pro Helios klienty nepřijatelný – firemní data nemají co dělat v cizí infrastruktuře.</p>
+    <p>Ethel staví na obráceném principu. <strong>Cloud nemá vaše data, jen model.</strong> Vaše databáze zůstává tam, kde byla. Ethel je most mezi přirozeným jazykem a SQL, ne datový sklad.</p>
+  </section>
+
+  <!-- TOK DAT -->
+  <section class="sec-section" id="tok-dat">
+    <h2>Tok dat krok po kroku</h2>
+    <p class="data-flow-intro">Když se uživatel zeptá <em>„Kolik faktur čeká na schválení?"</em>:</p>
+    <div class="data-flow">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-body"><strong>Helios</strong> otevře okno Ethel agenta (lokálně, na pracovní stanici uživatele).</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-body"><strong>Agent</strong> posílá do cloudu <strong>pouze text dotazu</strong> („kolik faktur čeká na schválení") + identifikátor instance pro fakturaci.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-body"><strong>Cloud proxy</strong> předá dotaz AI modelu (Claude od Anthropic) společně se znalostní bází o Heliosu.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-body"><strong>AI model</strong> vygeneruje SQL dotaz typu <code>SELECT COUNT(*) FROM TabDokladyZbozi WHERE ...</code></div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">5</div>
+        <div class="step-body"><strong>Cloud proxy</strong> SQL zvaliduje (pouze čtení, žádné citlivé tabulky) a vrátí ho agentovi.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">6</div>
+        <div class="step-body"><strong>Agent</strong> spustí SQL <strong>lokálně na vaší databázi</strong> přes standardní SQL Server připojení.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">7</div>
+        <div class="step-body"><strong>Databáze</strong> vrátí výsledek (např. číslo 23) agentovi.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">8</div>
+        <div class="step-body"><strong>Agent</strong> zobrazí výsledek uživateli – formátovaně, v rámci Helios prostředí.</div>
+      </div>
+    </div>
+    <div class="flow-note"><strong>Důležité:</strong> od kroku 6 dál cloud nehraje žádnou roli. Výsledek (číslo 23) cloud nikdy nevidí.</div>
+  </section>
+
+  <!-- CO CLOUD VIDÍ / NEVIDÍ -->
+  <section class="sec-section" id="co-cloud-vidi">
+    <h2>Co cloud vidí a co nevidí</h2>
+    <div class="cloud-grid">
+      <div class="cloud-card sees">
+        <div class="cloud-card-label">Co cloud vidí</div>
+        <ul>
+          <li>Text vašeho dotazu v přirozeném jazyce („kolik faktur čeká")</li>
+          <li>Vygenerované SQL (text dotazu, ne výsledek)</li>
+          <li>Identifikátor vaší instance (pro fakturaci a rate limiting)</li>
+          <li>Časové razítko a počet dotazů (provozní metriky)</li>
+        </ul>
+      </div>
+      <div class="cloud-card blind">
+        <div class="cloud-card-label">Co cloud nevidí</div>
+        <ul>
+          <li>Žádné záznamy z vaší databáze</li>
+          <li>Žádné výsledky SQL dotazů</li>
+          <li>Žádná jména klientů, čísla faktur, ceny, kontakty</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cloud-note">Jedna poctivost navíc: pokud uživatel do otázky sám napíše jméno nebo jiný údaj („kolik dluží Jan Novák"), je tento text součástí dotazu a do cloudu jde. <strong>Odpověď z databáze už ale nikdy.</strong></div>
+  </section>
+
+  <!-- CO ETHEL ZNÁ -->
+  <section class="sec-section" id="znalostni-baze">
+    <h2>Co Ethel zná z vaší databáze</h2>
+    <p>Ethel pracuje se <strong>sdílenou znalostní bází</strong> standardního Helios Inuvio. Zná názvy tabulek (<code>TabDokladyZbozi</code>, <code>TabKmenZbozi</code>, <code>TabCisOrg</code>…), jejich klíčové sloupce, vazby mezi nimi a typické dotazovací vzory.</p>
+    <p>Znalostní báze <strong>neobsahuje vaše konkrétní data</strong>. Je to popis schématu Heliosu, ne kopie vašich tabulek.</p>
+  </section>
+
+  <!-- CO ETHEL ZÁMĚRNĚ NEZNÁ -->
+  <section class="sec-section" id="citlive-moduly">
+    <h2>Co Ethel záměrně nezná</h2>
+    <p>Citlivé moduly jsou mimo dosah <strong>dvěma nezávislými vrstvami</strong>:</p>
+    <div class="two-layers">
+      <div class="layer-card">
+        <div class="layer-label">Vrstva 1 – znalostní báze</div>
+        <p>Moduly Mzdy, Personalistika (včetně číselníku zaměstnanců) a Banka nejsou ve znalostní bázi. Ethel o jejich tabulkách nemá žádné informace a neumí na ně cíleně sestavit dotaz.</p>
+      </div>
+      <div class="layer-card">
+        <div class="layer-label">Vrstva 2 – serverová blokace</div>
+        <p>Tabulky těchto modulů jsou navíc na deny-listu vyhodnocovaném na serveru. I kdyby se některá z nich ve vygenerovaném SQL objevila, dotaz se zastaví ještě před spuštěním. Není to instrukce v promptu, kterou by šlo ukecat – je to tvrdá kontrola mimo dosah AI modelu.</p>
+      </div>
+    </div>
+    <p>Pokud se uživatel zeptá na něco z těchto modulů, dostane odpověď, že k modulu Ethel nemá přístup. Žádný dotaz se nespustí.</p>
+    <p>V budoucích verzích plánujeme jemnější granularitu – vlastní tabulku oprávnění, kde si admin určí, ke kterým modulům má každý uživatel přístup. V současné verzi platí jednotná úroveň přístupu pro celou instanci.</p>
+  </section>
+
+  <!-- POUZE PRO ČTENÍ -->
+  <section class="sec-section" id="pouze-pro-cteni">
+    <h2>Pouze pro čtení</h2>
+    <p>Ethel pracuje <strong>výhradně v režimu čtení</strong> (SELECT). Každé vygenerované SQL prochází validační vrstvou, která zápisové operace (INSERT, UPDATE, DELETE i DDL příkazy) nepropustí – nezávisle na tom, co AI model vygeneruje.</p>
+    <p>Tuto vrstvu průběžně testujeme automatizovanou sadou testů, včetně záměrných pokusů o její obejití (SQL injection vzory, vícenásobné příkazy, maskované zápisy).</p>
+  </section>
+
+  <!-- ŠIFROVÁNÍ -->
+  <section class="sec-section" id="sifrovani">
+    <h2>Šifrování a autentizace</h2>
+
+    <h3>Komunikace s cloudem</h3>
+    <ul>
+      <li>TLS 1.2+ na všech spojeních mezi agentem a cloud proxy.</li>
+      <li>Žádná data se neposílají přes nešifrovaný kanál.</li>
+    </ul>
+
+    <h3>Komunikace s databází</h3>
+    <ul>
+      <li>Standardní šifrované SQL Server připojení.</li>
+      <li>Agent používá <strong>stejné připojení jako samotný Helios</strong> – connection string čte z konfigurace Heliosu, žádné vlastní credentials neukládá ani nepřenáší.</li>
+    </ul>
+
+    <h3>Aktivace a licencování</h3>
+    <ul>
+      <li>Každá instance má unikátní aktivační token vázaný na IČO klienta.</li>
+      <li>Token lze kdykoliv revokovat – přístup zaniká okamžitě, žádná anonymní AI bez kontroly.</li>
+    </ul>
+  </section>
+
+  <!-- LOGOVÁNÍ -->
+  <section class="sec-section" id="logovani">
+    <h2>Logování</h2>
+
+    <h3>Na naší straně se loguje</h3>
+    <ul>
+      <li>Čas dotazu, identifikátor instance, počet dotazů.</li>
+      <li>Text dotazu a vygenerované SQL (pro debugging a zlepšování znalostní báze).</li>
+      <li>Chyby a výjimky.</li>
+    </ul>
+
+    <h3>Co se neloguje</h3>
+    <ul>
+      <li>Žádné výsledky SQL dotazů.</li>
+      <li>Žádná data z vaší databáze.</li>
+    </ul>
+
+    <p>Logy uchováváme po dobu nezbytnou pro provoz, debugging a zlepšování znalostní báze. Na vyžádání logy vaší instance kdykoliv smažeme.</p>
+    <p><strong>Přehled dotazů vaší instance</strong> (kdo se na co ptal a kdy) vám na vyžádání poskytneme – jde o stejné logy, žádná skrytá data navíc.</p>
+  </section>
+
+  <!-- INFRASTRUKTURA -->
+  <section class="sec-section" id="infrastruktura">
+    <h2>Kde běží infrastruktura</h2>
+    <p>Celá infrastruktura Ethel běží v <strong>Evropské unii</strong>:</p>
+    <ul>
+      <li><strong>Cloud proxy a aplikační vrstva:</strong> Railway, region <strong>EU – Amsterdam</strong>.</li>
+      <li><strong>Databáze metadat (tokeny, logy, znalostní báze):</strong> Supabase, region <strong>EU – Frankfurt (AWS eu-central-1)</strong>.</li>
+      <li><strong>AI inference:</strong> Anthropic API. K Anthropic putuje pouze text otázky, kontext znalostní báze a vygenerované SQL – nikdy data z vaší databáze. Vstupy přes API se dle podmínek Anthropic nepoužívají k trénování modelů.</li>
+    </ul>
+    <p>Jako provozovatel jsme <strong>zpracovatelem osobních údajů</strong> v rozsahu metadat (texty dotazů, fakturační údaje). Smlouvu o zpracování (DPA) poskytneme na vyžádání.</p>
+  </section>
+
+  <!-- CO SE STANE PŘI VÝPADKU -->
+  <section class="sec-section" id="vypadek">
+    <h2>Co se stane při výpadku</h2>
+    <p>Ethel ke svému běhu potřebuje internet a dostupnost AI služby. Když cokoliv z toho vypadne:</p>
+    <ul>
+      <li>Ethel neodpoví a zobrazí srozumitelnou chybu – tím to končí.</li>
+      <li><strong>Helios běží dál</strong>, vaše data ani práce nejsou nijak dotčené.</li>
+      <li>Po obnovení připojení Ethel funguje okamžitě, bez restartu nebo zásahu.</li>
+    </ul>
+    <p>Architektura Ethel je model-agnostická – AI vrstva běží na naší straně, takže případnou dlouhodobou nedostupnost poskytovatele umíme řešit změnou modelu bez jakéhokoliv zásahu u vás.</p>
+  </section>
+
+  <!-- CO SE STANE PŘI ZRUŠENÍ -->
+  <section class="sec-section" id="zruseni">
+    <h2>Co se stane, když Ethel zrušíte</h2>
+    <ol>
+      <li>Předplatné můžete zrušit kdykoliv k dalšímu fakturačnímu období.</li>
+      <li>Po skončení období se token deaktivuje – cloud přestane přijímat dotazy z vaší instance.</li>
+      <li>Agenta jednoduše odinstalujete (smažete exe ze složky vedle Heliosu).</li>
+      <li>SQL objekty Ethel v databázi smažete dodaným odinstalačním skriptem.</li>
+      <li>Na vyžádání vám potvrdíme smazání logů z naší strany.</li>
+    </ol>
+    <p><strong>Vaše Helios data jsou tím okamžikem nedotčená.</strong> Ethel je nikdy nikam nekopírovala – neexistuje žádná kopie ani záloha, kterou bychom drželi.</p>
+  </section>
+
+  <!-- BEZPEČNOSTNÍ KONTAKT -->
+  <div class="sec-contact" id="kontakt">
+    <p>Pokud objevíte zranitelnost nebo máte bezpečnostní dotaz, napište na <strong><a href="mailto:info@ethel.cz">info@ethel.cz</a></strong> s předmětem „Bezpečnost". Reagujeme do 24 hodin v pracovních dnech.</p>
+  </div>
+
+  <!-- SOUVISEJÍCÍ OTÁZKY -->
+  <section class="sec-related" id="souvisejici">
+    <h2>Související otázky</h2>
+    <p>Podrobněji v sekci <a href="/faq">Často kladené otázky</a>:</p>
+    <ul class="faq-refs">
+      <li><em>Tečou moje data do cloudu?</em> → <strong>Ne.</strong></li>
+      <li><em>Co moduly Mzdy a Banka?</em> → <strong>Dvě vrstvy ochrany, Ethel je nevidí.</strong></li>
+      <li><em>Co když Ethel vygeneruje špatné SQL?</em> → <strong>Pouze čtení, validace mimo AI model.</strong></li>
+      <li><em>Co se stane po zrušení?</em> → <strong>Agent se odinstaluje, data zůstávají v Heliosu.</strong></li>
+    </ul>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="footer-left">
+    &copy; 2026 Ethel &middot; Embedded Thinking for Helios
+    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a> &middot; <a href="/bezpecnost">Bezpečnost</a> &middot; <a href="/faq">FAQ</a> &middot; <a href="/partneri">Partneři</a>
+    <br><span style="font-size: 0.72rem;">Ethel není produktem společnosti Asseco Solutions. Helios a Helios Inuvio jsou registrované ochranné známky.</span>
+  </div>
+  <div class="footer-right">v1.0 &middot; brno, cz</div>
+</footer>
+
+<script>
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+</script>
+
+</body>
+</html>
