@@ -29,41 +29,6 @@
 <link rel="stylesheet" href="/docs/_assets/docs.css">
 
 <style>
-.sec-page {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 6rem 2rem 5rem;
-}
-.sec-hero {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--border);
-}
-.sec-tag {
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
-  color: var(--accent);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-.sec-hero h1 {
-  font-size: clamp(2rem, 4.5vw, 2.8rem);
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 0.9rem;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-}
-.sec-hero p {
-  font-size: 1.05rem;
-  color: var(--text-secondary);
-  max-width: 560px;
-  margin: 0 auto;
-  line-height: 1.75;
-}
 .sec-section {
   margin-bottom: 3rem;
 }
@@ -136,19 +101,32 @@
     <a href="/faq">FAQ</a>
     <a href="/docs/">Nápověda</a>
     <a href="/#cena">Cena</a>
-    <a href="/#kontakt" class="nav-cta">Kontakt</a>
+    <a href="/#kontakt" class="nav-cta">Vyzkoušet zdarma</a>
   </div>
 </nav>
 </header>
 
-<main>
-<div class="sec-page">
+<main class="docs-shell">
 
-  <div class="sec-hero">
-    <div class="sec-tag">Bezpečnost dat</div>
-    <h1>Jak Ethel chrání vaše data</h1>
-    <p>Přehled bezpečnostní architektury, toku dat a provozní infrastruktury. Psáno pro IT adminy, ředitele a právní oddělení.</p>
-  </div>
+  <aside class="docs-sidebar">
+    <div class="sidebar-heading">Návody</div>
+    <ul>
+      <li><a href="/docs/instalace/">Instalace a správa</a></li>
+      <li><a href="/docs/prvni-kroky/">První kroky</a></li>
+      <li><a href="/bezpecnost" class="active">Bezpečnost</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/docs/changelog/">Co je nového</a></li>
+    </ul>
+  </aside>
+
+  <article>
+    <div class="docs-breadcrumb">
+      <a href="/">ethel.cz</a><span class="sep">/</span><a href="/docs/">návody</a><span class="sep">/</span>bezpečnost
+    </div>
+    <div class="docs-content">
+
+  <h1>Bezpečnost dat</h1>
+  <p>Přehled bezpečnostní architektury, toku dat a provozní infrastruktury. Psáno pro IT adminy, ředitele a právní oddělení.</p>
 
   <section class="sec-section" id="tldr">
     <h2>TL;DR</h2>
@@ -316,7 +294,9 @@
     </ul>
   </section>
 
-</div>
+    </div><!-- /docs-content -->
+  </article>
+
 </main>
 
 <footer>

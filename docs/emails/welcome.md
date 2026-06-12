@@ -48,8 +48,8 @@ ET/HEL si pamatuje předchozí otázky. Po první odpovědi můžete pokračovat
 
 Ať si ET/HEL nezůstane jen u vás – největší hodnota je, když se začnou ptát všichni v týmu:
 
-- 📖 [Rychlý start pro uživatele](https://ethel.cz/docs/quickstart) – pošlete účetním, skladníkům, obchodu
-- 📊 [Návod pro IT](https://ethel.cz/docs/guide-it) – pro vašeho administrátora
+- 📖 [První kroky pro uživatele](https://ethel.cz/docs/prvni-kroky/) – pošlete účetním, skladníkům, obchodu
+- 📊 [Instalace pro IT](https://ethel.cz/docs/instalace/) – pro vašeho administrátora
 
 V tarifu **{{TIER_NAME}}** máte **{{USER_COUNT}} uživatelů v ceně**. Přidání dalších je otázka pár kliknutí – kontaktujte nás na ethel@jakubsevela.cz.
 

@@ -29,49 +29,6 @@
 <link rel="stylesheet" href="/docs/_assets/docs.css">
 
 <style>
-.faq-page {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 6rem 2rem 5rem;
-}
-.faq-hero {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--border);
-}
-.faq-tag {
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
-  color: var(--accent);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-.faq-hero h1 {
-  font-size: clamp(2rem, 4.5vw, 2.8rem);
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 0.9rem;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-}
-.faq-hero p {
-  font-size: 1.05rem;
-  color: var(--text-secondary);
-  max-width: 560px;
-  margin: 0 auto;
-  line-height: 1.75;
-}
-.faq-hero p a {
-  color: var(--accent-light);
-  text-decoration: underline;
-  text-decoration-color: rgba(143, 179, 204, 0.4);
-  text-underline-offset: 3px;
-  transition: color 0.2s, text-decoration-color 0.2s;
-}
-.faq-hero p a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 .faq-toc {
   display: flex;
   flex-wrap: wrap;
@@ -342,18 +299,32 @@
     <a href="/faq" class="active">FAQ</a>
     <a href="/docs/">Nápověda</a>
     <a href="/#cena">Cena</a>
-    <a href="/#kontakt" class="nav-cta">Kontakt</a>
+    <a href="/#kontakt" class="nav-cta">Vyzkoušet zdarma</a>
   </div>
 </nav>
 </header>
 
-<main class="faq-page">
+<main class="docs-shell">
 
-  <div class="faq-hero">
-    <span class="faq-tag">ČASTÉ DOTAZY</span>
-    <h1>Odpovědi na vaše dotazy</h1>
-    <p>Nenašli jste, co hledáte? Napište na <a href="mailto:info@ethel.cz">info@ethel.cz</a>.</p>
-  </div>
+  <aside class="docs-sidebar">
+    <div class="sidebar-heading">Návody</div>
+    <ul>
+      <li><a href="/docs/instalace/">Instalace a správa</a></li>
+      <li><a href="/docs/prvni-kroky/">První kroky</a></li>
+      <li><a href="/bezpecnost">Bezpečnost</a></li>
+      <li><a href="/faq" class="active">FAQ</a></li>
+      <li><a href="/docs/changelog/">Co je nového</a></li>
+    </ul>
+  </aside>
+
+  <article>
+    <div class="docs-breadcrumb">
+      <a href="/">ethel.cz</a><span class="sep">/</span><a href="/docs/">návody</a><span class="sep">/</span>faq
+    </div>
+    <div class="docs-content">
+
+  <h1>Časté dotazy</h1>
+  <p>Nenašli jste, co hledáte? Napište na <a href="mailto:info@ethel.cz">info@ethel.cz</a>.</p>
 
   <!-- O produktu -->
   <section class="faq-section" id="o-produktu">
@@ -497,6 +468,9 @@
       <p>Napište na <strong><a href="mailto:info@ethel.cz">info@ethel.cz</a></strong> nebo přes <a href="/#kontakt">kontaktní formulář</a>.</p>
     </div>
   </section>
+
+    </div><!-- /docs-content -->
+  </article>
 
 </main>
 

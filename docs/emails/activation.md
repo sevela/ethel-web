@@ -32,8 +32,8 @@ Celá instalace trvá obvykle **5–15 minut**.
 
 ## Něco se nepodařilo?
 
-- 📖 [Návod pro IT administrátory](https://ethel.cz/docs/guide-it) – detailní kroky, troubleshooting
-- 🚀 [Rychlý start pro uživatele](https://ethel.cz/docs/quickstart) – pošlete kolegům po instalaci
+- 📖 [Instalace pro IT administrátory](https://ethel.cz/docs/instalace/) – detailní kroky, troubleshooting
+- 🚀 [První kroky pro uživatele](https://ethel.cz/docs/prvni-kroky/) – pošlete kolegům po instalaci
 - 💬 Napište nám na **[ethel@jakubsevela.cz](mailto:ethel@jakubsevela.cz)** – odpovídáme do 24 hodin v pracovní dny
 
 ## Důležité info k vašemu předplatnému
