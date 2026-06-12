@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instalace a správa – ET/HEL</title>
+<meta name="description" content="Průvodce nasazením Ethel pro IT administrátory – předpoklady, wizard, klávesová zkratka, denylist, troubleshooting.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Jakub Ševela">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="canonical" href="https://ethel.cz/docs/instalace/">
+
+<meta property="og:title" content="Instalace a správa – ET/HEL">
+<meta property="og:description" content="Průvodce nasazením Ethel pro IT administrátory – předpoklady, wizard, klávesová zkratka, denylist, troubleshooting.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ethel.cz/docs/instalace/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Ethel">
+<meta property="og:image" content="https://ethel.cz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Instalace a správa – ET/HEL">
+<meta name="twitter:description" content="Průvodce nasazením Ethel pro IT administrátory – předpoklady, wizard, klávesová zkratka, denylist, troubleshooting.">
+<meta name="twitter:image" content="https://ethel.cz/og-image.png">
+
+<link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sora-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/docs/_assets/docs.css">
+</head>
+<body>
+
+<header>
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></a>
+  <div class="nav-links">
+    <a href="/#features">Co umí</a>
+    <a href="/#audience">Pro koho</a>
+    <a href="/#pricing">Cena</a>
+    <a href="/bezpecnost">Bezpečnost</a>
+    <a href="/docs/" class="nav-docs active">Návody</a>
+    <a href="/faq">FAQ</a>
+    <a href="/#contact" class="nav-cta">Kontakt</a>
+  </div>
+</nav>
+</header>
+
+<main class="docs-shell">
+
+  <aside class="docs-sidebar">
+    <div class="sidebar-heading">Návody</div>
+    <ul>
+      <li><a href="/docs/instalace/" class="active">Instalace a správa</a></li>
+      <li><a href="/docs/prvni-kroky/" >První kroky</a></li>
+      <li><a href="/docs/changelog/">Co je nového</a></li>
+    </ul>
+  </aside>
+
+  <article>
+    <div class="docs-breadcrumb">
+      <a href="/">ethel.cz</a><span class="sep">/</span><a href="/docs/">návody</a><span class="sep">/</span>instalace
+    </div>
+    <div class="docs-content">
+<h1 id="instalace-ethel">Instalace Ethel</h1>
+<p>Pro IT administrátory. Cíl: bezpečné nasazení do produkce za hodinu. Bez surovostí, bez magie – co se kde děje, je popsané.</p>
+<h2 id="predpoklady">Předpoklady</h2>
+<table>
+<thead>
+<tr>
+<th>Vyžadováno</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Helios Inuvio</td>
+<td>Aktuální verze (LTS i běžná). Pro Helios Easy/Green se ozvěte.</td>
+</tr>
+<tr>
+<td>MS SQL Server</td>
+<td>2016 nebo novější (testujeme až do 2022; 2025 viz <a href="/docs/changelog">changelog</a>)</td>
+</tr>
+<tr>
+<td>ODBC Driver</td>
+<td>17 nebo 18 for SQL Server</td>
+</tr>
+<tr>
+<td>Práva na SQL</td>
+<td><code>sysadmin</code> nebo <code>db_owner</code> cílových databází (jednorázově pro instalaci)</td>
+</tr>
+<tr>
+<td>Přístup na server s Helios</td>
+<td>Pro umístění <code>Ethel.exe</code></td>
+</tr>
+<tr>
+<td>Síť</td>
+<td>HTTPS výstup na <code>api.ethel.cz</code> a <code>app.ethel.cz</code> (port 443) – z Helios serveru i klientských stanic</td>
+</tr>
+<tr>
+<td>Aktivační token</td>
+<td>UUID, přijde e-mailem po objednávce nebo aktivaci trialu</td>
+</tr>
+</tbody></table>
+<h2 id="architektura-ve-zkratce">Architektura ve zkratce</h2>
+<pre><code>[Klient s Heliosem]
+        │
+        │  CTRL+I → Ethel.exe (lokálně, Tauri/WebView2)
+        │
+        ├──→ [SQL Server lokálně]   ← data nikdy neopouští server
+        │
+        └──→ HTTPS → [api.ethel.cz]  ← jen metadata + dotaz uživatele
+                          │
+                          └──→ Claude API (Anthropic)
+</code></pre>
+<p><strong>Princip:</strong> SQL se generuje v cloudu, spouští se lokálně. Hodnoty z databáze cloud nikdy nevidí. Podrobněji viz <a href="/bezpecnost">Bezpečnostní architektura</a>.</p>
+<h2 id="krok-1-stahnout-code-ethel-exe-code">Krok 1 – Stáhnout <code>Ethel.exe</code></h2>
+<p>Po objednávce dostanete odkaz na aktuální verzi. Soubor má cca 12 MB (Tauri/Rust, vše statické – žádné závislosti).</p>
+<p>Doporučené umístění: <strong>stejná složka jako <code>Helios.exe</code></strong> (typicky <code>C:\Helios\</code> nebo <code>C:\Program Files\Asseco\HELIOS iNuvio\</code>).</p>
+<h2 id="krok-2-spustit-code-ethel-exe-code-bez-parametru">Krok 2 – Spustit <code>Ethel.exe</code> bez parametrů</h2>
+<p>Bez parametrů <code>Ethel.exe</code> otevře instalační wizard:</p>
+<ol>
+<li><strong>Aktivační token</strong> (UUID, např. <code>e33de134-...</code>)</li>
+<li><strong>Přihlášení k SQL Serveru</strong> – SQL login s odpovídajícími právy, nebo Windows autentizace</li>
+<li><strong>Výběr databází</strong> Helios, kde má Ethel fungovat (lze i víc najednou)</li>
+<li><strong>Výběr uživatelů per databáze</strong> – kteří mají mít přístup (volitelně všichni)</li>
+<li><strong>Automatické vytvoření</strong>:<ul>
+<li>Tabulek <code>Tabx_Ethel_*</code> v cílových databázích (Log, Token, Deny, KB)</li>
+<li>SQL loginu pro Ethel agenta</li>
+<li>Práv na čtení a logování</li>
+</ul>
+</li>
+</ol>
+<p>Po dokončení wizard nabídne spuštění Heliosu.</p>
+<h2 id="krok-3-konfigurace-klavesove-zkratky-v-heliosu">Krok 3 – Konfigurace klávesové zkratky v Heliosu</h2>
+<p>Pro otevření Ethel z Heliosu se používá uživatelská akce:</p>
+<pre><code>Ethel.exe --database &lt;NázevDB&gt; --token &lt;token&gt;
+</code></pre>
+<p>S kontextem aktuálního záznamu (Ethel pak ví, na co se uživatel dívá):</p>
+<pre><code>Ethel.exe --database &lt;NázevDB&gt; --token &lt;token&gt; --id 123 --browse-id 456 --table TabDoklady
+</code></pre>
+<p>Klávesovou zkratku (doporučujeme <strong>CTRL+I</strong>) nastavíte standardní cestou: <strong>Možnosti → Konfigurace uživatelských zkratek</strong>.</p>
+<h2 id="krok-4-denylist-citlivych-dat">Krok 4 – Denylist citlivých dat</h2>
+<p>Než pustíte Ethel k uživatelům, doplňte do <code>Tabx_Ethel_Deny</code> zápisy pro tabulky, ke kterým Ethel nemá mít přístup:</p>
+<pre><code class="language-sql">-- Zakázat celou tabulku
+INSERT INTO Tabx_Ethel_Deny (TableName, ColumnName) VALUES (&#39;TabMzdyZam&#39;, &#39;*&#39;);
+
+-- Zakázat jen konkrétní sloupec
+INSERT INTO Tabx_Ethel_Deny (TableName, ColumnName) VALUES (&#39;TabCisZam&#39;, &#39;RodneCislo&#39;);
+</code></pre>
+<p>Standardně mimo znalostní bázi: Mzdy, Personalistika, Banka. Doplňte vlastní citlivé tabulky.</p>
+<h2 id="krok-5-test">Krok 5 – Test</h2>
+<p>Otevřete Helios, stiskněte CTRL+I, položte testovací dotaz:</p>
+<blockquote>
+<p>„Které tabulky vidíš?&quot;</p>
+</blockquote>
+<p>Ethel vrátí seznam tabulek, ke kterým má přístup. Ověřte, že tam nejsou tabulky z denylistu. Pokud ano, zkontrolujte <code>Tabx_Ethel_Deny</code>.</p>
+<h2 id="sitove-pozadavky">Síťové požadavky</h2>
+<table>
+<thead>
+<tr>
+<th>Cíl</th>
+<th>Port</th>
+<th>Účel</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>api.ethel.cz</code></td>
+<td>443 (HTTPS)</td>
+<td>Backend proxy → Claude API</td>
+</tr>
+<tr>
+<td><code>app.ethel.cz</code></td>
+<td>443 (HTTPS)</td>
+<td>Chat UI (load do WebView2)</td>
+</tr>
+</tbody></table>
+<p><strong>Firewall:</strong> při striktním whitelistu povolte výše uvedené domény z Helios serveru i klientských stanic.</p>
+<p><strong>Proxy:</strong> Ethel respektuje systémovou proxy konfiguraci Windows. Pro vlastní proxy nastavení se ozvěte.</p>
+<h2 id="aktualizace">Aktualizace</h2>
+<p>Průběžné aktualizace jsou součástí předplatného. Notifikaci dostanete e-mailem nebo přímo v chatu (banner „Nová verze k dispozici&quot;).</p>
+<p>Postup:</p>
+<ol>
+<li>Stáhnout nový <code>Ethel.exe</code> z odkazu v notifikaci.</li>
+<li>Přepsat starý exe (Helios při aktualizaci nemusí být zavřený, ale doporučujeme).</li>
+<li>Konfigurace v <code>Tabx_Ethel_*</code> zůstává – žádný re-install.</li>
+</ol>
+<h2 id="bezpecnostni-checklist-pred-produkcnim-nasazenim">Bezpečnostní checklist před produkčním nasazením</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <code>Tabx_Ethel_Deny</code> obsahuje všechny citlivé tabulky</li>
+<li><input disabled="" type="checkbox"> Aktivační token uložen na bezpečném místě (ne ve sdílené složce)</li>
+<li><input disabled="" type="checkbox"> HTTPS přístup na <code>api.ethel.cz</code> ověřen z Helios serveru (<code>curl -I https://api.ethel.cz/health</code> vrací HTTP 200)</li>
+<li><input disabled="" type="checkbox"> Test dotaz „Které tabulky vidíš?&quot; – odpověď neobsahuje denylistované tabulky</li>
+<li><input disabled="" type="checkbox"> <code>Tabx_Ethel_Log</code> zařazen do retenčního plánu (doporučeno 90 dnů)</li>
+<li><input disabled="" type="checkbox"> Klávesová zkratka v Heliosu funguje pro všechny schválené uživatele</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p><strong>Ethel se nepřipojí k SQL Serveru</strong>
+→ Zkontrolujte ODBC Driver 17/18 (<code>odbcad32.exe</code>). Ethel si driver vybere automaticky.</p>
+<p><strong>„Token expired&quot;</strong>
+→ Trial má 14 dní, placené tokeny podle předplatného. Pro obnovení napište na <a href="mailto:info@ethel.cz">info@ethel.cz</a>.</p>
+<p><strong>Helios neumí spustit <code>Ethel.exe</code></strong>
+→ Některé instalace blokují externí exe. Povolte přes uživatelskou akci „Externí program&quot; nebo v <code>Helios.INI</code>.</p>
+<p><strong>Firewall blokuje <code>api.ethel.cz</code></strong>
+→ <code>curl -I https://api.ethel.cz/health</code> z Helios serveru, mělo by vrátit HTTP 200.</p>
+<p><strong>Ethel odpovídá pomalu (&gt; 10 s)</strong>
+→ Zkontrolujte latenci na <code>api.ethel.cz</code> a velikost vaší databáze. Při velkém DDL je první dotaz pomalejší (cache warm-up), další jsou rychlé.</p>
+<p><strong>„Nerozumím dotazu&quot;</strong>
+→ Zformulujte konkrétněji nebo se zeptejte na strukturu: „Kde najdu informace o XY?&quot; Ethel pak vysvětlí, kterou tabulku použít.</p>
+<p>Více řešení viz <a href="/bezpecnost">stránku Bezpečnost</a>.</p>
+<hr>
+<p><strong>Další čtení:</strong></p>
+<ul>
+<li><a href="/docs/prvni-kroky">První kroky</a> – pošlete kolegům, kteří budou s Ethel pracovat</li>
+<li><a href="/bezpecnost">Stránka Bezpečnost</a> – verze pro IT manažery a ředitele</li>
+</ul>
+<p><strong>Kontakt:</strong> <a href="mailto:info@ethel.cz">info@ethel.cz</a></p>
+
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  <div class="footer-left">
+    &copy; 2026 Ethel &middot; Embedded Thinking for Helios
+    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a> &middot; <a href="/bezpecnost">Bezpečnost</a> &middot; <a href="/faq">FAQ</a> &middot; <a href="/docs/changelog">Co je nového</a>
+    <br><span style="font-size: 0.72rem;">Ethel není produktem společnosti Asseco Solutions. Helios a Helios Inuvio jsou registrované ochranné známky.</span>
+  </div>
+  <div class="footer-right">v1.0 &middot; brno, cz</div>
+</footer>
+
+<script>
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+</script>
+
+</body>
+</html>
