@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>První kroky – ET/HEL</title>
+<meta name="description" content="Jak začít s Ethel v Helios Inuvio: spuštění, příklady dotazů, tipy a klávesové zkratky.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Jakub Ševela">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="canonical" href="https://ethel.cz/docs/prvni-kroky/">
+
+<meta property="og:title" content="První kroky – ET/HEL">
+<meta property="og:description" content="Jak začít s Ethel v Helios Inuvio: spuštění, příklady dotazů, tipy a klávesové zkratky.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ethel.cz/docs/prvni-kroky/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Ethel">
+<meta property="og:image" content="https://ethel.cz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="První kroky – ET/HEL">
+<meta name="twitter:description" content="Jak začít s Ethel v Helios Inuvio: spuštění, příklady dotazů, tipy a klávesové zkratky.">
+<meta name="twitter:image" content="https://ethel.cz/og-image.png">
+
+<link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sora-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/docs/_assets/docs.css">
+</head>
+<body>
+
+<header>
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></a>
+  <div class="nav-links">
+    <a href="/#features">Co umí</a>
+    <a href="/#audience">Pro koho</a>
+    <a href="/#pricing">Cena</a>
+    <a href="/bezpecnost">Bezpečnost</a>
+    <a href="/docs/" class="nav-docs active">Návody</a>
+    <a href="/faq">FAQ</a>
+    <a href="/#contact" class="nav-cta">Kontakt</a>
+  </div>
+</nav>
+</header>
+
+<main class="docs-shell">
+
+  <aside class="docs-sidebar">
+    <div class="sidebar-heading">Návody</div>
+    <ul>
+      <li><a href="/docs/instalace/" >Instalace a správa</a></li>
+      <li><a href="/docs/prvni-kroky/" class="active">První kroky</a></li>
+      <li><a href="/docs/changelog/">Co je nového</a></li>
+    </ul>
+  </aside>
+
+  <article>
+    <div class="docs-breadcrumb">
+      <a href="/">ethel.cz</a><span class="sep">/</span><a href="/docs/">návody</a><span class="sep">/</span>první kroky
+    </div>
+    <div class="docs-content">
+<h1 id="navod-pro-uzivatele">Návod pro uživatele</h1>
+<p>Pro koncové uživatele v Heliosu. Tonalita praktická – co stisknout, co napsat, co se stane.</p>
+<h2 id="jak-ethel-spustit">Jak Ethel spustit</h2>
+<p>V Heliosu stiskněte <strong>CTRL+I</strong> (případně akci „Ethel&quot; v menu, podle toho, jak to nastavil váš IT). Otevře se chat okno – vypadá jako messenger, jen ho ovládáte z klávesnice nebo myší.</p>
+<h2 id="prvni-dotaz-ukazka">První dotaz – ukázka</h2>
+<p>Napište do chatu cokoliv, na co byste se ptali kolegy nebo si museli vyhledat v sestavě:</p>
+<blockquote>
+<p><strong>„Kolik faktur jsme vystavili minulý měsíc?&quot;</strong></p>
+</blockquote>
+<p>Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, kterou použila. Pokud něco vypadá divně, dejte palec dolů – pomůže nám to ladit.</p>
+<h2 id="10-prikladu-na-co-se-zeptat">10 příkladů, na co se zeptat</h2>
+<p>Vyzkoušejte, ať pochopíte rozsah:</p>
+<ol>
+<li><p><strong>„Kolik faktur jsme vystavili minulý měsíc?&quot;</strong>
+Rychlý přehled bez otevírání sestavy.</p>
+</li>
+<li><p><strong>„Které objednávky čekají na vyřízení déle než 14 dnů?&quot;</strong>
+Provozní filtr jedním dotazem.</p>
+</li>
+<li><p><strong>„Vysvětli mi sloupec <code>Datum_S</code> v tabulce <code>TabDokladyZbozi</code>.&quot;</strong>
+Význam polí v Heliosu – ideální pro nové kolegy.</p>
+</li>
+<li><p><strong>„Najdi všechny faktury od dodavatele ABC za poslední čtvrtletí.&quot;</strong>
+Filtrování přes přirozený jazyk.</p>
+</li>
+<li><p><strong>„Co znamená status doplňkového textu = 9?&quot;</strong>
+Vysvětlení číselníků a logiky Heliosu.</p>
+</li>
+<li><p><strong>„Která dodávka má největší marži za minulý rok?&quot;</strong>
+Agregace s pořadím – co byste hledali přes několik sestav.</p>
+</li>
+<li><p><strong>„Ukaž mi 10 největších objednávek z minulého týdne.&quot;</strong>
+Top-N přehledy.</p>
+</li>
+<li><p><strong>„Kolik máme aktivních klientů v segmentu B2B?&quot;</strong>
+Filtr přes podmnožinu zákazníků.</p>
+</li>
+<li><p><strong>„Vypiš tabulky, které obsahují informace o platbách.&quot;</strong>
+Když nevíte, kde data hledat – Ethel vám pomůže s orientací.</p>
+</li>
+<li><p><strong>„Vysvětli mi SQL dotaz, který jsi posledně použila.&quot;</strong>
+Pomáhá při učení SQL nebo když chcete pochopit, odkud čísla pochází.</p>
+</li>
+</ol>
+<h2 id="co-ethel-strong-neumi-strong-a-proc">Co Ethel <strong>NEUMÍ</strong> (a proč)</h2>
+<p>Ze záměru – bezpečnost vašich dat je priorita.</p>
+<ul>
+<li>❌ <strong>Mazat ani měnit data v Heliosu.</strong> Ethel umí pouze číst.</li>
+<li>❌ <strong>Přistupovat k datům mimo Helios</strong> (souborový systém, jiné aplikace, e-maily).</li>
+<li>❌ <strong>Spouštět vlastní SQL příkazy</strong> mimo schválený rozsah.</li>
+<li>❌ <strong>Pracovat s Mzdami, Personalistikou, Bankou.</strong> Tyto moduly nejsou ve znalostní bázi.</li>
+<li>❌ <strong>Posílat data ven</strong> bez vašeho vědomí. Více v <a href="/bezpecnost">Bezpečnost</a>.</li>
+</ul>
+<p>Pokud potřebujete akci typu „uprav záznam&quot;, Ethel vám pomůže s návrhem SQL, ale spuštění zůstane na vás – v Heliosu standardní cestou.</p>
+<h2 id="tipy-do-zacatku">Tipy do začátku</h2>
+<h3 id="piste-cesky-a-prirozene">Pište česky a přirozeně</h3>
+<p>„Najdi mi faktury od září&quot; funguje stejně dobře jako „Vrať mi všechny FA od 1. 9. po 30. 9.&quot;. Ethel rozumí oběma.</p>
+<h3 id="budte-konkretni-s-casem-a-kontextem">Buďte konkrétní s časem a kontextem</h3>
+<p>Čím přesněji, tím lepší odpověď:</p>
+<ul>
+<li>„Tento týden&quot; / „od minulého úterý&quot;</li>
+<li>„Od dodavatele XY&quot;</li>
+<li>„Pro středisko 110&quot;</li>
+<li>„V CZK&quot;, „v EUR&quot;</li>
+</ul>
+<h3 id="pouzijte-follow-up-otazky">Použijte follow-up otázky</h3>
+<p>Po první odpovědi pokračujte:</p>
+<blockquote>
+<p>„Kolik faktur jsme vystavili minulý měsíc?&quot; → „A z toho jen ty nezaplacené?&quot;</p>
+</blockquote>
+<p>Ethel si pamatuje kontext konverzace v rámci okna. Nemusíte opakovat předchozí podmínky.</p>
+<h3 id="kdyz-si-nejste-jisti-strukturou">Když si nejste jistí strukturou</h3>
+<p>„Které tabulky obsahují informace o platbách?&quot; vám pomůže pochopit, kde co najít. Pak se ptejte konkrétněji.</p>
+<h3 id="kdyz-ethel-rekne-ze-to-neumi">Když Ethel řekne, že to neumí</h3>
+<p>Doptá se nebo nabídne alternativu. Pokud opravdu nezná téma (typicky Mzdy), řekne to a navrhne, s čím vám může pomoct místo toho.</p>
+<h2 id="klavesove-zkratky-v-chatu">Klávesové zkratky v chatu</h2>
+<table>
+<thead>
+<tr>
+<th>Zkratka</th>
+<th>Akce</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Enter</code></td>
+<td>Odeslat zprávu</td>
+</tr>
+<tr>
+<td><code>Shift + Enter</code></td>
+<td>Nový řádek (víceřádkový dotaz)</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Zavřít chat</td>
+</tr>
+<tr>
+<td><code>↑</code> (v prázdném inputu)</td>
+<td>Editovat poslední dotaz</td>
+</tr>
+<tr>
+<td><code>Ctrl + L</code></td>
+<td>Vymazat konverzaci a začít znovu</td>
+</tr>
+</tbody></table>
+<h2 id="kdyz-ethel-odpovi-spatne">Když Ethel odpoví špatně</h2>
+<p>Stává se to – ne často, ale stává. Co dělat:</p>
+<ol>
+<li><strong>Zkontrolujte SQL</strong>, které Ethel zobrazila – často je rozdíl vidět rovnou (např. špatný filtr na datum).</li>
+<li><strong>Dejte palec dolů</strong> přímo v chatu. Pomáhá nám to ladit prompty.</li>
+<li><strong>Reformulujte dotaz</strong> konkrétněji nebo s upřesněním („myslel jsem vydané faktury, ne přijaté&quot;).</li>
+<li><strong>U kritických rozhodnutí</strong> (audit, daňové přiznání) považujte odpověď Ethel za prvotní vodítko a ověřte standardní cestou v sestavách Heliosu.</li>
+</ol>
+<h2 id="kdyz-nejaky-dotaz-funguje-prekvapive-dobre">Když nějaký dotaz funguje překvapivě dobře</h2>
+<p>Dejte palec nahoru a klidně napište do feedbacku, čím vás potěšilo. Pomáhá to nastavit, kterým směrem Ethel dál ladit.</p>
+<h2 id="neco-nefunguje-mate-napad">Něco nefunguje? Máte nápad?</h2>
+<p>Napište na <a href="mailto:info@ethel.cz">info@ethel.cz</a>. Reagujeme rychle, každá zpětná vazba pomáhá.</p>
+<hr>
+<p><strong>Další čtení:</strong></p>
+<ul>
+<li><a href="/docs/instalace">Instalace a správa</a> – pro IT (pošlete kolegovi z IT, pokud je problém s nasazením)</li>
+<li><a href="/bezpecnost">Bezpečnost</a> – pro ředitele a IT manažery</li>
+<li><a href="/docs/changelog">Changelog</a> – co se nově přidává</li>
+</ul>
+
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  <div class="footer-left">
+    &copy; 2026 Ethel &middot; Embedded Thinking for Helios
+    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a> &middot; <a href="/bezpecnost">Bezpečnost</a> &middot; <a href="/faq">FAQ</a> &middot; <a href="/docs/changelog">Co je nového</a>
+    <br><span style="font-size: 0.72rem;">Ethel není produktem společnosti Asseco Solutions. Helios a Helios Inuvio jsou registrované ochranné známky.</span>
+  </div>
+  <div class="footer-right">v1.0 &middot; brno, cz</div>
+</footer>
+
+<script>
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+</script>
+
+</body>
+</html>
