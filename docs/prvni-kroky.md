@@ -1,112 +1,87 @@
-# Návod pro uživatele
+# První kroky s Ethel
 
-Pro koncové uživatele v Heliosu. Tonalita praktická – co stisknout, co napsat, co se stane.
+Ethel je AI asistentka přímo v Heliosu. Zeptáte se přirozeně – jako kolegy – a ona data vyhledá, spočítá nebo vám je vysvětlí. Tady je vše, co potřebujete na začátek.
 
 ## Jak Ethel spustit
 
-V Heliosu stiskněte **CTRL+I** (případně akci „Ethel" v menu, podle toho, jak to nastavil váš IT). Otevře se chat okno – vypadá jako messenger, jen ho ovládáte z klávesnice nebo myší.
+V Heliosu stiskněte **CTRL+I** nebo zvolte akci **Ethel** v menu – obojí je po instalaci k dispozici automaticky, ve všech podporovaných přehledech. Otevře se okno chatu; ovládáte ho klávesnicí i myší, jako messenger.
 
-## První dotaz – ukázka
+## První dotaz
 
-Napište do chatu cokoliv, na co byste se ptali kolegy nebo si museli vyhledat v sestavě:
+Napište cokoliv, na co byste se jinak ptali kolegy nebo zdlouhavě hledali v sestavě:
 
 > **„Kolik máme faktur vydaných v roce 2026 a jaká je jejich celková hodnota?"**
 
-Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, kterou použila. Pokud něco vypadá divně, dejte palec dolů – pomůže nám to ladit.
+Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, který použila. Pokud něco vypadá divně, dejte palec dolů – pomáhá nám to ladit.
 
-## 10 příkladů, na co se zeptat
+## Na co se zeptat
 
-Vyzkoušejte, ať pochopíte rozsah:
+Pár dotazů z praxe, ať vidíte rozsah:
 
-1. **„Kolik faktur po splatnosti?"**
-   Provozní filtr jedním dotazem.
+- „Kolik faktur po splatnosti?"
+- „Top 10 nejprodávanějších položek za květen."
+- „Jakou mám skladovou zásobu na jednotlivých skladech?"
+- „Vypiš tržby po měsících a střediscích za rok 2026."
+- „Najdi top 10 zákazníků v segmentu maloobchod v roce 2026."
+- „Které položky mají největší marži?"
+- „Vypiš telefonní čísla a e-maily organizací."
+- „Porovnej tržby za Q1 2026 a Q1 2025 po měsících."
+- „Které aktivní položky nemají přiřazenou cenu v ceníku?"
+- „Shrň, co se dělo ve skladu za poslední rok – příjmy, výdeje, saldo."
 
-2. **„Top 10 nejprodávanějších položek za květen."**
-   Top-N přehledy.
-
-3. **„Jakou mám skladovou zásobu (celkem kusů) na jednotlivých skladech?"**
-   Stav skladu napříč všemi sklady najednou.
-
-4. **„Vypiš tržby po měsících a střediscích za rok 2026."**
-   Agregace ve dvou rozměrech – rovnou jako tabulka.
-
-5. **„Najdi mi top 10 zákazníků v segmentu maloobchod v roce 2026."**
-   Filtr přes podmnožinu zákazníků s pořadím.
-
-6. **„Které položky mají největší marži?"**
-   Co byste jinak skládali přes několik sestav.
-
-7. **„Vypiš telefonní čísla a e-maily organizací."**
-   Kontaktní údaje jedním dotazem.
-
-8. **„Porovnej mi tržby za Q1 2026 a Q1 2025 po měsících."**
-   Srovnání dvou období vedle sebe.
-
-9. **„Udělej mi přehled aktivních položek, které nemají přiřazenou cenu v ceníku."**
-   Kontrola úplnosti dat – Ethel najde díry, které byste ručně hledali dlouho.
-
-10. **„Shrň mi, co se dělo ve skladu za poslední rok – příjmy, výdeje, saldo."**
-    Souhrnná analytika jedním dotazem.
-
-## Co Ethel **NEUMÍ** (a proč)
+## Co Ethel **neumí** (a proč)
 
 Ze záměru – bezpečnost vašich dat je priorita.
 
 - ❌ **Mazat ani měnit data v Heliosu.** Ethel umí pouze číst.
 - ❌ **Přistupovat k datům mimo Helios** (souborový systém, jiné aplikace, e-maily).
-- ❌ **Spouštět vlastní SQL příkazy** mimo schválený rozsah.
-- ❌ **Pracovat s Mzdami, Personalistikou, Bankou.** Tyto moduly nejsou ve znalostní bázi.
-- ❌ **Posílat data ven** bez vašeho vědomí. Více v [Bezpečnost](/bezpecnost).
+- ❌ **Spouštět vlastní SQL** mimo schválený rozsah.
+- ❌ **Pracovat s Mzdami, Personalistikou a Bankou.** Tyto moduly nejsou ve znalostní bázi.
+- ❌ **Posílat data ven** bez vašeho vědomí. Více v sekci [Bezpečnost](/bezpecnost).
 
-Pokud potřebujete akci typu „uprav záznam", Ethel vám pomůže s návrhem SQL, ale spuštění zůstane na vás – v Heliosu standardní cestou.
+Ethel je tu na čtení a vyhledávání. Pro úpravy dat slouží standardní postupy v Heliosu.
 
 ## Tipy do začátku
 
 ### Pište česky a přirozeně
 
-„Najdi mi faktury od září" funguje stejně dobře jako „Vrať mi všechny FA od 1. 9. po 30. 9.". Ethel rozumí oběma.
+„Najdi mi faktury od září" funguje stejně dobře jako „Vrať mi všechny vydané faktury od 1. 9. do 30. 9.". Ethel rozumí obojímu.
 
-### Buďte konkrétní s časem a kontextem
+### Buďte konkrétní
 
-Čím přesněji, tím lepší odpověď:
+Čím přesnější dotaz, tím lepší odpověď. Přidejte třeba:
 
-- „Tento týden" / „od minulého úterý"
-- „Od dodavatele XY"
-- „Pro středisko 110"
-- „V CZK", „v EUR"
+- období – „za tento týden", „od minulého úterý"
+- subjekt – „od dodavatele [název]", „pro středisko 110"
+- měnu – „v CZK", „v EUR"
 
-### Použijte follow-up otázky
+### Ptejte se dál
 
-Po první odpovědi pokračujte:
+Po první odpovědi můžete pokračovat – Ethel si pamatuje kontext konverzace, takže nemusíte opakovat předchozí podmínky:
 
-> „Najdi mi top 10 zákazníků v segmentu maloobchod v roce 2026." → „Z jakých měst?"
+> „Najdi top 10 zákazníků v segmentu maloobchod v roce 2026." → „A z jakých jsou měst?"
 
-Ethel si pamatuje kontext konverzace v rámci okna. Nemusíte opakovat předchozí podmínky.
+### Když si nevíte rady
 
-### Když si nejste jistí strukturou
-
-„Které tabulky obsahují informace o platbách?" vám pomůže pochopit, kde co najít. Pak se ptejte konkrétněji.
-
-### Když Ethel řekne, že to neumí
-
-Doptá se nebo nabídne alternativu. Pokud opravdu nezná téma (typicky Mzdy), řekne to a navrhne, s čím vám může pomoct místo toho.
+Nevíte, jak se na něco zeptat? Napište to vlastními slovy. Když si Ethel nebude jistá, sama se doptá nebo nabídne, jak dotaz upřesnit.
 
 ## Když Ethel odpoví špatně
 
-Stává se to – ne často, ale stává. Co dělat:
+Stává se to – ne často, ale stává. Co s tím:
 
-1. **Zkontrolujte SQL**, které Ethel zobrazila – často je rozdíl vidět rovnou (např. špatný filtr na datum).
-2. **Dejte palec dolů** přímo v chatu. Pomáhá nám to ladit prompty.
-3. **Reformulujte dotaz** konkrétněji nebo s upřesněním („myslel jsem vydané faktury, ne přijaté").
-4. **U kritických rozhodnutí** (audit, daňové přiznání) považujte odpověď Ethel za prvotní vodítko a ověřte standardní cestou v sestavách Heliosu.
+1. **Klikněte na ikonu „?"** u odpovědi – Ethel vysvětlí, jak k výsledku došla a z jakých dat čerpá.
+2. **Zkontrolujte SQL,** který Ethel zobrazila – nesrovnalost je často vidět hned (např. špatný filtr na datum).
+3. **Dejte palec dolů** a napište, co bylo špatně – pomáhá nám to ladit.
+4. **Přeformulujte dotaz** konkrétněji („myslel jsem vydané faktury, ne přijaté").
+5. **U kritických rozhodnutí** (audit, daňové přiznání) berte odpověď jako prvotní vodítko a ověřte ji standardní cestou v sestavách Heliosu.
 
-## Když nějaký dotaz funguje překvapivě dobře
+## Když dotaz vyjde dobře
 
-Dejte palec nahoru a klidně napište do feedbacku, čím vás potěšilo. Pomáhá to nastavit, kterým směrem Ethel dál ladit.
+Dejte palec nahoru – pomáhá nám to poznat, které dotazy fungují dobře a kam Ethel dál rozvíjet.
 
 ## Něco nefunguje? Máte nápad?
 
-Napište na [info@ethel.cz](mailto:info@ethel.cz). Reagujeme rychle, každá zpětná vazba pomáhá.
+Napište na [info@ethel.cz](mailto:info@ethel.cz). Reagujeme rychle a každá zpětná vazba pomáhá.
 
 ---
 

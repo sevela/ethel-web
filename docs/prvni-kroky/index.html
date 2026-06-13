@@ -63,93 +63,70 @@
       <a href="/">ethel.cz</a><span class="sep">/</span><a href="/docs/">návody</a><span class="sep">/</span>první kroky
     </div>
     <div class="docs-content">
-<h1 id="navod-pro-uzivatele">Návod pro uživatele</h1>
-<p>Pro koncové uživatele v Heliosu. Tonalita praktická – co stisknout, co napsat, co se stane.</p>
+<h1 id="prvni-kroky-s-ethel">První kroky s Ethel</h1>
+<p>Ethel je AI asistentka přímo v Heliosu. Zeptáte se přirozeně – jako kolegy – a ona data vyhledá, spočítá nebo vám je vysvětlí. Tady je vše, co potřebujete na začátek.</p>
 <h2 id="jak-ethel-spustit">Jak Ethel spustit</h2>
-<p>V Heliosu stiskněte <strong>CTRL+I</strong> (případně akci „Ethel&quot; v menu, podle toho, jak to nastavil váš IT). Otevře se chat okno – vypadá jako messenger, jen ho ovládáte z klávesnice nebo myší.</p>
-<h2 id="prvni-dotaz-ukazka">První dotaz – ukázka</h2>
-<p>Napište do chatu cokoliv, na co byste se ptali kolegy nebo si museli vyhledat v sestavě:</p>
+<p>V Heliosu stiskněte <strong>CTRL+I</strong> nebo zvolte akci <strong>Ethel</strong> v menu – obojí je po instalaci k dispozici automaticky, ve všech podporovaných přehledech. Otevře se okno chatu; ovládáte ho klávesnicí i myší, jako messenger.</p>
+<h2 id="prvni-dotaz">První dotaz</h2>
+<p>Napište cokoliv, na co byste se jinak ptali kolegy nebo zdlouhavě hledali v sestavě:</p>
 <blockquote>
 <p><strong>„Kolik máme faktur vydaných v roce 2026 a jaká je jejich celková hodnota?&quot;</strong></p>
 </blockquote>
-<p>Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, kterou použila. Pokud něco vypadá divně, dejte palec dolů – pomůže nám to ladit.</p>
-<h2 id="10-prikladu-na-co-se-zeptat">10 příkladů, na co se zeptat</h2>
-<p>Vyzkoušejte, ať pochopíte rozsah:</p>
-<ol>
-<li><p><strong>„Kolik faktur po splatnosti?&quot;</strong>
-Provozní filtr jedním dotazem.</p>
-</li>
-<li><p><strong>„Top 10 nejprodávanějších položek za květen.&quot;</strong>
-Top-N přehledy.</p>
-</li>
-<li><p><strong>„Jakou mám skladovou zásobu (celkem kusů) na jednotlivých skladech?&quot;</strong>
-Stav skladu napříč všemi sklady najednou.</p>
-</li>
-<li><p><strong>„Vypiš tržby po měsících a střediscích za rok 2026.&quot;</strong>
-Agregace ve dvou rozměrech – rovnou jako tabulka.</p>
-</li>
-<li><p><strong>„Najdi mi top 10 zákazníků v segmentu maloobchod v roce 2026.&quot;</strong>
-Filtr přes podmnožinu zákazníků s pořadím.</p>
-</li>
-<li><p><strong>„Které položky mají největší marži?&quot;</strong>
-Co byste jinak skládali přes několik sestav.</p>
-</li>
-<li><p><strong>„Vypiš telefonní čísla a e-maily organizací.&quot;</strong>
-Kontaktní údaje jedním dotazem.</p>
-</li>
-<li><p><strong>„Porovnej mi tržby za Q1 2026 a Q1 2025 po měsících.&quot;</strong>
-Srovnání dvou období vedle sebe.</p>
-</li>
-<li><p><strong>„Udělej mi přehled aktivních položek, které nemají přiřazenou cenu v ceníku.&quot;</strong>
-Kontrola úplnosti dat – Ethel najde díry, které byste ručně hledali dlouho.</p>
-</li>
-<li><p><strong>„Shrň mi, co se dělo ve skladu za poslední rok – příjmy, výdeje, saldo.&quot;</strong>
-Souhrnná analytika jedním dotazem.</p>
-</li>
-</ol>
-<h2 id="co-ethel-strong-neumi-strong-a-proc">Co Ethel <strong>NEUMÍ</strong> (a proč)</h2>
+<p>Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, který použila. Pokud něco vypadá divně, dejte palec dolů – pomáhá nám to ladit.</p>
+<h2 id="na-co-se-zeptat">Na co se zeptat</h2>
+<p>Pár dotazů z praxe, ať vidíte rozsah:</p>
+<ul>
+<li>„Kolik faktur po splatnosti?&quot;</li>
+<li>„Top 10 nejprodávanějších položek za květen.&quot;</li>
+<li>„Jakou mám skladovou zásobu na jednotlivých skladech?&quot;</li>
+<li>„Vypiš tržby po měsících a střediscích za rok 2026.&quot;</li>
+<li>„Najdi top 10 zákazníků v segmentu maloobchod v roce 2026.&quot;</li>
+<li>„Které položky mají největší marži?&quot;</li>
+<li>„Vypiš telefonní čísla a e-maily organizací.&quot;</li>
+<li>„Porovnej tržby za Q1 2026 a Q1 2025 po měsících.&quot;</li>
+<li>„Které aktivní položky nemají přiřazenou cenu v ceníku?&quot;</li>
+<li>„Shrň, co se dělo ve skladu za poslední rok – příjmy, výdeje, saldo.&quot;</li>
+</ul>
+<h2 id="co-ethel-strong-neumi-strong-a-proc">Co Ethel <strong>neumí</strong> (a proč)</h2>
 <p>Ze záměru – bezpečnost vašich dat je priorita.</p>
 <ul>
 <li>❌ <strong>Mazat ani měnit data v Heliosu.</strong> Ethel umí pouze číst.</li>
 <li>❌ <strong>Přistupovat k datům mimo Helios</strong> (souborový systém, jiné aplikace, e-maily).</li>
-<li>❌ <strong>Spouštět vlastní SQL příkazy</strong> mimo schválený rozsah.</li>
-<li>❌ <strong>Pracovat s Mzdami, Personalistikou, Bankou.</strong> Tyto moduly nejsou ve znalostní bázi.</li>
-<li>❌ <strong>Posílat data ven</strong> bez vašeho vědomí. Více v <a href="/bezpecnost">Bezpečnost</a>.</li>
+<li>❌ <strong>Spouštět vlastní SQL</strong> mimo schválený rozsah.</li>
+<li>❌ <strong>Pracovat s Mzdami, Personalistikou a Bankou.</strong> Tyto moduly nejsou ve znalostní bázi.</li>
+<li>❌ <strong>Posílat data ven</strong> bez vašeho vědomí. Více v sekci <a href="/bezpecnost">Bezpečnost</a>.</li>
 </ul>
-<p>Pokud potřebujete akci typu „uprav záznam&quot;, Ethel vám pomůže s návrhem SQL, ale spuštění zůstane na vás – v Heliosu standardní cestou.</p>
+<p>Ethel je tu na čtení a vyhledávání. Pro úpravy dat slouží standardní postupy v Heliosu.</p>
 <h2 id="tipy-do-zacatku">Tipy do začátku</h2>
 <h3 id="piste-cesky-a-prirozene">Pište česky a přirozeně</h3>
-<p>„Najdi mi faktury od září&quot; funguje stejně dobře jako „Vrať mi všechny FA od 1. 9. po 30. 9.&quot;. Ethel rozumí oběma.</p>
-<h3 id="budte-konkretni-s-casem-a-kontextem">Buďte konkrétní s časem a kontextem</h3>
-<p>Čím přesněji, tím lepší odpověď:</p>
+<p>„Najdi mi faktury od září&quot; funguje stejně dobře jako „Vrať mi všechny vydané faktury od 1. 9. do 30. 9.&quot;. Ethel rozumí obojímu.</p>
+<h3 id="budte-konkretni">Buďte konkrétní</h3>
+<p>Čím přesnější dotaz, tím lepší odpověď. Přidejte třeba:</p>
 <ul>
-<li>„Tento týden&quot; / „od minulého úterý&quot;</li>
-<li>„Od dodavatele XY&quot;</li>
-<li>„Pro středisko 110&quot;</li>
-<li>„V CZK&quot;, „v EUR&quot;</li>
+<li>období – „za tento týden&quot;, „od minulého úterý&quot;</li>
+<li>subjekt – „od dodavatele [název]&quot;, „pro středisko 110&quot;</li>
+<li>měnu – „v CZK&quot;, „v EUR&quot;</li>
 </ul>
-<h3 id="pouzijte-follow-up-otazky">Použijte follow-up otázky</h3>
-<p>Po první odpovědi pokračujte:</p>
+<h3 id="ptejte-se-dal">Ptejte se dál</h3>
+<p>Po první odpovědi můžete pokračovat – Ethel si pamatuje kontext konverzace, takže nemusíte opakovat předchozí podmínky:</p>
 <blockquote>
-<p>„Najdi mi top 10 zákazníků v segmentu maloobchod v roce 2026.&quot; → „Z jakých měst?&quot;</p>
+<p>„Najdi top 10 zákazníků v segmentu maloobchod v roce 2026.&quot; → „A z jakých jsou měst?&quot;</p>
 </blockquote>
-<p>Ethel si pamatuje kontext konverzace v rámci okna. Nemusíte opakovat předchozí podmínky.</p>
-<h3 id="kdyz-si-nejste-jisti-strukturou">Když si nejste jistí strukturou</h3>
-<p>„Které tabulky obsahují informace o platbách?&quot; vám pomůže pochopit, kde co najít. Pak se ptejte konkrétněji.</p>
-<h3 id="kdyz-ethel-rekne-ze-to-neumi">Když Ethel řekne, že to neumí</h3>
-<p>Doptá se nebo nabídne alternativu. Pokud opravdu nezná téma (typicky Mzdy), řekne to a navrhne, s čím vám může pomoct místo toho.</p>
+<h3 id="kdyz-si-nevite-rady">Když si nevíte rady</h3>
+<p>Nevíte, jak se na něco zeptat? Napište to vlastními slovy. Když si Ethel nebude jistá, sama se doptá nebo nabídne, jak dotaz upřesnit.</p>
 <h2 id="kdyz-ethel-odpovi-spatne">Když Ethel odpoví špatně</h2>
-<p>Stává se to – ne často, ale stává. Co dělat:</p>
+<p>Stává se to – ne často, ale stává. Co s tím:</p>
 <ol>
-<li><strong>Zkontrolujte SQL</strong>, které Ethel zobrazila – často je rozdíl vidět rovnou (např. špatný filtr na datum).</li>
-<li><strong>Dejte palec dolů</strong> přímo v chatu. Pomáhá nám to ladit prompty.</li>
-<li><strong>Reformulujte dotaz</strong> konkrétněji nebo s upřesněním („myslel jsem vydané faktury, ne přijaté&quot;).</li>
-<li><strong>U kritických rozhodnutí</strong> (audit, daňové přiznání) považujte odpověď Ethel za prvotní vodítko a ověřte standardní cestou v sestavách Heliosu.</li>
+<li><strong>Klikněte na ikonu „?&quot;</strong> u odpovědi – Ethel vysvětlí, jak k výsledku došla a z jakých dat čerpá.</li>
+<li><strong>Zkontrolujte SQL,</strong> který Ethel zobrazila – nesrovnalost je často vidět hned (např. špatný filtr na datum).</li>
+<li><strong>Dejte palec dolů</strong> a napište, co bylo špatně – pomáhá nám to ladit.</li>
+<li><strong>Přeformulujte dotaz</strong> konkrétněji („myslel jsem vydané faktury, ne přijaté&quot;).</li>
+<li><strong>U kritických rozhodnutí</strong> (audit, daňové přiznání) berte odpověď jako prvotní vodítko a ověřte ji standardní cestou v sestavách Heliosu.</li>
 </ol>
-<h2 id="kdyz-nejaky-dotaz-funguje-prekvapive-dobre">Když nějaký dotaz funguje překvapivě dobře</h2>
-<p>Dejte palec nahoru a klidně napište do feedbacku, čím vás potěšilo. Pomáhá to nastavit, kterým směrem Ethel dál ladit.</p>
+<h2 id="kdyz-dotaz-vyjde-dobre">Když dotaz vyjde dobře</h2>
+<p>Dejte palec nahoru – pomáhá nám to poznat, které dotazy fungují dobře a kam Ethel dál rozvíjet.</p>
 <h2 id="neco-nefunguje-mate-napad">Něco nefunguje? Máte nápad?</h2>
-<p>Napište na <a href="mailto:info@ethel.cz">info@ethel.cz</a>. Reagujeme rychle, každá zpětná vazba pomáhá.</p>
+<p>Napište na <a href="mailto:info@ethel.cz">info@ethel.cz</a>. Reagujeme rychle a každá zpětná vazba pomáhá.</p>
 <hr>
 <p><strong>Další čtení:</strong></p>
 <ul>
