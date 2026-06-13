@@ -10,7 +10,7 @@ V Heliosu stiskněte **CTRL+I** (případně akci „Ethel" v menu, podle toho, 
 
 Napište do chatu cokoliv, na co byste se ptali kolegy nebo si museli vyhledat v sestavě:
 
-> **„Kolik faktur jsme vystavili minulý měsíc?"**
+> **„Kolik máme faktur vydaných v roce 2026 a jaká je jejich celková hodnota?"**
 
 Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, kterou použila. Pokud něco vypadá divně, dejte palec dolů – pomůže nám to ladit.
 
@@ -18,35 +18,35 @@ Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, kterou po
 
 Vyzkoušejte, ať pochopíte rozsah:
 
-1. **„Kolik faktur jsme vystavili minulý měsíc?"**
-   Rychlý přehled bez otevírání sestavy.
-
-2. **„Které objednávky čekají na vyřízení déle než 14 dnů?"**
+1. **„Kolik faktur po splatnosti?"**
    Provozní filtr jedním dotazem.
 
-3. **„Vysvětli mi sloupec `Datum_S` v tabulce `TabDokladyZbozi`."**
-   Význam polí v Heliosu – ideální pro nové kolegy.
-
-4. **„Najdi všechny faktury od dodavatele ABC za poslední čtvrtletí."**
-   Filtrování přes přirozený jazyk.
-
-5. **„Co znamená status doplňkového textu = 9?"**
-   Vysvětlení číselníků a logiky Heliosu.
-
-6. **„Která dodávka má největší marži za minulý rok?"**
-   Agregace s pořadím – co byste hledali přes několik sestav.
-
-7. **„Ukaž mi 10 největších objednávek z minulého týdne."**
+2. **„Top 10 nejprodávanějších položek za květen."**
    Top-N přehledy.
 
-8. **„Kolik máme aktivních klientů v segmentu B2B?"**
-   Filtr přes podmnožinu zákazníků.
+3. **„Jakou mám skladovou zásobu (celkem kusů) na jednotlivých skladech?"**
+   Stav skladu napříč všemi sklady najednou.
 
-9. **„Vypiš tabulky, které obsahují informace o platbách."**
-   Když nevíte, kde data hledat – Ethel vám pomůže s orientací.
+4. **„Vypiš tržby po měsících a střediscích za rok 2026."**
+   Agregace ve dvou rozměrech – rovnou jako tabulka.
 
-10. **„Vysvětli mi SQL dotaz, který jsi posledně použila."**
-    Pomáhá při učení SQL nebo když chcete pochopit, odkud čísla pochází.
+5. **„Najdi mi top 10 zákazníků v segmentu maloobchod v roce 2026."**
+   Filtr přes podmnožinu zákazníků s pořadím.
+
+6. **„Které položky mají největší marži?"**
+   Co byste jinak skládali přes několik sestav.
+
+7. **„Vypiš telefonní čísla a e-maily organizací."**
+   Kontaktní údaje jedním dotazem.
+
+8. **„Porovnej mi tržby za Q1 2026 a Q1 2025 po měsících."**
+   Srovnání dvou období vedle sebe.
+
+9. **„Udělej mi přehled aktivních položek, které nemají přiřazenou cenu v ceníku."**
+   Kontrola úplnosti dat – Ethel najde díry, které byste ručně hledali dlouho.
+
+10. **„Shrň mi, co se dělo ve skladu za poslední rok – příjmy, výdeje, saldo."**
+    Souhrnná analytika jedním dotazem.
 
 ## Co Ethel **NEUMÍ** (a proč)
 
@@ -79,7 +79,7 @@ Pokud potřebujete akci typu „uprav záznam", Ethel vám pomůže s návrhem S
 
 Po první odpovědi pokračujte:
 
-> „Kolik faktur jsme vystavili minulý měsíc?" → „A z toho jen ty nezaplacené?"
+> „Najdi mi top 10 zákazníků v segmentu maloobchod v roce 2026." → „Z jakých měst?"
 
 Ethel si pamatuje kontext konverzace v rámci okna. Nemusíte opakovat předchozí podmínky.
 
@@ -90,16 +90,6 @@ Ethel si pamatuje kontext konverzace v rámci okna. Nemusíte opakovat předchoz
 ### Když Ethel řekne, že to neumí
 
 Doptá se nebo nabídne alternativu. Pokud opravdu nezná téma (typicky Mzdy), řekne to a navrhne, s čím vám může pomoct místo toho.
-
-## Klávesové zkratky v chatu
-
-| Zkratka | Akce |
-|---|---|
-| `Enter` | Odeslat zprávu |
-| `Shift + Enter` | Nový řádek (víceřádkový dotaz) |
-| `Esc` | Zavřít chat |
-| `↑` (v prázdném inputu) | Editovat poslední dotaz |
-| `Ctrl + L` | Vymazat konverzaci a začít znovu |
 
 ## Když Ethel odpoví špatně
 
