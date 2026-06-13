@@ -19,6 +19,7 @@ Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, který po
 U každé odpovědi s daty najdete řádek ikon:
 
 - **?** – Ethel vysvětlí, jak k výsledku došla a z jakých dat čerpá
+- **Analyzovat výkon** – u definice databázového objektu (procedura, trigger, pohled) Ethel rozebere výkon jeho SQL kódu a poradí, kde zrychlit
 - **Kopírovat** – zkopíruje odpověď do schránky
 - **Stáhnout CSV** – uloží tabulku jako soubor pro Excel (jen u tabulkových výsledků)
 - **Zobrazit SQL** – ukáže dotaz, který Ethel použila
