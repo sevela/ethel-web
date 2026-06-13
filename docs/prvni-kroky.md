@@ -14,6 +14,16 @@ Napište cokoliv, na co byste se jinak ptali kolegy nebo zdlouhavě hledali v se
 
 Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, který použila. Pokud něco vypadá divně, dejte palec dolů – pomáhá nám to ladit.
 
+## Co s odpovědí můžete dělat
+
+U každé odpovědi s daty najdete řádek ikon:
+
+- **?** – Ethel vysvětlí, jak k výsledku došla a z jakých dat čerpá
+- **Kopírovat** – zkopíruje odpověď do schránky
+- **Stáhnout CSV** – uloží tabulku jako soubor pro Excel (jen u tabulkových výsledků)
+- **Zobrazit SQL** – ukáže dotaz, který Ethel použila
+- **Palec nahoru / dolů** – dáte nám vědět, jestli odpověď sedí
+
 ## Na co se zeptat
 
 Pár dotazů z praxe, ať vidíte rozsah:
