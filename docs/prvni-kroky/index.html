@@ -70,41 +70,41 @@
 <h2 id="prvni-dotaz-ukazka">První dotaz – ukázka</h2>
 <p>Napište do chatu cokoliv, na co byste se ptali kolegy nebo si museli vyhledat v sestavě:</p>
 <blockquote>
-<p><strong>„Kolik faktur jsme vystavili minulý měsíc?&quot;</strong></p>
+<p><strong>„Kolik máme faktur vydaných v roce 2026 a jaká je jejich celková hodnota?&quot;</strong></p>
 </blockquote>
 <p>Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, kterou použila. Pokud něco vypadá divně, dejte palec dolů – pomůže nám to ladit.</p>
 <h2 id="10-prikladu-na-co-se-zeptat">10 příkladů, na co se zeptat</h2>
 <p>Vyzkoušejte, ať pochopíte rozsah:</p>
 <ol>
-<li><p><strong>„Kolik faktur jsme vystavili minulý měsíc?&quot;</strong>
-Rychlý přehled bez otevírání sestavy.</p>
-</li>
-<li><p><strong>„Které objednávky čekají na vyřízení déle než 14 dnů?&quot;</strong>
+<li><p><strong>„Kolik faktur po splatnosti?&quot;</strong>
 Provozní filtr jedním dotazem.</p>
 </li>
-<li><p><strong>„Vysvětli mi sloupec <code>Datum_S</code> v tabulce <code>TabDokladyZbozi</code>.&quot;</strong>
-Význam polí v Heliosu – ideální pro nové kolegy.</p>
-</li>
-<li><p><strong>„Najdi všechny faktury od dodavatele ABC za poslední čtvrtletí.&quot;</strong>
-Filtrování přes přirozený jazyk.</p>
-</li>
-<li><p><strong>„Co znamená status doplňkového textu = 9?&quot;</strong>
-Vysvětlení číselníků a logiky Heliosu.</p>
-</li>
-<li><p><strong>„Která dodávka má největší marži za minulý rok?&quot;</strong>
-Agregace s pořadím – co byste hledali přes několik sestav.</p>
-</li>
-<li><p><strong>„Ukaž mi 10 největších objednávek z minulého týdne.&quot;</strong>
+<li><p><strong>„Top 10 nejprodávanějších položek za květen.&quot;</strong>
 Top-N přehledy.</p>
 </li>
-<li><p><strong>„Kolik máme aktivních klientů v segmentu B2B?&quot;</strong>
-Filtr přes podmnožinu zákazníků.</p>
+<li><p><strong>„Jakou mám skladovou zásobu (celkem kusů) na jednotlivých skladech?&quot;</strong>
+Stav skladu napříč všemi sklady najednou.</p>
 </li>
-<li><p><strong>„Vypiš tabulky, které obsahují informace o platbách.&quot;</strong>
-Když nevíte, kde data hledat – Ethel vám pomůže s orientací.</p>
+<li><p><strong>„Vypiš tržby po měsících a střediscích za rok 2026.&quot;</strong>
+Agregace ve dvou rozměrech – rovnou jako tabulka.</p>
 </li>
-<li><p><strong>„Vysvětli mi SQL dotaz, který jsi posledně použila.&quot;</strong>
-Pomáhá při učení SQL nebo když chcete pochopit, odkud čísla pochází.</p>
+<li><p><strong>„Najdi mi top 10 zákazníků v segmentu maloobchod v roce 2026.&quot;</strong>
+Filtr přes podmnožinu zákazníků s pořadím.</p>
+</li>
+<li><p><strong>„Které položky mají největší marži?&quot;</strong>
+Co byste jinak skládali přes několik sestav.</p>
+</li>
+<li><p><strong>„Vypiš telefonní čísla a e-maily organizací.&quot;</strong>
+Kontaktní údaje jedním dotazem.</p>
+</li>
+<li><p><strong>„Porovnej mi tržby za Q1 2026 a Q1 2025 po měsících.&quot;</strong>
+Srovnání dvou období vedle sebe.</p>
+</li>
+<li><p><strong>„Udělej mi přehled aktivních položek, které nemají přiřazenou cenu v ceníku.&quot;</strong>
+Kontrola úplnosti dat – Ethel najde díry, které byste ručně hledali dlouho.</p>
+</li>
+<li><p><strong>„Shrň mi, co se dělo ve skladu za poslední rok – příjmy, výdeje, saldo.&quot;</strong>
+Souhrnná analytika jedním dotazem.</p>
 </li>
 </ol>
 <h2 id="co-ethel-strong-neumi-strong-a-proc">Co Ethel <strong>NEUMÍ</strong> (a proč)</h2>
@@ -131,42 +131,13 @@ Pomáhá při učení SQL nebo když chcete pochopit, odkud čísla pochází.</
 <h3 id="pouzijte-follow-up-otazky">Použijte follow-up otázky</h3>
 <p>Po první odpovědi pokračujte:</p>
 <blockquote>
-<p>„Kolik faktur jsme vystavili minulý měsíc?&quot; → „A z toho jen ty nezaplacené?&quot;</p>
+<p>„Najdi mi top 10 zákazníků v segmentu maloobchod v roce 2026.&quot; → „Z jakých měst?&quot;</p>
 </blockquote>
 <p>Ethel si pamatuje kontext konverzace v rámci okna. Nemusíte opakovat předchozí podmínky.</p>
 <h3 id="kdyz-si-nejste-jisti-strukturou">Když si nejste jistí strukturou</h3>
 <p>„Které tabulky obsahují informace o platbách?&quot; vám pomůže pochopit, kde co najít. Pak se ptejte konkrétněji.</p>
 <h3 id="kdyz-ethel-rekne-ze-to-neumi">Když Ethel řekne, že to neumí</h3>
 <p>Doptá se nebo nabídne alternativu. Pokud opravdu nezná téma (typicky Mzdy), řekne to a navrhne, s čím vám může pomoct místo toho.</p>
-<h2 id="klavesove-zkratky-v-chatu">Klávesové zkratky v chatu</h2>
-<table>
-<thead>
-<tr>
-<th>Zkratka</th>
-<th>Akce</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>Enter</code></td>
-<td>Odeslat zprávu</td>
-</tr>
-<tr>
-<td><code>Shift + Enter</code></td>
-<td>Nový řádek (víceřádkový dotaz)</td>
-</tr>
-<tr>
-<td><code>Esc</code></td>
-<td>Zavřít chat</td>
-</tr>
-<tr>
-<td><code>↑</code> (v prázdném inputu)</td>
-<td>Editovat poslední dotaz</td>
-</tr>
-<tr>
-<td><code>Ctrl + L</code></td>
-<td>Vymazat konverzaci a začít znovu</td>
-</tr>
-</tbody></table>
 <h2 id="kdyz-ethel-odpovi-spatne">Když Ethel odpoví špatně</h2>
 <p>Stává se to – ne často, ale stává. Co dělat:</p>
 <ol>
