@@ -1,151 +1,124 @@
-# Instalace Ethel
+# Instalace a správa Ethel
 
-Pro IT administrátory. Cíl: bezpečné nasazení do produkce za hodinu. Bez surovostí, bez magie – co se kde děje, je popsané.
+Pro IT administrátory. Cíl: bezpečné nasazení do produkce řádově za hodinu. Co se kde děje, je popsané – žádná magie.
 
 ## Předpoklady
 
 | Vyžadováno | Detail |
 |---|---|
-| Helios Inuvio | Aktuální verze (LTS i běžná). Pro Helios Easy/Green se ozvěte. |
-| MS SQL Server | 2016 nebo novější (testujeme až do 2022; 2025 viz [changelog](/docs/changelog)) |
-| ODBC Driver | 17 nebo 18 for SQL Server |
-| Práva na SQL | `sysadmin` nebo `db_owner` cílových databází (jednorázově pro instalaci) |
-| Přístup na server s Helios | Pro umístění `Ethel.exe` |
-| Síť | HTTPS výstup na `api.ethel.cz` a `app.ethel.cz` (port 443) – z Helios serveru i klientských stanic |
+| Helios iNuvio | Aktuální verze (LTS i běžná). Pro Helios Easy/Green se ozvěte. |
+| MS SQL Server | 2016 nebo novější |
+| ODBC Driver | Doporučeno 17 nebo 18 for SQL Server; Ethel si driver vybere automaticky (zvládne i SQL Server Native Client) |
+| Práva na SQL pro instalaci | `sysadmin` (jednorázově – instalace vytváří SQL login a registruje akce) |
+| Přístup na server s Heliosem | Pro umístění `Ethel.exe` |
+| Síť | HTTPS výstup na `proxy.ethel.cz` a `app.ethel.cz` (port 443) – z Helios serveru i klientských stanic |
 | Aktivační token | UUID, přijde e-mailem po objednávce nebo aktivaci trialu |
 
-## Architektura ve zkratce
+## Jak to funguje
 
 ```
 [Klient s Heliosem]
-        │
         │  CTRL+I → Ethel.exe (lokálně, Tauri/WebView2)
         │
-        ├──→ [SQL Server lokálně]   ← data nikdy neopouští server
+        ├──→ [SQL Server lokálně]   ← SQL se spouští tady, data nikdy neopustí server
         │
-        └──→ HTTPS → [api.ethel.cz]  ← jen metadata + dotaz uživatele
+        └──→ HTTPS → app.ethel.cz (chat UI) → proxy.ethel.cz (backend)
                           │
                           └──→ Claude API (Anthropic)
 ```
 
-**Princip:** SQL se generuje v cloudu, spouští se lokálně. Hodnoty z databáze cloud nikdy nevidí. Podrobněji viz [Bezpečnostní architektura](/bezpecnost).
+**Princip:** SQL se generuje v cloudu, ale spouští se **lokálně** na vašem SQL Serveru. Výsledky dotazu zůstávají u vás – cloud vidí jen dotaz uživatele a vygenerované SQL, nikdy hodnoty z databáze. Podrobně v [Bezpečnosti](/bezpecnost).
 
-## Krok 1 – Stáhnout `Ethel.exe`
+## Instalace
 
-Po objednávce dostanete odkaz na aktuální verzi. Soubor má cca 12 MB (Tauri/Rust, vše statické – žádné závislosti).
+### Krok 1 – Stáhnout a umístit `Ethel.exe`
 
-Doporučené umístění: **stejná složka jako `Helios.exe`** (typicky `C:\Helios\` nebo `C:\Program Files\Asseco\HELIOS iNuvio\`).
+Po objednávce dostanete odkaz na aktuální verzi. Soubor má cca 12 MB (jeden spustitelný soubor, bez závislostí). Umístěte ho do **stejné složky jako `Helios.exe`** (typicky `C:\Helios\` nebo `C:\Program Files\Asseco\HELIOS iNuvio\`).
 
-## Krok 2 – Spustit `Ethel.exe` bez parametrů
+### Krok 2 – Spustit průvodce instalací
 
-Bez parametrů `Ethel.exe` otevře instalační wizard:
+Spusťte `Ethel.exe` bez parametrů – otevře se průvodce:
 
-1. **Aktivační token** (UUID, např. `e33de134-...`)
-2. **Přihlášení k SQL Serveru** – SQL login s odpovídajícími právy, nebo Windows autentizace
-3. **Výběr databází** Helios, kde má Ethel fungovat (lze i víc najednou)
-4. **Výběr uživatelů per databáze** – kteří mají mít přístup (volitelně všichni)
-5. **Automatické vytvoření**:
-   - Tabulek `Tabx_Ethel_*` v cílových databázích (Log, Token, Deny, KB)
-   - SQL loginu pro Ethel agenta
-   - Práv na čtení a logování
+1. **Aktivační token** a **přihlášení administrátora k SQL Serveru** (SQL login s dostatečnými právy, nebo Windows autentizace). Vyberete také, jak se má Ethel k databázi připojovat při provozu – přes vytvořený SQL login `ethel`, nebo Windows autentizací.
+2. **Výběr databází** Helios, kde má Ethel fungovat (i více najednou).
+3. **Výběr uživatelů** pro každou databázi – kdo bude mít k Ethel přístup.
+4. **Instalace** – průvodce sám vytvoří:
+   - tabulky `Tabx_Ethel_*` (konfigurace, log, denylist, uživatelé, kontext),
+   - SQL login `ethel` s právem **jen pro čtení** (a spuštění Ethel procedur),
+   - pomocné procedury a **akce v Heliosu** (viz Krok 3).
 
-Po dokončení wizard nabídne spuštění Heliosu.
+### Krok 3 – Hotovo
 
-## Krok 3 – Konfigurace klávesové zkratky v Heliosu
+Po instalaci jsou v podporovaných přehledech Heliosu automaticky akce **ET/HEL** pod zkratkou **CTRL+I**. **Nic ručně nenastavujete** – žádná konfigurace zkratek, žádná příkazová řádka. Průvodce nabídne spuštění Heliosu.
 
-Pro otevření Ethel z Heliosu se používá uživatelská akce:
+## Bezpečnost a přístup k datům
 
-```
-Ethel.exe --database <NázevDB> --token <token>
-```
+Bezpečnost je vynucena na několika vrstvách:
 
-S kontextem aktuálního záznamu (Ethel pak ví, na co se uživatel dívá):
+- **Jen pro čtení.** Ethel agent spustí pouze dotaz začínající `SELECT` nebo `WITH`. Cokoliv s `INSERT/UPDATE/DELETE/DROP/EXEC/…` (i schované přes `SELECT … INTO` nebo `sp_`/`xp_` procedury) je zablokováno ještě před odesláním na SQL Server.
+- **SQL login bez práv k zápisu.** Login `ethel` má `GRANT SELECT` – fyzicky nemůže měnit data.
+- **Předvyplněný denylist.** Tabulka `Tabx_Ethel_Deny` je už po instalaci naplněná citlivými oblastmi: **Mzdy, Personalistika, Banka, platební příkazy, uživatelská práva, souhlasy/GDPR, e-maily**. Ethel o nich negeneruje SQL.
+- **Whitelist v cloudu.** Backend pracuje jen se schválenými tabulkami znalostní báze – co v ní není (typicky výše uvedené moduly), neprojde.
+- **Limit výsledku** 500 řádků na dotaz.
 
-```
-Ethel.exe --database <NázevDB> --token <token> --id 123 --browse-id 456 --table TabDoklady
-```
+### Doplnění vlastních citlivých tabulek
 
-Klávesovou zkratku (doporučujeme **CTRL+I**) nastavíte standardní cestou: **Možnosti → Konfigurace uživatelských zkratek**.
-
-## Krok 4 – Denylist citlivých dat
-
-Než pustíte Ethel k uživatelům, doplňte do `Tabx_Ethel_Deny` zápisy pro tabulky, ke kterým Ethel nemá mít přístup:
+Základ je pokrytý. Když chcete zakázat další tabulku, přidejte záznam do `Tabx_Ethel_Deny`:
 
 ```sql
--- Zakázat celou tabulku
-INSERT INTO Tabx_Ethel_Deny (TableName, ColumnName) VALUES ('TabMzdyZam', '*');
-
--- Zakázat jen konkrétní sloupec
-INSERT INTO Tabx_Ethel_Deny (TableName, ColumnName) VALUES ('TabCisZam', 'RodneCislo');
+-- Zakázat celou tabulku všem uživatelům
+INSERT INTO Tabx_Ethel_Deny (LoginName, TableName) VALUES ('*', 'NazevTabulky');
 ```
 
-Standardně mimo znalostní bázi: Mzdy, Personalistika, Banka. Doplňte vlastní citlivé tabulky.
+## Ověření po instalaci
 
-## Krok 5 – Test
+Otevřete Helios, stiskněte **CTRL+I** a vyzkoušejte:
 
-Otevřete Helios, stiskněte CTRL+I, položte testovací dotaz:
-
-> „Které tabulky vidíš?"
-
-Ethel vrátí seznam tabulek, ke kterým má přístup. Ověřte, že tam nejsou tabulky z denylistu. Pokud ano, zkontrolujte `Tabx_Ethel_Deny`.
+1. **Že Ethel funguje** – položte reálný dotaz, např. „Kolik máme organizací v databázi?" Měla by přijít odpověď s číslem (ověří celý řetězec: akce → agent → SQL → odpověď).
+2. **Že denylist drží** – zeptejte se na zakázanou oblast, např. „Vypiš mzdy zaměstnanců." Ethel odpoví, že na mzdová data nemá přístup.
 
 ## Síťové požadavky
 
 | Cíl | Port | Účel |
 |---|---|---|
-| `api.ethel.cz` | 443 (HTTPS) | Backend proxy → Claude API |
-| `app.ethel.cz` | 443 (HTTPS) | Chat UI (load do WebView2) |
+| `app.ethel.cz` | 443 (HTTPS) | Chat UI (načtení do WebView2) |
+| `proxy.ethel.cz` | 443 (HTTPS) | Backend → Claude API |
 
-**Firewall:** při striktním whitelistu povolte výše uvedené domény z Helios serveru i klientských stanic.
+**Firewall:** při striktním whitelistu povolte obě domény z Helios serveru i klientských stanic. Dostupnost backendu ověříte přes `https://proxy.ethel.cz/health` (vrací HTTP 200 se stavem).
 
-**Proxy:** Ethel respektuje systémovou proxy konfiguraci Windows. Pro vlastní proxy nastavení se ozvěte.
+**Proxy:** Ethel respektuje systémovou proxy konfiguraci Windows.
 
-## Aktualizace
+## Správa a provoz
 
-Průběžné aktualizace jsou součástí předplatného. Notifikaci dostanete e-mailem nebo přímo v chatu (banner „Nová verze k dispozici").
+### Aktualizace
 
-Postup:
+Aktualizace probíhá výměnou souboru: stáhněte nový `Ethel.exe` a přepište stávající. Konfigurace v `Tabx_Ethel_*` zůstává – žádný re-install. (Helios při tom nemusí být zavřený, ale doporučujeme.)
 
-1. Stáhnout nový `Ethel.exe` z odkazu v notifikaci.
-2. Přepsat starý exe (Helios při aktualizaci nemusí být zavřený, ale doporučujeme).
-3. Konfigurace v `Tabx_Ethel_*` zůstává – žádný re-install.
+### Licence a platnost
 
-## Bezpečnostní checklist před produkčním nasazením
+Trial má 14 dní, placené tokeny dle předplatného. Po vypršení Ethel zobrazí hlášku o vypršení platnosti a odkáže na ethel.cz. Pro obnovu napište na [info@ethel.cz](mailto:info@ethel.cz).
 
-- [ ] `Tabx_Ethel_Deny` obsahuje všechny citlivé tabulky
-- [ ] Aktivační token uložen na bezpečném místě (ne ve sdílené složce)
-- [ ] HTTPS přístup na `api.ethel.cz` ověřen z Helios serveru (`curl -I https://api.ethel.cz/health` vrací HTTP 200)
-- [ ] Test dotaz „Které tabulky vidíš?" – odpověď neobsahuje denylistované tabulky
-- [ ] `Tabx_Ethel_Log` zařazen do retenčního plánu (doporučeno 90 dnů)
-- [ ] Klávesová zkratka v Heliosu funguje pro všechny schválené uživatele
+### Správa uživatelů
 
-## Troubleshooting
+Přidat nebo odebrat uživatele lze opětovným spuštěním průvodce (`Ethel.exe` bez parametrů) a úpravou výběru, nebo přímo v `Tabx_Ethel_Users`.
 
-**Ethel se nepřipojí k SQL Serveru**
-→ Zkontrolujte ODBC Driver 17/18 (`odbcad32.exe`). Ethel si driver vybere automaticky.
+## Řešení potíží
 
-**„Token expired"**
-→ Trial má 14 dní, placené tokeny podle předplatného. Pro obnovení napište na [info@ethel.cz](mailto:info@ethel.cz).
+**Ethel se nepřipojí k SQL Serveru** → Zkontrolujte dostupnost ODBC driveru (`odbcad32.exe`). Ethel si driver vybírá automaticky (17/18, případně Native Client).
 
-**Helios neumí spustit `Ethel.exe`**
-→ Některé instalace blokují externí exe. Povolte přes uživatelskou akci „Externí program" nebo v `Helios.INI`.
+**Vypršela platnost** → Trial má 14 dní. Pro obnovení napište na [info@ethel.cz](mailto:info@ethel.cz).
 
-**Firewall blokuje `api.ethel.cz`**
-→ `curl -I https://api.ethel.cz/health` z Helios serveru, mělo by vrátit HTTP 200.
+**Helios neumí spustit `Ethel.exe`** → Některé instalace blokují externí exe. Povolte přes uživatelskou akci „Externí program" nebo v `Helios.INI`.
 
-**Ethel odpovídá pomalu (> 10 s)**
-→ Zkontrolujte latenci na `api.ethel.cz` a velikost vaší databáze. Při velkém DDL je první dotaz pomalejší (cache warm-up), další jsou rychlé.
+**Firewall blokuje backend** → Ověřte `https://proxy.ethel.cz/health` z Helios serveru (má vrátit HTTP 200).
 
-**„Nerozumím dotazu"**
-→ Zformulujte konkrétněji nebo se zeptejte na strukturu: „Kde najdu informace o XY?" Ethel pak vysvětlí, kterou tabulku použít.
-
-Více řešení viz [stránku Bezpečnost](/bezpecnost).
+**Ethel odpovídá pomalu (> 10 s)** → Při prvním dotazu je odezva delší (zahřátí cache), další jsou rychlé. Zkontrolujte latenci na `proxy.ethel.cz` a velikost databáze.
 
 ---
 
 **Další čtení:**
 
 - [První kroky](/docs/prvni-kroky) – pošlete kolegům, kteří budou s Ethel pracovat
-- [Stránka Bezpečnost](/bezpecnost) – verze pro IT manažery a ředitele
+- [Bezpečnost](/bezpecnost) – verze pro IT manažery a ředitele
 
 **Kontakt:** [info@ethel.cz](mailto:info@ethel.cz)
