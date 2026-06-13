@@ -28,7 +28,7 @@
 
 ## 2. Vymezení služby
 
-2.1. **Služba ET/HEL** (dále také jen „**Služba**") je SaaS (Software as a Service) řešení v podobě AI asistentky pro ERP systém Helios iNuvio. Služba umožňuje Uživateli pokládat dotazy v přirozeném jazyce a získávat odpovědi s využitím AI modelu třetí strany (Anthropic Claude).
+2.1. **Služba ET/HEL** (dále také jen „**Služba**") je SaaS (Software as a Service) řešení v podobě AI asistentky pro ERP systém Helios Inuvio. Služba umožňuje Uživateli pokládat dotazy v přirozeném jazyce a získávat odpovědi s využitím AI modelu třetí strany (Anthropic Claude).
 
 2.2. Služba se skládá ze dvou částí:
 - **Klientská aplikace** (`Ethel.exe`) – instalovaná na infrastruktuře Uživatele, zajišťuje připojení k databázi Helios a UI
@@ -39,7 +39,7 @@
 - Strukturní informace databáze (názvy tabulek, sloupců, datové typy – DDL)
 - Vygenerovaný SQL dotaz pro audit
 
-2.4. Provozovatel **není výrobcem ani distributorem** ERP systému Helios iNuvio (výrobcem je Asseco Solutions, a.s.). ET/HEL je samostatný produkt třetí strany.
+2.4. Provozovatel **není výrobcem ani distributorem** ERP systému Helios Inuvio (výrobcem je Asseco Solutions, a.s.). ET/HEL je samostatný produkt třetí strany.
 
 ## 3. Uzavření smlouvy
 
