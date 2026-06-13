@@ -18,14 +18,6 @@ const SITE = 'https://ethel.cz';
 
 const PAGES = [
   {
-    slug: 'instalace',
-    src: 'instalace.md',
-    title: 'Instalace a správa',
-    breadcrumb: 'instalace',
-    description: 'Průvodce nasazením Ethel pro IT administrátory – předpoklady, wizard, klávesová zkratka, denylist, troubleshooting.',
-    activeKey: 'INSTALACE',
-  },
-  {
     slug: 'prvni-kroky',
     src: 'prvni-kroky.md',
     title: 'První kroky',

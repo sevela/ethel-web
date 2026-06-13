@@ -98,6 +98,5 @@ Napište na [info@ethel.cz](mailto:info@ethel.cz). Reagujeme rychle a každá zp
 
 **Další čtení:**
 
-- [Instalace a správa](/docs/instalace) – pro IT (pošlete kolegovi z IT, pokud je problém s nasazením)
 - [Bezpečnost](/bezpecnost) – pro ředitele a IT manažery
 - [Changelog](/docs/changelog) – co se nově přidává
