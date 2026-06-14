@@ -130,7 +130,7 @@
 
   <section class="sec-section" id="tldr">
     <h2>TL;DR</h2>
-    <p><strong>Vaše firemní data nikdy neopustí váš server.</strong> Ethel komunikuje s cloudem pouze textem vašeho dotazu a vygenerovaným SQL. Samotné výsledky – čísla, jména, ceny, kontakty, jakákoliv data z vaší databáze – zůstávají u vás. Cloud je nikdy nevidí.</p>
+    <p><strong>Vaše firemní data nikdy neopustí váš server.</strong> Ethel komunikuje s cloudem pouze textem vašeho dotazu a vygenerovaným SQL. Samotné výsledky – čísla, jména, ceny, kontakty, jakýkoliv obsah vašich datových tabulek – zůstávají u vás. Cloud je nikdy nevidí.</p>
     <p>Citlivé moduly Helios (Mzdy, Banka, Personalistika) jsou mimo dosah Ethel dvěma nezávislými vrstvami – nejsou ve znalostní bázi a jejich tabulky jsou blokované na úrovni serveru.</p>
   </section>
 
@@ -169,11 +169,12 @@
   <section class="sec-section" id="co-cloud-nevidi">
     <h2>Co cloud nevidí</h2>
     <ul>
-      <li>Žádné záznamy z vaší databáze.</li>
-      <li>Žádné výsledky SQL dotazů.</li>
-      <li>Žádná jména klientů, čísla faktur, ceny, kontakty.</li>
+      <li>Žádné záznamy (řádky) z vašich datových tabulek.</li>
+      <li>Žádné výsledky dotazů na vaše data – čísla, jména, ceny, kontakty.</li>
+      <li>Žádný obsah modulů Mzdy, Banka a Personalistika.</li>
     </ul>
-    <p>Jedna poctivost navíc: pokud uživatel do otázky sám napíše jméno nebo jiný údaj („kolik dluží Jan Novák"), je tento text součástí dotazu a do cloudu jde. <strong>Odpověď z databáze už ale nikdy.</strong></p>
+    <p>Jedna poctivost navíc: pokud uživatel do otázky sám napíše jméno nebo jiný údaj („kolik dluží Jan Novák"), je tento text součástí dotazu a do cloudu jde. <strong>Výsledek z vašich datových tabulek už ale nikdy.</strong></p>
+    <p>Druhá poctivost: když se zeptáte na <em>definici</em> objektu Heliosu – co dělá konkrétní procedura, jak je sestavená sestava, co znamená určitý sloupec – pošle Ethel do cloudu i výsledek tohoto dotazu (zdrojový kód objektu nebo popis schématu), aby vám ho srozumitelně vysvětlila. Jde o popis struktury Heliosu, <strong>nikdy o obsah vašich datových tabulek</strong> – ty jsou navíc blokované na úrovni serveru.</p>
   </section>
 
   <section class="sec-section" id="znalostni-baze">
@@ -236,8 +237,8 @@
 
     <h3>Co se neloguje</h3>
     <ul>
-      <li>Žádné výsledky SQL dotazů.</li>
-      <li>Žádná data z vaší databáze.</li>
+      <li>Žádné výsledky dotazů na vaše data.</li>
+      <li>Žádná data z vašich datových tabulek.</li>
     </ul>
 
     <p>Logy uchováváme po dobu nezbytnou pro provoz, debugging a zlepšování znalostní báze. Na vyžádání logy vaší instance kdykoliv smažeme.</p>
