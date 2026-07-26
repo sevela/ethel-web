@@ -13,8 +13,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const htmlPath = resolve(__dirname, 'og-image.html');
 const outPath = resolve(__dirname, '..', 'og-image.png');
 
-const CHROME = process.env.CHROME_PATH
-  || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const CHROME =
+  process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 
 const browser = await puppeteer.launch({
   executablePath: CHROME,

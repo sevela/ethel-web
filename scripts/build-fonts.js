@@ -13,20 +13,24 @@ const ROOT = path.resolve(__dirname, '..');
 const FONTS_DIR = path.join(ROOT, 'fonts');
 const OUT_CSS = path.join(__dirname, '_fonts.css');
 
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
-const QUERY = 'family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@700&display=swap';
+const UA =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+const QUERY =
+  'family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@700&display=swap';
 
 function get(url, headers = {}) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': UA, ...headers } }, (res) => {
-      if (res.statusCode === 301 || res.statusCode === 302) {
-        return resolve(get(res.headers.location, headers));
-      }
-      const chunks = [];
-      res.on('data', (c) => chunks.push(c));
-      res.on('end', () => resolve(Buffer.concat(chunks)));
-      res.on('error', reject);
-    }).on('error', reject);
+    https
+      .get(url, { headers: { 'User-Agent': UA, ...headers } }, (res) => {
+        if (res.statusCode === 301 || res.statusCode === 302) {
+          return resolve(get(res.headers.location, headers));
+        }
+        const chunks = [];
+        res.on('data', (c) => chunks.push(c));
+        res.on('end', () => resolve(Buffer.concat(chunks)));
+        res.on('error', reject);
+      })
+      .on('error', reject);
   });
 }
 
@@ -35,7 +39,7 @@ const css = (await get(`https://fonts.googleapis.com/css2?${QUERY}`)).toString('
 await fs.mkdir(FONTS_DIR, { recursive: true });
 
 // CSS is split into blocks separated by `/* subset */` comments.
-const blocks = css.split(/\/\*\s*([a-z\-]+)\s*\*\/\s*/i).filter(Boolean);
+const blocks = css.split(/\/\*\s*([a-z-]+)\s*\*\/\s*/i).filter(Boolean);
 
 const KEEP = new Set(['latin', 'latin-ext']);
 const out = [];

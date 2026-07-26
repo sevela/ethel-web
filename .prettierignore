@@ -1,0 +1,9 @@
+# Web je hlavne staticky obsah — Prettier drzime jen na JS/JSON nastrojich.
+# Generovane docs a rucne psany obsah (HTML/MD) nechavame byt.
+dist/
+node_modules/
+docs/
+*.min.js
+*.html
+*.md
+*.css

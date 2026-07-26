@@ -1,0 +1,23 @@
+#!/bin/sh
+# Ethel-web pre-commit hook — hlida cistotu JS nastroju pred kazdym commitem.
+# Spusti prettier + eslint na staged .js v scripts/. Kdyz najde problem,
+# commit zablokuje a poradi, jak to spravit.
+#
+# Instalace: sh scripts/hooks/install.sh
+
+files=$(git diff --cached --name-only --diff-filter=ACM -- 'scripts/*.js')
+[ -z "$files" ] && exit 0
+
+echo "$files" | xargs npx prettier --check || {
+    echo ""
+    echo "❌ prettier: kod neni naformatovany. Oprav: npm run format"
+    exit 1
+}
+
+echo "$files" | xargs npx eslint || {
+    echo ""
+    echo "❌ eslint nasel problemy. Oprav je (nebo npx eslint --fix)."
+    exit 1
+}
+
+exit 0

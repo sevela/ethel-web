@@ -3,9 +3,16 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build:docs": "node scripts/build-docs.js"
+    "build:docs": "node scripts/build-docs.js",
+    "format": "prettier --write \"scripts/**/*.js\" \"*.json\"",
+    "format:check": "prettier --check \"scripts/**/*.js\" \"*.json\"",
+    "lint": "eslint \"scripts/**/*.js\""
   },
   "devDependencies": {
-    "marked": "^18.0.3"
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "globals": "^17.7.0",
+    "marked": "^18.0.3",
+    "prettier": "^3.9.6"
   }
 }
