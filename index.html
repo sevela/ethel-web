@@ -32,7 +32,7 @@
 <meta name="twitter:image:alt" content="Ethel – AI asistentka pro Helios Inuvio">
 
 <!-- Performance hints -->
-<link rel="dns-prefetch" href="https://formspree.io">
+<link rel="dns-prefetch" href="https://gygwfcattcunbikootbx.supabase.co">
 <link rel="preload" href="/fonts/sora-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/sora-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -1324,6 +1324,10 @@
         <label class="form-label" for="f-msg">Zpráva</label>
         <textarea class="form-input" id="f-msg" placeholder="Na co se chcete zeptat?"></textarea>
       </div>
+      <div class="form-group" style="position:absolute;left:-9999px" aria-hidden="true">
+        <label class="form-label" for="f-mail">Mail</label>
+        <input class="form-input" type="text" id="f-mail" tabindex="-1" autocomplete="off">
+      </div>
       <button class="form-submit" id="form-submit">Odeslat</button>
       <div class="form-note">Žádný spam. Odpovídáme osobně.</div>
     </div>
@@ -1602,18 +1606,21 @@ document.querySelectorAll('.reveal').forEach(function(el) {
   var submitBtn = document.getElementById('form-submit');
   var currentType = 'trial';
 
+  // Společný backend pro všechny tři weby (feedco.cz, jakubsevela.cz, ethel.cz) —
+  // dřív dva samostatné Formspree formuláře (trial/demo), teď web-lead. Rozlišení
+  // trial/demo jde přes pole "type", server ho přidá jako řádek do zprávy.
+  var LEAD_ENDPOINT = 'https://gygwfcattcunbikootbx.supabase.co/functions/v1/web-lead';
+
   var config = {
     trial: {
       title: 'Vyzkoušet Ethel zdarma',
       subtitle: 'Vyplňte údaje a ozveme se vám do 24 hodin s aktivačním tokenem.',
-      showMsg: false,
-      endpoint: 'https://formspree.io/f/xgopkapp'
+      showMsg: false
     },
     demo: {
       title: 'Domluvit demo nebo nasazení',
       subtitle: 'Řekneme si o vašem Heliosu a ukážeme, co Ethel umí s vašimi daty.',
-      showMsg: true,
-      endpoint: 'https://formspree.io/f/xwvwolwj'
+      showMsg: true
     }
   };
 
@@ -1673,6 +1680,7 @@ document.querySelectorAll('.reveal').forEach(function(el) {
     var email = document.getElementById('f-email').value.trim();
     var company = document.getElementById('f-company').value.trim();
     var msg = document.getElementById('f-msg').value.trim();
+    var honeypot = document.getElementById('f-mail').value.trim();
 
     if (!name || !email) {
       if (!name) document.getElementById('f-name').focus();
@@ -1680,7 +1688,6 @@ document.querySelectorAll('.reveal').forEach(function(el) {
       return;
     }
 
-    var c = config[currentType] || config.trial;
     submitBtn.disabled = true;
     submitBtn.textContent = 'Odesílám…';
 
@@ -1688,22 +1695,29 @@ document.querySelectorAll('.reveal').forEach(function(el) {
       name: name,
       email: email,
       company: company || '–',
-      type: currentType
+      type: currentType,
+      message: msg,
+      mail: honeypot
     };
-    if (msg) data.message = msg;
 
-    fetch(c.endpoint, {
+    fetch(LEAD_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(data)
     }).then(function(res) {
-      if (res.ok) {
+      return res.json().catch(function () { return {}; }).then(function (payload) {
+        return { res: res, payload: payload };
+      });
+    }).then(function(result) {
+      if (result.res.ok && result.payload.ok) {
         form.classList.add('hidden');
         success.classList.remove('show');
         success.classList.add('show');
         if (typeof gtag === 'function') {
           gtag('event', 'lead_submit', { lead_type: currentType });
         }
+      } else if (result.res.status === 429) {
+        alert('Zpráv bylo za poslední chvíli víc. Zkuste to prosím za pár minut.');
       } else {
         alert('Něco se nepovedlo. Zkuste to prosím znovu.');
       }
@@ -1716,6 +1730,7 @@ document.querySelectorAll('.reveal').forEach(function(el) {
       document.getElementById('f-email').value = '';
       document.getElementById('f-company').value = '';
       document.getElementById('f-msg').value = '';
+      document.getElementById('f-mail').value = '';
     });
   });
 })();
