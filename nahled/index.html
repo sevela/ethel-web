@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ethel – AI asistentka pro Helios Inuvio · náhled</title>
-<meta name="description" content="Ethel je AI asistentka pro Helios Inuvio. Zeptejte se místo proklikávání – rozumí vašim datům, sestavám i SQL a odpovídá česky.">
+<meta name="description" content="Ethel je AI asistentka pro Helios Inuvio. Vyhledá informace, odpoví na otázky a provede úkoly přímo v Heliosu – česky, během sekund.">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex, nofollow">
 <meta name="author" content="Jakub Ševela">
@@ -357,6 +357,7 @@ a { color: inherit; }
 .safety-icon svg { width: 26px; height: 26px; fill: none; stroke: var(--accent-l); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .safety-box h2 { font-family: var(--font-display); font-weight: var(--weight-display); font-size: 26px; line-height: 1.25; margin-bottom: 14px; }
 .safety-box > p { color: var(--text-2); font-size: 16px; line-height: 1.7; max-width: 56ch; margin: 0 auto; }
+.safety-box > p + p { margin-top: 12px; }
 .safety-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
 .safety-pill {
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
@@ -445,6 +446,24 @@ a { color: inherit; }
 .pcard .pticks li + li { margin-top: 8px; }
 .pcard .pticks li::before { content: '+'; font-family: var(--font-mono); color: var(--accent-l); flex: 0 0 auto; }
 .pcard .pcta { margin-top: auto; padding-top: 26px; }
+/* modul uvnitř karty — modulární varianta price-card z manuálu (label v mono a --text-3, cena u modulu) */
+.pmodule {
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: var(--radius-btn); padding: 14px 16px; margin-top: 18px;
+}
+.pmodule-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.pmodule-label {
+  font-family: var(--font-mono); font-size: 11.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);
+}
+.pmodule-price { font-size: 14.5px; font-weight: 700; color: var(--text); white-space: nowrap; }
+.pmodule-text { font-size: 13px; line-height: 1.6; color: var(--text-2); margin-top: 8px; }
+.pmodule-promo {
+  display: inline-block; margin-top: 10px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-l); background: var(--accent-tint); border: 1px solid var(--accent-border);
+  border-radius: 6px; padding: 3px 9px;
+}
 .pcard .pcta .btn { width: 100%; justify-content: center; }
 .price-sub { margin-top: 22px; font-size: 14px; color: var(--text-3); }
 
@@ -614,8 +633,8 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
       <div class="chat-body" id="chat-body">
         <div class="chat-msg user">Kolik objednávek přišlo včera z e-shopu?</div>
         <div class="chat-msg bot">Včera přijato <span class="hl">47 objednávek</span> za <span class="hl">128 450 Kč</span> bez DPH. Tři z nich čekají na ruční párování – chcete je zobrazit?</div>
-        <div class="chat-msg user">Ne, díky. Radši řekni, jestli máme faktury hodně po splatnosti.</div>
-        <div class="chat-msg bot"><span class="hl">12 faktur</span> je po splatnosti víc než 30 dnů, celkem <span class="hl">847 200 Kč</span>. Největší dlužník je <strong>ABC Trade s.r.o.</strong> – 3 faktury za 312 000 Kč.</div>
+        <div class="chat-msg user">Super. A z té největší rovnou vystav fakturu.</div>
+        <div class="chat-msg bot">Připravila jsem fakturu k&nbsp;objednávce <span class="hl">OB-2026/0847</span>: <strong>ABC Trade s.r.o.</strong>, 3 položky, <span class="hl">45 200 Kč</span> bez DPH. Mám ji založit?</div>
         <div class="chat-typing" id="chat-typing"><span></span><span></span><span></span></div>
       </div>
       <div class="chat-input-bar">
@@ -627,7 +646,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
   <div class="wrap">
     <span class="hero-label">AI asistentka pro Helios Inuvio</span>
     <h1 class="lede">Rozumí vašemu Heliosu<br>a&nbsp;umí v&nbsp;něm pracovat</h1>
-    <p class="body-text"><strong>Ethel</strong> je AI asistentka pro Helios Inuvio. Odpoví na dotazy, vysvětlí sestavy a&nbsp;pomůže s&nbsp;orientací v&nbsp;datech – během sekund, česky.</p>
+    <p class="body-text"><strong>Ethel</strong> využívá znalosti z&nbsp;Heliosu i&nbsp;vaší firmy. Díky tomu dokáže vyhledávat informace, odpovídat na otázky i&nbsp;provádět úkoly přímo v&nbsp;Heliosu.</p>
     <ul class="btn-row">
       <li><a href="#" class="btn" role="button" data-modal="trial"><span>Vyzkoušet zdarma</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
       <li><a href="#how" class="btn ghost" role="button"><span>Jak to funguje</span></a></li>
@@ -655,6 +674,11 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
         <div class="value-arrow">↓</div>
         <div class="value-after">Odpovědi pro každého</div>
       </div>
+      <div class="value-item">
+        <div class="value-before">Rutinní úkony v Heliosu</div>
+        <div class="value-arrow">↓</div>
+        <div class="value-after">Jeden pokyn pro Ethel</div>
+      </div>
     </div>
   </div>
 </section>
@@ -664,32 +688,32 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
   <div class="wrap stack">
     <span class="mono-label">Funkce</span>
     <h2 class="section-title">AI asistentka, která rozumí<br>vašemu Helios Inuvio</h2>
-    <p class="section-intro">Ethel nenahrazuje váš ERP. Přidává mu inteligenci – nad daty, kódem i procesy. Vy se ptáte, ona odpovídá.</p>
+    <p class="section-intro">Ethel nenahrazuje váš ERP. Přidává mu inteligenci – nad daty, kódem i procesy. Vy se ptáte, ona odpovídá. Zadáte úkol, provede ho.</p>
     <div class="card-grid">
       <div class="card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2z"/></svg></div>
         <h3 class="card-title">Zeptejte se místo klikání</h3>
-        <p class="card-text">Nehledáte v sestavách. Prostě se zeptáte – Ethel odpoví česky, s&nbsp;reálnými daty z vašeho Heliosu. Žádné tabulky s tisíci řádky.</p>
+        <p class="card-text">Nehledáte v sestavách. Zeptáte se česky a&nbsp;Ethel odpoví s&nbsp;reálnými čísly z&nbsp;vašeho Heliosu. Žádné tabulky s tisíci řádky.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/><path d="m9 11 3 3L22 4"/></svg></div>
+        <h3 class="card-title">Provede úkoly přímo v Heliosu</h3>
+        <p class="card-text">Založí organizaci podle IČO, vygeneruje fakturu z&nbsp;objednávky nebo připraví objednávky pro zboží pod minimem skladu. Každý úkol běží podle předem připraveného scénáře a&nbsp;před zápisem vám Ethel ukáže rekapitulaci ke schválení.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15.5H6.5A2.5 2.5 0 0 0 4 21V5.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"/></svg></div>
+        <h3 class="card-title">Zná nápovědu Heliosu</h3>
+        <p class="card-text">Má načtenou kompletní dokumentaci Heliosu. Zeptáte se, jak udělat inventuru, a&nbsp;dostanete postup krok za krokem – bez hledání v&nbsp;nápovědě a&nbsp;bez školení. Nový kolega se zorientuje sám.</p>
       </div>
       <div class="card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2z"/></svg></div>
-        <h3 class="card-title">Vysvětlí Helios novým lidem</h3>
-        <p class="card-text">Nový kolega? Ethel vysvětlí sestavy, pole i&nbsp;logiku systému – bez školení. Ideální onboarding do Heliosu.</p>
+        <h3 class="card-title">Vysvětlí sestavy, sloupce i akce</h3>
+        <p class="card-text">Zeptejte se na uloženou sestavu, počítaný sloupec nebo externí akci – Ethel přečte definici v&nbsp;Heliosu a&nbsp;přeloží ji do běžné češtiny. Řekne vám, co sloupec počítá a&nbsp;odkud bere data.</p>
       </div>
       <div class="card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/></svg></div>
         <h3 class="card-title">Rozumí SQL v Heliosu</h3>
         <p class="card-text">Standardní procedury, views a&nbsp;triggery Helios Inuvio. Vysvětlí logiku a&nbsp;závislosti – bez čtení stovek řádků kódu.</p>
-      </div>
-      <div class="card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15.5H6.5A2.5 2.5 0 0 0 4 21V5.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"/></svg></div>
-        <h3 class="card-title">Vysvětlí vaše sestavy a sloupce</h3>
-        <p class="card-text">Zeptejte se na uloženou sestavu, počítaný sloupec nebo externí akci – Ethel přečte definici v&nbsp;Heliosu a&nbsp;přeloží ji do běžné češtiny. Bez listování v&nbsp;SQL.</p>
-      </div>
-      <div class="card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3 class="card-title">Data zůstávají u vás</h3>
-        <p class="card-text">AI vidí strukturu databáze, ale ne obsah vašich tabulek. Do cloudu jde text dotazu a vygenerované SQL – výsledky se spouštějí a skládají lokálně na vašem serveru.</p>
       </div>
       <div class="card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.4-6.5-10.5a6.5 6.5 0 0 1 13 0C18.5 15.6 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.3"/></svg></div>
@@ -715,12 +739,12 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
       <div class="card">
         <span class="mono-label audience-role">Operativa &amp; účetní</span>
         <h3 class="card-title">Konec ztrácení se v sestavách</h3>
-        <p class="card-text">Nechcete proklikávat složité sestavy. Stačí se zeptat a dostanete konkrétní odpověď – s&nbsp;čísly, kontextem a bez otevírání deseti oken.</p>
+        <p class="card-text">Stačí se zeptat a dostanete konkrétní odpověď – s&nbsp;čísly a&nbsp;bez otevírání deseti oken. A&nbsp;rutinu předáte Ethel: fakturu z&nbsp;objednávky vygeneruje, částky s&nbsp;vámi zkontroluje a&nbsp;po schválení zapíše.</p>
       </div>
       <div class="card">
         <span class="mono-label audience-role">IT &amp; Helios admin</span>
         <h3 class="card-title">Nemusíte vysvětlovat systém dokola</h3>
-        <p class="card-text">Ethel vysvětlí kolegům sestavy, sloupce i logiku systému za vás. A vám pomůže s kódem – rozebere procedury, views i triggery.</p>
+        <p class="card-text">Ethel vysvětlí kolegům sestavy, sloupce i logiku systému za vás. Vám pomůže s kódem – rozebere procedury, views i triggery. A&nbsp;firemní proces ji naučíte vlastním scénářem na míru.</p>
       </div>
     </div>
   </div>
@@ -757,8 +781,8 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
       <div class="step">
         <div class="step-num">04</div>
         <div class="step-content">
-          <h3>Ptejte se</h3>
-          <p>Otevřete Ethel přímo z Heliosu, napíšete otázku česky a&nbsp;dostanete odpověď s reálnými daty z&nbsp;vašeho Heliosu. Jako byste se ptali kolegy, který zná celý systém.</p>
+          <h3>Ptejte se – nebo zadejte úkol</h3>
+          <p>Otevřete Ethel přímo z Heliosu a&nbsp;píšete česky. Na otázku dostanete odpověď s&nbsp;reálnými daty, úkol Ethel připraví a&nbsp;provede až po vašem schválení. Jako byste se ptali kolegy, který zná celý systém.</p>
         </div>
       </div>
     </div>
@@ -778,9 +802,24 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
         <div class="usecase-benefit">↗ Bez otevírání jediné sestavy</div>
       </div>
       <div class="card">
+        <div class="usecase-q">„Založ organizaci s IČO 04997476."</div>
+        <div class="usecase-a">→ Dohledá firmu v ARESu, zkontroluje duplicity a po vašem schválení ji založí.</div>
+        <div class="usecase-benefit">↗ Ruční přepisování odpadá</div>
+      </div>
+      <div class="card">
+        <div class="usecase-q">„Vygeneruj fakturu z objednávky OB-2026/0847."</div>
+        <div class="usecase-a">→ Připraví převod dokladu, zrekapituluje částky a po schválení fakturu vytvoří.</div>
+        <div class="usecase-benefit">↗ Rutina na jednu větu</div>
+      </div>
+      <div class="card">
         <div class="usecase-q">„Na co se tady dívám? Co jsou tyhle sloupce?"</div>
         <div class="usecase-a">→ Ethel přečte definici sestavy a popíše každý sloupec, doplněk i filtr.</div>
         <div class="usecase-benefit">↗ Nový kolega se zorientuje sám</div>
+      </div>
+      <div class="card">
+        <div class="usecase-q">„Jak se v Heliosu dělá inventura?"</div>
+        <div class="usecase-a">→ Vytáhne postup z nápovědy Heliosu a provede vás krok za krokem.</div>
+        <div class="usecase-benefit">↗ Bez hledání v dokumentaci</div>
       </div>
       <div class="card">
         <div class="usecase-q">„Vysvětli mi proceduru hp_DosleObj_NovaHlavicka02."</div>
@@ -791,11 +830,6 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
         <div class="usecase-q">„Je v synchronizačních lozích něco divného?"</div>
         <div class="usecase-a">→ Analyzuje logy a upozorní na skoky v sekvenci, chybové stavy nebo výpadky.</div>
         <div class="usecase-benefit">↗ Bez ručního scrollování tisíců řádků</div>
-      </div>
-      <div class="card">
-        <div class="usecase-q">„Kolik faktur je po splatnosti víc než 30 dnů?"</div>
-        <div class="usecase-a">→ Odpověď s rozpadem podle odběratelů – jeden dotaz, kompletní přehled.</div>
-        <div class="usecase-benefit">↗ Bez jediného otevřeného reportu</div>
       </div>
       <div class="card">
         <div class="usecase-q">„Který zákazník měl letos největší obrat?"</div>
@@ -813,11 +847,12 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
       <div class="safety-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
       <h2>Vaše data nikam neodchází</h2>
       <p>Ethel zná strukturu vašeho Heliosu, ale nevidí reálná čísla. Do cloudu jde jen dotaz – odpověď se sestaví lokálně na vašem serveru. Žádné kopírování databáze, žádná rizika.</p>
+      <p>Zápisy do Heliosu běží výhradně přes připravené scénáře – každý smí spustit jedinou povolenou proceduru, každý krok schvalujete vy a o spuštění zůstává auditní záznam. Bez schválení Ethel nezapíše nic.</p>
       <div class="safety-pills">
         <span class="safety-pill">SQL běží u vás</span>
         <span class="safety-pill">Žádný export dat</span>
         <span class="safety-pill">Výsledky zůstávají u vás</span>
-        <span class="safety-pill">Vy rozhodujete</span>
+        <span class="safety-pill">Akce jen se schválením</span>
       </div>
       <p class="safety-note">Ethel je nezávislý nástroj. Není produktem společnosti Asseco Solutions a za jeho provoz zodpovídáme my.</p>
       <br>
@@ -849,8 +884,8 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
   <div class="wrap">
     <span class="mono-label">Ceník</span>
     <p class="pricing-intro" style="margin-top:14px">14 dní zdarma, bez omezení, bez karty.</p>
-    <h2 class="section-title" style="margin-top:14px">Dva tarify podle velikosti provozu</h2>
-    <p class="section-intro" style="margin-top:14px">Jedna cena pro běžný provoz, druhá pro firmy s více databázemi nebo širším týmem.</p>
+    <h2 class="section-title" style="margin-top:14px">Dva tarify a modul Akce</h2>
+    <p class="section-intro" style="margin-top:14px">Jedna cena pro běžný provoz, druhá pro firmy s více databázemi nebo širším týmem. Zápisy do Heliosu přidává modul Akce.</p>
 
     <div class="ptoggle" id="ptoggle">
       <button type="button" class="on" data-period="monthly">Měsíčně</button>
@@ -870,8 +905,17 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
           <li>1 databáze</li>
           <li>5 uživatelů v ceně</li>
           <li data-monthly="Každý další uživatel +249 Kč / měsíc" data-annual="Každý další uživatel +209 Kč / měsíc" id="pseat">Každý další uživatel +249 Kč / měsíc</li>
+          <li>Akce Založení organizace v ceně</li>
           <li>Průběžné aktualizace</li>
         </ul>
+        <div class="pmodule">
+          <div class="pmodule-head">
+            <span class="pmodule-label">Modul Akce</span>
+            <span class="pmodule-price"><span class="pswap" data-monthly="+990" data-annual="+825">+990</span> Kč / měsíc</span>
+          </div>
+          <p class="pmodule-text">Celý katalog akcí: realizace faktury, faktura z objednávky, objednávky pod minimum skladu, překlad popisů zboží, odeslání faktury e-mailem. Nové akce automaticky.</p>
+          <span class="pmodule-promo">Pro první klienty 6 měsíců v ceně</span>
+        </div>
         <div class="pcta"><a href="#" class="btn" role="button" data-modal="trial"><span>Vyzkoušet zdarma</span></a></div>
       </div>
 
@@ -884,6 +928,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
         <ul class="pticks">
           <li>Neomezený počet databází</li>
           <li>Neomezený počet uživatelů</li>
+          <li>Modul Akce v ceně</li>
           <li>Onboarding call + asistované nasazení</li>
           <li>Prioritní podpora</li>
           <li>Vlastní konfigurace promptů</li>
@@ -892,7 +937,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
       </div>
 
     </div>
-    <p class="price-sub">Early access – trial 14 dní zdarma bez omezení.</p>
+    <p class="price-sub">Scénář na míru: akci pro váš proces postavíme od 9 900 Kč jednorázově. Provoz vyžaduje aktivní modul Akce.</p>
   </div>
 </section>
 
@@ -1040,7 +1085,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
     if (!btn) return;
     var period = btn.getAttribute('data-period');
     toggle.querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b === btn); });
-    document.querySelectorAll('.pamount, .pper, #pseat').forEach(function (el) {
+    document.querySelectorAll('.pamount, .pper, #pseat, .pswap').forEach(function (el) {
       var val = el.getAttribute(period === 'annual' ? 'data-annual' : 'data-monthly');
       if (!val) return;
       if (el.classList.contains('pamount')) {
