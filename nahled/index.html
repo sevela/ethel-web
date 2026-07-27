@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ethel – AI asistentka pro Helios Inuvio · náhled</title>
+<meta name="description" content="Ethel je AI asistentka pro Helios Inuvio. Zeptejte se místo proklikávání – rozumí vašim datům, sestavám i SQL a odpovídá česky.">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="Jakub Ševela">
+
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/brand/dm-sans-latin-ext-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/brand/lora-latin-ext-400-normal.woff2" crossorigin>
+<link rel="stylesheet" href="/brand/fonts.css">
+
+<link rel="stylesheet" href="/brand/tokens.css">
+<style>
+/* ==========================================================================
+   ethel.cz — NÁHLED přepisu do brandu podle grafického manuálu (26. 7. 2026).
+   Barvy, typografie, komponenty a radiusy z /brand/tokens.css.
+   Texty jsou 1:1 ze živého webu; nový je jen hero text (od Jakuba) a vzhled.
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--content-max); margin: 0 auto; padding: 0 32px; }
+@media (max-width: 640px) { .wrap { padding: 0 20px; } }
+
+section { padding: 72px 0; scroll-margin-top: 56px; } /* sticky nav nesmí překrýt nadpis po skoku na kotvu */
+section + section { border-top: 1px solid var(--border); }
+.stack > * + * { margin-top: 20px; }
+
+a { color: inherit; }
+
+/* --- typografie ---------------------------------------------------------- */
+.wordmark-sm, .wordmark-ft {
+  font-family: var(--font-wordmark);
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--text);
+  line-height: 1;
+}
+.wordmark-sm { font-size: 26px; }
+.wordmark-ft { font-size: 22px; }
+/* tečka: bold 700 + 125 % velikosti — univerzální pravidlo z manuálu */
+.wordmark-sm .dot, .wordmark-ft .dot {
+  color: var(--accent); font-weight: 700; font-size: 1.25em; line-height: 1;
+}
+.wordmark-sm:hover .dot { color: var(--accent-l); }
+
+.lede {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  line-height: 1.2;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: 28px;
+  line-height: 1.25;
+}
+.card-title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-heading);
+  font-size: 19px;
+  line-height: 1.35;
+}
+.body-text { font-size: 17px; line-height: 1.7; color: var(--text-2); }
+.body-text strong { color: var(--text); font-weight: 700; }
+.section-intro { font-size: 16px; line-height: 1.7; color: var(--text-2); max-width: 68ch; }
+.card-text { font-size: 15px; line-height: 1.7; color: var(--text-2); }
+.note { font-size: 16px; line-height: 1.7; color: var(--text-2); font-style: italic; }
+.accent { color: var(--accent-l); font-style: normal; }
+.muted  { color: var(--text-3); font-style: normal; }
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent-l);
+}
+
+/* --- navigace ------------------------------------------------------------ */
+.topnav {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(10, 10, 12, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topnav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 16px; padding-bottom: 16px; }
+.topnav ul { list-style: none; display: flex; gap: 24px; align-items: center; overflow-x: auto; }
+.topnav ul a {
+  font-family: var(--font-mono);
+  font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-2); text-decoration: none; white-space: nowrap;
+  transition: color 0.15s;
+}
+.topnav ul a:hover { color: var(--text); }
+.topnav ul a.btn { color: var(--accent-l); padding: 8px 16px; font-size: 12.5px; }
+@media (max-width: 720px) {
+  .topnav .wrap { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .topnav ul { flex-wrap: wrap; gap: 12px 20px; max-width: 100%; }
+}
+
+/* --- tlačítka: tónované, 12 % podklad + 35 % border ---------------------- */
+.btn-row { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-body); font-weight: 500; font-size: 14.5px;
+  padding: 11px 20px; border-radius: var(--radius-btn);
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-l);
+  text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn:hover { background: var(--accent-tint-hover); border-color: var(--accent-border-hover); }
+.btn svg { width: 0.9em; height: 0.9em; fill: currentColor; flex: 0 0 auto; }
+.btn.ghost { background: transparent; border-color: var(--border-2); color: var(--text); }
+.btn.ghost:hover { background: transparent; border-color: rgba(255, 255, 255, 0.25); }
+
+/* --- hero: jednotná stavba podle manuálu (vzor jakubsevela.cz / feedco.cz)
+   chip label → dvouřádkový H1 → popisek → CTA, radiální záře vlevo nahoře.
+   Vizuál (chat okno) jako fotka na hubu: absolutně od konce textového
+   sloupce doprava, fade do pozadí. Text kotvený dole; sticky nav je v toku,
+   proto se její výška (65 px) odečítá. ------------------------------------- */
+#home {
+  position: relative; overflow: hidden;
+  min-height: calc(84vh - 65px); min-height: calc(84svh - 65px);
+  display: flex; align-items: flex-end;
+  padding: 105px 0 96px;
+}
+#home::before {
+  content: ''; position: absolute; top: -260px; left: -200px;
+  width: 680px; height: 680px;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.10) 0%, rgba(var(--accent-rgb), 0) 68%);
+  pointer-events: none;
+}
+#home .wrap { position: relative; z-index: 1; width: 100%; }
+.hero-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent-l);
+  padding: 0.34rem 0.9rem;
+  border: 1px solid var(--accent-border);
+  background: var(--accent-tint);
+  border-radius: var(--radius-btn);
+}
+/* vertikální rytmus přesně podle hubu: 1.6rem / 1.5rem / 2.3rem */
+#home .lede { font-size: clamp(2.3rem, 4.8vw, 3.8rem); line-height: 1.2; margin-top: 1.6rem; }
+#home .body-text { font-size: 1.05rem; max-width: 52ch; margin-top: 1.5rem; }
+#home .btn-row { margin-top: 2.3rem; }
+
+.hero-visual {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  left: max(46%, calc(50% - 60px));
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-visual .chat-window { width: min(88%, 460px); }
+/* fade jako u hero fotky na hubu — vizuál se rozpouští do pozadí vlevo a dole */
+.hero-visual::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to right, var(--bg) 0%, rgba(10,10,12,0.72) 18%, rgba(10,10,12,0) 46%),
+    linear-gradient(to top, var(--bg) 0%, rgba(10,10,12,0.30) 14%, rgba(10,10,12,0) 34%),
+    linear-gradient(to bottom, rgba(10,10,12,0.75) 0%, rgba(10,10,12,0) 16%);
+}
+@media (max-width: 1100px) {
+  #home { display: flex; flex-direction: column; min-height: 0; padding: 72px 0 64px; }
+  .hero-visual { position: static; order: 2; margin-top: 44px; }
+  .hero-visual .chat-window { width: 100%; max-width: 440px; margin: 0 auto; }
+  .hero-visual::after { display: none; }
+}
+
+/* --- chat okno (hero vizuál) — postavené na tokenech ---------------------- */
+.chat-window {
+  background: var(--card);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+.chat-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px; border-bottom: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+/* avatar = monogram e. — jeden textový běh, tečka na účaří (pravidlo z manuálu) */
+.chat-avatar {
+  width: 36px; height: 36px; flex: 0 0 36px;
+  border-radius: 10px;
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-wordmark); font-weight: 500; font-size: 17px;
+  color: var(--text); line-height: 1;
+}
+.chat-avatar .dot { color: var(--accent); font-weight: 700; font-size: 1.25em; line-height: 1; }
+.chat-header-name { font-size: 14.5px; font-weight: 500; line-height: 1.3; }
+.chat-header-status {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-3);
+  display: flex; align-items: center; gap: 6px; line-height: 1.4;
+}
+.chat-header-status .online-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+.chat-header-ctx {
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+  color: var(--text-2); background: var(--bg); padding: 4px 10px;
+  border-radius: 6px; border: 1px solid var(--border);
+}
+.chat-body { padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; min-height: 300px; }
+.chat-msg {
+  max-width: 84%; padding: 10px 14px; border-radius: var(--radius-card);
+  font-size: 14px; line-height: 1.55;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.chat-msg.visible { opacity: 1; transform: translateY(0); }
+.chat-msg.user {
+  align-self: flex-end;
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+  color: var(--accent-l);
+  border-bottom-right-radius: 4px;
+}
+.chat-msg.bot {
+  align-self: flex-start;
+  background: var(--bg-alt); border: 1px solid var(--border);
+  color: var(--text-2);
+  border-bottom-left-radius: 4px;
+}
+.chat-msg.bot strong { color: var(--text); font-weight: 500; }
+.chat-msg.bot .hl { color: var(--accent-l); }
+.chat-typing {
+  align-self: flex-start; padding: 12px 14px;
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: var(--radius-card); border-bottom-left-radius: 4px;
+  display: none; gap: 4px; align-items: center;
+}
+.chat-typing.visible { display: flex; }
+.chat-typing span {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--text-3);
+  animation: typingDot 1.4s ease-in-out infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingDot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+.chat-input-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px; border-top: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+.chat-input-fake {
+  flex: 1; padding: 9px 14px; border-radius: var(--radius-btn);
+  background: var(--bg); border: 1px solid var(--border-2);
+  font-size: 13.5px; color: var(--text-3);
+}
+.chat-send-btn {
+  width: 34px; height: 34px; border-radius: var(--radius-btn); flex: 0 0 34px;
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+}
+.chat-send-btn svg { width: 14px; height: 14px; fill: var(--accent-l); }
+@media (prefers-reduced-motion: reduce) {
+  .chat-msg { opacity: 1 !important; transform: none !important; }
+  .chat-typing { display: none !important; }
+}
+
+/* --- value strip ---------------------------------------------------------- */
+.value-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.value-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 26px 22px; text-align: center;
+}
+.value-before {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--text-3); text-decoration: line-through;
+}
+.value-arrow { font-family: var(--font-mono); color: var(--accent-l); font-size: 15px; margin: 6px 0; }
+.value-after { font-size: 16px; font-weight: 500; color: var(--text); }
+
+/* --- karty (funkce / pro koho / příklady) -------------------------------- */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 28px 26px;
+}
+.feature-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-btn);
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.feature-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--accent-l); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.card .card-title { margin-bottom: 8px; }
+.audience-role { margin-bottom: 12px; display: block; }
+
+/* --- jak to funguje ------------------------------------------------------- */
+.steps { max-width: 760px; }
+.step {
+  display: flex; gap: 28px; padding: 26px 0;
+  border-bottom: 1px solid var(--border); align-items: flex-start;
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--accent-l); min-width: 44px; padding-top: 3px;
+}
+.step-content h3 { font-family: var(--font-display); font-weight: var(--weight-heading); font-size: 18px; line-height: 1.35; margin-bottom: 5px; }
+.step-content p { color: var(--text-2); font-size: 15.5px; line-height: 1.65; }
+
+/* --- příklady ------------------------------------------------------------- */
+.usecase-q {
+  font-family: var(--font-mono); font-size: 13.5px;
+  color: var(--accent-l); line-height: 1.55; margin-bottom: 10px;
+}
+.usecase-a { font-size: 14.5px; color: var(--text-2); line-height: 1.6; }
+.usecase-benefit {
+  margin-top: 12px; font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 0.04em; color: var(--text-3);
+}
+
+/* --- bezpečnost ----------------------------------------------------------- */
+.safety-box {
+  background: var(--card);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-card);
+  padding: 48px 40px; text-align: center;
+  max-width: 820px; margin: 0 auto;
+}
+.safety-icon {
+  width: 54px; height: 54px; border-radius: 50%; margin: 0 auto 22px;
+  background: var(--accent-tint);
+  display: flex; align-items: center; justify-content: center;
+}
+.safety-icon svg { width: 26px; height: 26px; fill: none; stroke: var(--accent-l); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.safety-box h2 { font-family: var(--font-display); font-weight: var(--weight-display); font-size: 26px; line-height: 1.25; margin-bottom: 14px; }
+.safety-box > p { color: var(--text-2); font-size: 16px; line-height: 1.7; max-width: 56ch; margin: 0 auto; }
+.safety-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
+.safety-pill {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
+  padding: 6px 14px; border-radius: var(--radius-btn);
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+  color: var(--accent-l);
+}
+.safety-note { margin-top: 26px !important; font-size: 13.5px !important; color: var(--text-3) !important; font-style: italic; }
+.safety-more {
+  display: inline-block; margin-top: 18px;
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em;
+  color: var(--accent-l);
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;
+}
+.safety-more:hover { text-decoration-thickness: 2px; }
+@media (max-width: 640px) { .safety-box { padding: 32px 22px; } }
+
+/* --- autor + trust -------------------------------------------------------- */
+.author-box {
+  display: flex; align-items: center; gap: 32px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 34px 36px;
+  max-width: 760px; margin: 0 auto;
+}
+.author-photo {
+  width: 132px; height: 132px; border-radius: var(--radius-card); flex: 0 0 132px;
+  object-fit: cover; object-position: center 32%;
+  border: 1px solid var(--border-2);
+}
+.author-name { font-family: var(--font-display); font-weight: var(--weight-heading); font-size: 18px; }
+.author-role { margin: 4px 0 10px; display: block; }
+.author-text { font-size: 15px; color: var(--text-2); line-height: 1.65; }
+@media (max-width: 640px) { .author-box { flex-direction: column; text-align: center; padding: 28px 22px; } }
+
+.trust-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 34px 36px; text-align: center;
+  max-width: 760px; margin: 0 auto;
+}
+.trust-box h3 { font-family: var(--font-display); font-weight: var(--weight-heading); font-size: 19px; margin-bottom: 8px; }
+.trust-box p { color: var(--text-2); font-size: 15px; line-height: 1.7; max-width: 52ch; margin: 0 auto; }
+
+/* --- tarify: price-card z manuálu (sekce Tarify) -------------------------- */
+.pricing-intro { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; color: var(--accent-l); }
+.ptoggle {
+  display: inline-flex; gap: 4px; background: var(--bg-alt);
+  border: 1px solid var(--border-2); border-radius: var(--radius-btn);
+  padding: 4px; margin-top: 26px;
+}
+.ptoggle button {
+  font-family: var(--font-body); font-size: 13.5px; font-weight: 500; color: var(--text-2);
+  background: transparent; border: 1px solid transparent; border-radius: 6px;
+  padding: 7px 14px; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.ptoggle button.on {
+  background: var(--accent-tint); border-color: var(--accent-border); color: var(--accent-l);
+}
+.ptoggle .save { font-family: var(--font-mono); font-size: 11px; margin-left: 6px; }
+.pgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 760px; margin-top: 26px; }
+.pcard {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-card);
+  padding: 28px; display: flex; flex-direction: column; position: relative;
+}
+.pcard.featured { border-color: var(--accent-border); }
+.pcard .pbadge {
+  position: absolute; top: 18px; right: 18px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-l); background: var(--accent-tint); border: 1px solid var(--accent-border);
+  border-radius: 6px; padding: 3px 9px;
+}
+.pcard .ptier {
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-l);
+}
+.pcard .psub { font-size: 13.5px; line-height: 1.55; color: var(--text-2); margin-top: 7px; }
+.pcard .pamount {
+  font-family: var(--font-display); font-weight: var(--weight-display);
+  font-size: 38px; line-height: 1.1; letter-spacing: -0.01em; margin-top: 20px;
+}
+.pcard .pamount .pcur { font-size: 0.5em; color: var(--text-2); }
+.pcard .pper { font-size: 13px; color: var(--text-3); margin-top: 5px; }
+.pcard .pdiv { border: 0; border-top: 1px solid var(--border); margin: 20px 0 18px; }
+.pcard .pticks { list-style: none; }
+.pcard .pticks li { display: flex; gap: 10px; font-size: 14.5px; line-height: 1.6; color: var(--text-2); }
+.pcard .pticks li + li { margin-top: 8px; }
+.pcard .pticks li::before { content: '+'; font-family: var(--font-mono); color: var(--accent-l); flex: 0 0 auto; }
+.pcard .pcta { margin-top: auto; padding-top: 26px; }
+.pcard .pcta .btn { width: 100%; justify-content: center; }
+.price-sub { margin-top: 22px; font-size: 14px; color: var(--text-3); }
+
+/* --- závěrečné CTA -------------------------------------------------------- */
+.cta-section { text-align: center; }
+.cta-section .section-title { font-size: 32px; }
+.cta-section p { color: var(--text-2); font-size: 16.5px; margin-top: 12px; }
+.cta-section .btn-row { justify-content: center; margin-top: 28px; }
+
+/* --- modal (formulář — komponenta z manuálu, sekce Formulář) -------------- */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(10, 10, 12, 0.7); backdrop-filter: blur(6px);
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--card); border: 1px solid var(--border-2);
+  border-radius: var(--radius-card); padding: 34px 32px;
+  width: 100%; max-width: 460px; position: relative;
+  max-height: 90vh; overflow-y: auto;
+}
+.modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 34px; height: 34px; border-radius: var(--radius-btn);
+  background: transparent; border: 1px solid transparent;
+  color: var(--text-2); font-size: 20px; line-height: 1; cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.modal-close:hover { color: var(--text); border-color: var(--border-2); }
+.modal-title { font-family: var(--font-display); font-weight: var(--weight-heading); font-size: 21px; line-height: 1.3; }
+.modal-subtitle { font-size: 14.5px; color: var(--text-2); line-height: 1.6; margin-top: 8px; }
+.modal-form { margin-top: 22px; }
+.modal-form.hidden { display: none; }
+.form-group + .form-group { margin-top: 16px; }
+.form-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-2);
+  margin-bottom: 7px;
+}
+.form-label .opt { color: var(--text-3); text-transform: none; letter-spacing: 0.04em; }
+.form-input {
+  width: 100%; display: block;
+  font-family: var(--font-body); font-size: 15.5px; line-height: 1.6;
+  color: var(--text); background: var(--bg-alt);
+  border: 1px solid var(--border-2); border-radius: var(--radius-btn);
+  padding: 11px 14px; outline: 0;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+textarea.form-input { min-height: 110px; resize: vertical; }
+.form-input::placeholder { color: var(--text-3); }
+.form-input:hover { border-color: rgba(255, 255, 255, 0.22); }
+.form-input:focus-visible {
+  border-color: var(--accent-border-hover);
+  box-shadow: 0 0 0 3px var(--accent-tint);
+}
+.form-error {
+  display: none; gap: 12px; align-items: flex-start;
+  background: var(--danger-tint); border: 1px solid var(--danger-border);
+  border-radius: var(--radius-btn); padding: 12px 14px;
+  font-size: 14px; line-height: 1.55; color: var(--danger-l); margin-top: 16px;
+}
+.form-error.show { display: flex; }
+.form-error a { color: var(--danger-l); }
+.form-submit-row { margin-top: 22px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.form-note { font-size: 13.5px; color: var(--text-3); }
+.modal-success { display: none; margin-top: 22px; gap: 16px; align-items: flex-start; }
+.modal-success.show { display: flex; }
+.modal-success .fs-icon {
+  flex: 0 0 auto; width: 38px; height: 38px;
+  display: grid; place-items: center; border-radius: 50%;
+  background: var(--accent-tint); color: var(--accent-l);
+}
+.modal-success .fs-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.modal-success h3 { font-family: var(--font-display); font-weight: var(--weight-heading); font-size: 18px; line-height: 1.35; margin-bottom: 2px; }
+.modal-success p { font-size: 15px; line-height: 1.6; color: var(--text-2); }
+
+/* --- cookie banner -------------------------------------------------------- */
+.cookie-banner {
+  position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 40;
+  max-width: 560px; margin: 0 auto;
+  background: var(--card); border: 1px solid var(--border-2);
+  border-radius: var(--radius-card); padding: 20px 22px;
+  display: none; gap: 16px; flex-direction: column;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5);
+}
+.cookie-banner.show { display: flex; }
+.cookie-banner-text { font-size: 14px; line-height: 1.6; color: var(--text-2); }
+.cookie-banner-text strong { color: var(--text); font-weight: 500; }
+.cookie-banner-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.cookie-banner-actions .btn { padding: 8px 16px; font-size: 13.5px; }
+
+/* --- sdílená patička (shodná na všech třech webech) ----------------------- */
+footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: var(--bg-alt); }
+
+.ft-head { margin-bottom: 32px; }
+.ft-head .wordmark-ft { display: inline-block; }
+
+.ft-top { display: grid; grid-template-columns: 1.25fr 1.25fr 0.9fr; gap: 48px; align-items: start; }
+@media (max-width: 900px) { .ft-top { grid-template-columns: 1fr 1fr; gap: 36px; } .ft-tagline { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .ft-top { grid-template-columns: 1fr; gap: 32px; } }
+
+.ft-tagline, .ft-name { font-size: 15px; line-height: 1.5; }
+.ft-tagline { color: var(--text-2); max-width: 40ch; margin: 0; }
+
+.ft-col { display: flex; flex-direction: column; }
+.ft-col a {
+  display: block; text-decoration: none;
+  padding-left: 14px;
+  border-left: 1px solid var(--border);
+  transition: border-color 0.15s;
+}
+.ft-col a + a { margin-top: 14px; }
+.ft-col a:hover { border-left-color: var(--accent); }
+.ft-name { display: block; color: var(--text); transition: color 0.15s; }
+.ft-col a:hover .ft-name { color: var(--accent-l); }
+.ft-desc { display: block; margin-top: 2px; font-size: 14px; line-height: 1.5; color: var(--text-2); }
+
+.ft-col a.has-icon { display: flex; align-items: baseline; gap: 8px; }
+.ft-col .ico { width: 14px; height: 14px; fill: currentColor; flex: 0 0 auto; transform: translateY(2px); }
+.ft-col a.has-icon:hover .ico { color: var(--accent-l); }
+
+.ft-legal { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--border); }
+.ft-legal p { font-size: 14px; color: var(--text-2); }
+.ft-legal p + p { margin-top: 6px; }
+.ft-copy { margin-top: 12px !important; color: var(--text-3) !important; }
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" display="none" width="0" height="0">
+  <symbol id="arrow-right" viewBox="0 0 40 40">
+    <path d="M34.1,19.9c0,0.3-0.1,0.3-0.1,0.4L21.3,33.1c-0.1,0.1-0.1,0.1-0.4,0.1c-0.3,0-0.3-0.1-0.4-0.1L19,31.6 c-0.1-0.1-0.1-0.1-0.1-0.4s0.1-0.3,0.1-0.4l9.2-9.2H5.8c-0.1,0-0.2,0-0.2,0c0,0,0,0,0,0c-0.1-0.1-0.1-0.2-0.1-0.4v-2.5 c0-0.2,0.1-0.4,0.1-0.5c0,0,0.1,0,0.2,0h22.4L19,9c-0.1-0.1-0.1-0.1-0.1-0.4c0-0.3,0.1-0.3,0.1-0.4l1.5-1.5c0.1-0.1,0.1-0.1,0.4-0.1 c0.3,0,0.3,0.1,0.4,0.1L34,19.5C34,19.6,34.1,19.6,34.1,19.9z"/>
+  </symbol>
+</svg>
+
+<nav class="topnav">
+  <div class="wrap">
+    <a class="wordmark-sm" href="#home" aria-label="ethel.cz">ethel<span class="dot">.</span></a>
+    <ul>
+      <li><a href="#produkt">Produkt</a></li>
+      <li><a href="/bezpecnost">Bezpečnost</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/docs/">Nápověda</a></li>
+      <li><a href="#cena">Cena</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="#" class="btn" data-modal="trial">Vyzkoušet zdarma</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================== HERO ============================== -->
+<section id="home">
+  <div class="hero-visual" aria-hidden="true">
+    <div class="chat-window">
+      <div class="chat-header">
+        <div class="chat-avatar">e<span class="dot">.</span></div>
+        <div>
+          <div class="chat-header-name">Ethel</div>
+          <div class="chat-header-status"><span class="online-dot"></span> online</div>
+        </div>
+        <div class="chat-header-ctx">Objednávky</div>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="chat-msg user">Kolik objednávek přišlo včera z e-shopu?</div>
+        <div class="chat-msg bot">Včera přijato <span class="hl">47 objednávek</span> za <span class="hl">128 450 Kč</span> bez DPH. Tři z nich čekají na ruční párování – chcete je zobrazit?</div>
+        <div class="chat-msg user">Ne, díky. Radši řekni, jestli máme faktury hodně po splatnosti.</div>
+        <div class="chat-msg bot"><span class="hl">12 faktur</span> je po splatnosti víc než 30 dnů, celkem <span class="hl">847 200 Kč</span>. Největší dlužník je <strong>ABC Trade s.r.o.</strong> – 3 faktury za 312 000 Kč.</div>
+        <div class="chat-typing" id="chat-typing"><span></span><span></span><span></span></div>
+      </div>
+      <div class="chat-input-bar">
+        <div class="chat-input-fake">Napište dotaz…</div>
+        <div class="chat-send-btn"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <span class="hero-label">AI asistentka pro Helios Inuvio</span>
+    <h1 class="lede">Rozumí vašemu Heliosu<br>a&nbsp;umí v&nbsp;něm pracovat</h1>
+    <p class="body-text"><strong>Ethel</strong> je AI asistentka pro Helios Inuvio. Odpoví na dotazy, vysvětlí sestavy a&nbsp;pomůže s&nbsp;orientací v&nbsp;datech – během sekund, česky.</p>
+    <ul class="btn-row">
+      <li><a href="#" class="btn" role="button" data-modal="trial"><span>Vyzkoušet zdarma</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
+      <li><a href="#how" class="btn ghost" role="button"><span>Jak to funguje</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- =========================== VALUE STRIP ========================== -->
+<section>
+  <div class="wrap stack">
+    <h2 class="section-title">Co vám to reálně ušetří</h2>
+    <div class="value-items">
+      <div class="value-item">
+        <div class="value-before">10 kliků v sestavách</div>
+        <div class="value-arrow">↓</div>
+        <div class="value-after">1 otázka</div>
+      </div>
+      <div class="value-item">
+        <div class="value-before">Hledání v reportech</div>
+        <div class="value-arrow">↓</div>
+        <div class="value-after">Okamžitá odpověď</div>
+      </div>
+      <div class="value-item">
+        <div class="value-before">Závislost na IT oddělení</div>
+        <div class="value-arrow">↓</div>
+        <div class="value-after">Odpovědi pro každého</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FUNKCE ============================= -->
+<section id="produkt">
+  <div class="wrap stack">
+    <span class="mono-label">Funkce</span>
+    <h2 class="section-title">AI asistentka, která rozumí<br>vašemu Helios Inuvio</h2>
+    <p class="section-intro">Ethel nenahrazuje váš ERP. Přidává mu inteligenci – nad daty, kódem i procesy. Vy se ptáte, ona odpovídá.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2z"/></svg></div>
+        <h3 class="card-title">Zeptejte se místo klikání</h3>
+        <p class="card-text">Nehledáte v sestavách. Prostě se zeptáte – Ethel odpoví česky, s&nbsp;reálnými daty z vašeho Heliosu. Žádné tabulky s tisíci řádky.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2z"/></svg></div>
+        <h3 class="card-title">Vysvětlí Helios novým lidem</h3>
+        <p class="card-text">Nový kolega? Ethel vysvětlí sestavy, pole i&nbsp;logiku systému – bez školení. Ideální onboarding do Heliosu.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/></svg></div>
+        <h3 class="card-title">Rozumí SQL v Heliosu</h3>
+        <p class="card-text">Standardní procedury, views a&nbsp;triggery Helios Inuvio. Vysvětlí logiku a&nbsp;závislosti – bez čtení stovek řádků kódu.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15.5H6.5A2.5 2.5 0 0 0 4 21V5.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"/></svg></div>
+        <h3 class="card-title">Vysvětlí vaše sestavy a sloupce</h3>
+        <p class="card-text">Zeptejte se na uloženou sestavu, počítaný sloupec nebo externí akci – Ethel přečte definici v&nbsp;Heliosu a&nbsp;přeloží ji do běžné češtiny. Bez listování v&nbsp;SQL.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="card-title">Data zůstávají u vás</h3>
+        <p class="card-text">AI vidí strukturu databáze, ale ne obsah vašich tabulek. Do cloudu jde text dotazu a vygenerované SQL – výsledky se spouštějí a skládají lokálně na vašem serveru.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.4-6.5-10.5a6.5 6.5 0 0 1 13 0C18.5 15.6 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.3"/></svg></div>
+        <h3 class="card-title">Ví, kde v Heliosu stojíte</h3>
+        <p class="card-text">Otevřete Ethel přímo z&nbsp;dokladu nebo browsu – zná aktuální záznam a&nbsp;odpovídá v&nbsp;jeho kontextu. Žádné vysvětlování, na co se ptáte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PRO KOHO ============================ -->
+<section id="audience">
+  <div class="wrap stack">
+    <span class="mono-label">Pro koho to je</span>
+    <h2 class="section-title">Ethel pomáhá celé firmě</h2>
+    <p class="section-intro">Od managementu po IT – každý dostane odpovědi, které potřebuje.</p>
+    <div class="card-grid">
+      <div class="card">
+        <span class="mono-label audience-role">Management</span>
+        <h3 class="card-title">Rychlé odpovědi bez čekání na reporty</h3>
+        <p class="card-text">Chcete vědět, co se děje ve firmě – hned. Ethel vám řekne stav objednávek, faktur nebo skladu jedním dotazem. Bez čekání na IT.</p>
+      </div>
+      <div class="card">
+        <span class="mono-label audience-role">Operativa &amp; účetní</span>
+        <h3 class="card-title">Konec ztrácení se v sestavách</h3>
+        <p class="card-text">Nechcete proklikávat složité sestavy. Stačí se zeptat a dostanete konkrétní odpověď – s&nbsp;čísly, kontextem a bez otevírání deseti oken.</p>
+      </div>
+      <div class="card">
+        <span class="mono-label audience-role">IT &amp; Helios admin</span>
+        <h3 class="card-title">Nemusíte vysvětlovat systém dokola</h3>
+        <p class="card-text">Ethel vysvětlí kolegům sestavy, sloupce i logiku systému za vás. A vám pomůže s kódem – rozebere procedury, views i triggery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= JAK TO FUNGUJE ========================= -->
+<section id="how">
+  <div class="wrap stack">
+    <span class="mono-label">Jak to funguje</span>
+    <h2 class="section-title">Od instalace k prvnímu dotazu,<br>než dopijete kafe</h2>
+    <p class="section-intro">Žádná měsíční implementace. Ethel se napojí na váš Helios a&nbsp;začne odpovídat.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Spustíte instalační skript</h3>
+          <p>Jeden SQL skript nasadí Ethel do vaší databáze. Připojení k Heliosu přes standardní konfiguraci – bez zásahů do jádra systému.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Ethel se propojí s Heliosem</h3>
+          <p>Načte připojení k vaší databázi z&nbsp;konfigurace Heliosu. Standardní tabulky a&nbsp;procedury už zná – nemusí nic skenovat ani indexovat.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Zadáte aktivační token</h3>
+          <p>Token dostanete po objednávce. O AI se staráme my – žádné vlastní API klíče, žádné technické nastavování. Prostě to funguje.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Ptejte se</h3>
+          <p>Otevřete Ethel přímo z Heliosu, napíšete otázku česky a&nbsp;dostanete odpověď s reálnými daty z&nbsp;vašeho Heliosu. Jako byste se ptali kolegy, který zná celý systém.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PŘÍKLADY ============================ -->
+<section id="usecases">
+  <div class="wrap stack">
+    <span class="mono-label">Příklady</span>
+    <h2 class="section-title">Co se lidé ptají</h2>
+    <p class="section-intro">Reálné dotazy, reálné odpovědi – z vaší databáze, ne z internetu.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="usecase-q">„Kolik objednávek přišlo včera z e-shopu?"</div>
+        <div class="usecase-a">→ Včera 47 objednávek za 128 450 Kč. Tři čekají na ruční párování.</div>
+        <div class="usecase-benefit">↗ Bez otevírání jediné sestavy</div>
+      </div>
+      <div class="card">
+        <div class="usecase-q">„Na co se tady dívám? Co jsou tyhle sloupce?"</div>
+        <div class="usecase-a">→ Ethel přečte definici sestavy a popíše každý sloupec, doplněk i filtr.</div>
+        <div class="usecase-benefit">↗ Nový kolega se zorientuje sám</div>
+      </div>
+      <div class="card">
+        <div class="usecase-q">„Vysvětli mi proceduru hp_DosleObj_NovaHlavicka02."</div>
+        <div class="usecase-a">→ Rozebere logiku krok po kroku, identifikuje závislosti na dalších objektech.</div>
+        <div class="usecase-benefit">↗ Nemusíte číst 300 řádků SQL</div>
+      </div>
+      <div class="card">
+        <div class="usecase-q">„Je v synchronizačních lozích něco divného?"</div>
+        <div class="usecase-a">→ Analyzuje logy a upozorní na skoky v sekvenci, chybové stavy nebo výpadky.</div>
+        <div class="usecase-benefit">↗ Bez ručního scrollování tisíců řádků</div>
+      </div>
+      <div class="card">
+        <div class="usecase-q">„Kolik faktur je po splatnosti víc než 30 dnů?"</div>
+        <div class="usecase-a">→ Odpověď s rozpadem podle odběratelů – jeden dotaz, kompletní přehled.</div>
+        <div class="usecase-benefit">↗ Bez jediného otevřeného reportu</div>
+      </div>
+      <div class="card">
+        <div class="usecase-q">„Který zákazník měl letos největší obrat?"</div>
+        <div class="usecase-a">→ ABC Trade s.r.o. – obrat 4,2 mil. Kč, meziročně +18 %. Druhý je Delta Elektro s 3,1 mil. Kč.</div>
+        <div class="usecase-benefit">↗ Odpověď za sekundy místo ručního exportu</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== BEZPEČNOST =========================== -->
+<section>
+  <div class="wrap">
+    <div class="safety-box">
+      <div class="safety-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <h2>Vaše data nikam neodchází</h2>
+      <p>Ethel zná strukturu vašeho Heliosu, ale nevidí reálná čísla. Do cloudu jde jen dotaz – odpověď se sestaví lokálně na vašem serveru. Žádné kopírování databáze, žádná rizika.</p>
+      <div class="safety-pills">
+        <span class="safety-pill">SQL běží u vás</span>
+        <span class="safety-pill">Žádný export dat</span>
+        <span class="safety-pill">Výsledky zůstávají u vás</span>
+        <span class="safety-pill">Vy rozhodujete</span>
+      </div>
+      <p class="safety-note">Ethel je nezávislý nástroj. Není produktem společnosti Asseco Solutions a za jeho provoz zodpovídáme my.</p>
+      <br>
+      <a href="/bezpecnost" class="safety-more">Více o bezpečnosti →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== AUTOR ============================= -->
+<section>
+  <div class="wrap stack">
+    <div class="author-box">
+      <img class="author-photo" src="/images/jakub-sevela.jpg" alt="Jakub Ševela" loading="lazy">
+      <div>
+        <div class="author-name">Jakub Ševela</div>
+        <span class="mono-label author-role">Solution architect · Helios Inuvio</span>
+        <p class="author-text">Přes 18 let pracuju s&nbsp;Heliosem – implementace, integrace, SQL na denní bázi. Ethel stavím, protože vím, kolik času lidi tráví proklikáváním sestav. A&nbsp;věřím, že to jde líp.</p>
+      </div>
+    </div>
+    <div class="trust-box">
+      <h3>Nasazeno u reálných firem</h3>
+      <p>Ethel testujeme v ostrém provozu. Časem zde přibydou reference – zatím nás posuzujte podle kvality trialu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CENÍK ============================== -->
+<section id="cena">
+  <div class="wrap">
+    <span class="mono-label">Ceník</span>
+    <p class="pricing-intro" style="margin-top:14px">14 dní zdarma, bez omezení, bez karty.</p>
+    <h2 class="section-title" style="margin-top:14px">Dva tarify podle velikosti provozu</h2>
+    <p class="section-intro" style="margin-top:14px">Jedna cena pro běžný provoz, druhá pro firmy s více databázemi nebo širším týmem.</p>
+
+    <div class="ptoggle" id="ptoggle">
+      <button type="button" class="on" data-period="monthly">Měsíčně</button>
+      <button type="button" data-period="annual">Ročně <span class="save">−17 %</span></button>
+    </div>
+
+    <div class="pgrid">
+
+      <div class="pcard featured">
+        <div class="pbadge">Doporučujeme</div>
+        <div class="ptier">Standard</div>
+        <div class="psub">1 databáze · 5 uživatelů v ceně</div>
+        <div class="pamount" data-monthly="1 490" data-annual="1 242">1 490 <span class="pcur">Kč</span></div>
+        <div class="pper" data-monthly="měsíčně · bez DPH" data-annual="měsíčně při roční platbě · bez DPH">měsíčně · bez DPH</div>
+        <hr class="pdiv">
+        <ul class="pticks">
+          <li>1 databáze</li>
+          <li>5 uživatelů v ceně</li>
+          <li data-monthly="Každý další uživatel +249 Kč / měsíc" data-annual="Každý další uživatel +209 Kč / měsíc" id="pseat">Každý další uživatel +249 Kč / měsíc</li>
+          <li>Průběžné aktualizace</li>
+        </ul>
+        <div class="pcta"><a href="#" class="btn" role="button" data-modal="trial"><span>Vyzkoušet zdarma</span></a></div>
+      </div>
+
+      <div class="pcard">
+        <div class="ptier">Enterprise</div>
+        <div class="psub">Multi-DB provoz · neomezený tým</div>
+        <div class="pamount" data-monthly="4 990" data-annual="4 158">4 990 <span class="pcur">Kč</span></div>
+        <div class="pper" data-monthly="měsíčně · bez DPH" data-annual="měsíčně při roční platbě · bez DPH">měsíčně · bez DPH</div>
+        <hr class="pdiv">
+        <ul class="pticks">
+          <li>Neomezený počet databází</li>
+          <li>Neomezený počet uživatelů</li>
+          <li>Onboarding call + asistované nasazení</li>
+          <li>Prioritní podpora</li>
+          <li>Vlastní konfigurace promptů</li>
+        </ul>
+        <div class="pcta"><a href="#" class="btn ghost" role="button" data-modal="demo"><span>Domluvit nasazení</span></a></div>
+      </div>
+
+    </div>
+    <p class="price-sub">Early access – trial 14 dní zdarma bez omezení.</p>
+  </div>
+</section>
+
+<!-- =============================== CTA ============================== -->
+<section class="cta-section" id="cta">
+  <div class="wrap">
+    <h2 class="section-title">Přestaňte hledat v&nbsp;Heliosu</h2>
+    <p>Začněte se ptát. Ethel vám odpoví během sekund.</p>
+    <ul class="btn-row">
+      <li><a href="#" class="btn" role="button" data-modal="trial"><span>Vyzkoušet zdarma</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
+      <li><a href="#" class="btn ghost" role="button" data-modal="demo"><span>Domluvit demo</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================== MODAL ============================= -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Zavřít">×</button>
+    <div class="modal-title" id="modal-title">Vyzkoušet Ethel zdarma</div>
+    <div class="modal-subtitle" id="modal-subtitle">Vyplňte údaje a ozveme se vám do 24 hodin s aktivačním tokenem.</div>
+    <div class="modal-form" id="modal-form">
+      <div class="form-group">
+        <label class="form-label" for="f-name">Jméno</label>
+        <input class="form-input" type="text" id="f-name" placeholder="Jan Novák" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-email">E-mail</label>
+        <input class="form-input" type="email" id="f-email" placeholder="jan@firma.cz" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-company">Firma <span class="opt">— nepovinné</span></label>
+        <input class="form-input" type="text" id="f-company" placeholder="Název firmy">
+      </div>
+      <div class="form-group" id="msg-group" style="display:none">
+        <label class="form-label" for="f-msg">Zpráva</label>
+        <textarea class="form-input" id="f-msg" placeholder="Na co se chcete zeptat?"></textarea>
+      </div>
+      <div class="form-error" id="form-error">Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo napište rovnou na <a href="mailto:info@ethel.cz">info@ethel.cz</a>.</div>
+      <div class="form-submit-row">
+        <button class="btn" id="form-submit" type="button">Odeslat</button>
+        <p class="form-note">Žádný spam. Odpovídáme osobně.</p>
+      </div>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="fs-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 6.5"/></svg></div>
+      <div>
+        <h3>Díky!</h3>
+        <p>Ozveme se vám co nejdříve na zadaný e-mail.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================= COOKIE BANNER ========================== -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
+  <div class="cookie-banner-text">
+    <strong>Sušenky?</strong> Používáme jen analytické cookies (Google Analytics) k pochopení, jak vám web slouží.
+    Žádný marketing, žádný tracking napříč weby. Můžete je odmítnout – web bude fungovat normálně.
+  </div>
+  <div class="cookie-banner-actions">
+    <button class="btn" id="cookie-accept" type="button">Přijmout</button>
+    <button class="btn ghost" id="cookie-reject" type="button">Odmítnout</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     SDÍLENÁ PATIČKA — shodná na jakubsevela.cz / ethel.cz / feedco.cz.
+     Mění se jen wordmark, věta pod ním, prolinky a disclaimer.
+     Když tu něco měníš, propiš to do ostatních dvou rep.
+     ============================================================ -->
+<footer id="kontakt">
+  <div class="wrap">
+    <div class="ft-head">
+      <a class="wordmark-ft" href="#home">ethel<span class="dot">.</span></a>
+    </div>
+
+    <div class="ft-top">
+      <p class="ft-tagline">AI asistentka přímo v&nbsp;Heliosu. Co potřebujete, najde, vysvětlí nebo rovnou udělá.</p>
+
+      <nav class="ft-col" aria-label="Související weby">
+        <a href="https://jakubsevela.cz">
+          <span class="ft-name">jakubsevela.cz</span>
+          <span class="ft-desc">Doplňky, integrace a automatizace pro Helios&nbsp;Inuvio. Rutinu má dělat systém, ne&nbsp;lidé.</span>
+        </a>
+        <a href="https://feedco.cz">
+          <span class="ft-name">feedco.cz</span>
+          <span class="ft-desc">E-commerce konektor pro Helios&nbsp;Inuvio. Objednávky chodí samy a sklady sedí.</span>
+        </a>
+      </nav>
+
+      <nav class="ft-col" aria-label="Kontakt">
+        <a href="mailto:info@ethel.cz"><span class="ft-name">info@ethel.cz</span></a>
+        <a href="tel:+420774267301"><span class="ft-name" style="white-space:nowrap">+420&nbsp;774&nbsp;267&nbsp;301</span></a>
+        <a href="#" data-modal="trial"><span class="ft-name">Vyzkoušet zdarma</span></a>
+        <a href="https://linkedin.com/in/sevela" rel="me noopener" class="has-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.852 3.37-1.852 3.601 0 4.267 2.37 4.267 5.455v6.288zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg><span class="ft-name">LinkedIn</span></a>
+      </nav>
+    </div>
+
+    <div class="ft-legal">
+      <p>Mgr. Jakub Ševela &middot; Lidická 700/19, 602 00 Brno &middot; IČ: 75185628 &middot; DIČ: CZ8503274703</p>
+      <p>Ethel není produkt společnosti Asseco Solutions.</p>
+      <p class="ft-copy">&copy; 2026 Ethel &middot; Embedded Thinking for Helios</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== CHAT — přehraje konverzaci jednou (bez karuselu) ===== */
+(function () {
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var msgs = Array.prototype.slice.call(document.querySelectorAll('#chat-body .chat-msg'));
+  var typing = document.getElementById('chat-typing');
+  if (reduced) {
+    msgs.forEach(function (m) { m.classList.add('visible'); });
+    return;
+  }
+  var i = 0;
+  function next() {
+    if (i >= msgs.length) return;
+    var msg = msgs[i];
+    if (msg.classList.contains('bot')) {
+      typing.classList.add('visible');
+      setTimeout(function () {
+        typing.classList.remove('visible');
+        msg.classList.add('visible');
+        i++;
+        setTimeout(next, 1000);
+      }, 900);
+    } else {
+      msg.classList.add('visible');
+      i++;
+      setTimeout(next, 700);
+    }
+  }
+  setTimeout(next, 900);
+})();
+
+/* ===== TARIFY — přepínač měsíčně / ročně ===== */
+(function () {
+  var toggle = document.getElementById('ptoggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var period = btn.getAttribute('data-period');
+    toggle.querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b === btn); });
+    document.querySelectorAll('.pamount, .pper, #pseat').forEach(function (el) {
+      var val = el.getAttribute(period === 'annual' ? 'data-annual' : 'data-monthly');
+      if (!val) return;
+      if (el.classList.contains('pamount')) {
+        el.innerHTML = val + ' <span class="pcur">Kč</span>';
+      } else {
+        el.textContent = val;
+      }
+    });
+  });
+})();
+
+/* ===== MODAL ===== */
+(function () {
+  var overlay = document.getElementById('modal-overlay');
+  var closeBtn = document.getElementById('modal-close');
+  var form = document.getElementById('modal-form');
+  var success = document.getElementById('modal-success');
+  var titleEl = document.getElementById('modal-title');
+  var subtitleEl = document.getElementById('modal-subtitle');
+  var msgGroup = document.getElementById('msg-group');
+  var submitBtn = document.getElementById('form-submit');
+  var errorEl = document.getElementById('form-error');
+  var currentType = 'trial';
+
+  var config = {
+    trial: {
+      title: 'Vyzkoušet Ethel zdarma',
+      subtitle: 'Vyplňte údaje a ozveme se vám do 24 hodin s aktivačním tokenem.',
+      showMsg: false,
+      endpoint: 'https://formspree.io/f/xgopkapp'
+    },
+    demo: {
+      title: 'Domluvit demo nebo nasazení',
+      subtitle: 'Řekneme si o vašem Heliosu a ukážeme, co Ethel umí s vašimi daty.',
+      showMsg: true,
+      endpoint: 'https://formspree.io/f/xwvwolwj'
+    }
+  };
+
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest('[data-modal]');
+    if (!trigger) return;
+    e.preventDefault();
+    currentType = trigger.getAttribute('data-modal');
+    if (typeof gtag === 'function') {
+      gtag('event', 'cta_click', { cta_type: currentType, cta_location: trigger.className || 'unknown' });
+    }
+    var c = config[currentType] || config.trial;
+    titleEl.textContent = c.title;
+    subtitleEl.textContent = c.subtitle;
+    msgGroup.style.display = c.showMsg ? 'block' : 'none';
+    form.classList.remove('hidden');
+    success.classList.remove('show');
+    errorEl.classList.remove('show');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+  submitBtn.addEventListener('click', function () {
+    var name = document.getElementById('f-name').value.trim();
+    var email = document.getElementById('f-email').value.trim();
+    var company = document.getElementById('f-company').value.trim();
+    var msg = document.getElementById('f-msg').value.trim();
+
+    if (!name || !email) {
+      if (!name) document.getElementById('f-name').focus();
+      else document.getElementById('f-email').focus();
+      return;
+    }
+
+    var c = config[currentType] || config.trial;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Odesílám…';
+    errorEl.classList.remove('show');
+
+    var data = { name: name, email: email, company: company || '–', type: currentType };
+    if (msg) data.message = msg;
+
+    fetch(c.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function (res) {
+      if (res.ok) {
+        form.classList.add('hidden');
+        success.classList.add('show');
+        if (typeof gtag === 'function') {
+          gtag('event', 'lead_submit', { lead_type: currentType });
+        }
+      } else {
+        errorEl.classList.add('show');
+      }
+    }).catch(function () {
+      errorEl.classList.add('show');
+    }).finally(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Odeslat';
+      document.getElementById('f-name').value = '';
+      document.getElementById('f-email').value = '';
+      document.getElementById('f-company').value = '';
+      document.getElementById('f-msg').value = '';
+    });
+  });
+
+  /* Konverze: scroll na #cena (jednorázově za session) */
+  var pricingEl = document.getElementById('cena');
+  if (pricingEl && 'IntersectionObserver' in window) {
+    var pricingFired = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !pricingFired) {
+          pricingFired = true;
+          if (typeof gtag === 'function') gtag('event', 'pricing_view');
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(pricingEl);
+  }
+})();
+
+/* ===== COOKIE CONSENT + GA4 ===== */
+(function () {
+  var GA_MEASUREMENT_ID = 'G-5YGP0D48W7';
+  var CONSENT_KEY = 'ethel_cookie_consent_v1';
+
+  var banner = document.getElementById('cookie-banner');
+  var acceptBtn = document.getElementById('cookie-accept');
+  var rejectBtn = document.getElementById('cookie-reject');
+
+  function getConsent() {
+    try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; }
+  }
+  function setConsent(value) {
+    try { localStorage.setItem(CONSENT_KEY, value); } catch (e) { /* private mode */ }
+  }
+  function hideBanner() {
+    if (banner) banner.classList.remove('show');
+  }
+  function loadGA() {
+    if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
+    if (window._ethelGaLoaded) return;
+    window._ethelGaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_MEASUREMENT_ID);
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+  }
+
+  var existing = getConsent();
+  if (existing === 'accepted') {
+    loadGA();
+  } else if (existing !== 'rejected' && banner) {
+    setTimeout(function () { banner.classList.add('show'); }, 1200);
+  }
+
+  if (acceptBtn) acceptBtn.addEventListener('click', function () {
+    setConsent('accepted');
+    hideBanner();
+    loadGA();
+  });
+  if (rejectBtn) rejectBtn.addEventListener('click', function () {
+    setConsent('rejected');
+    hideBanner();
+  });
+})();
+</script>
+
+</body>
+</html>

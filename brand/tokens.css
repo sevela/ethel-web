@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Brand tokeny — Jakub Ševela / Ethel / Feedco
+   Zdroj pravdy: https://jakubsevela.cz/brand/ (grafický manuál, jediná verze)
+   Manuál je jen tam, v tomhle repu jeho kopie není.
+
+   Tenhle soubor je shodný ve všech třech repozitářích (jakubsevela-web,
+   feedco-web, ethel-web). Mění se jen blok "accent" podle značky.
+   Když ho měníš, propiš změnu do ostatních dvou rep.
+   ========================================================================== */
+
+:root {
+  /* --- base: společné pro všechny tři weby --- */
+  --bg: #0a0a0c;
+  --bg-alt: #111114;
+  --card: #16161a;
+
+  --text: #e8e6e3;
+  --text-2: #8a8a8e;   /* nepoužívat pod 14 px — kontrast 5,8 : 1 */
+  --text-3: #5a5a5e;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-2: rgba(255, 255, 255, 0.14);
+
+  --radius-btn: 8px;
+  --radius-card: 12px;
+
+  /* --- typografie --- */
+  --font-display: 'Lora', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
+  --font-wordmark: 'Space Grotesk', sans-serif;  /* JEN wordmark a monogram */
+
+  /* Čím větší nadpis, tím lehčí řez. Velké nadpisy v Lora 400 nekonkurují
+     fotce ani accentu; malé by ve 400 byly bez důrazu, proto 500. */
+  --weight-display: 400;   /* h1, h2 — velké nadpisy */
+  --weight-heading: 500;   /* h3, h4 — nadpisy karet a bloků */
+
+  /* --- layout --- */
+  --content-max: 1200px;   /* obsahový kontejner; hero je výjimka od kraje ke kraji */
+
+  /* --- stavové barvy: společné pro všechny weby (v1.3) ---
+     Stejný odvozovací vzorec jako accenty: 12 % tint, 35 % border,
+     text na tónované ploše vždy v light odstínu. */
+
+  /* chyba — terakota (~10°, stejná šťavnatost jako zbytek palety) */
+  --danger: #e0705c;
+  --danger-l: #ea937f;
+  --danger-rgb: 224, 112, 92;
+  --danger-tint: rgba(var(--danger-rgb), 0.12);
+  --danger-border: rgba(var(--danger-rgb), 0.35);
+
+  /* neutrální šedá — admin/utility role z palety (stav „počkejte", ne chyba) */
+  --neutral: #9c9c9c;
+  --neutral-l: #b5b5b5;
+  --neutral-rgb: 156, 156, 156;
+  --neutral-tint: rgba(var(--neutral-rgb), 0.12);
+  --neutral-border: rgba(var(--neutral-rgb), 0.35);
+
+  /* --- accent: ethel.cz = azurová (~210°) --- */
+  --accent: #56a8e8;
+  --accent-l: #74b8ee;
+  --accent-rgb: 86, 168, 232;
+
+  /* odvozené — vždy z --accent-rgb, nikdy natvrdo */
+  --accent-tint: rgba(var(--accent-rgb), 0.12);
+  --accent-tint-hover: rgba(var(--accent-rgb), 0.18);
+  --accent-border: rgba(var(--accent-rgb), 0.35);
+  --accent-border-hover: rgba(var(--accent-rgb), 0.5);
+}
+
+/* ==========================================================================
+   Komponenty postavené na tokenech
+   Tónovaný styl — ŽÁDNÉ plné barevné plochy.
+   Text na tónované ploše vždy v light odstínu (drží AAA kontrast).
+   ========================================================================== */
+
+.btn-primary {
+  font-family: var(--font-body);
+  font-weight: 500;
+  border-radius: var(--radius-btn);
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-l);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn-primary:hover {
+  background: var(--accent-tint-hover);
+  border-color: var(--accent-border-hover);
+}
+
+.btn-secondary {
+  font-family: var(--font-body);
+  font-weight: 500;
+  border-radius: var(--radius-btn);
+  background: transparent;
+  border: 1px solid var(--border-2);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* wordmark — Space Grotesk medium, malými písmeny.
+   Tečka: bold 700 + 125 % velikosti. Univerzální pravidlo, bez výjimek. */
+.wordmark {
+  font-family: var(--font-wordmark);
+  font-weight: 500;
+  text-transform: lowercase;
+}
+.wordmark .dot {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.25em;
+  line-height: 1;
+}
+
+/* odkazy v textu — light odstín + podtržení, hover zesílí */
+.text-link {
+  color: var(--accent-l);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.text-link:hover {
+  text-decoration-thickness: 2px;
+}
