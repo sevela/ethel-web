@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="/brand/tokens.css">
 <style>
 /* ==========================================================================
-   ethel.cz — NÁHLED přepisu do brandu podle grafického manuálu (26. 7. 2026).
+   ethel.cz – NÁHLED přepisu do brandu podle grafického manuálu (26. 7. 2026).
    Barvy, typografie, komponenty a radiusy z /brand/tokens.css.
    Texty jsou 1:1 ze živého webu; nový je jen hero text (od Jakuba) a vzhled.
    ========================================================================== */
@@ -57,7 +57,7 @@ a { color: inherit; }
 }
 .wordmark-sm { font-size: 26px; }
 .wordmark-ft { font-size: 22px; }
-/* tečka: bold 700 + 125 % velikosti — univerzální pravidlo z manuálu */
+/* tečka: bold 700 + 125 % velikosti – univerzální pravidlo z manuálu */
 .wordmark-sm .dot, .wordmark-ft .dot {
   color: var(--accent); font-weight: 700; font-size: 1.25em; line-height: 1;
 }
@@ -173,7 +173,7 @@ a { color: inherit; }
   display: flex; align-items: center; justify-content: center;
 }
 .hero-visual .chat-window { width: min(88%, 460px); }
-/* fade jako u hero fotky na hubu — vizuál se rozpouští do pozadí vlevo a dole */
+/* fade jako u hero fotky na hubu – vizuál se rozpouští do pozadí vlevo a dole */
 .hero-visual::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
@@ -188,7 +188,7 @@ a { color: inherit; }
   .hero-visual::after { display: none; }
 }
 
-/* --- chat okno (hero vizuál) — postavené na tokenech ---------------------- */
+/* --- chat okno (hero vizuál) – postavené na tokenech ---------------------- */
 .chat-window {
   background: var(--card);
   border: 1px solid var(--border-2);
@@ -202,7 +202,7 @@ a { color: inherit; }
   padding: 14px 18px; border-bottom: 1px solid var(--border);
   background: var(--bg-alt);
 }
-/* avatar = monogram e. — jeden textový běh, tečka na účaří (pravidlo z manuálu) */
+/* avatar = monogram e. – jeden textový běh, tečka na účaří (pravidlo z manuálu) */
 .chat-avatar {
   width: 36px; height: 36px; flex: 0 0 36px;
   border-radius: 10px;
@@ -446,7 +446,7 @@ a { color: inherit; }
 .pcard .pticks li + li { margin-top: 8px; }
 .pcard .pticks li::before { content: '+'; font-family: var(--font-mono); color: var(--accent-l); flex: 0 0 auto; }
 .pcard .pcta { margin-top: auto; padding-top: 26px; }
-/* modul uvnitř karty — modulární varianta price-card z manuálu (label v mono a --text-3, cena u modulu) */
+/* modul uvnitř karty – modulární varianta price-card z manuálu (label v mono a --text-3, cena u modulu) */
 .pmodule {
   background: var(--bg-alt); border: 1px solid var(--border);
   border-radius: var(--radius-btn); padding: 14px 16px; margin-top: 18px;
@@ -473,7 +473,7 @@ a { color: inherit; }
 .cta-section p { color: var(--text-2); font-size: 16.5px; margin-top: 12px; }
 .cta-section .btn-row { justify-content: center; margin-top: 28px; }
 
-/* --- modal (formulář — komponenta z manuálu, sekce Formulář) -------------- */
+/* --- modal (formulář – komponenta z manuálu, sekce Formulář) -------------- */
 .modal-overlay {
   position: fixed; inset: 0; z-index: 50;
   background: rgba(10, 10, 12, 0.7); backdrop-filter: blur(6px);
@@ -969,7 +969,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
         <input class="form-input" type="email" id="f-email" placeholder="jan@firma.cz" required>
       </div>
       <div class="form-group">
-        <label class="form-label" for="f-company">Firma <span class="opt">— nepovinné</span></label>
+        <label class="form-label" for="f-company">Firma <span class="opt">– nepovinné</span></label>
         <input class="form-input" type="text" id="f-company" placeholder="Název firmy">
       </div>
       <div class="form-group" id="msg-group" style="display:none">
@@ -1005,7 +1005,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
 </div>
 
 <!-- ============================================================
-     SDÍLENÁ PATIČKA — shodná na jakubsevela.cz / ethel.cz / feedco.cz.
+     SDÍLENÁ PATIČKA – shodná na jakubsevela.cz / ethel.cz / feedco.cz.
      Mění se jen wordmark, věta pod ním, prolinky a disclaimer.
      Když tu něco měníš, propiš to do ostatních dvou rep.
      ============================================================ -->
@@ -1046,7 +1046,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
 </footer>
 
 <script>
-/* ===== CHAT — přehraje konverzaci jednou (bez karuselu) ===== */
+/* ===== CHAT – přehraje konverzaci jednou (bez karuselu) ===== */
 (function () {
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var msgs = Array.prototype.slice.call(document.querySelectorAll('#chat-body .chat-msg'));
@@ -1076,7 +1076,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
   setTimeout(next, 900);
 })();
 
-/* ===== TARIFY — přepínač měsíčně / ročně ===== */
+/* ===== TARIFY – přepínač měsíčně / ročně ===== */
 (function () {
   var toggle = document.getElementById('ptoggle');
   if (!toggle) return;
