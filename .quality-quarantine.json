@@ -1,0 +1,4 @@
+{
+  "$schema_note": "ETH-270: karantena failujicich testu. V tomhle repu neni testovaci framework (staticky web, zadny 'test' skript) — karantena je prazdna a mechanismus se nepouziva.",
+  "quarantine": []
+}

@@ -1,0 +1,129 @@
+# ETH-270 — CI branka pro ethel-web. Tenhle soubor vlastni ETH-270 dávka; ostatní
+# dávky (ETH-260, ETH-272, ...) do něj nesahají bez konzultace.
+#
+# Web je hlavně statický obsah (landing + docs) — CI pokrývá jen 'scripts/**/*.js'
+# (build skripty), to je jediný "kód" v repu. Viz CLAUDE.md.
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    # Tydenni dependency audit. Z nemergnute vetve se nespusti — az po mergi
+    # do main (fáze 3 ETH-270, otevřený bod pro Jakuba).
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-docs:
+    name: "JS — npm run build:docs"
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build:docs
+
+  lint:
+    name: "JS — eslint"
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run lint
+
+  format:
+    name: "JS — prettier --check"
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - name: prettier --check (neblokující — 1 předexistující soubor, viz CLAUDE.md)
+        continue-on-error: true
+        run: |
+          {
+            echo "### prettier --check — předexistující nálezy (neblokující, ETH-260 je opraví)"
+            echo '```'
+            npm run format:check || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  no-tests:
+    name: "JS — testy (žádný framework)"
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule'
+    steps:
+      - run: echo "::notice::Staticky web nema testovaci framework. Job je informativni placeholder, ne tiche vynechani."
+
+  quality-baseline:
+    name: "JS — quality baseline (limity scripts/**/*.js)"
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - name: Kontrola proti .quality-baseline.json (selže jen při zhoršení)
+        run: node scripts/quality/baseline.js --check
+
+  dependency-audit:
+    name: "JS — npm audit"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Zjisti, jestli se změnil package-lock.json
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            BASE="${{ github.event.pull_request.base.sha }}"
+            if [ -z "$BASE" ]; then BASE="${{ github.event.before }}"; fi
+            if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BASE" 2>/dev/null; then
+              echo "run=true" >> "$GITHUB_OUTPUT"
+            elif git diff --name-only "$BASE" "${{ github.sha }}" -- package-lock.json | grep -q .; then
+              echo "run=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "run=false" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+      - uses: actions/setup-node@v4
+        if: steps.changed.outputs.run == 'true'
+        with:
+          node-version: "22"
+      - name: npm audit (neblokující, viz docs/eth270-ci-konvence.md)
+        if: steps.changed.outputs.run == 'true'
+        continue-on-error: true
+        run: |
+          npm ci
+          {
+            echo "### npm audit"
+            echo '```'
+            npm audit || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Přeskočeno — package-lock.json se nezměnil
+        if: steps.changed.outputs.run != 'true'
+        run: echo "::notice::npm audit přeskočen, package-lock.json se v tomto běhu nezměnil. Ruční běh - workflow_dispatch. Týdenní schedule (pondělí 06:00 UTC) je otevřený bod, rozběhne se až po mergi do main."
