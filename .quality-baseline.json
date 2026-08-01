@@ -1,0 +1,37 @@
+{
+  "ecosystem": "javascript",
+  "measured_by": "scripts/quality/baseline.js (git ls-files scripts/**/*.js + eslint core pravidla: max-lines-per-function/max-params/max-depth/complexity)",
+  "scope_note": "meri jen 'scripts/**/*.js' (to same, co 'npm run lint'). HTML/MD obsah (landing, docs, faq) je marketingovy/dokumentacni obsah, ne kod — limity na delku souboru na nej nedavaji smysl.",
+  "limits": {
+    "file_lines": {
+      "soft": 400,
+      "hard": 600
+    },
+    "func_lines": {
+      "soft": 50,
+      "hard": 80
+    },
+    "params": {
+      "soft": 5,
+      "hard": 8
+    },
+    "nesting": {
+      "soft": 3,
+      "hard": 4
+    },
+    "complexity": {
+      "soft": 10,
+      "hard": 15
+    }
+  },
+  "skipped_metrics": {
+    "public_methods": "projekt je vanilla JS bez trid (zadny `class` v kodu); ESLint navic nema jadrove pravidlo pro pocet verejnych metod na tridu."
+  },
+  "violations": {
+    "files": [],
+    "functions": [],
+    "classes": []
+  },
+  "score_formula": "(radky_souboru / 600) * (max_slozitost_funkce_v_souboru / tvrdy_limit_slozitosti[15])",
+  "top10_worst_files": []
+}
