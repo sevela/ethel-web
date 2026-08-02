@@ -2,174 +2,106 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<title>OG image template</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>OG image – ethel.cz</title>
+<!-- Načítá se přes lokální server ze scripts/generate-og.js, ne přes file://,
+     aby fungovaly absolutní cesty k fontům a tokenům. -->
+<link rel="stylesheet" href="/brand/fonts.css">
+<link rel="stylesheet" href="/brand/tokens.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
   body {
-    font-family: 'Sora', sans-serif;
-    background: #08080a;
-    color: #eaeaf0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 80px 96px;
+    padding: 76px 88px;
   }
 
-  /* radial accent glows */
+  /* jantarové záře – stejný princip jako hero na webu */
   body::before {
     content: '';
     position: absolute;
-    top: -200px;
-    right: -200px;
-    width: 700px;
-    height: 700px;
-    background: radial-gradient(circle, rgba(107, 148, 184, 0.28) 0%, rgba(107, 148, 184, 0) 65%);
-    pointer-events: none;
+    top: -240px; right: -200px;
+    width: 760px; height: 760px;
+    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.20) 0%, rgba(var(--accent-rgb), 0) 66%);
   }
   body::after {
     content: '';
     position: absolute;
-    bottom: -250px;
-    left: -150px;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(107, 148, 184, 0.18) 0%, rgba(107, 148, 184, 0) 65%);
-    pointer-events: none;
+    bottom: -280px; left: -180px;
+    width: 620px; height: 620px;
+    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.10) 0%, rgba(var(--accent-rgb), 0) 66%);
   }
 
-  /* subtle grid */
   .grid {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(107, 148, 184, 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(107, 148, 184, 0.045) 1px, transparent 1px);
+      linear-gradient(rgba(var(--accent-rgb), 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--accent-rgb), 0.035) 1px, transparent 1px);
     background-size: 48px 48px;
-    pointer-events: none;
   }
 
-  .container {
-    position: relative;
-    z-index: 1;
-  }
+  .container { position: relative; z-index: 1; }
 
-  .top-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 40px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 18px;
-    color: #6b94b8;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+  .wordmark {
+    font-family: var(--font-wordmark);
+    font-weight: 500;
+    font-size: 34px;
+    text-transform: lowercase;
+    margin-bottom: 44px;
   }
-  .top-row .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #34d399;
-    box-shadow: 0 0 12px rgba(52, 211, 153, 0.7);
-  }
+  .wordmark .dot { color: var(--accent); font-weight: 700; font-size: 1.25em; line-height: 1; }
 
   h1 {
-    font-family: 'Sora', sans-serif;
-    font-weight: 800;
-    font-size: 168px;
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    background: linear-gradient(180deg, #ffffff 0%, #c8d4e0 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 24px;
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    font-size: 64px; /* delší headline – 78px by přeteklo šířku 1200 */
+    line-height: 1.24;
   }
-  h1 .slash {
-    color: #6b94b8;
-    -webkit-text-fill-color: #6b94b8;
-  }
+  h1 em { font-style: italic; color: var(--accent-l); }
 
-  .tagline {
-    font-size: 44px;
-    font-weight: 400;
-    color: #eaeaf0;
-    line-height: 1.25;
-    max-width: 900px;
-    margin-bottom: 20px;
-  }
-  .tagline .accent {
-    color: #8fb3cc;
-    font-weight: 500;
-  }
-
-  .sub {
-    font-size: 22px;
-    color: #9494a8;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.02em;
+  .label {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 20px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-l);
+    padding: 8px 18px;
+    border: 1px solid var(--accent-border);
+    background: var(--accent-tint);
+    border-radius: 8px;
+    margin-bottom: 30px;
   }
 
   .footer-row {
     position: absolute;
-    bottom: 80px;
-    left: 96px;
-    right: 96px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    bottom: 76px; left: 88px; right: 88px;
     z-index: 1;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 20px;
-    color: #5c5c72;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 22px;
+    color: var(--accent-l);
   }
-  .footer-row .url {
-    color: #8fb3cc;
-  }
-  .badges {
-    display: flex;
-    gap: 12px;
-  }
-  .badge {
-    padding: 8px 16px;
-    border: 1px solid rgba(107, 148, 184, 0.3);
-    border-radius: 8px;
-    background: rgba(107, 148, 184, 0.06);
-    color: #c8d4e0;
-    font-size: 18px;
-  }
+  .rule { flex: 1; height: 1px; background: var(--border-2); margin-left: 28px; }
 </style>
 </head>
 <body>
   <div class="grid"></div>
 
   <div class="container">
-    <div class="top-row">
-      <span class="dot"></span>
-      <span>AI asistentka pro Helios Inuvio</span>
-    </div>
-
-    <h1>ET<span class="slash">/</span>HEL</h1>
-
-    <div class="tagline">
-      Místo klikání se prostě <span class="accent">zeptáte</span>.<br>
-      Rozumí vašim datům, sestavám i SQL.
-    </div>
-
-    <div class="sub">// embedded thinking for Helios</div>
+    <div class="wordmark">ethel<span class="dot">.</span></div>
+    <div class="label">AI asistentka pro Helios Inuvio</div>
+    <h1>Rozumí vašemu Heliosu<br>a umí v&nbsp;něm pracovat</h1>
   </div>
 
   <div class="footer-row">
-    <span class="url">ethel.cz</span>
-    <div class="badges">
-      <span class="badge">česky</span>
-      <span class="badge">on-prem ready</span>
-      <span class="badge">RAG + SQL</span>
-    </div>
+    <span>ethel.cz</span>
+    <span class="rule"></span>
   </div>
 </body>
 </html>
