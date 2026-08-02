@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jak Ethel chrání vaše data – ET/HEL</title>
-<meta name="description" content="Vaše firemní data nikdy neopustí váš server. Jak funguje architektura Ethel, tok dat, šifrování a hosting v EU.">
+<title>Bezpečnost – ET/HEL</title>
+<meta name="description" content="Kde v Ethel zůstávají data z Heliosu, co vidí jazykový model a tři výjimky, kdy do cloudu odchází víc než dotaz a SQL.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Jakub Ševela">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -12,16 +12,16 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="canonical" href="https://ethel.cz/bezpecnost/">
 
-<meta property="og:title" content="Jak Ethel chrání vaše data – ET/HEL">
-<meta property="og:description" content="Vaše firemní data nikdy neopustí váš server. Jak funguje architektura Ethel, tok dat, šifrování a hosting v EU.">
+<meta property="og:title" content="Bezpečnost – ET/HEL">
+<meta property="og:description" content="Kde v Ethel zůstávají data z Heliosu, co vidí jazykový model a tři výjimky, kdy do cloudu odchází víc než dotaz a SQL.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ethel.cz/bezpecnost/">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Ethel">
 <meta property="og:image" content="https://ethel.cz/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Jak Ethel chrání vaše data – ET/HEL">
-<meta name="twitter:description" content="Vaše firemní data nikdy neopustí váš server. Jak funguje architektura Ethel, tok dat, šifrování a hosting v EU.">
+<meta name="twitter:title" content="Bezpečnost – ET/HEL">
+<meta name="twitter:description" content="Kde v Ethel zůstávají data z Heliosu, co vidí jazykový model a tři výjimky, kdy do cloudu odchází víc než dotaz a SQL.">
 <meta name="twitter:image" content="https://ethel.cz/og-image.png">
 
 <link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -63,32 +63,39 @@
   transition: color 0.2s, text-decoration-color 0.2s;
 }
 .sec-section a:hover { color: var(--accent); text-decoration-color: var(--accent); }
-.sec-section ol,
-.sec-section ul {
-  color: var(--text-secondary);
-  padding-left: 1.5rem;
-  line-height: 1.75;
-  margin-bottom: 0.7rem;
-}
-.sec-section ol:last-child,
-.sec-section ul:last-child { margin-bottom: 0; }
-.sec-section li { margin-bottom: 0.45rem; }
-.sec-section li:last-child { margin-bottom: 0; }
-.sec-section li::marker { color: var(--text-dim); }
-.sec-section li strong { color: var(--text); }
-.sec-section code {
+.rev-date {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.83em;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 0.1em 0.4em;
-  color: var(--accent);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin: -0.5rem 0 2.5rem;
 }
 @media (max-width: 768px) {
   .sec-page { padding: 5rem 1.25rem 3rem; }
 }
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Bezpečnost",
+  "description": "Kde v Ethel zůstávají data z Heliosu, co vidí jazykový model a tři výjimky, kdy do cloudu odchází víc než dotaz a SQL.",
+  "url": "https://ethel.cz/bezpecnost/",
+  "inLanguage": "cs",
+  "datePublished": "2026-06-10",
+  "dateModified": "2026-08-02",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Ethel",
+    "url": "https://ethel.cz"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Jakub Ševela",
+    "url": "https://jakubsevela.cz"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -125,174 +132,34 @@
     </div>
     <div class="docs-content">
 
-  <h1>Bezpečnost dat</h1>
-  <p>Přehled bezpečnostní architektury, toku dat a provozní infrastruktury. Psáno pro IT adminy, ředitele a právní oddělení.</p>
+  <h1>Bezpečnost</h1>
+  <p class="rev-date">Poslední revize: 2. srpna 2026</p>
 
-  <section class="sec-section" id="tldr">
-    <h2>TL;DR</h2>
-    <p><strong>Vaše firemní data nikdy neopustí váš server.</strong> Ethel komunikuje s cloudem pouze textem vašeho dotazu a vygenerovaným SQL. Samotné výsledky – čísla, jména, ceny, kontakty, jakýkoliv obsah vašich datových tabulek – zůstávají u vás. Cloud je nikdy nevidí.</p>
-    <p>Citlivé moduly Helios (Mzdy, Banka, Personalistika) jsou mimo dosah Ethel dvěma nezávislými vrstvami – nejsou ve znalostní bázi a jejich tabulky jsou blokované na úrovni serveru.</p>
+  <section class="sec-section" id="kde-zustavaji-vase-data">
+    <h2>Kde zůstávají vaše data</h2>
+    <p>Ethel posílá jazykovému modelu vaši otázku a popis datové struktury, tedy názvy tabulek a sloupců potřebných k odpovědi. Model z toho sestaví SQL dotaz. Ten se spustí na vašem serveru agentem, který běží vedle Heliosu, a výsledek zůstane u vás.</p>
+    <p>Když se zeptáte, kolik jste letos fakturovali konkrétní firmě, odejde do cloudu ta otázka a informace, že odpověď vznikne z tabulky dokladů. Částka, která z dotazu vyjde, do cloudu nejde.</p>
+    <p>V provozním záznamu držíme váš dotaz, vygenerované SQL a počet spotřebovaných tokenů. Výsledky dotazů neukládáme.</p>
+    <p>Že to takhle opravdu funguje, hlídá sada automatických testů. Běží při každé změně kódu; když ji některá úprava poruší, změna neprojde do produkce.</p>
   </section>
 
-  <section class="sec-section" id="hlavni-princip">
-    <h2>Hlavní princip</h2>
-    <p>Klasický přístup k AI nad firemními daty znamená: data se nahrají do cloudu, model nad nimi pracuje, výsledky se vrátí. Tento přístup je pro Helios klienty nepřijatelný – firemní data nemají co dělat v cizí infrastruktuře.</p>
-    <p>Ethel staví na obráceném principu. <strong>Cloud nemá vaše data, jen model.</strong> Vaše databáze zůstává tam, kde byla. Ethel je most mezi přirozeným jazykem a SQL, ne datový sklad.</p>
+  <section class="sec-section" id="treninkovani-modelu">
+    <h2>Trénování modelu</h2>
+    <p>Anthropic, jehož model Ethel používá, podle své dokumentace ve výchozím nastavení nepoužívá vstupy ani výstupy z komerčních produktů a API k trénování svých modelů.</p>
   </section>
 
-  <section class="sec-section" id="tok-dat">
-    <h2>Tok dat krok po kroku</h2>
-    <p>Když se uživatel zeptá <em>„Kolik faktur čeká na schválení?"</em>:</p>
-    <ol>
-      <li><strong>Helios</strong> otevře okno Ethel agenta (lokálně, na pracovní stanici uživatele).</li>
-      <li><strong>Agent</strong> posílá do cloudu <strong>pouze text dotazu</strong> („kolik faktur čeká na schválení") + identifikátor instance pro fakturaci.</li>
-      <li><strong>Cloud proxy</strong> předá dotaz AI modelu (Claude od Anthropic) společně se znalostní bází o Heliosu.</li>
-      <li><strong>AI model</strong> vygeneruje SQL dotaz typu <code>SELECT COUNT(*) FROM TabDokladyZbozi WHERE ...</code></li>
-      <li><strong>Cloud proxy</strong> SQL zvaliduje (pouze čtení, žádné citlivé tabulky) a vrátí ho agentovi.</li>
-      <li><strong>Agent</strong> spustí SQL <strong>lokálně na vaší databázi</strong> přes standardní SQL Server připojení.</li>
-      <li><strong>Databáze</strong> vrátí výsledek (např. číslo 23) agentovi.</li>
-      <li><strong>Agent</strong> zobrazí výsledek uživateli – formátovaně, v rámci Helios prostředí.</li>
-    </ol>
-    <p>Od kroku 6 dál cloud nehraje žádnou roli. Výsledek (číslo 23) cloud nikdy nevidí.</p>
-  </section>
+  <section class="sec-section" id="kde-odchazi-vic">
+    <h2>Kde odchází víc než dotaz a struktura</h2>
+    <p>Tři místa. Vypisujeme je radši sami, než abyste je hledali.</p>
 
-  <section class="sec-section" id="co-cloud-vidi">
-    <h2>Co cloud vidí</h2>
-    <ul>
-      <li>Text vašeho dotazu v přirozeném jazyce („kolik faktur čeká").</li>
-      <li>Vygenerované SQL (text dotazu, ne výsledek).</li>
-      <li>Identifikátor vaší instance (pro fakturaci a rate limiting).</li>
-      <li>Časové razítko a počet dotazů (provozní metriky).</li>
-    </ul>
-  </section>
+    <h3 id="asistovane-akce">Asistované akce nad větším počtem záznamů</h3>
+    <p>U kontroly zásob pod minimem odejde modelu stav skladu a aktuální dodavatel u dotčených položek zboží. U kontroly nepřeložených popisů interní ID a název položky. Obojí je ve výchozím stavu vypnuté a zapíná se pro každého zákazníka zvlášť.</p>
 
-  <section class="sec-section" id="co-cloud-nevidi">
-    <h2>Co cloud nevidí</h2>
-    <ul>
-      <li>Žádné záznamy (řádky) z vašich datových tabulek.</li>
-      <li>Žádné výsledky dotazů na vaše data – čísla, jména, ceny, kontakty.</li>
-      <li>Žádný obsah modulů Mzdy, Banka a Personalistika.</li>
-    </ul>
-    <p>Jedna poctivost navíc: pokud uživatel do otázky sám napíše jméno nebo jiný údaj („kolik dluží Jan Novák"), je tento text součástí dotazu a do cloudu jde. <strong>Výsledek z vašich datových tabulek už ale nikdy.</strong></p>
-    <p>Druhá poctivost: když se zeptáte na <em>definici</em> objektu Heliosu – co dělá konkrétní procedura, jak je sestavená sestava, co znamená určitý sloupec – pošle Ethel do cloudu i výsledek tohoto dotazu (zdrojový kód objektu nebo popis schématu), aby vám ho srozumitelně vysvětlila. Jde o popis struktury Heliosu, <strong>nikdy o obsah vašich datových tabulek</strong> – ty jsou navíc blokované na úrovni serveru.</p>
-  </section>
+    <h3 id="diagnostika-chyb">Diagnostika chyb</h3>
+    <p>Když SQL dotaz selže, odejde zařazení chyby a název dotčeného objektu, například že sloupec neexistuje. Původní text chybové hlášky z databáze, který může nést konkrétní hodnoty, se ven neposílá.</p>
 
-  <section class="sec-section" id="znalostni-baze">
-    <h2>Co Ethel zná z vaší databáze</h2>
-    <p>Ethel pracuje se <strong>sdílenou znalostní bází</strong> standardního Helios Inuvio. Zná názvy tabulek (<code>TabDokladyZbozi</code>, <code>TabKmenZbozi</code>, <code>TabCisOrg</code>…), jejich klíčové sloupce, vazby mezi nimi a typické dotazovací vzory.</p>
-    <p>Znalostní báze <strong>neobsahuje vaše konkrétní data</strong>. Je to popis schématu Heliosu, ne kopie vašich tabulek.</p>
-  </section>
-
-  <section class="sec-section" id="citlive-moduly">
-    <h2>Co Ethel záměrně nezná</h2>
-    <p>Citlivé moduly jsou mimo dosah <strong>dvěma nezávislými vrstvami</strong>:</p>
-
-    <h3>Vrstva 1 – znalostní báze</h3>
-    <p>Moduly Mzdy, Personalistika (včetně číselníku zaměstnanců) a Banka nejsou ve znalostní bázi. Ethel o jejich tabulkách nemá žádné informace a neumí na ně cíleně sestavit dotaz.</p>
-
-    <h3>Vrstva 2 – serverová blokace</h3>
-    <p>Tabulky těchto modulů jsou navíc na deny-listu vyhodnocovaném na serveru. I kdyby se některá z nich ve vygenerovaném SQL objevila, dotaz se zastaví ještě před spuštěním. Není to instrukce v promptu, kterou by šlo ukecat – je to tvrdá kontrola mimo dosah AI modelu.</p>
-
-    <p>Pokud se uživatel zeptá na něco z těchto modulů, dostane odpověď, že k modulu Ethel nemá přístup. Žádný dotaz se nespustí.</p>
-    <p>V budoucích verzích plánujeme jemnější granularitu – vlastní tabulku oprávnění, kde si admin určí, ke kterým modulům má každý uživatel přístup. V současné verzi platí jednotná úroveň přístupu pro celou instanci.</p>
-  </section>
-
-  <section class="sec-section" id="pouze-pro-cteni">
-    <h2>Pouze pro čtení</h2>
-    <p>Ethel pracuje <strong>výhradně v režimu čtení</strong> (SELECT). Každé vygenerované SQL prochází validační vrstvou, která zápisové operace (INSERT, UPDATE, DELETE i DDL příkazy) nepropustí – nezávisle na tom, co AI model vygeneruje.</p>
-    <p>Tuto vrstvu průběžně testujeme automatizovanou sadou testů, včetně záměrných pokusů o její obejití (SQL injection vzory, vícenásobné příkazy, maskované zápisy).</p>
-  </section>
-
-  <section class="sec-section" id="sifrovani">
-    <h2>Šifrování a autentizace</h2>
-
-    <h3>Komunikace s cloudem</h3>
-    <ul>
-      <li>TLS 1.2+ na všech spojeních mezi agentem a cloud proxy.</li>
-      <li>Žádná data se neposílají přes nešifrovaný kanál.</li>
-    </ul>
-
-    <h3>Komunikace s databází</h3>
-    <ul>
-      <li>Standardní šifrované SQL Server připojení.</li>
-      <li>Agent používá <strong>stejné připojení jako samotný Helios</strong> – connection string čte z konfigurace Heliosu, žádné vlastní credentials neukládá ani nepřenáší.</li>
-    </ul>
-
-    <h3>Aktivace a licencování</h3>
-    <ul>
-      <li>Každá instance má unikátní aktivační token vázaný na IČO klienta.</li>
-      <li>Token lze kdykoliv revokovat – přístup zaniká okamžitě, žádná anonymní AI bez kontroly.</li>
-    </ul>
-  </section>
-
-  <section class="sec-section" id="logovani">
-    <h2>Logování</h2>
-
-    <h3>Na naší straně se loguje</h3>
-    <ul>
-      <li>Čas dotazu, identifikátor instance, počet dotazů.</li>
-      <li>Text dotazu a vygenerované SQL (pro debugging a zlepšování znalostní báze).</li>
-      <li>Chyby a výjimky.</li>
-    </ul>
-
-    <h3>Co se neloguje</h3>
-    <ul>
-      <li>Žádné výsledky dotazů na vaše data.</li>
-      <li>Žádná data z vašich datových tabulek.</li>
-    </ul>
-
-    <p>Logy uchováváme po dobu nezbytnou pro provoz, debugging a zlepšování znalostní báze. Na vyžádání logy vaší instance kdykoliv smažeme.</p>
-    <p><strong>Přehled dotazů vaší instance</strong> (kdo se na co ptal a kdy) vám na vyžádání poskytneme – jde o stejné logy, žádná skrytá data navíc.</p>
-  </section>
-
-  <section class="sec-section" id="infrastruktura">
-    <h2>Kde běží infrastruktura</h2>
-    <p>Celá infrastruktura Ethel běží v <strong>Evropské unii</strong>:</p>
-    <ul>
-      <li><strong>Cloud proxy a aplikační vrstva:</strong> Railway, region EU – Amsterdam.</li>
-      <li><strong>Databáze metadat (tokeny, logy, znalostní báze):</strong> Supabase, region EU – Frankfurt (AWS eu-central-1).</li>
-      <li><strong>AI inference:</strong> Anthropic API. K Anthropic putuje pouze text otázky, kontext znalostní báze a vygenerované SQL – nikdy data z vaší databáze. Vstupy přes API se dle podmínek Anthropic nepoužívají k trénování modelů.</li>
-    </ul>
-    <p>Jako provozovatel jsme <strong>zpracovatelem osobních údajů</strong> v rozsahu metadat (texty dotazů, fakturační údaje). Smlouvu o zpracování (DPA) poskytneme na vyžádání.</p>
-  </section>
-
-  <section class="sec-section" id="vypadek">
-    <h2>Co se stane při výpadku</h2>
-    <p>Ethel ke svému běhu potřebuje internet a dostupnost AI služby. Když cokoliv z toho vypadne:</p>
-    <ul>
-      <li>Ethel neodpoví a zobrazí srozumitelnou chybu – tím to končí.</li>
-      <li><strong>Helios běží dál</strong>, vaše data ani práce nejsou nijak dotčené.</li>
-      <li>Po obnovení připojení Ethel funguje okamžitě, bez restartu nebo zásahu.</li>
-    </ul>
-    <p>Architektura Ethel je model-agnostická – AI vrstva běží na naší straně, takže případnou dlouhodobou nedostupnost poskytovatele umíme řešit změnou modelu bez jakéhokoliv zásahu u vás.</p>
-  </section>
-
-  <section class="sec-section" id="zruseni">
-    <h2>Co se stane, když Ethel zrušíte</h2>
-    <ol>
-      <li>Předplatné můžete zrušit kdykoliv k dalšímu fakturačnímu období.</li>
-      <li>Po skončení období se token deaktivuje – cloud přestane přijímat dotazy z vaší instance.</li>
-      <li>Agenta jednoduše odinstalujete (smažete exe ze složky vedle Heliosu).</li>
-      <li>SQL objekty Ethel v databázi smažete dodaným odinstalačním skriptem.</li>
-      <li>Na vyžádání vám potvrdíme smazání logů z naší strany.</li>
-    </ol>
-    <p><strong>Vaše Helios data jsou tím okamžikem nedotčená.</strong> Ethel je nikdy nikam nekopírovala – neexistuje žádná kopie ani záloha, kterou bychom drželi.</p>
-  </section>
-
-  <section class="sec-section" id="kontakt">
-    <h2>Bezpečnostní kontakt</h2>
-    <p>Pokud objevíte zranitelnost nebo máte bezpečnostní dotaz, napište na <a href="mailto:info@ethel.cz">info@ethel.cz</a> s předmětem „Bezpečnost". Reagujeme do 24 hodin v pracovních dnech.</p>
-  </section>
-
-  <section class="sec-section" id="souvisejici">
-    <h2>Související otázky</h2>
-    <p>Podrobněji v sekci <a href="/faq">Často kladené otázky</a>:</p>
-    <ul>
-      <li><em>Tečou moje data do cloudu?</em> → <strong>Ne.</strong></li>
-      <li><em>Co moduly Mzdy a Banka?</em> → <strong>Dvě vrstvy ochrany, Ethel je nevidí.</strong></li>
-      <li><em>Co když Ethel vygeneruje špatné SQL?</em> → <strong>Pouze čtení, validace mimo AI model.</strong></li>
-      <li><em>Co se stane po zrušení?</em> → <strong>Agent se odinstaluje, data zůstávají v Heliosu.</strong></li>
-    </ul>
+    <h3 id="hlasove-cteni">Hlasové čtení odpovědí</h3>
+    <p>Ethel čte odpovědi hlasem, který běží na vašem počítači. Existuje i cloudová varianta: ta posílá text odpovědi včetně dat, která obsahuje, poskytovateli hlasové syntézy. Zapíná se jen účtům, kterým to výslovně povolíme, a dnes ji nemá zapnutou žádný zákazník.</p>
   </section>
 
     </div><!-- /docs-content -->
