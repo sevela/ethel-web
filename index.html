@@ -347,6 +347,10 @@
     background: var(--accent); box-shadow: 0 0 8px rgba(107,148,184,0.4);
     width: 20px; border-radius: 3px;
   }
+  .chat-disclaimer {
+    text-align: center; margin-top: 0.9rem;
+    color: var(--text-dim); font-size: 0.78rem; font-weight: 300;
+  }
   @media (max-width: 560px) {
     .chat-nav-prev { left: -6px; }
     .chat-nav-next { right: -6px; }
@@ -396,6 +400,9 @@
     color: var(--text-secondary); font-size: 1.05rem; font-weight: 300;
     max-width: 580px; margin-bottom: 3.5rem; line-height: 1.7;
   }
+
+  /* inline kód v běžném textu; používá se ve víc sekcích */
+  .code-inline { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; color: var(--accent-light); }
 
   /* ===== FEATURES ===== */
   .features { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
@@ -463,9 +470,40 @@
   .step-content h3 { font-size: 1.08rem; font-weight: 600; margin-bottom: 0.4rem; letter-spacing: -0.01em; }
   .step-content p { color: var(--text-secondary); font-size: 0.92rem; font-weight: 300; line-height: 1.65; }
 
+  /* ===== WRITE FLOW (zápisové akce) ===== */
+  /* Zápisová smyčka. Záměrně jiný tvar než .step v sekci "Jak to funguje":
+     ta popisuje instalaci vertikálně, tahle čtyři fáze jednoho běhu v mřížce 2x2,
+     aby se obě čtyřkrokové sekce nepletly. */
+  .writeflow { padding: 6rem 2rem; max-width: 860px; margin: 0 auto; }
+  .wf-steps {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .wf-step {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.6rem 1.5rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .wf-step:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+  .wf-phase {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    color: var(--accent); font-weight: 700; letter-spacing: 0.12em;
+    display: block; margin-bottom: 0.7rem;
+  }
+  .wf-step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.45rem; letter-spacing: -0.01em; }
+  .wf-step p { color: var(--text-secondary); font-size: 0.88rem; font-weight: 300; line-height: 1.65; }
+  .wf-guard {
+    margin-top: 2rem; padding: 1.5rem 1.6rem;
+    border: 1px solid var(--border-hover); border-radius: var(--radius);
+    background: var(--accent-glow);
+  }
+  .wf-guard strong { color: var(--text); font-weight: 600; }
+  .wf-guard p { color: var(--text-secondary); font-size: 0.92rem; font-weight: 300; line-height: 1.7; }
+  .wf-note { margin-top: 1.5rem; color: var(--text-dim); font-size: 0.85rem; font-weight: 300; }
+
   /* ===== USE CASES ===== */
   .usecases { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
-  .usecase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
+  .usecase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; align-items: start; }
   .usecase {
     padding: 1.6rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius);
     background: var(--bg-card); transition: all 0.3s;
@@ -476,6 +514,20 @@
     color: var(--accent-light); margin-bottom: 0.7rem; line-height: 1.55;
   }
   .usecase-a { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+  .usecase-steps {
+    margin: 0 0 0.7rem 1.1rem; padding: 0;
+    font-size: 0.84rem; color: var(--text-secondary); font-weight: 300; line-height: 1.55;
+  }
+  .usecase-steps li { margin-bottom: 0.3rem; padding-left: 0.2rem; }
+  .usecase-steps li::marker { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
+  /* námitka: stejná karta, ale vizuálně oddělená od ukázkových dotazů */
+  .usecase-objection { border-color: var(--border-hover); background: var(--bg-elevated); }
+  .usecase-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+    text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-dim);
+    margin-bottom: 0.6rem;
+  }
+  .usecase-q-plain { color: var(--text); font-family: inherit; font-size: 0.95rem; font-weight: 600; }
   .usecase-benefit {
     margin-top: 0.6rem; font-size: 0.78rem; color: var(--accent);
     font-weight: 500;
@@ -820,6 +872,7 @@
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
@@ -831,10 +884,11 @@
     .nav-links a:not(.nav-cta) { display: none; }
     .nav-links { gap: 0.8rem; }
     .hero { padding: 7rem 1.5rem 3rem; }
-    .features, .how, .usecases, .safety, .pricing, .audience { padding: 4rem 1.5rem; }
+    .features, .how, .usecases, .safety, .pricing, .audience, .writeflow { padding: 4rem 1.5rem; }
     .features-grid, .audience-grid { grid-template-columns: 1fr; }
     .value-items { grid-template-columns: 1fr; }
     .step { flex-direction: column; gap: 0.5rem; }
+    .wf-steps { grid-template-columns: 1fr; }
     .safety-box { padding: 2.5rem 1.5rem; }
     .price-card { padding: 2.5rem 1.5rem; }
     .price-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
@@ -1025,6 +1079,7 @@
     </div>
     <div class="chat-dots" id="chat-dots"></div>
   </div>
+  <p class="chat-disclaimer">Ukázka konverzace. Čísla i&nbsp;názvy položek v odpovědích jsou ilustrační, ne data konkrétního zákazníka.</p>
 </div>
 
 <!-- VALUE STRIP -->
@@ -1032,12 +1087,12 @@
   <div class="value-strip-title">Co vám to reálně ušetří</div>
   <div class="value-items">
     <div class="value-item">
-      <div class="value-before">10 kliků v sestavách</div>
+      <div class="value-before">Klikání v sestavách</div>
       <div class="value-arrow">↓</div>
-      <div class="value-after">1 otázka</div>
+      <div class="value-after">Jedna otázka</div>
     </div>
     <div class="value-item">
-      <div class="value-before">Hledání v reportech</div>
+      <div class="value-before">Export do Excelu a ruční počítání</div>
       <div class="value-arrow">↓</div>
       <div class="value-after">Okamžitá odpověď</div>
     </div>
@@ -1058,12 +1113,12 @@
     <div class="feature-card reveal reveal-delay-1">
       <div class="feature-icon">⚡</div>
       <h3>Zeptejte se místo klikání</h3>
-      <p>Nehledáte v sestavách. Prostě se zeptáte – Ethel odpoví česky, s&nbsp;reálnými daty z vašeho Heliosu. Žádné tabulky s tisíci řádky.</p>
+      <p>Nehledáte v sestavách. Prostě se zeptáte – Ethel odpoví česky, s&nbsp;reálnými daty z vašeho Heliosu. Žádné tabulky s tisíci řádky. Otázku můžete i&nbsp;nadiktovat, psát ji nemusíte.</p>
     </div>
     <div class="feature-card reveal reveal-delay-2">
       <div class="feature-icon">🧭</div>
       <h3>Vysvětlí Helios novým lidem</h3>
-      <p>Nový kolega? Ethel vysvětlí sestavy, pole i&nbsp;logiku systému – bez školení. Ideální onboarding do Heliosu.</p>
+      <p>Ethel prohledává celou wiki Heliosu, všech 11&nbsp;023 úseků nápovědy. Zeptáte se, jak se dělá inventura, a&nbsp;dostanete postup krok za krokem. Nový kolega se zorientuje bez školení.</p>
     </div>
     <div class="feature-card reveal reveal-delay-3">
       <div class="feature-icon">🔍</div>
@@ -1122,28 +1177,28 @@
   <p class="section-desc">Žádná měsíční implementace. Ethel se napojí na váš Helios a&nbsp;začne odpovídat.</p>
   <div class="steps">
     <div class="step reveal">
-      <div class="step-num mono">01</div>
+      <div class="step-num">01</div>
       <div class="step-content">
         <h3>Spustíte instalační skript</h3>
         <p>Jeden SQL skript nasadí Ethel do vaší databáze. Připojení k Heliosu přes standardní konfiguraci – bez zásahů do jádra systému.</p>
       </div>
     </div>
     <div class="step reveal">
-      <div class="step-num mono">02</div>
+      <div class="step-num">02</div>
       <div class="step-content">
         <h3>Ethel se propojí s Heliosem</h3>
         <p>Načte připojení k vaší databázi z&nbsp;konfigurace Heliosu. Standardní tabulky a&nbsp;procedury už zná – nemusí nic skenovat ani indexovat.</p>
       </div>
     </div>
     <div class="step reveal">
-      <div class="step-num mono">03</div>
+      <div class="step-num">03</div>
       <div class="step-content">
         <h3>Zadáte aktivační token</h3>
         <p>Token dostanete po objednávce. O AI se staráme my – žádné vlastní API klíče, žádné technické nastavování. Prostě to funguje.</p>
       </div>
     </div>
     <div class="step reveal">
-      <div class="step-num mono">04</div>
+      <div class="step-num">04</div>
       <div class="step-content">
         <h3>Ptejte se</h3>
         <p>Otevřete Ethel přímo z Heliosu, napíšete otázku česky a&nbsp;dostanete odpověď s reálnými daty z&nbsp;vašeho Heliosu. Jako byste se ptali kolegy, který zná celý systém.</p>
@@ -1152,16 +1207,60 @@
   </div>
 </section>
 
+<!-- WRITE FLOW -->
+<section class="writeflow reveal" id="akce">
+  <div class="section-label">Zápisy do Heliosu</div>
+  <h2 class="section-title">Co se stane, když Ethel něco zapisuje</h2>
+  <p class="section-desc">Ethel dnes umí jednu zápisovou akci: založení organizace podle IČO z&nbsp;ARESu. Ta akce běží v&nbsp;ostrém provozu a&nbsp;prochází čtyřmi kroky, ze kterých žádný nejde přeskočit.</p>
+  <div class="wf-steps">
+    <div class="wf-step reveal reveal-delay-1">
+      <span class="wf-phase">Návrh</span>
+      <h3>Ethel připraví zápis</h3>
+      <p>Dohledá firmu v&nbsp;ARESu, zkontroluje, jestli už v&nbsp;Heliosu není, a&nbsp;sestaví návrh: která pole se zapíšou a&nbsp;s&nbsp;jakými hodnotami.</p>
+    </div>
+    <div class="wf-step reveal reveal-delay-2">
+      <span class="wf-phase">Potvrzení uživatelem</span>
+      <h3>Rozhodujete vy</h3>
+      <p>Návrh vidíte celý, než se cokoli stane. Dokud ho nepotvrdíte, do databáze nejde nic. Zamítnutí je stejně platná odpověď jako souhlas.</p>
+    </div>
+    <div class="wf-step reveal reveal-delay-3">
+      <span class="wf-phase">Provedení</span>
+      <h3>Zápis přes povolenou proceduru</h3>
+      <p>Ethel neskládá vlastní INSERT ani UPDATE. Zavolá proceduru z&nbsp;whitelistu <span class="code-inline">epx_Ethel_*</span>; jen ta smí do Heliosu zapsat.</p>
+    </div>
+    <div class="wf-step reveal reveal-delay-4">
+      <span class="wf-phase">Záznam v auditu</span>
+      <h3>Zůstane stopa</h3>
+      <p>Kdo akci spustil, co potvrdil a&nbsp;co se zapsalo, zůstává v&nbsp;auditním záznamu. Dohledáte to i&nbsp;za měsíc.</p>
+    </div>
+  </div>
+  <div class="wf-guard">
+    <p><strong>Potvrzení drží aplikace, ne model.</strong> Jazykový model umí zápis navrhnout, ale spustit ho nedokáže. Tlačítko potvrzení obsluhuje aplikace a bez něj se procedura nezavolá. Whitelist hlídá jinou věc: které procedury Ethel vůbec smí volat. Co přesně se zapíše, čtete v návrhu, který schvalujete.</p>
+  </div>
+  <p class="wf-note">Další akce máme rozpracované. Na web je dáme, až poběží u&nbsp;zákazníků, ne dřív.</p>
+</section>
+
 <!-- USE CASES -->
 <section class="usecases reveal" id="usecases">
   <div class="section-label">Příklady</div>
   <h2 class="section-title">Co se lidé ptají</h2>
-  <p class="section-desc">Reálné dotazy, reálné odpovědi – z vaší databáze, ne z internetu.</p>
+  <p class="section-desc">Ukázky dotazů z běžného dne v Heliosu a&nbsp;co s nimi Ethel udělá. Odpovídá z vaší databáze, ne z internetu.</p>
   <div class="usecase-grid">
     <div class="usecase reveal">
       <div class="usecase-q">"Kolik objednávek přišlo včera z e-shopu?"</div>
-      <div class="usecase-a">→ Včera 47 objednávek za 128 450 Kč. Tři čekají na ruční párování.</div>
+      <div class="usecase-a">→ Vypíše počet i&nbsp;celkovou částku za včerejšek a&nbsp;upozorní na ty, které čekají na ruční párování.</div>
       <div class="usecase-benefit">↗ Bez otevírání jediné sestavy</div>
+    </div>
+    <div class="usecase reveal">
+      <div class="usecase-q">"Založ organizaci podle IČO z ARESu."</div>
+      <ol class="usecase-steps">
+        <li>Dohledá firmu v ARESu a&nbsp;zkontroluje duplicitu v&nbsp;Heliosu.</li>
+        <li>Ukáže návrh zápisu se všemi poli a&nbsp;počká na vaše potvrzení.</li>
+        <li>Po potvrzení zavolá povolenou proceduru <span class="code-inline">epx_Ethel_*</span>.</li>
+        <li>Zapíše, co se stalo, do auditního záznamu.</li>
+      </ol>
+      <div class="usecase-a">→ Organizace je v&nbsp;Heliosu založená, bez ručního přepisování z&nbsp;rejstříku.</div>
+      <div class="usecase-benefit">↗ Jediná zápisová akce, kterou dnes Ethel umí</div>
     </div>
     <div class="usecase reveal">
       <div class="usecase-q">"Na co se tady dívám? Co jsou tyhle sloupce?"</div>
@@ -1185,8 +1284,14 @@
     </div>
     <div class="usecase reveal">
       <div class="usecase-q">"Který zákazník měl letos největší obrat?"</div>
-      <div class="usecase-a">→ ABC Trade s.r.o. – obrat 4,2 mil. Kč, meziročně +18 %. Druhý je Delta Elektro s 3,1 mil. Kč.</div>
+      <div class="usecase-a">→ Seřadí odběratele podle obratu za zvolené období a&nbsp;doplní meziroční změnu.</div>
       <div class="usecase-benefit">↗ Odpověď za sekundy místo ručního exportu</div>
+    </div>
+    <div class="usecase usecase-objection reveal">
+      <div class="usecase-label">Námitka, kterou slyšíme nejčastěji</div>
+      <div class="usecase-q usecase-q-plain">Co když Ethel zapíše něco špatně?</div>
+      <div class="usecase-a">→ Bez vašeho potvrzení nezapíše nic. Návrh zápisu vidíte celý dopředu a&nbsp;potvrzení drží aplikace, ne model. Samotný zápis pak projde jedině povolenou procedurou <span class="code-inline">epx_Ethel_*</span>; nic mimo tenhle whitelist se ke&nbsp;spuštění nedostane.</div>
+      <div class="usecase-benefit">↗ Dvě nezávislé pojistky, ne slib</div>
     </div>
   </div>
 </section>
@@ -1243,7 +1348,7 @@
   <div class="price-grid">
 
     <!-- STANDARD -->
-    <div class="price-card reveal reveal-delay-1" data-monthly="1 490" data-annual="1 242" data-monthly-period="měsíčně" data-annual-period="1 242 Kč / měs. · 14 900 Kč / rok" data-monthly-note="bez DPH" data-annual-note="platba jednou ročně" data-monthly-extra="Každý další uživatel: +249 Kč / měsíc" data-annual-extra="Každý další uživatel: +209 Kč / měsíc">
+    <div class="price-card reveal reveal-delay-1" data-monthly="1 490" data-annual="1 236" data-monthly-period="měsíčně" data-annual-period="při roční platbě" data-monthly-note="bez DPH" data-annual-note="bez DPH" data-monthly-extra="Každý další uživatel: +249 Kč / měsíc" data-annual-extra="Každý další uživatel: +206 Kč / měsíc">
       <div class="price-tier">Standard</div>
       <div class="price-subtitle">1 databáze · 5 uživatelů v ceně</div>
       <div class="price-amount-wrap">
@@ -1257,6 +1362,7 @@
         <li><span class="check">✓</span>1 databáze</li>
         <li><span class="check">✓</span>5 uživatelů v ceně</li>
         <li class="price-extra"><span class="check">✓</span>Každý další uživatel: +249 Kč / měsíc</li>
+        <li><span class="check">✓</span>1 akce v ceně: založení organizace</li>
         <li><span class="check">✓</span>Průběžné aktualizace</li>
       </ul>
       <div class="price-cta">
@@ -1265,7 +1371,7 @@
     </div>
 
     <!-- ENTERPRISE -->
-    <div class="price-card reveal reveal-delay-2" data-monthly="4 990" data-annual="4 158" data-monthly-period="měsíčně" data-annual-period="4 158 Kč / měs. · 49 900 Kč / rok" data-monthly-note="bez DPH" data-annual-note="platba jednou ročně">
+    <div class="price-card reveal reveal-delay-2" data-monthly="4 990" data-annual="4 141" data-monthly-period="měsíčně" data-annual-period="při roční platbě" data-monthly-note="bez DPH" data-annual-note="bez DPH">
       <div class="price-tier">Enterprise</div>
       <div class="price-subtitle">Multi-DB provoz · neomezený tým</div>
       <div class="price-amount-wrap">
@@ -1288,7 +1394,7 @@
     </div>
 
   </div>
-  <div class="price-sub">Early access – trial 14 dní zdarma bez omezení.</div>
+  <div class="price-sub">Ceník platný od 24. 7. 2026. Všechny ceny jsou bez DPH.</div>
 </section>
 
 <!-- CTA -->
@@ -1340,18 +1446,6 @@
 </div>
 
 </main>
-
-<!-- COOKIE CONSENT BANNER -->
-<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
-  <div class="cookie-banner-text">
-    <strong>Sušenky? 🍪</strong> Používáme jen analytické cookies (Google Analytics) k pochopení, jak vám web slouží.
-    Žádný marketing, žádný tracking napříč weby. Můžete je odmítnout – web bude fungovat normálně.
-  </div>
-  <div class="cookie-banner-actions">
-    <button class="cookie-btn cookie-btn-reject" id="cookie-reject" type="button">Odmítnout</button>
-    <button class="cookie-btn cookie-btn-accept" id="cookie-accept" type="button">Přijmout</button>
-  </div>
-</div>
 
 <!-- COOKIE CONSENT BANNER -->
 <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
@@ -1417,7 +1511,7 @@ document.querySelectorAll('.reveal').forEach(function(el) {
         { from: 'user', text: 'Kolik objednávek přišlo včera z e-shopu?' },
         { from: 'bot', text: 'Včera přijato <span class="hl">47 objednávek</span> za <span class="hl">128 450 Kč</span> bez DPH. Tři z nich čekají na ruční párování – chcete je zobrazit?' },
         { from: 'user', text: 'Ne, díky. Radši řekni, jestli máme faktury hodně po splatnosti.' },
-        { from: 'bot', text: '<span class="hl">12 faktur</span> je po splatnosti víc než 30 dnů, celkem <span class="hl">847 200 Kč</span>. Největší dlužník je <strong>ABC Trade s.r.o.</strong> – 3 faktury za 312 000 Kč.' }
+        { from: 'bot', text: '<span class="hl">12 faktur</span> je po splatnosti víc než 30 dnů, celkem <span class="hl">847 200 Kč</span>. Nejvíc z toho drží jeden odběratel, tři faktury. Chcete rozpad?' }
       ]
     },
     {
@@ -1444,7 +1538,7 @@ document.querySelectorAll('.reveal').forEach(function(el) {
         { from: 'user', text: 'Co znamenají sloupce v sestavě Přehled tržeb?' },
         { from: 'bot', text: 'Sestava zobrazuje měsíční tržby podle středisek. Sloupce: <span class="hl">Středisko</span> (org. jednotka), <span class="hl">Tržby netto</span> (bez DPH), <span class="hl">Marže %</span> a <span class="hl">YoY</span> (meziroční změna).' },
         { from: 'user', text: 'Proč je u střediska 300 marže záporná?' },
-        { from: 'bot', text: 'Středisko 300 (Servis) má marži <span class="hl">−4,2 %</span> – náklady na reklamace v březnu přesáhly tržby o <span class="hl">38 000 Kč</span>. Hlavní položka: 3 reklamace od <strong>Delta Elektro</strong>.' }
+        { from: 'bot', text: 'Středisko 300 (Servis) má marži <span class="hl">−4,2 %</span> – náklady na reklamace v březnu přesáhly tržby o <span class="hl">38 000 Kč</span>. Hlavní položka: tři reklamace od jednoho odběratele.' }
       ]
     }
   ];
