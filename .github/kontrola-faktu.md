@@ -1,6 +1,6 @@
 2. 8. 2026
 
-# Křížová kontrola faktů — ethel.cz, vrstva A
+# Křížová kontrola faktů — ethel.cz, vrstva A (náhled `/nahled-2/`)
 
 Interní soubor. Leží v `.github/`, protože GitHub Pages publikují z kořene repa a `.github/`
 je adresář, který by publikovaný výstup obsahovat neměl. **Předpoklad k ověření po mergi:**
@@ -14,9 +14,22 @@ Zdroje pravdy pro tuhle kontrolu: ceník v5 platný od 24. 7. 2026, katalog akc�
 bezpečnostních invariantů ze zadání ze 2. 8. 2026, dále Jira ETH-17, ETH-257, ETH-259, ETH-287,
 ETH-295, ETH-296, ETH-299.
 
-**Použitá varianta: A1b (bez modulu Akce).** ETH-295 i ETH-296 byly 2. 8. 2026 ve stavu Backlog,
-ETH-287 ve stavu Úkoly. Modul Akce, custom scénář ani „modul v ceně" u Enterprise se proto na web
-nedostaly. Vrstva B je blokovaná na ETH-287 → ETH-299 a v téhle dávce se nedělala.
+**Pozor na historii větve.** PR #5 (`c1e80a0`) mergnul do `main` **starší podobu téhle dávky**,
+která sahala na ostrou homepage a psala o zápisových akcích. Tahle větev to vrací: `index.html`,
+`/faq`, `/docs/prvni-kroky` i `sitemap.xml` jsou zpět na stavu z `63deb62`, tedy před dávkou.
+
+**Kam dávka sahá.** Ostrá verze webu se **nemění** — `index.html`, `/faq`, `/docs/prvni-kroky`
+i `sitemap.xml` jsou bajtově shodné se stavem před dávkou. Všechny úpravy leží v nové stránce
+**`/nahled-2/index.html`** (noindex, `Disallow: /nahled-2/` v `robots.txt`), stejným způsobem,
+jakým vzniklo `/nahled/`. Rozhodl Jakub 2. 8. 2026.
+
+**O zápisových akcích se na webu zatím nepíše.** Původní verze dávky měla sekci o akcích
+postavenou kolem jediné živé akce; Jakubovo rozhodnutí z 2. 8.: „napsat, že Ethel umí zatím
+jednu akci, prodává slabinu" — počká se, až jich bude víc. Z náhledu proto zmizela celá sekce
+o zápisech, obě karty o akcích v „Co se lidé ptají" i řádek „1 akce v ceně" v ceníku.
+Varianta A1b (bez modulu Akce, ETH-295 a ETH-296 v Backlogu) tím platí tím spíš.
+
+Vrstva B je blokovaná na ETH-287 → ETH-299 a v téhle dávce se nedělala.
 
 ---
 
@@ -28,14 +41,17 @@ větve `main`), ne na `https://ethel.cz/` — ze sandboxu není na ethel.cz sí�
 
 Příkaz: `npx lighthouse <url> --form-factor=mobile --quiet`, medián ze tří běhů, Chromium 1194.
 
-| Kategorie | Baseline (main) | Po zásahu (web/vrstva-a) | Rozdíl |
-|---|---|---|---|
-| Performance (mobil) | **77** | **79** | +2 |
-| Accessibility | 100 | 100 | 0 |
-| Best practices | 100 | 100 | 0 |
-| SEO | 100 | 100 | 0 |
+| Kategorie | Baseline (`main`, homepage) | `/nahled-2/` |
+|---|---|---|
+| Performance (mobil) | **77** | **77** |
+| Accessibility | 100 | 100 |
+| Best practices | 100 | 100 |
+| SEO | 100 | 69 |
 
-Jednotlivé běhy baseline: 77 / 77 / 79. Po zásahu: 77 / 79 / 79.
+Jednotlivé běhy baseline: 77 / 77 / 79. Náhled: 69 / 77 / 77.
+
+**SEO 69 u náhledu je záměr, ne regrese** — stránka má `noindex, nofollow` a Lighthouse za to
+strhává. Při překlopení na ostrou verzi se meta vrátí na `index, follow` a hodnota s ní.
 
 Metriky baseline (medián běh): FCP 3,5 s · LCP 4,1 s · TBT 0 ms · CLS 0 · Speed Index 4,7 s.
 Performance drží dolů FCP a LCP, ne skripty. Lokální server bez komprese a HTTP/2 je horší než
@@ -64,18 +80,9 @@ carousel, trust box a nová sekce o zápisech, které v původním výčtu chyb�
 | 5 | funkce | „Standardní procedury, views a triggery Helios Inuvio." | ETH-17, changelog 12. 6. 2026 | A |
 | 6 | persony | tři role bez čísel | — | A |
 | 7 | Jak to funguje | čtyři kroky instalace, aktivační token | dokumentace `/docs/prvni-kroky` | A |
-| 8 | **Co se stane, když Ethel něco zapisuje** (nová) | „Ethel dnes umí jednu zápisovou akci: založení organizace podle IČO z ARESu" | katalog akcí — jediná položka „na web: ANO" | A |
-| 8 | tamtéž | „Ta akce běží v ostrém provozu" | katalog akcí, ETH-255/256 | A |
-| 8 | tamtéž | zápis jde přes whitelist `epx_Ethel_*` | invariant I2 | A |
-| 8 | tamtéž | „Potvrzení drží aplikace, ne model." | invariant I5 | A |
-| 8 | tamtéž | co whitelist garantuje: „Whitelist hlídá jinou věc: které procedury Ethel vůbec smí volat." | invariant I2 — hlídá jméno procedury, ne hodnoty parametrů | A (první formulace slibovala, že whitelist zastaví i jiné hodnoty — přepsáno) |
-| 8 | tamtéž | „Co přesně se zapíše, čtete v návrhu, který schvalujete." | ne invariant, ale chování potvrzovací smyčky (návrh se uživateli zobrazuje před provedením); invarianty I2 a I5 tenhle konkrétní slib nekryjí | A, ale opora je aplikační, ne testovaná — patří ověřit v ETH-299 |
-| 8 | tamtéž | „založení organizace podle IČO z ARESu" | katalog akcí | A, ale dotaz do ARESu je volání ven a bezpečnostní box o něm mlčí — viz otevřená otázka 12 |
-| 8 | tamtéž | auditní záznam o spuštění | invariant I5, ETH-295 (`ethel.action_log`) | A |
+| 8 | — | sekce o zápisových akcích **vyňata** na Jakubovo rozhodnutí z 2. 8. 2026 | — | — |
 | 9 | Co se lidé ptají | popis sekce „Ukázky dotazů z běžného dne v Heliosu" | ilustrace, netvrdí četnost (mezikrok „padají nejčastěji" byl tvrzení o četnosti bez zdroje, přepsán) | A |
 | 9 | Co se lidé ptají | „Vypíše počet i celkovou částku za včerejšek" | schopnost, bez konkrétního čísla | A |
-| 9 | tamtéž | „Založ organizaci podle IČO z ARESu" + čtyřkrokový sled | katalog akcí | A |
-| 9 | tamtéž | „Co když Ethel zapíše něco špatně?" — potvrzení + whitelist | invarianty I2 a I5 | A |
 | 9 | tamtéž | „ABC Trade s.r.o. – obrat 4,2 mil. Kč, Delta Elektro 3,1 mil. Kč" | žádný | **N → přepsáno** bez firem a bez částek |
 | 9 | tamtéž | „Nemusíte číst 300 řádků SQL" | ilustrační rozsah, ne tvrzení o produktu | A |
 | 10 | bezpečnost (box) | „Vaše data nikam neodchází", „Do cloudu jde jen dotaz" | ⚠️ ETH-287 popisuje čtyři cesty ven | **?** viz otevřená otázka 3 |
@@ -84,7 +91,7 @@ carousel, trust box a nová sekce o zápisech, které v původním výčtu chyb�
 | 12 | trust box | nadpis „Nasazeno u reálných firem" bez reference | text pod ním to relativizuje, ale nadpis slibuje víc | **?** viz otevřená otázka 5 |
 | 13 | ceník | Standard 1 490 Kč/měs, 1 databáze, 5 uživatelů | ceník v5 | A |
 | 13 | ceník | další uživatel +249 Kč/měs | ceník v5 | A |
-| 13 | ceník | „1 akce v ceně: založení organizace" | ceník v5 | A (doplněno) |
+| 13 | ceník | „1 akce v ceně: založení organizace" z ceníku v5 | ceník v5 | **vyňato** — mluví o akci, viz rozhodnutí z 2. 8. |
 | 13 | ceník | Enterprise 4 990 Kč/měs, neomezeně DB i uživatelů | ceník v5 | A |
 | 13 | ceník | roční režim Standard 1 236 Kč, Enterprise 4 141 Kč, další uživatel 206 Kč | 1 490 × 0,83 = 1 236,7 → 1 236; 4 990 × 0,83 = 4 141,7 → 4 141; 249 × 0,83 = 206,6 → 206 | A (opraveno z v4: 1 242 / 4 158 / 209) |
 | 13 | ceník | roční součty „14 900 Kč / rok" a „49 900 Kč / rok" | ceník v5 roční součet nezobrazuje | **N → odstraněno** |
@@ -96,23 +103,20 @@ carousel, trust box a nová sekce o zápisech, které v původním výčtu chyb�
 | 17 | footer | IČ 75185628, kontaktní údaje | rejstřík | A |
 | 17 | footer | odkaz `/partneri` | **stránka v repu neexistuje** | **N** viz otevřená otázka 4 |
 
-### `/faq` (dotčeno v téhle dávce)
+### `/faq` — **nedotčeno** (dřívější verze dávky ho měnila, vráceno)
 
 | Tvrzení | Zdroj | Shoda |
 |---|---|---|
-| „Ethel je pouze pro čtení. Zápisové operace neprojdou." | katalog akcí — zápisové akce běží od 24. 7. 2026 | **N → přepsáno**: čtení přes generované SQL zůstává read-only, zápis jen přes potvrzenou akci a whitelistovanou proceduru |
-| „Ethel spouští jen čtecí dotazy" (zátěž SQL Serveru) | totéž | **N → doplněno** o větu o zápisové akci |
+| „Ethel je pouze pro čtení. Zápisové operace neprojdou." | katalog akcí — zápisové akce běží od 24. 7. 2026 | **N, vědomě ponecháno** — oprava by musela mluvit o akcích, a o těch se zatím nepíše. Platí i pro `/bezpecnost` a `/docs/prvni-kroky`; viz otevřená otázka 6. |
 | Standard 1 490 Kč, Enterprise 4 990 Kč, +249 Kč, bez DPH | ceník v5 | A |
-| výčet u Standardu bez „1 akce v ceně: založení organizace" | ceník v5 | **N → doplněno** v HTML i v JSON-LD, aby `/faq` a homepage říkaly totéž |
 | „Měsíční předplatné" bez zmínky ročního režimu | homepage roční režim má | **?** viz otevřená otázka 7 |
 | TLS 1.2+, model-agnostická architektura, instalace 15–30 minut | `/bezpecnost`, dokumentace | A (nedotčeno) |
 
-### `/docs/prvni-kroky` (dotčeno v téhle dávce)
+### `/docs/prvni-kroky` — **nedotčeno** (dřívější verze dávky ho měnila, vráceno)
 
 | Tvrzení | Zdroj | Shoda |
 |---|---|---|
-| „Mazat ani měnit data v Heliosu. Ethel umí pouze číst." | katalog akcí | **N → přepsáno** stejnou logikou jako `/faq`; zdrojem je `docs/prvni-kroky.md`, HTML vzniklo `npm run build:docs` |
-| „Ethel je tu na čtení a vyhledávání. Pro úpravy dat slouží standardní postupy v Heliosu." (ř. 53 zdrojového `.md`) | katalog akcí | **N → přepsáno**; ta věta popírala opravu o pár řádků výš |
+| „Mazat ani měnit data v Heliosu. Ethel umí pouze číst." | katalog akcí | **N, vědomě ponecháno** — stejný důvod jako u `/faq` |
 | „Ethel za 2–5 sekund vrátí odpověď" | žádný doložený benchmark | **?** viz otevřená otázka 8 |
 
 ### `/bezpecnost`, `/docs/changelog`, `/nahled` — nedotčeno
@@ -172,18 +176,20 @@ se reference řeší až po konverzích trialů, tak jsem to nechal, ale stojí 
 Poznámka: počet zákaznických instalací, u kterých akce běží, jsem na web **nedal** — `CLAUDE.md`
 zakazuje publikovat počty klientů.
 
-**6. `/bezpecnost` po téhle dávce tvrdí opak než homepage a `/faq`.**
+**6. Web na třech místech tvrdí, že Ethel umí pouze číst.**
 `bezpecnost/index.html:202`: „Ethel pracuje **výhradně v režimu čtení** (SELECT). Každé
 vygenerované SQL prochází validační vrstvou, která zápisové operace … nepropustí." A znovu
 `:293` v shrnutí: „Co když Ethel vygeneruje špatné SQL? → Pouze čtení, validace mimo AI model."
 Od 24. 7. 2026 to neplatí; homepage, `/faq` i `/docs/prvni-kroky` teď říkají, že Ethel zapisuje
 přes potvrzenou akci a whitelistovanou proceduru.
 
-Rozhodnutí z 2. 8. 2026: `/bezpecnost` patří vrstvě B, kterou blokuje ETH-287 → ETH-299, a v téhle
-dávce se na ni nesahalo. **Do doby, než se vrstva B odblokuje, tvrdí web na téhle jedné stránce
-nepravdu**, a homepage na ni odkazuje přímo ze safety boxu („Více o bezpečnosti →"). Když se
-vrstva B protáhne, stojí za zvážení opravit ty dvě věty samostatně, dřív než přijdou invarianty
-z ETH-299 — je to jednořádková oprava stejného typu, jaká proběhla ve `/faq`.
+Stejné tvrzení je i ve `faq/index.html` (HTML i JSON-LD) a v `docs/prvni-kroky.md:47`.
+Od 24. 7. 2026 to neplatí, ale **opravit se to nedá bez zmínky o akcích**, o kterých se podle
+rozhodnutí z 2. 8. zatím nepíše. Ponecháno vědomě, ne přehlédnuto.
+
+Až akcí přibude a půjdou na web, tyhle tři soubory je nutné opravit **současně** s tím —
+jinak bude web tvrdit dvě věci najednou. Původní znění opravy je v historii větve
+(commit `c3c4e57`), takže se dá vzít odtamtud.
 
 **7. `/faq` neuvádí roční režim.** Homepage má přepínač měsíčně/ročně se slevou 17 %, `/faq` tvrdí
 „Měsíční předplatné" a „platbu kartou připravujeme". Není to lež, ale je to neúplné.
