@@ -53,7 +53,7 @@ carousel, trust box a nová sekce o zápisech, které v původním výčtu chyb�
 | # | Sekce | Tvrzení | Zdroj | Shoda |
 |---|---|---|---|---|
 | 1 | navigace | bez číselných a schopnostních tvrzení | — | — |
-| 2 | hero | „AI asistentka pro Helios Inuvio, odpoví na dotazy, vysvětlí sestavy" | katalog schopností, ETH-17 | A |
+| 2 | hero | hero podtitul: schopnost odpovídat na dotazy, vysvětlit sestavy a pomoct s orientací v datech (shrnutí, ne citace) | katalog schopností, ETH-17 | A |
 | 3 | chat carousel | ilustrační čísla v ukázkové konverzaci (47 objednávek, 128 450 Kč, 12 faktur…) | žádný — jde o mockup | **N → opraveno**: doplněn popisek „Ukázka konverzace. Čísla i názvy položek v odpovědích jsou ilustrační, ne data konkrétního zákazníka." |
 | 3 | chat carousel | fiktivní firmy „ABC Trade s.r.o." a „Delta Elektro" | žádný | **N → odstraněno** (precedent ETH-161) |
 | 4 | value strip | „10 kliků v sestavách → 1 otázka" | **žádný ověřitelný zdroj** | **N → přepsáno** na „Klikání v sestavách → Jedna otázka" |
@@ -61,15 +61,15 @@ carousel, trust box a nová sekce o zápisech, které v původním výčtu chyb�
 | 5 | funkce | „Otázku můžete i nadiktovat, psát ji nemusíte." | ETH-259, hotovo 24. 7. 2026 | A (doplněno) |
 | 5 | funkce | „prohledává celou wiki Heliosu, všech 11 023 úseků nápovědy" | ETH-17, v produkci (11 023 chunků) | A (doplněno) |
 | 5 | funkce | „AI vidí strukturu databáze, ale ne obsah vašich tabulek" | ⚠️ viz otevřená otázka 3 | **?** |
-| 5 | funkce | „rozumí procedurám, views a triggerům Helios Inuvio" | ETH-17, changelog 12. 6. 2026 | A |
+| 5 | funkce | „Standardní procedury, views a triggery Helios Inuvio." | ETH-17, changelog 12. 6. 2026 | A |
 | 6 | persony | tři role bez čísel | — | A |
 | 7 | Jak to funguje | čtyři kroky instalace, aktivační token | dokumentace `/docs/prvni-kroky` | A |
 | 8 | **Co se stane, když Ethel něco zapisuje** (nová) | „Ethel dnes umí jednu zápisovou akci: založení organizace podle IČO z ARESu" | katalog akcí — jediná položka „na web: ANO" | A |
-| 8 | tamtéž | „Běží v ostrém provozu" | katalog akcí, ETH-255/256 | A |
+| 8 | tamtéž | „Ta akce běží v ostrém provozu" | katalog akcí, ETH-255/256 | A |
 | 8 | tamtéž | zápis jde přes whitelist `epx_Ethel_*` | invariant I2 | A |
 | 8 | tamtéž | „Potvrzení drží aplikace, ne model." | invariant I5 | A |
 | 8 | tamtéž | co whitelist garantuje: „Whitelist hlídá jinou věc: které procedury Ethel vůbec smí volat." | invariant I2 — hlídá jméno procedury, ne hodnoty parametrů | A (první formulace slibovala, že whitelist zastaví i jiné hodnoty — přepsáno) |
-| 8 | tamtéž | „Co se v nich zapíše, čtete v návrhu, který schvalujete." | ne invariant, ale chování potvrzovací smyčky (návrh se uživateli zobrazuje před provedením); invarianty I2 a I5 tenhle konkrétní slib nekryjí | A, ale opora je aplikační, ne testovaná — patří ověřit v ETH-299 |
+| 8 | tamtéž | „Co přesně se zapíše, čtete v návrhu, který schvalujete." | ne invariant, ale chování potvrzovací smyčky (návrh se uživateli zobrazuje před provedením); invarianty I2 a I5 tenhle konkrétní slib nekryjí | A, ale opora je aplikační, ne testovaná — patří ověřit v ETH-299 |
 | 8 | tamtéž | „založení organizace podle IČO z ARESu" | katalog akcí | A, ale dotaz do ARESu je volání ven a bezpečnostní box o něm mlčí — viz otevřená otázka 12 |
 | 8 | tamtéž | auditní záznam o spuštění | invariant I5, ETH-295 (`ethel.action_log`) | A |
 | 9 | Co se lidé ptají | popis sekce „Ukázky dotazů z běžného dne v Heliosu" | ilustrace, netvrdí četnost (mezikrok „padají nejčastěji" byl tvrzení o četnosti bez zdroje, přepsán) | A |
@@ -152,7 +152,7 @@ Rozhodnutí k udělání: buď přidat na náhled basic auth / přesunout ho mim
 s A1b.
 
 **3. Slib o datech na homepage a `/bezpecnost` neodpovídá ETH-287.**
-Homepage tvrdí „Vaše data nikam neodchází" a „AI vidí strukturu databáze, ale ne obsah tabulek",
+Homepage tvrdí „Vaše data nikam neodchází" a „AI vidí strukturu databáze, ale ne obsah vašich tabulek",
 `/bezpecnost` má „Vaše firemní data nikdy neopustí váš server". ETH-287 popisuje čtyři cesty, kterými
 data dnes klientský stroj opouštějí (text ODBC chyby, `sql_result` v `/api/interpret`, výsledky
 čtecích kroků scénářů, hlasové čtení přes ElevenLabs), a sám navrhuje slib přeformulovat.
