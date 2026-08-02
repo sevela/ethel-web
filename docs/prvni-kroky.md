@@ -44,13 +44,13 @@ Pár dotazů z praxe, ať vidíte rozsah:
 
 Ze záměru – bezpečnost vašich dat je priorita.
 
-- ❌ **Mazat ani měnit data v Heliosu.** Ethel umí pouze číst.
+- ❌ **Mazat ani měnit data v Heliosu na vlastní pěst.** Dotazy jsou jen pro čtení; zapsat umí Ethel výhradně zápisovou akcí, kterou jí zadáte a před provedením potvrdíte.
 - ❌ **Přistupovat k datům mimo Helios** (souborový systém, jiné aplikace, e-maily).
 - ❌ **Spouštět vlastní SQL** mimo schválený rozsah.
 - ❌ **Pracovat s Mzdami, Personalistikou a Bankou.** Tyto moduly nejsou ve znalostní bázi.
 - ❌ **Posílat data ven** bez vašeho vědomí. Více v sekci [Bezpečnost](/bezpecnost).
 
-Ethel je tu na čtení a vyhledávání. Pro úpravy dat slouží standardní postupy v Heliosu.
+Ethel je tu hlavně na čtení a vyhledávání. Zapsat umí jedinou akcí, kterou jí zadáte a před provedením potvrdíte; všechno ostatní se v Heliosu dělá standardními postupy.
 
 ## Tipy do začátku
 
