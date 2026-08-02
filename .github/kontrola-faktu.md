@@ -54,9 +54,9 @@ carousel, trust box a nová sekce o zápisech, které v původním výčtu chyb�
 |---|---|---|---|---|
 | 1 | navigace | bez číselných a schopnostních tvrzení | — | — |
 | 2 | hero | „AI asistentka pro Helios Inuvio, odpoví na dotazy, vysvětlí sestavy" | katalog schopností, ETH-17 | A |
-| 3 | chat carousel | ilustrační čísla v ukázkové konverzaci (47 objednávek, 128 450 Kč, 12 faktur…) | žádný — jde o mockup | **N → opraveno**: doplněn popisek „Ukázka konverzace. Čísla a názvy položek jsou ilustrační, ne data konkrétního zákazníka." |
+| 3 | chat carousel | ilustrační čísla v ukázkové konverzaci (47 objednávek, 128 450 Kč, 12 faktur…) | žádný — jde o mockup | **N → opraveno**: doplněn popisek „Ukázka konverzace. Čísla i názvy položek v odpovědích jsou ilustrační, ne data konkrétního zákazníka." |
 | 3 | chat carousel | fiktivní firmy „ABC Trade s.r.o." a „Delta Elektro" | žádný | **N → odstraněno** (precedent ETH-161) |
-| 4 | value strip | „10 kliků v sestavách → 1 otázka" | **žádný ověřitelný zdroj** | **N → přepsáno** na „Klikání v sestavách → 1 otázka" |
+| 4 | value strip | „10 kliků v sestavách → 1 otázka" | **žádný ověřitelný zdroj** | **N → přepsáno** na „Klikání v sestavách → Jedna otázka" |
 | 4 | value strip | „Export do Excelu a ruční počítání → Okamžitá odpověď", „Závislost na IT → Odpovědi pro každého" | kvalitativní, bez čísla | A (první z nich přeformulována, aby se významově nepřekrývala s klikáním v sestavách) |
 | 5 | funkce | „Otázku můžete i nadiktovat, psát ji nemusíte." | ETH-259, hotovo 24. 7. 2026 | A (doplněno) |
 | 5 | funkce | „prohledává celou wiki Heliosu, všech 11 023 úseků nápovědy" | ETH-17, v produkci (11 023 chunků) | A (doplněno) |
@@ -68,9 +68,11 @@ carousel, trust box a nová sekce o zápisech, které v původním výčtu chyb�
 | 8 | tamtéž | „Běží v ostrém provozu" | katalog akcí, ETH-255/256 | A |
 | 8 | tamtéž | zápis jde přes whitelist `epx_Ethel_*` | invariant I2 | A |
 | 8 | tamtéž | „Potvrzení drží aplikace, ne model." | invariant I5 | A |
-| 8 | tamtéž | co whitelist garantuje: „Whitelist hlídá, které procedury se vůbec smí spustit. Co se zapíše, vidíte v návrhu, který potvrzujete." | invariant I2 hlídá jméno procedury, ne hodnoty parametrů; hodnoty hlídá potvrzení podle I5 | A (první formulace slibovala, že whitelist zastaví i jiné hodnoty — přepsáno) |
+| 8 | tamtéž | co whitelist garantuje: „Whitelist hlídá jinou věc: které procedury Ethel vůbec smí volat." | invariant I2 — hlídá jméno procedury, ne hodnoty parametrů | A (první formulace slibovala, že whitelist zastaví i jiné hodnoty — přepsáno) |
+| 8 | tamtéž | „Co se v nich zapíše, čtete v návrhu, který schvalujete." | ne invariant, ale chování potvrzovací smyčky (návrh se uživateli zobrazuje před provedením); invarianty I2 a I5 tenhle konkrétní slib nekryjí | A, ale opora je aplikační, ne testovaná — patří ověřit v ETH-299 |
 | 8 | tamtéž | „založení organizace podle IČO z ARESu" | katalog akcí | A, ale dotaz do ARESu je volání ven a bezpečnostní box o něm mlčí — viz otevřená otázka 12 |
 | 8 | tamtéž | auditní záznam o spuštění | invariant I5, ETH-295 (`ethel.action_log`) | A |
+| 9 | Co se lidé ptají | popis sekce „Ukázky dotazů z běžného dne v Heliosu" | ilustrace, netvrdí četnost (mezikrok „padají nejčastěji" byl tvrzení o četnosti bez zdroje, přepsán) | A |
 | 9 | Co se lidé ptají | „Vypíše počet i celkovou částku za včerejšek" | schopnost, bez konkrétního čísla | A |
 | 9 | tamtéž | „Založ organizaci podle IČO z ARESu" + čtyřkrokový sled | katalog akcí | A |
 | 9 | tamtéž | „Co když Ethel zapíše něco špatně?" — potvrzení + whitelist | invarianty I2 a I5 | A |
@@ -202,16 +204,6 @@ ilustrační" nikoho neklame.
 `id="cookie-banner"`, `id="cookie-reject"` a `id="cookie-accept"`. JS obsluhoval jen první, druhý
 visel v DOM. **Odstraněno** v téhle dávce.
 
----
-
-## Co se v téhle dávce neověřovalo
-
-- Šest bezpečnostních invariantů (I1–I6) a jejich opora v testech. Podklad dodá ETH-299, produktový
-  kód není v tomhle repu; opora se nesmí odvozovat, jen přebírat.
-- Seznam zpracovatelů dat. Dodá ETH-299.
-- Kritéria vyžadující živé URL: `curl` na `.github/kontrola-faktu.md` (musí vrátit 404) a Lighthouse
-  proti `https://ethel.cz/`. Obojí jde ověřit až po mergi.
-
 **12. Dotaz do ARESu je volání ven a bezpečnostní box o něm mlčí.**
 Nová sekce o zápisech uvádí, že Ethel dohledá firmu v ARESu. Bezpečnostní box o pár sekcí níž
 tvrdí „Vaše data nikam neodchází" a mezi pilulkami má „Žádný export dat". IČO, které uživatel
@@ -225,3 +217,13 @@ Homepage teď mluví o zápisových akcích (od 24. 7.), hlasovém vstupu (ETH-2
 úseky (ETH-17). Changelog o žádné z nich neví a u vydání 1.0 má pořád „(pouze čtení)". Nedotýkal
 jsem se ho, protože doplnit changelog znamená znát data vydání, která nemám. Stojí za samostatnou
 dávku.
+
+---
+
+## Co se v téhle dávce neověřovalo
+
+- Šest bezpečnostních invariantů (I1–I6) a jejich opora v testech. Podklad dodá ETH-299, produktový
+  kód není v tomhle repu; opora se nesmí odvozovat, jen přebírat.
+- Seznam zpracovatelů dat. Dodá ETH-299.
+- Kritéria vyžadující živé URL: `curl` na `.github/kontrola-faktu.md` (musí vrátit 404) a Lighthouse
+  proti `https://ethel.cz/`. Obojí jde ověřit až po mergi.

@@ -401,6 +401,9 @@
     max-width: 580px; margin-bottom: 3.5rem; line-height: 1.7;
   }
 
+  /* inline kód v běžném textu; používá se ve víc sekcích */
+  .code-inline { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; color: var(--accent-light); }
+
   /* ===== FEATURES ===== */
   .features { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
   .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
@@ -497,7 +500,6 @@
   .wf-guard strong { color: var(--text); font-weight: 600; }
   .wf-guard p { color: var(--text-secondary); font-size: 0.92rem; font-weight: 300; line-height: 1.7; }
   .wf-note { margin-top: 1.5rem; color: var(--text-dim); font-size: 0.85rem; font-weight: 300; }
-  .code-inline { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; color: var(--accent-light); }
 
   /* ===== USE CASES ===== */
   .usecases { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
@@ -1077,7 +1079,7 @@
     </div>
     <div class="chat-dots" id="chat-dots"></div>
   </div>
-  <p class="chat-disclaimer">Ukázka konverzace. Čísla v odpovědích jsou ilustrační, ne data konkrétního zákazníka.</p>
+  <p class="chat-disclaimer">Ukázka konverzace. Čísla i&nbsp;názvy položek v odpovědích jsou ilustrační, ne data konkrétního zákazníka.</p>
 </div>
 
 <!-- VALUE STRIP -->
@@ -1175,28 +1177,28 @@
   <p class="section-desc">Žádná měsíční implementace. Ethel se napojí na váš Helios a&nbsp;začne odpovídat.</p>
   <div class="steps">
     <div class="step reveal">
-      <div class="step-num mono">01</div>
+      <div class="step-num">01</div>
       <div class="step-content">
         <h3>Spustíte instalační skript</h3>
         <p>Jeden SQL skript nasadí Ethel do vaší databáze. Připojení k Heliosu přes standardní konfiguraci – bez zásahů do jádra systému.</p>
       </div>
     </div>
     <div class="step reveal">
-      <div class="step-num mono">02</div>
+      <div class="step-num">02</div>
       <div class="step-content">
         <h3>Ethel se propojí s Heliosem</h3>
         <p>Načte připojení k vaší databázi z&nbsp;konfigurace Heliosu. Standardní tabulky a&nbsp;procedury už zná – nemusí nic skenovat ani indexovat.</p>
       </div>
     </div>
     <div class="step reveal">
-      <div class="step-num mono">03</div>
+      <div class="step-num">03</div>
       <div class="step-content">
         <h3>Zadáte aktivační token</h3>
         <p>Token dostanete po objednávce. O AI se staráme my – žádné vlastní API klíče, žádné technické nastavování. Prostě to funguje.</p>
       </div>
     </div>
     <div class="step reveal">
-      <div class="step-num mono">04</div>
+      <div class="step-num">04</div>
       <div class="step-content">
         <h3>Ptejte se</h3>
         <p>Otevřete Ethel přímo z Heliosu, napíšete otázku česky a&nbsp;dostanete odpověď s reálnými daty z&nbsp;vašeho Heliosu. Jako byste se ptali kolegy, který zná celý systém.</p>
@@ -1233,7 +1235,7 @@
     </div>
   </div>
   <div class="wf-guard">
-    <p><strong>Potvrzení drží aplikace, ne model.</strong> Jazykový model umí zápis navrhnout, ale spustit ho nedokáže. Tlačítko potvrzení obsluhuje aplikace; bez něj se procedura nezavolá. Whitelist k tomu hlídá druhou věc: které procedury se vůbec smí spustit. Co se zapíše, vidíte v návrhu, který potvrzujete.</p>
+    <p><strong>Potvrzení drží aplikace, ne model.</strong> Jazykový model umí zápis navrhnout, ale spustit ho nedokáže. Tlačítko potvrzení obsluhuje aplikace a bez něj se procedura nezavolá. Whitelist hlídá jinou věc: které procedury Ethel vůbec smí volat. Co se v nich zapíše, čtete v návrhu, který schvalujete.</p>
   </div>
   <p class="wf-note">Další akce máme rozpracované. Na web je dáme, až poběží u&nbsp;zákazníků, ne dřív.</p>
 </section>
@@ -1242,7 +1244,7 @@
 <section class="usecases reveal" id="usecases">
   <div class="section-label">Příklady</div>
   <h2 class="section-title">Co se lidé ptají</h2>
-  <p class="section-desc">Dotazy, které v Heliosu padají nejčastěji, a&nbsp;co s nimi Ethel udělá. Odpovídá z vaší databáze, ne z internetu.</p>
+  <p class="section-desc">Ukázky dotazů z běžného dne v Heliosu a&nbsp;co s nimi Ethel udělá. Odpovídá z vaší databáze, ne z internetu.</p>
   <div class="usecase-grid">
     <div class="usecase reveal">
       <div class="usecase-q">"Kolik objednávek přišlo včera z e-shopu?"</div>
