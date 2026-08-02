@@ -50,7 +50,7 @@ Ze záměru – bezpečnost vašich dat je priorita.
 - ❌ **Pracovat s Mzdami, Personalistikou a Bankou.** Tyto moduly nejsou ve znalostní bázi.
 - ❌ **Posílat data ven** bez vašeho vědomí. Více v sekci [Bezpečnost](/bezpecnost).
 
-Ethel je tu hlavně na čtení a vyhledávání. Zapsat umí jedinou akcí, kterou jí zadáte a před provedením potvrdíte; všechno ostatní se v Heliosu dělá standardními postupy.
+Ethel je tu hlavně na čtení a vyhledávání. Zapisuje jen tam, kde ji o to sami požádáte; všechno ostatní se v Heliosu dělá standardními postupy.
 
 ## Tipy do začátku
 

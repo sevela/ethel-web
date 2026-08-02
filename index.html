@@ -497,11 +497,11 @@
   .wf-guard strong { color: var(--text); font-weight: 600; }
   .wf-guard p { color: var(--text-secondary); font-size: 0.92rem; font-weight: 300; line-height: 1.7; }
   .wf-note { margin-top: 1.5rem; color: var(--text-dim); font-size: 0.85rem; font-weight: 300; }
-  .wf-code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; color: var(--accent-light); }
+  .code-inline { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; color: var(--accent-light); }
 
   /* ===== USE CASES ===== */
   .usecases { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
-  .usecase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
+  .usecase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; align-items: start; }
   .usecase {
     padding: 1.6rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius);
     background: var(--bg-card); transition: all 0.3s;
@@ -1077,7 +1077,7 @@
     </div>
     <div class="chat-dots" id="chat-dots"></div>
   </div>
-  <p class="chat-disclaimer">Ukázka konverzace. Čísla a&nbsp;názvy položek jsou ilustrační, ne data konkrétního zákazníka.</p>
+  <p class="chat-disclaimer">Ukázka konverzace. Čísla v odpovědích jsou ilustrační, ne data konkrétního zákazníka.</p>
 </div>
 
 <!-- VALUE STRIP -->
@@ -1087,7 +1087,7 @@
     <div class="value-item">
       <div class="value-before">Klikání v sestavách</div>
       <div class="value-arrow">↓</div>
-      <div class="value-after">1 otázka</div>
+      <div class="value-after">Jedna otázka</div>
     </div>
     <div class="value-item">
       <div class="value-before">Export do Excelu a ruční počítání</div>
@@ -1209,7 +1209,7 @@
 <section class="writeflow reveal" id="akce">
   <div class="section-label">Zápisy do Heliosu</div>
   <h2 class="section-title">Co se stane, když Ethel něco zapisuje</h2>
-  <p class="section-desc">Ethel dnes umí jednu zápisovou akci: založení organizace podle IČO z&nbsp;ARESu. Běží v&nbsp;ostrém provozu a&nbsp;prochází čtyřmi kroky, ze kterých žádný nejde přeskočit.</p>
+  <p class="section-desc">Ethel dnes umí jednu zápisovou akci: založení organizace podle IČO z&nbsp;ARESu. Ta akce běží v&nbsp;ostrém provozu a&nbsp;prochází čtyřmi kroky, ze kterých žádný nejde přeskočit.</p>
   <div class="wf-steps">
     <div class="wf-step reveal reveal-delay-1">
       <span class="wf-phase">Návrh</span>
@@ -1224,7 +1224,7 @@
     <div class="wf-step reveal reveal-delay-3">
       <span class="wf-phase">Provedení</span>
       <h3>Zápis přes povolenou proceduru</h3>
-      <p>Ethel neskládá vlastní INSERT ani UPDATE. Zavolá proceduru z&nbsp;whitelistu <span class="wf-code">epx_Ethel_*</span>, a&nbsp;jen ta smí do Heliosu zapsat.</p>
+      <p>Ethel neskládá vlastní INSERT ani UPDATE. Zavolá proceduru z&nbsp;whitelistu <span class="code-inline">epx_Ethel_*</span>; jen ta smí do Heliosu zapsat.</p>
     </div>
     <div class="wf-step reveal reveal-delay-4">
       <span class="wf-phase">Záznam v auditu</span>
@@ -1233,7 +1233,7 @@
     </div>
   </div>
   <div class="wf-guard">
-    <p><strong>Potvrzení drží aplikace, ne model.</strong> Jazykový model umí zápis navrhnout, ale spustit ho nedokáže. Tlačítko potvrzení obsluhuje aplikace, a&nbsp;bez něj se procedura nezavolá. Kdyby model vymyslel úplně jiný zápis, než jaký jste viděli, whitelist procedur ho zastaví.</p>
+    <p><strong>Potvrzení drží aplikace, ne model.</strong> Jazykový model umí zápis navrhnout, ale spustit ho nedokáže. Tlačítko potvrzení obsluhuje aplikace; bez něj se procedura nezavolá. Whitelist k tomu hlídá druhou věc: které procedury se vůbec smí spustit. Co se zapíše, vidíte v návrhu, který potvrzujete.</p>
   </div>
   <p class="wf-note">Další akce máme rozpracované. Na web je dáme, až poběží u&nbsp;zákazníků, ne dřív.</p>
 </section>
@@ -1242,7 +1242,7 @@
 <section class="usecases reveal" id="usecases">
   <div class="section-label">Příklady</div>
   <h2 class="section-title">Co se lidé ptají</h2>
-  <p class="section-desc">Dotazy, které lidem v Heliosu chodí na jazyk, a&nbsp;co s nimi Ethel udělá. Odpovídá z vaší databáze, ne z internetu.</p>
+  <p class="section-desc">Dotazy, které v Heliosu padají nejčastěji, a&nbsp;co s nimi Ethel udělá. Odpovídá z vaší databáze, ne z internetu.</p>
   <div class="usecase-grid">
     <div class="usecase reveal">
       <div class="usecase-q">"Kolik objednávek přišlo včera z e-shopu?"</div>
@@ -1254,7 +1254,7 @@
       <ol class="usecase-steps">
         <li>Dohledá firmu v ARESu a&nbsp;zkontroluje duplicitu v&nbsp;Heliosu.</li>
         <li>Ukáže návrh zápisu se všemi poli a&nbsp;počká na vaše potvrzení.</li>
-        <li>Po potvrzení zavolá povolenou proceduru <span class="wf-code">epx_Ethel_*</span>.</li>
+        <li>Po potvrzení zavolá povolenou proceduru <span class="code-inline">epx_Ethel_*</span>.</li>
         <li>Zapíše, co se stalo, do auditního záznamu.</li>
       </ol>
       <div class="usecase-a">→ Organizace je v&nbsp;Heliosu založená, bez ručního přepisování z&nbsp;rejstříku.</div>
@@ -1286,9 +1286,9 @@
       <div class="usecase-benefit">↗ Odpověď za sekundy místo ručního exportu</div>
     </div>
     <div class="usecase usecase-objection reveal">
-      <div class="usecase-label mono">Námitka, kterou slyšíme nejčastěji</div>
+      <div class="usecase-label">Námitka, kterou slyšíme nejčastěji</div>
       <div class="usecase-q usecase-q-plain">Co když Ethel zapíše něco špatně?</div>
-      <div class="usecase-a">→ Bez vašeho potvrzení nezapíše nic. Návrh zápisu vidíte celý dopředu a&nbsp;potvrzení drží aplikace, ne model. Samotný zápis pak projde jedině povolenou procedurou <span class="wf-code">epx_Ethel_*</span>; nic mimo tenhle whitelist se ke&nbsp;spuštění nedostane.</div>
+      <div class="usecase-a">→ Bez vašeho potvrzení nezapíše nic. Návrh zápisu vidíte celý dopředu a&nbsp;potvrzení drží aplikace, ne model. Samotný zápis pak projde jedině povolenou procedurou <span class="code-inline">epx_Ethel_*</span>; nic mimo tenhle whitelist se ke&nbsp;spuštění nedostane.</div>
       <div class="usecase-benefit">↗ Dvě nezávislé pojistky, ne slib</div>
     </div>
   </div>

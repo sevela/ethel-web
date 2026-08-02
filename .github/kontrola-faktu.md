@@ -5,8 +5,10 @@
 Interní soubor. Leží v `.github/`, protože GitHub Pages publikují z kořene repa a `.github/`
 je adresář, který by publikovaný výstup obsahovat neměl. **Předpoklad k ověření po mergi:**
 `curl -sI https://ethel.cz/.github/kontrola-faktu.md` musí vrátit 404. Kdyby vrátil 200,
-soubor se musí z repa vyndat jinam (Pages s `.nojekyll` kopírují obsah větve včetně
-dot-adresářů, což je důvod, proč na Pages funguje `.well-known/`). V `sitemap.xml` není.
+soubor se musí z repa vyndat jinam — GitHub Pages s `.nojekyll` kopírují obsah větve včetně
+dot-adresářů, takže spolehnout se na to, že `.github/` zůstane skrytý, nejde. Jako levná pojistka
+je v `robots.txt` řádek `Disallow: /.github/`; **není to řešení, jen zdržení** — kdyby `curl`
+vrátil 200, soubor musí pryč z repa. V `sitemap.xml` není.
 
 Zdroje pravdy pro tuhle kontrolu: ceník v5 platný od 24. 7. 2026, katalog akcí a seznam šesti
 bezpečnostních invariantů ze zadání ze 2. 8. 2026, dále Jira ETH-17, ETH-257, ETH-259, ETH-287,
@@ -66,6 +68,8 @@ carousel, trust box a nová sekce o zápisech, které v původním výčtu chyb�
 | 8 | tamtéž | „Běží v ostrém provozu" | katalog akcí, ETH-255/256 | A |
 | 8 | tamtéž | zápis jde přes whitelist `epx_Ethel_*` | invariant I2 | A |
 | 8 | tamtéž | „Potvrzení drží aplikace, ne model." | invariant I5 | A |
+| 8 | tamtéž | co whitelist garantuje: „Whitelist hlídá, které procedury se vůbec smí spustit. Co se zapíše, vidíte v návrhu, který potvrzujete." | invariant I2 hlídá jméno procedury, ne hodnoty parametrů; hodnoty hlídá potvrzení podle I5 | A (první formulace slibovala, že whitelist zastaví i jiné hodnoty — přepsáno) |
+| 8 | tamtéž | „založení organizace podle IČO z ARESu" | katalog akcí | A, ale dotaz do ARESu je volání ven a bezpečnostní box o něm mlčí — viz otevřená otázka 12 |
 | 8 | tamtéž | auditní záznam o spuštění | invariant I5, ETH-295 (`ethel.action_log`) | A |
 | 9 | Co se lidé ptají | „Vypíše počet i celkovou částku za včerejšek" | schopnost, bez konkrétního čísla | A |
 | 9 | tamtéž | „Založ organizaci podle IČO z ARESu" + čtyřkrokový sled | katalog akcí | A |
@@ -98,7 +102,7 @@ carousel, trust box a nová sekce o zápisech, které v původním výčtu chyb�
 | „Ethel spouští jen čtecí dotazy" (zátěž SQL Serveru) | totéž | **N → doplněno** o větu o zápisové akci |
 | Standard 1 490 Kč, Enterprise 4 990 Kč, +249 Kč, bez DPH | ceník v5 | A |
 | výčet u Standardu bez „1 akce v ceně: založení organizace" | ceník v5 | **N → doplněno** v HTML i v JSON-LD, aby `/faq` a homepage říkaly totéž |
-| „Měsíční předplatné" bez zmínky ročního režimu | homepage roční režim má | **?** viz otevřená otázka 6 |
+| „Měsíční předplatné" bez zmínky ročního režimu | homepage roční režim má | **?** viz otevřená otázka 7 |
 | TLS 1.2+, model-agnostická architektura, instalace 15–30 minut | `/bezpecnost`, dokumentace | A (nedotčeno) |
 
 ### `/docs/prvni-kroky` (dotčeno v téhle dávce)
@@ -107,12 +111,12 @@ carousel, trust box a nová sekce o zápisech, které v původním výčtu chyb�
 |---|---|---|
 | „Mazat ani měnit data v Heliosu. Ethel umí pouze číst." | katalog akcí | **N → přepsáno** stejnou logikou jako `/faq`; zdrojem je `docs/prvni-kroky.md`, HTML vzniklo `npm run build:docs` |
 | „Ethel je tu na čtení a vyhledávání. Pro úpravy dat slouží standardní postupy v Heliosu." (ř. 53 zdrojového `.md`) | katalog akcí | **N → přepsáno**; ta věta popírala opravu o pár řádků výš |
-| „Ethel za 2–5 sekund vrátí odpověď" | žádný doložený benchmark | **?** viz otevřená otázka 7 |
+| „Ethel za 2–5 sekund vrátí odpověď" | žádný doložený benchmark | **?** viz otevřená otázka 8 |
 
 ### `/bezpecnost`, `/docs/changelog`, `/nahled` — nedotčeno
 
 `/bezpecnost` patří vrstvě B a je blokovaná na ETH-287 → ETH-299. Nálezy k ní jsou v otevřených
-otázkách 3, 8 a 10. **Otázka 10 je vědomě odložený rozpor, ne přehlédnutí.**
+otázkách 3, 6 a 9. **Otázka 6 je vědomě odložený rozpor, ne přehlédnutí.**
 
 ---
 
@@ -166,7 +170,7 @@ se reference řeší až po konverzích trialů, tak jsem to nechal, ale stojí 
 Poznámka: počet zákaznických instalací, u kterých akce běží, jsem na web **nedal** — `CLAUDE.md`
 zakazuje publikovat počty klientů.
 
-**10. `/bezpecnost` po téhle dávce tvrdí opak než homepage a `/faq`.**
+**6. `/bezpecnost` po téhle dávce tvrdí opak než homepage a `/faq`.**
 `bezpecnost/index.html:202`: „Ethel pracuje **výhradně v režimu čtení** (SELECT). Každé
 vygenerované SQL prochází validační vrstvou, která zápisové operace … nepropustí." A znovu
 `:293` v shrnutí: „Co když Ethel vygeneruje špatné SQL? → Pouze čtení, validace mimo AI model."
@@ -179,22 +183,22 @@ nepravdu**, a homepage na ni odkazuje přímo ze safety boxu („Více o bezpeč
 vrstva B protáhne, stojí za zvážení opravit ty dvě věty samostatně, dřív než přijdou invarianty
 z ETH-299 — je to jednořádková oprava stejného typu, jaká proběhla ve `/faq`.
 
-**6. `/faq` neuvádí roční režim.** Homepage má přepínač měsíčně/ročně se slevou 17 %, `/faq` tvrdí
+**7. `/faq` neuvádí roční režim.** Homepage má přepínač měsíčně/ročně se slevou 17 %, `/faq` tvrdí
 „Měsíční předplatné" a „platbu kartou připravujeme". Není to lež, ale je to neúplné.
 
-**7. „Ethel za 2–5 sekund vrátí odpověď"** v `/docs/prvni-kroky` je jediné výkonnostní číslo na
+**8. „Ethel za 2–5 sekund vrátí odpověď"** v `/docs/prvni-kroky` je jediné výkonnostní číslo na
 webu a nemám k němu doložený zdroj. Nechal jsem ho být.
 
-**8. `/faq` a `/bezpecnost` nemají cookie banner.** GA4 snippet je jen na homepage, takže právní
+**9. `/faq` a `/bezpecnost` nemají cookie banner.** GA4 snippet je jen na homepage, takže právní
 problém to není. Kdyby se GA rozšířilo na podstránky, banner tam bude potřeba doplnit.
 
-**11. Nedoložená čísla, která na webu zůstala.** „Nemusíte číst 300 řádků SQL" (homepage,
+**10. Nedoložená čísla, která na webu zůstala.** „Nemusíte číst 300 řádků SQL" (homepage,
 ilustrační rozsah) a „Ethel za 2–5 sekund vrátí odpověď" (`/docs/prvni-kroky`, jediné výkonnostní
-číslo na webu, viz otázka 7). U chat mockupu jsem se vědomě rozhodl **čísla nechat a přiznat je
+číslo na webu, viz otázka 8). U chat mockupu jsem se vědomě rozhodl **čísla nechat a přiznat je
 popiskem** místo odstranění: bez čísel ztrácí ukázka konverzace smysl, s popiskem „čísla jsou
 ilustrační" nikoho neklame.
 
-**9. Duplicitní cookie banner na homepage.** `index.html` obsahoval dvakrát tentýž blok s totožnými
+**11. Duplicitní cookie banner na homepage.** `index.html` obsahoval dvakrát tentýž blok s totožnými
 `id="cookie-banner"`, `id="cookie-reject"` a `id="cookie-accept"`. JS obsluhoval jen první, druhý
 visel v DOM. **Odstraněno** v téhle dávce.
 
@@ -207,3 +211,17 @@ visel v DOM. **Odstraněno** v téhle dávce.
 - Seznam zpracovatelů dat. Dodá ETH-299.
 - Kritéria vyžadující živé URL: `curl` na `.github/kontrola-faktu.md` (musí vrátit 404) a Lighthouse
   proti `https://ethel.cz/`. Obojí jde ověřit až po mergi.
+
+**12. Dotaz do ARESu je volání ven a bezpečnostní box o něm mlčí.**
+Nová sekce o zápisech uvádí, že Ethel dohledá firmu v ARESu. Bezpečnostní box o pár sekcí níž
+tvrdí „Vaše data nikam neodchází" a mezi pilulkami má „Žádný export dat". IČO, které uživatel
+zadá, jde do veřejného rejstříku — je to jiná kategorie než výsledky SQL, o kterých mluví
+invariant I1, ale na webu to nikde nestojí. ETH-287 tuhle cestu ve svém výčtu čtyř nemá, protože
+řeší výsledky dotazů. **Nedomýšlím, jestli ARES volá agent u klienta, nebo proxy** — to je otázka
+na tebe. Až se bude psát vrstva B, patří odpověď do formulace slibu o datech.
+
+**13. `/docs/changelog` končí 12. 6. 2026 a nezná nic z toho, co dnes web tvrdí.**
+Homepage teď mluví o zápisových akcích (od 24. 7.), hlasovém vstupu (ETH-259) a wiki s 11 023
+úseky (ETH-17). Changelog o žádné z nich neví a u vydání 1.0 má pořád „(pouze čtení)". Nedotýkal
+jsem se ho, protože doplnit changelog znamená znát data vydání, která nemám. Stojí za samostatnou
+dávku.
