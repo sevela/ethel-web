@@ -184,7 +184,7 @@
       "name": "Co když Ethel vygeneruje SQL, který něco změní v databázi?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Generované SQL je pouze pro čtení. Každý dotaz prochází validační vrstvou, která propustí jen SELECT – zápisové operace (INSERT, UPDATE, DELETE i DDL) neprojdou, ať AI vygeneruje cokoliv. Vrstvu průběžně testujeme i proti záměrným pokusům o obejití. Zapisovat umí Ethel jedině zápisovou akcí, kterou si sami vyžádáte. Ta neběží přes generované SQL: volá připravenou proceduru z whitelistu epx_Ethel_* a spustí se až po vašem potvrzení, které drží aplikace, ne model. O každém spuštění zůstává auditní záznam."
+        "text": "Ethel je pouze pro čtení. Každé SQL prochází validační vrstvou, která propustí jen SELECT – zápisové operace (INSERT, UPDATE, DELETE i DDL) neprojdou, ať AI vygeneruje cokoliv. Vrstvu průběžně testujeme i proti záměrným pokusům o obejití."
       }
     },
     {
@@ -240,7 +240,7 @@
       "name": "Nezatíží Ethel náš SQL Server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Ne. Ethel spouští čtecí dotazy srovnatelné s běžnou sestavou. Žádná synchronizace na pozadí, žádné kopírování dat – dotaz proběhne, jen když se uživatel zeptá. Zápisová akce proběhne jen tehdy, když ji uživatel sám potvrdí."
+        "text": "Ne. Ethel spouští jen čtecí dotazy srovnatelné s běžnou sestavou. Žádná synchronizace na pozadí, žádné kopírování dat – dotaz proběhne, jen když se uživatel zeptá."
       }
     },
     {
@@ -264,7 +264,7 @@
       "name": "Jaké jsou ceny a jak se platí?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Standard: 1 490 Kč/měsíc, jedna databáze, 5 uživatelů v ceně, další uživatel +249 Kč, 1 akce v ceně: založení organizace. Enterprise: 4 990 Kč/měsíc, neomezené databáze i uživatelé, onboarding, vlastní konfigurace. Ceny bez DPH. Měsíční předplatné, faktura v PDF s českými náležitostmi (IČO, DIČ, DPH), platba bankovním převodem; platbu kartou připravujeme."
+        "text": "Standard: 1 490 Kč/měsíc, jedna databáze, 5 uživatelů v ceně, další uživatel +249 Kč. Enterprise: 4 990 Kč/měsíc, neomezené databáze i uživatelé, onboarding, vlastní konfigurace. Ceny bez DPH. Měsíční předplatné, faktura v PDF s českými náležitostmi (IČO, DIČ, DPH), platba bankovním převodem; platbu kartou připravujeme."
       }
     },
     {
@@ -391,8 +391,7 @@
 
     <div class="faq-item">
       <h3 id="co-kdyz-ethel-vygeneruje-sql">Co když Ethel vygeneruje SQL, který něco změní v databázi?</h3>
-      <p>Generované SQL je <strong>pouze pro čtení</strong>. Každý dotaz prochází validační vrstvou, která propustí jen SELECT – zápisové operace (INSERT, UPDATE, DELETE i DDL) neprojdou, ať AI vygeneruje cokoliv. Vrstvu průběžně testujeme i proti záměrným pokusům o obejití.</p>
-      <p>Zapisovat umí Ethel jedině <strong>zápisovou akcí</strong>, kterou si sami vyžádáte. Ta neběží přes generované SQL: volá připravenou proceduru z whitelistu <code>epx_Ethel_*</code> a spustí se až po vašem potvrzení, které drží aplikace, ne model. O každém spuštění zůstává auditní záznam. Podrobněji na <a href="/#akce">hlavní stránce</a>.</p>
+      <p>Ethel je <strong>pouze pro čtení</strong>. Každé SQL prochází validační vrstvou, která propustí jen SELECT – zápisové operace (INSERT, UPDATE, DELETE i DDL) neprojdou, ať AI vygeneruje cokoliv. Vrstvu průběžně testujeme i proti záměrným pokusům o obejití.</p>
     </div>
 
     <div class="faq-item">
@@ -440,7 +439,7 @@
 
     <div class="faq-item">
       <h3 id="nezatizi-ethel-nas-sql-server">Nezatíží Ethel náš SQL Server?</h3>
-      <p>Ne. Ethel spouští čtecí dotazy srovnatelné s běžnou sestavou. Žádná synchronizace na pozadí, žádné kopírování dat – dotaz proběhne, jen když se uživatel zeptá. Zápisová akce proběhne jen tehdy, když ji uživatel sám potvrdí.</p>
+      <p>Ne. Ethel spouští jen čtecí dotazy srovnatelné s běžnou sestavou. Žádná synchronizace na pozadí, žádné kopírování dat – dotaz proběhne, jen když se uživatel zeptá.</p>
     </div>
 
     <div class="faq-item">
@@ -461,7 +460,7 @@
     <div class="faq-item">
       <h3 id="jake-jsou-ceny-a-jak-se-plati">Jaké jsou ceny a jak se platí?</h3>
       <ul>
-        <li><strong>Standard</strong> – 1&nbsp;490&nbsp;Kč/měsíc, jedna databáze, 5 uživatelů v ceně, další uživatel +249&nbsp;Kč, 1 akce v ceně: založení organizace</li>
+        <li><strong>Standard</strong> – 1&nbsp;490&nbsp;Kč/měsíc, jedna databáze, 5 uživatelů v ceně, další uživatel +249&nbsp;Kč</li>
         <li><strong>Enterprise</strong> – 4&nbsp;990&nbsp;Kč/měsíc, neomezené databáze i uživatelé, onboarding, vlastní konfigurace</li>
       </ul>
       <p>Ceny bez DPH. Měsíční předplatné, faktura v PDF s českými náležitostmi (IČO, DIČ, DPH), platba bankovním převodem; platbu kartou připravujeme. Detail na stránce <a href="/#cena">Ceny</a>.</p>
