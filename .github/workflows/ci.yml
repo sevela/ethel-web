@@ -70,7 +70,23 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name != 'schedule'
     steps:
-      - run: echo "::notice::Staticky web nema testovaci framework. Job je informativni placeholder, ne tiche vynechani."
+      - uses: actions/checkout@v4
+      - name: Ověř, že tvrzení "žádné testy" pořád platí (ETH-311)
+        run: |
+          set -e
+          TEST_FILES=$(git ls-files | grep -E '\.(test|spec)\.[cm]?js$' || true)
+          if [ -n "$TEST_FILES" ]; then
+            echo "::error::V repu přibyly testovací soubory, ale tenhle job je pořád jen placeholder:"
+            echo "$TEST_FILES"
+            echo "::error::Nahraď no-tests job reálným krokem, který je spustí (vzor: ethel-app, node --test tests/)."
+            exit 1
+          fi
+          HAS_TEST_SCRIPT=$(node -pe "!!(require('./package.json').scripts && require('./package.json').scripts.test)")
+          if [ "$HAS_TEST_SCRIPT" = "true" ]; then
+            echo "::error::V package.json přibyl 'test' skript, ale tenhle job je pořád jen placeholder — nahraď ho reálným krokem, který ho spustí."
+            exit 1
+          fi
+          echo "::notice::Statický web pořád nemá testovací soubory (*.test.js/*.spec.js) ani 'test' skript — placeholder platí. Job spadne sám, jakmile to přestane být pravda."
 
   quality-baseline:
     name: "JS — quality baseline (limity scripts/**/*.js)"

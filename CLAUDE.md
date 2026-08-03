@@ -99,3 +99,15 @@ zákaz měnit kód nad rámec vlastního zadání. Zmenšování souborů vlastn
 Do `main` se merguje výhradně přes pull request — ruleset `protect-main` přímý push
 odmítne. `npm run format` (bez `--check`) patří vždy do samostatného commitu, nikdy
 smíchaný s jinou změnou.
+
+## Required check musí umět spadnout (ETH-311)
+
+Job vedený jako required status check v rulesetu `eth270-required-checks` musí mít reálnou
+podmínku selhání — `echo`, holý `exit 0` nebo `continue-on-error: true` bez odůvodnění tam
+nepatří. ETH-311: v `ethel-app` byl required job `no-tests` přes měsíc jen `echo "žádný
+framework"`, zatímco v repu mezitím přibyly dva testovací soubory — commit, který by jejich
+regrese vrátil zpátky, by prošel zeleně. `ethel-web` skutečné testy nemá a `no-tests` job to
+smí tvrdit — ale musí to tvrzení sám ověřovat, ne ho jen vypsat: job selže, jakmile v repu
+vzniknou testovací soubory (`*.test.js`/`*.spec.js`) nebo `test` skript v `package.json` a
+nikdo ho neaktualizuje. Pravdivé tvrzení, které se časem stane nepravdivým a nikdo si toho
+nevšimne, je přesně ten samý nález jako v `ethel-app` — jen o krok dřív.
