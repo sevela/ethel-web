@@ -11,7 +11,10 @@ on:
   schedule:
     # Tydenni dependency audit. Z nemergnute vetve se nespusti — az po mergi
     # do main (fáze 3 ETH-270, otevřený bod pro Jakuba).
-    - cron: "0 6 * * 1"
+    # Mimo kulatou minutu (ETH-309/294 batch): ETH-309 potvrdilo zpozdeni
+    # 3h24m-4h01m proti planu, konzistentne napric repy — fronta GitHubu na
+    # kulate minute (0 6 * * 1), ne problem konfigurace.
+    - cron: "17 6 * * 1"
   workflow_dispatch:
 
 permissions:
