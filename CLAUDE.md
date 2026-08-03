@@ -52,7 +52,20 @@ a čisté. **Veřejné metody na třídu se nemíří** — žádná `class` v k
 jádrové pravidlo.
 
 Baseline **nemůže vyrůst sama** — každý růst existující položky je vědomé rozšíření souboru
-člověkem v PR.
+člověkem v PR. Snížení (refaktoring) se promítne automaticky při přegenerování.
+
+**Tightening je manuální krok (ETH-289), ne automatika ani týdenní bot** — stejné rozhodnutí a
+zdůvodnění jako v ostatních třech repech, viz `ethel-agent/CLAUDE.md`. Stav k ETH-289: baseline
+je prázdná a odpovídá aktuálnímu kódu, žádná korekce nebyla potřeba. Volnější limit pro
+testovací soubory (viz `ethel-proxy`, 800/1200 řádků) tu nedává smysl — repo nemá testovací
+framework ani jediný test soubor, přidávat carve-out pro neexistující kategorii by byla
+spekulativní abstrakce navíc.
+
+Dependency-audit job (`npm audit`) v tomhle repu zůstává **záměrně neblokující**
+(`continue-on-error: true`) a **není** v required checks branch protection rulesetu — na
+rozdíl od ostatních tří repů tu žádný produkční kód neběží proti datům zákazníků, jde o
+statický landing page. ETH-309 se ho proto netýkal; schedule (týdenní cron) tu už existoval
+z ETH-270 stejně jako všude jinde.
 
 ## Karanténa testů
 
