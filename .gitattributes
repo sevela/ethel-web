@@ -1,0 +1,13 @@
+# ETH-314 — konce řádků určuje repozitář, ne nastavení stroje.
+#
+# Zdůvodnění je společné pro všechny čtyři repy, plné znění v
+# `ethel-app/.gitattributes`. Tady navíc: `docs/` se generuje skriptem
+# (`npm run build:docs`) a vygenerované HTML se commituje — kdyby se konce
+# řádků lišily podle stroje, každý build by vyrobil diff přes celý web.
+
+* text=auto eol=lf
+
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.ico binary
