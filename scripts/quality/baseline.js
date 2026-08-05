@@ -77,19 +77,89 @@ function fileLineViolations(jsFiles) {
   return { files, allLines };
 }
 
+// ETH-318: jadrova ESLint pravidla hlasi cislo radku, ale ne jmeno funkce —
+// proto mel kazdy zaznam `name: null` a klic `path::::metric` slepil vsechny
+// funkce souboru do jedne polozky na metriku. Tady se to dnes neprojevi (repo
+// nema zadnou funkci pres limit), a prave proto to bylo potreba opravit driv,
+// nez se projevi: prvni funkce, ktera limit prelezne, by zacala prepisovat
+// klic te druhe a baseline by tise hlidala jen posledni z nich.
+//
+// Stejna oprava jako v `ethel-app` (ETH-318). Jmeno se bere z AST vlastnim
+// pravidlem — zadna nova zavislost, jen `eslint`, ktery uz v repu je.
+const FN_NAME_RULE = `
+const nameOf = (node) => {
+  if (node.id && node.id.name) return node.id.name;
+  const p = node.parent || {};
+  if (p.type === 'VariableDeclarator' && p.id && p.id.name) return p.id.name;
+  if ((p.type === 'Property' || p.type === 'MethodDefinition' || p.type === 'PropertyDefinition') && p.key) {
+    return p.key.name || p.key.value || null;
+  }
+  if (p.type === 'AssignmentExpression' && p.left) {
+    if (p.left.type === 'Identifier') return p.left.name;
+    if (p.left.type === 'MemberExpression' && p.left.property) {
+      return p.left.property.name || p.left.property.value || null;
+    }
+  }
+  return null;
+};
+const ethelfn = {
+  rules: {
+    'fn-name': {
+      create(context) {
+        // Anonymni callback dostane jmeno podle rodice a poradi ('build>fn#2'),
+        // ne podle radku — jinak by se klic posunul pri kazde uprave nad nim.
+        const stack = [];
+        let topLevel = 0;
+        const enter = (node) => {
+          const vlastni = nameOf(node);
+          let jmeno;
+          if (vlastni) {
+            jmeno = vlastni;
+          } else if (stack.length) {
+            const rodic = stack[stack.length - 1];
+            rodic.deti += 1;
+            jmeno = rodic.jmeno + '>fn#' + rodic.deti;
+          } else {
+            topLevel += 1;
+            jmeno = 'fn@top#' + topLevel;
+          }
+          stack.push({ jmeno, deti: 0 });
+          context.report({
+            node,
+            message: 'ETHELFN ' + node.loc.start.line + '-' + node.loc.end.line + ' ' + jmeno,
+          });
+        };
+        const leave = () => stack.pop();
+        return {
+          FunctionDeclaration: enter,
+          'FunctionDeclaration:exit': leave,
+          FunctionExpression: enter,
+          'FunctionExpression:exit': leave,
+          ArrowFunctionExpression: enter,
+          'ArrowFunctionExpression:exit': leave,
+        };
+      },
+    },
+  },
+};
+`;
+
 function withTempEslintConfig(fn) {
   const config = `
 import js from '@eslint/js';
 import globals from 'globals';
+${FN_NAME_RULE}
 export default [
   js.configs.recommended,
   {
+    plugins: { ethelfn },
     languageOptions: { ecmaVersion: 'latest', sourceType: 'module', globals: { ...globals.node } },
     rules: {
       'max-lines-per-function': ['warn', { max: 1, skipBlankLines: true, skipComments: true }],
       'max-params': ['warn', 1],
       'max-depth': ['warn', 1],
       complexity: ['warn', 1],
+      'ethelfn/fn-name': 'warn',
     },
   },
 ];
@@ -146,11 +216,36 @@ function parseMetricValue(msg) {
   return value === null ? null : { metric, value };
 }
 
+// ETH-318: `ethelfn/fn-name` hlasi rozsah funkce a jmeno. Parovani podle
+// rozsahu (ne podle shodneho radku) je nutne kvuli `max-depth` — to hlasi na
+// vnorenem bloku, ne na uzlu funkce, takze radky se neshoduji.
+function functionSpans(fileResult) {
+  const found = [];
+  for (const msg of fileResult.messages) {
+    if (msg.ruleId !== 'ethelfn/fn-name') continue;
+    const m = msg.message.match(/^ETHELFN (\d+)-(\d+) (.+)$/);
+    if (!m) continue;
+    found.push({ start: Number(m[1]), end: Number(m[2]), name: m[3] });
+  }
+  return found;
+}
+
+/** Nejvnitrnejsi funkce obsahujici dany radek (nejuzsi rozsah). */
+function nameForLine(spans, line) {
+  let best = null;
+  for (const s of spans) {
+    if (line < s.start || line > s.end) continue;
+    if (!best || s.end - s.start < best.end - best.start) best = s;
+  }
+  return best ? best.name : null;
+}
+
 function functionViolations(eslintResults) {
   const functions = [];
   const maxComplexityPerFile = {};
   for (const fileResult of eslintResults) {
     const rel = path.relative(REPO_ROOT, fileResult.filePath).replace(/\\/g, '/');
+    const spans = functionSpans(fileResult);
     for (const msg of fileResult.messages) {
       const parsed = parseMetricValue(msg);
       if (!parsed) continue;
@@ -162,7 +257,10 @@ function functionViolations(eslintResults) {
       if (value > limits.soft) {
         functions.push({
           path: rel,
-          name: null,
+          // Kdyz jmeno chybi, radek je posledni zachrana — horsi klic nez
+          // jmeno (posouva se), ale porad lepsi nez `null`, ktery slepi
+          // cely soubor do jedne polozky na metriku.
+          name: nameForLine(spans, msg.line) || `line@${msg.line}`,
           line: msg.line,
           metric,
           value,
