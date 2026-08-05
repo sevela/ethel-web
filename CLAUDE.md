@@ -111,3 +111,26 @@ smí tvrdit — ale musí to tvrzení sám ověřovat, ne ho jen vypsat: job sel
 vzniknou testovací soubory (`*.test.js`/`*.spec.js`) nebo `test` skript v `package.json` a
 nikdo ho neaktualizuje. Pravdivé tvrzení, které se časem stane nepravdivým a nikdo si toho
 nevšimne, je přesně ten samý nález jako v `ethel-app` — jen o krok dřív.
+
+## Architektonická rozhodnutí (ADR) — ETH-273
+
+**Každé netriviální rozhodnutí zakládá nové ADR.** Kód Ethel je AI-generovaný: vznikne
+snadno, ale *proč* je takový, zůstane v ukončené session. ADR je jediné místo, kde ten
+důvod přežije dávku, která ho vymyslela.
+
+**Kde žijí:** `docs/adr/` v repu **ethel-proxy** ([odkaz](https://github.com/sevela/ethel-proxy/blob/main/docs/adr)), ne tady.
+Jedno místo napříč repy, ne kopie per repo — stejné pravidlo jako pro
+`docs/private/` (viz root `ethel/CLAUDE.md`).
+
+**Formát:** `NNNN-nazev.md`, krátké — kontext → rozhodnutí → důsledky (dobré **i zlé**)
+→ alternativy, které padly a proč. Šablona je `0000-template.md`. Odstavec o ceně
+rozhodnutí nesmí chybět; rozhodnutí bez ceny je marketing, ne ADR. Číslo se nerecykluje,
+nahrazené ADR se nemaže — dostane `Stav: nahrazeno ADR NNNN`.
+
+**Kdy ho zakládáš:** když volba nejde odvodit z kódu a někdo by se za půl roku ptal „proč
+zrovna takhle" — volba technologie, bezpečnostní kompromis, vědomé omezení, práh nebo
+konstanta s netriviálním dopadem, vzor, který se má opakovat. **Nezakládáš ho** na
+běžnou implementaci, opravu chyby ani přejmenování.
+
+**Když důvod neznáš, nevymýšlej ho.** Napiš „důvod nedoložen, doplní Jakub" a dej to do
+otázek k dávce. Domyšlený důvod je horší než žádný — vypadá stejně jako doložený.
