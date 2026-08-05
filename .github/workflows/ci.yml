@@ -81,7 +81,10 @@ jobs:
           if [ -n "$TEST_FILES" ]; then
             echo "::error::V repu přibyly testovací soubory, ale tenhle job je pořád jen placeholder:"
             echo "$TEST_FILES"
-            echo "::error::Nahraď no-tests job reálným krokem, který je spustí (vzor: ethel-app, node --test tests/)."
+            # ETH-311: `node --test tests/` (adresář jako pozicní argument) padá na
+            # Node 22 s MODULE_NOT_FOUND. Bez pozicního argumentu jede defaultní
+            # rekurzivní discovery, která `tests/` najde sama a ten bug nemá.
+            echo "::error::Nahraď no-tests job reálným krokem, který je spustí (vzor: ethel-app, node --test)."
             exit 1
           fi
           HAS_TEST_SCRIPT=$(node -pe "!!(require('./package.json').scripts && require('./package.json').scripts.test)")
