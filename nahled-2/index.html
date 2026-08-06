@@ -1,1025 +1,650 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ethel – AI asistentka pro Helios Inuvio · náhled 2</title>
-<meta name="description" content="Ethel je AI asistentka pro Helios Inuvio. Zeptejte se místo proklikávání – rozumí vašim datům, sestavám i SQL a odpovídá česky.">
+<meta name="description" content="Ethel je AI asistentka přímo v Heliosu Inuvio. Odpovídá nad aktuálními daty a pomocí připravených scénářů zvládne i konkrétní úkoly – vždy pod vaší kontrolou.">
+<meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex, nofollow">
 <meta name="author" content="Jakub Ševela">
+
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="canonical" href="https://ethel.cz/nahled-2/">
 
-<!-- Open Graph -->
-<meta property="og:title" content="Ethel – AI asistentka pro Helios Inuvio">
-<meta property="og:description" content="Ethel je AI asistentka pro Helios Inuvio. Místo klikání se prostě zeptáte – odpoví na dotazy, vysvětlí sestavy a pomůže s daty. Česky, během sekund.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://ethel.cz/nahled-2/">
-<meta property="og:locale" content="cs_CZ">
-<meta property="og:site_name" content="Ethel">
-<meta property="og:image" content="https://ethel.cz/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Ethel – AI asistentka pro Helios Inuvio">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/brand/dm-sans-latin-ext-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/brand/lora-latin-ext-400-normal.woff2" crossorigin>
+<link rel="stylesheet" href="/brand/fonts.css">
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ethel – AI asistentka pro Helios Inuvio">
-<meta name="twitter:description" content="Ethel je AI asistentka pro Helios Inuvio. Místo klikání se prostě zeptáte – odpoví na dotazy, vysvětlí sestavy a pomůže s daty. Česky, během sekund.">
-<meta name="twitter:image" content="https://ethel.cz/og-image.png">
-<meta name="twitter:image:alt" content="Ethel – AI asistentka pro Helios Inuvio">
-
-<!-- Performance hints -->
-<link rel="dns-prefetch" href="https://gygwfcattcunbikootbx.supabase.co">
-<link rel="preload" href="/fonts/sora-800-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/sora-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/brand/tokens.css">
 <style>
-/* Self-hosted fonts (was Google Fonts) – see scripts/build-fonts.js to regenerate */
-@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/jetbrains-mono-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/jetbrains-mono-400-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/jetbrains-mono-500-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/jetbrains-mono-500-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/jetbrains-mono-700-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/jetbrains-mono-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 300; font-display: swap; src: url('/fonts/sora-300-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 300; font-display: swap; src: url('/fonts/sora-300-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/sora-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/sora-400-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/sora-500-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/sora-500-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/sora-600-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/sora-600-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/sora-700-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/sora-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 800; font-display: swap; src: url('/fonts/sora-800-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 800; font-display: swap; src: url('/fonts/sora-800-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/space-mono-700-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/space-mono-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* ==========================================================================
+   ethel.cz – NÁHLED 2. Grafika, komponenty a rytmus 1:1 podle /nahled
+   (grafický manuál v1.6, /brand/tokens.css). Nové jsou texty od Jakuba
+   a sekce, které /nahled neměl: Akce, vlastní scénáře, další schopnosti,
+   nasazení, dvojité příklady a kontaktní formulář přímo na stránce.
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
-  :root {
-    --bg: #08080a;
-    --bg-elevated: #0e0e12;
-    --bg-card: #111116;
-    --bg-card-hover: #16161d;
-    --border: #1c1c24;
-    --border-hover: #2a2a36;
-    --text: #eaeaf0;
-    --text-secondary: #9494a8;
-    --text-dim: #8a8a9e;
-    --accent: #6b94b8;
-    --accent-light: #8fb3cc;
-    --accent-glow: rgba(107, 148, 184, 0.10);
-    --accent-glow-strong: rgba(107, 148, 184, 0.22);
-    --green: #34d399;
-    --green-dim: rgba(52, 211, 153, 0.15);
-    --radius: 12px;
-    --radius-sm: 8px;
-    --radius-lg: 20px;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Sora', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-  }
-  .mono { font-family: 'JetBrains Mono', monospace; }
-
-  /* ===== GRAIN OVERLAY ===== */
-  body::after {
-    content: '';
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 9999; opacity: 0.5;
-  }
-
-  /* ===== NAV ===== */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    padding: 0 2rem; height: 64px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(8, 8, 10, 0.75); backdrop-filter: blur(24px) saturate(1.4);
-    border-bottom: 1px solid rgba(28, 28, 36, 0.6);
-    transition: all 0.3s;
-  }
-  nav.scrolled { background: rgba(8, 8, 10, 0.92); }
-  .nav-logo {
-    font-family: 'Space Mono', monospace; font-size: 1.25rem;
-    font-weight: 700; letter-spacing: 0.06em;
-    display: flex; align-items: center; gap: 0;
-    text-decoration: none;
-  }
-  .nav-logo .et { color: var(--text); }
-  .nav-logo .sep { color: var(--text-dim); margin: 0 0.05em; font-weight: 400; }
-  .nav-logo .hel { color: var(--accent); text-shadow: 0 0 18px rgba(107,148,184,0.4); }
-  .nav-links { display: flex; gap: 2rem; align-items: center; }
-  .nav-links a {
-    color: var(--text-dim); text-decoration: none;
-    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.02em;
-    transition: color 0.25s;
-  }
-  .nav-links a:hover { color: var(--text); }
-  .nav-links a.active { color: var(--accent); }
-  .nav-cta {
-    background: var(--accent) !important; color: #0a0f0e !important;
-    padding: 0.5rem 1.3rem !important; border-radius: var(--radius-sm) !important;
-    font-weight: 600 !important; transition: all 0.25s !important;
-  }
-  .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(107,148,184,0.3); }
-
-  /* ===== HERO ===== */
-  .hero {
-    min-height: 100vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; text-align: center;
-    padding: 8rem 2rem 4rem; position: relative; overflow: hidden;
-  }
-  .hero-glow {
-    position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
-    width: 900px; height: 900px;
-    background: radial-gradient(ellipse at center, rgba(107,148,184,0.07) 0%, rgba(107,148,184,0.025) 30%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-grid {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background-image:
-      linear-gradient(rgba(28,28,36,0.3) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(28,28,36,0.3) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-content { position: relative; z-index: 2; max-width: 800px; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    padding: 0.45rem 1.1rem; border: 1px solid rgba(107,148,184,0.2);
-    border-radius: 100px; font-size: 0.78rem; color: var(--accent-light);
-    margin-bottom: 2.5rem; background: var(--accent-glow);
-    animation: fadeSlideDown 0.6s ease-out;
-  }
-  .hero-badge .pulse-dot {
-    width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
-    box-shadow: 0 0 6px rgba(107,148,184,0.9), 0 0 16px rgba(107,148,184,0.5), 0 0 32px rgba(107,148,184,0.25);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.45); } }
-
-  .hero h1 {
-    font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800;
-    letter-spacing: -0.01em; line-height: 1.12; margin-bottom: 1.5rem;
-    animation: fadeSlideUp 0.7s ease-out;
-  }
-  .hero h1 .accent {
-    color: var(--accent);
-    text-shadow: 0 0 60px rgba(107,148,184,0.3), 0 0 120px rgba(107,148,184,0.1);
-  }
-  .hero h1 .dim { color: var(--text-dim); font-weight: 600; }
-  .hero-acronym {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
-    color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    animation: fadeSlideUp 0.85s ease-out 0.12s both;
-  }
-  .hero-sub {
-    font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text-secondary);
-    max-width: 560px; margin: 0 auto 1.2rem; font-weight: 300; line-height: 1.75;
-    animation: fadeSlideUp 0.8s ease-out 0.1s both;
-  }
-  .hero-value {
-    font-size: 0.92rem; color: var(--accent); font-weight: 500;
-    margin-bottom: 2.5rem; letter-spacing: 0.01em;
-    animation: fadeSlideUp 0.85s ease-out 0.15s both;
-  }
-  .hero-actions {
-    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
-    animation: fadeSlideUp 0.9s ease-out 0.2s both;
-  }
-
-  /* ===== BUTTONS ===== */
-  .btn {
-    padding: 0.9rem 2rem; border-radius: var(--radius-sm); font-size: 0.92rem;
-    font-weight: 600; text-decoration: none; transition: all 0.3s;
-    cursor: pointer; border: none; font-family: 'Sora', sans-serif;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-  }
-  .btn-primary {
-    background: var(--accent); color: #0a0f0e;
-    box-shadow: 0 0 0 0 rgba(107,148,184,0), 0 2px 8px rgba(0,0,0,0.3);
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(107,148,184,0.2), 0 8px 30px rgba(0,0,0,0.4);
-  }
-  .btn-ghost {
-    background: transparent; color: var(--text-secondary);
-    border: 1px solid var(--border-hover);
-  }
-  .btn-ghost:hover { color: var(--text); border-color: var(--text-dim); background: var(--bg-card); }
-
-  /* ===== CHAT MOCKUP ===== */
-  .chat-wrap {
-    padding: 0 2rem 4rem; display: flex; justify-content: center;
-    animation: fadeSlideUp 1s ease-out 0.35s both;
-  }
-  .chat-window {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: var(--radius-lg); width: 100%; max-width: 440px;
-    overflow: hidden;
-    box-shadow: 0 25px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03) inset;
-    display: flex; flex-direction: column;
-  }
-  .chat-header {
-    display: flex; align-items: center; gap: 0.75rem;
-    padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--border);
-    background: rgba(14, 14, 18, 0.6);
-  }
-  .chat-avatar {
-    width: 34px; height: 34px; border-radius: 10px;
-    background: none;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .chat-header-info { flex: 1; }
-  .chat-header-name { font-size: 0.85rem; font-weight: 600; }
-  .chat-header-status {
-    font-size: 0.68rem; color: var(--green); display: flex; align-items: center; gap: 0.3rem;
-  }
-  .chat-header-status .online-dot {
-    width: 5px; height: 5px; border-radius: 50%; background: var(--green);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  .chat-header-ctx {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
-    color: var(--text-dim); background: var(--bg); padding: 0.2rem 0.55rem;
-    border-radius: 5px; border: 1px solid var(--border);
-  }
-  .chat-body {
-    padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem;
-    min-height: 280px;
-  }
-  .chat-msg {
-    max-width: 82%; padding: 0.6rem 0.9rem; border-radius: 16px;
-    font-size: 0.84rem; line-height: 1.5;
-    opacity: 0; transform: translateY(6px);
-    transition: opacity 0.3s, transform 0.3s;
-  }
-  .chat-msg.visible { opacity: 1; transform: translateY(0); }
-  .chat-msg.user {
-    align-self: flex-end; background: var(--accent); color: #0a0f0e;
-    border-bottom-right-radius: 4px; font-weight: 500;
-  }
-  .chat-msg.bot {
-    align-self: flex-start; background: var(--bg-elevated); color: var(--text-secondary);
-    border: 1px solid var(--border); border-bottom-left-radius: 4px; font-weight: 300;
-  }
-  .chat-msg.bot strong { color: var(--text); font-weight: 400; }
-  .chat-msg.bot .hl { color: var(--accent-light); font-weight: 400; }
-  .chat-typing {
-    align-self: flex-start; padding: 0.65rem 0.9rem;
-    background: var(--bg-elevated); border: 1px solid var(--border);
-    border-radius: 16px; border-bottom-left-radius: 4px;
-    display: none; gap: 0.28rem; align-items: center;
-  }
-  .chat-typing.visible { display: flex; }
-  .chat-typing span {
-    width: 5px; height: 5px; border-radius: 50%; background: var(--text-dim);
-    animation: typingDot 1.4s ease-in-out infinite;
-  }
-  .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
-  .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes typingDot {
-    0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
-    30% { opacity: 1; transform: translateY(-3px); }
-  }
-  .chat-input-bar {
-    display: flex; align-items: center; gap: 0.5rem;
-    padding: 0.7rem 0.9rem; border-top: 1px solid var(--border);
-    background: rgba(14, 14, 18, 0.4);
-  }
-  .chat-input-fake {
-    flex: 1; padding: 0.55rem 0.9rem; border-radius: 10px;
-    background: var(--bg); border: 1px solid var(--border);
-    font-size: 0.8rem; color: var(--text-dim); font-family: 'Sora', sans-serif;
-  }
-  .chat-send-btn {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: var(--accent); border: none; cursor: default;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .chat-send-btn svg { width: 14px; height: 14px; fill: #0a0f0e; }
-
-  /* ===== CHAT CAROUSEL ===== */
-  .chat-carousel {
-    position: relative; max-width: 440px; width: 100%;
-  }
-  .chat-nav-btn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    width: 36px; height: 36px; border-radius: 50%;
-    background: var(--bg-card); border: 1px solid var(--border);
-    color: var(--text-secondary); cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.25s; z-index: 5;
-    font-size: 0.9rem; font-family: 'Sora', sans-serif;
-  }
-  .chat-nav-btn:hover {
-    background: var(--bg-card-hover); border-color: var(--border-hover);
-    color: var(--text);
-  }
-  .chat-nav-prev { left: -48px; }
-  .chat-nav-next { right: -48px; }
-  .chat-dots {
-    display: flex; justify-content: center; gap: 0.5rem;
-    margin-top: 1rem;
-  }
-  .chat-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--text-dim); transition: all 0.3s;
-    cursor: pointer;
-  }
-  .chat-dot.active {
-    background: var(--accent); box-shadow: 0 0 8px rgba(107,148,184,0.4);
-    width: 20px; border-radius: 3px;
-  }
-  .chat-disclaimer {
-    text-align: center; margin-top: 0.9rem;
-    color: var(--text-dim); font-size: 0.78rem; font-weight: 300;
-  }
-  @media (max-width: 560px) {
-    .chat-nav-prev { left: -6px; }
-    .chat-nav-next { right: -6px; }
-    .chat-nav-btn {
-      width: 30px; height: 30px; font-size: 0.75rem;
-      background: rgba(17, 17, 22, 0.9); backdrop-filter: blur(8px);
-    }
-  }
-
-  /* ===== VALUE STRIP ===== */
-  .value-strip {
-    padding: 3rem 2rem 5rem; max-width: 800px; margin: 0 auto;
-  }
-  .value-strip-title {
-    text-align: center; font-size: 1.1rem; font-weight: 600;
-    color: var(--text); margin-bottom: 2rem; letter-spacing: -0.01em;
-  }
-  .value-items {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-  }
-  .value-item {
-    text-align: center; padding: 1.5rem 1rem;
-    border: 1px solid var(--border); border-radius: var(--radius);
-    background: var(--bg-card); transition: all 0.3s;
-  }
-  .value-item:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
-  .value-before {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
-    color: var(--text-dim); text-decoration: line-through; margin-bottom: 0.4rem;
-  }
-  .value-arrow { color: var(--accent); font-size: 1rem; margin-bottom: 0.4rem; }
-  .value-after {
-    font-size: 0.92rem; font-weight: 600; color: var(--text);
-  }
-
-  /* ===== SECTIONS COMMON ===== */
-  .section-label {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
-    text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent);
-    margin-bottom: 1rem; font-weight: 500;
-  }
-  .section-title {
-    font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700;
-    letter-spacing: -0.015em; margin-bottom: 1rem; line-height: 1.18;
-  }
-  .section-desc {
-    color: var(--text-secondary); font-size: 1.05rem; font-weight: 300;
-    max-width: 580px; margin-bottom: 3.5rem; line-height: 1.7;
-  }
-
-  /* ===== FEATURES ===== */
-  .features { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
-  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-  .feature-card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 2rem 1.8rem;
-    transition: all 0.35s ease; position: relative; overflow: hidden;
-  }
-  .feature-card::after {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0; transition: opacity 0.35s;
-  }
-  .feature-card:hover {
-    border-color: var(--border-hover); background: var(--bg-card-hover);
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.3), 0 0 0 1px rgba(107,148,184,0.06);
-  }
-  .feature-card:hover::after { opacity: 1; }
-  .feature-icon {
-    width: 44px; height: 44px; border-radius: 11px;
-    background: var(--accent-glow); border: 1px solid rgba(107,148,184,0.12);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.3rem; font-size: 1.2rem;
-  }
-  .feature-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
-  .feature-card p { color: var(--text-secondary); font-size: 0.88rem; font-weight: 300; line-height: 1.6; }
-
-  /* ===== AUDIENCE ===== */
-  .audience { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; text-align: center; }
-  .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .audience-card {
-    padding: 2.5rem 2rem; border: 1px solid var(--border);
-    border-radius: var(--radius-lg); background: var(--bg-card);
-    text-align: left; transition: all 0.35s; position: relative; overflow: hidden;
-  }
-  .audience-card:hover {
-    border-color: var(--border-hover); background: var(--bg-card-hover);
-    transform: translateY(-3px);
-  }
-  .audience-card::before {
-    content: ''; position: absolute; top: -1px; left: 20%; right: 20%; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .audience-card:hover::before { opacity: 0.6; }
-  .audience-icon { font-size: 1.8rem; margin-bottom: 1.2rem; }
-  .audience-role { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.6rem; }
-  .audience-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.6rem; }
-  .audience-card p { color: var(--text-secondary); font-size: 0.88rem; font-weight: 300; line-height: 1.65; }
-
-  /* ===== HOW IT WORKS ===== */
-  .how { padding: 6rem 2rem; max-width: 860px; margin: 0 auto; }
-  .steps { margin-top: 1rem; }
-  .step {
-    display: flex; gap: 2rem; padding: 2rem 0;
-    border-bottom: 1px solid var(--border); align-items: flex-start;
-  }
-  .step:last-child { border-bottom: none; }
-  .step-num {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
-    color: var(--accent); font-weight: 700; min-width: 50px; padding-top: 0.15rem;
-  }
-  .step-content h3 { font-size: 1.08rem; font-weight: 600; margin-bottom: 0.4rem; letter-spacing: -0.01em; }
-  .step-content p { color: var(--text-secondary); font-size: 0.92rem; font-weight: 300; line-height: 1.65; }
-
-  /* ===== USE CASES ===== */
-  .usecases { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
-  .usecase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; align-items: start; }
-  .usecase {
-    padding: 1.6rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius);
-    background: var(--bg-card); transition: all 0.3s;
-  }
-  .usecase:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateY(-2px); }
-  .usecase-q {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
-    color: var(--accent-light); margin-bottom: 0.7rem; line-height: 1.55;
-  }
-  .usecase-a { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
-  .usecase-benefit {
-    margin-top: 0.6rem; font-size: 0.78rem; color: var(--accent);
-    font-weight: 500;
-  }
-
-  /* ===== DATA SAFETY ===== */
-  .safety {
-    padding: 6rem 2rem; max-width: 860px; margin: 0 auto;
-    text-align: center;
-  }
-  .safety-box {
-    background: linear-gradient(180deg, rgba(234,179,8,0.04) 0%, var(--bg-card) 60%);
-    border: 1px solid rgba(234,179,8,0.16);
-    border-radius: var(--radius-lg); padding: 3.5rem 3rem;
-    position: relative; overflow: hidden;
-    box-shadow: 0 0 50px rgba(234,179,8,0.04);
-  }
-  .safety-box::before {
-    content: ''; position: absolute; top: -1px; left: 15%; right: 15%; height: 2px;
-    background: linear-gradient(90deg, transparent, #eab308, transparent);
-  }
-  .safety-icon { font-size: 2.5rem; margin-bottom: 1.5rem; }
-  .safety-box h2 {
-    font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700;
-    letter-spacing: -0.02em; margin-bottom: 1rem; color: #eab308;
-  }
-  .safety-box p { color: var(--text-secondary); font-size: 1rem; font-weight: 300; max-width: 520px; margin: 0 auto; line-height: 1.7; }
-  .safety-note {
-    margin-top: 2rem !important;
-    font-size: 0.82rem !important;
-    color: var(--text-dim) !important;
-    opacity: 0.8;
-    font-style: italic;
-  }
-  .safety-more {
-    display: inline-block;
-    margin-top: 1.4rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--accent);
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    opacity: 0.85;
-    transition: opacity 0.2s;
-  }
-  .safety-more:hover { opacity: 1; }
-  .safety-pills {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem;
-    margin-top: 2rem;
-  }
-  .safety-pill {
-    padding: 0.45rem 1rem; border-radius: 100px; font-size: 0.78rem;
-    font-weight: 500; background: rgba(234,179,8,0.1); color: #eab308;
-    border: 1px solid rgba(234,179,8,0.18);
-  }
-
-  /* ===== AUTHOR ===== */
-  .author {
-    padding: 5rem 2rem 2rem; max-width: 700px; margin: 0 auto;
-  }
-  .author-box {
-    display: flex; align-items: center; gap: 2rem;
-    padding: 2.5rem 2.5rem; border: 1px solid var(--border);
-    border-radius: var(--radius-lg); background: var(--bg-card);
-  }
-  .author-photo {
-    width: 156px; height: 156px; border-radius: var(--radius-lg); flex-shrink: 0;
-    object-fit: cover; object-position: center 32%;
-    border: 2px solid var(--border-hover);
-  }
-  .author-info { flex: 1; }
-  .author-name {
-    font-size: 1.05rem; font-weight: 600; margin-bottom: 0.15rem;
-  }
-  .author-role {
-    font-size: 0.78rem; color: var(--accent); font-weight: 500;
-    margin-bottom: 0.7rem;
-  }
-  .author-text {
-    font-size: 0.88rem; color: var(--text-secondary); font-weight: 300;
-    line-height: 1.65;
-  }
-  @media (max-width: 768px) {
-    .author-box { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
-  }
-
-  /* ===== TRUST ===== */
-  .trust { padding: 2rem 2rem 2rem; max-width: 700px; margin: 0 auto; text-align: center; }
-  .trust-box {
-    padding: 2.5rem 2rem; border: 1px solid var(--border);
-    border-radius: var(--radius-lg); background: var(--bg-card);
-  }
-  .trust-box h3 {
-    font-size: 1.2rem; font-weight: 600; margin-bottom: 0.8rem; letter-spacing: -0.01em;
-  }
-  .trust-box p { color: var(--text-secondary); font-size: 0.92rem; font-weight: 300; line-height: 1.7; max-width: 500px; margin: 0 auto; }
-
-  /* ===== PRICING ===== */
-  .pricing { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; text-align: center; }
-  .pricing .section-desc { margin-left: auto; margin-right: auto; }
-  .pricing-intro {
-    font-size: 1rem; color: var(--accent); font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
-  .price-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; align-items: stretch; max-width: 860px; margin: 0 auto; }
-  .price-card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: var(--radius-lg); padding: 2.5rem 2rem;
-    position: relative; overflow: hidden; text-align: center;
-    display: flex; flex-direction: column;
-    transition: all 0.35s;
-  }
-  .price-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
-  .price-card.featured {
-    border-color: var(--accent);
-    box-shadow: 0 0 40px rgba(107,148,184,0.08), 0 20px 60px rgba(0,0,0,0.3);
-  }
-  .price-card.featured::before {
-    content: ''; position: absolute; top: -1px; left: 15%; right: 15%; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  }
-  .price-badge {
-    position: absolute; top: 1rem; right: 1rem;
-    font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 0.3rem 0.8rem; border-radius: 100px;
-    background: var(--accent); color: #0a0f0e;
-  }
-  .price-tier { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
-  .price-subtitle { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1.2rem; font-weight: 300; }
-  .price-amount {
-    font-size: clamp(2.2rem, 4vw, 2.8rem); font-weight: 800;
-    letter-spacing: -0.04em; margin: 0.5rem 0 0.2rem;
-  }
-  .price-amount .currency { font-size: 0.45em; font-weight: 600; color: var(--text-secondary); vertical-align: super; }
-  .price-period { color: var(--text-dim); font-size: 0.82rem; font-weight: 400; margin-bottom: 0.2rem; }
-  .price-note { color: var(--text-dim); font-size: 0.75rem; margin-bottom: 1.5rem; }
-  .price-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 1.5rem; }
-  .price-features {
-    text-align: left; margin: 0 0 auto; padding: 0;
-    list-style: none; display: flex; flex-direction: column; gap: 0.7rem;
-  }
-  .price-features li {
-    display: flex; align-items: flex-start; gap: 0.7rem;
-    font-size: 0.85rem; color: var(--text-secondary); font-weight: 300; line-height: 1.45;
-  }
-  .price-features li .check {
-    width: 18px; height: 18px; border-radius: 50%;
-    background: var(--green-dim); color: var(--green);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.65rem; font-weight: 700; flex-shrink: 0; margin-top: 1px;
-  }
-  .price-cta { margin-top: 2rem; }
-  .price-cta .btn { width: 100%; justify-content: center; font-size: 0.92rem; padding: 0.85rem; }
-  .price-cta .btn-outline {
-    background: transparent; color: var(--accent); border: 1px solid var(--accent);
-  }
-  .price-cta .btn-outline:hover { background: var(--accent-glow); }
-  .price-sub { color: var(--text-dim); font-size: 0.82rem; margin-top: 2.5rem; }
-
-  /* ===== PRICING TOGGLE ===== */
-  .price-toggle {
-    display: inline-flex; align-items: center; gap: 0.9rem;
-    margin-bottom: 2.5rem;
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 100px; padding: 0.35rem;
-  }
-  .price-toggle-label {
-    font-size: 0.85rem; font-weight: 500; color: var(--text-dim);
-    padding: 0.5rem 1.2rem; border-radius: 100px;
-    cursor: pointer; transition: all 0.25s; user-select: none;
-  }
-  .price-toggle-label.active {
-    color: #0a0f0e; background: var(--accent);
-    font-weight: 600;
-  }
-  .price-toggle-label .save-tag {
-    font-size: 0.65rem; font-weight: 700; color: var(--green);
-    background: var(--green-dim); padding: 0.15rem 0.45rem;
-    border-radius: 100px; white-space: nowrap; letter-spacing: 0.02em;
-    margin-left: 0.4rem; vertical-align: middle;
-    transition: all 0.25s;
-  }
-  .price-toggle-label.active .save-tag {
-    color: #0a0f0e; background: rgba(0,0,0,0.18);
-  }
-  .price-amount-wrap {
-    position: relative; display: inline-block;
-  }
-  .price-amount-wrap .price-amount {
-    transition: opacity 0.25s, transform 0.25s;
-  }
-  .price-amount-wrap .price-original {
-    font-size: 0.85rem; color: var(--text-dim); text-decoration: line-through;
-    font-weight: 400; display: none; margin-bottom: 0.15rem;
-  }
-  .pricing.annual .price-original { display: block; }
-
-  /* ===== CTA ===== */
-  .cta-section {
-    padding: 8rem 2rem; text-align: center; position: relative;
-  }
-  .cta-section::before {
-    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 600px; height: 500px;
-    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 65%);
-    pointer-events: none;
-  }
-  .cta-section h2 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
-    letter-spacing: -0.02em; margin-bottom: 1rem; position: relative; z-index: 1;
-  }
-  .cta-section p {
-    color: var(--text-secondary); font-size: 1.05rem; font-weight: 300;
-    margin-bottom: 2.5rem; position: relative; z-index: 1;
-    max-width: 480px; margin-left: auto; margin-right: auto;
-  }
-  .cta-actions {
-    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
-    position: relative; z-index: 1;
-  }
-
-  /* ===== FOOTER ===== */
-  footer {
-    padding: 3rem 2rem; border-top: 1px solid var(--border);
-    max-width: 1100px; margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1.5rem;
-  }
-  .footer-left { font-size: 0.78rem; color: var(--text-dim); line-height: 1.8; }
-  .footer-left a {
-    color: var(--text-secondary);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    text-decoration-color: rgba(148, 148, 168, 0.45);
-    transition: color 0.2s, text-decoration-color 0.2s;
-  }
-  .footer-left a:hover { color: var(--text); text-decoration-color: var(--text); }
-  .footer-disclaimer {
-    display: inline-block; margin-top: 0.4rem;
-    font-size: 0.74rem; color: var(--text-dim); opacity: 0.85; line-height: 1.6;
-  }
-  .footer-right {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem; color: var(--text-dim);
-  }
-
-  /* ===== MODAL ===== */
-  .modal-overlay {
-    position: fixed; inset: 0; z-index: 2000;
-    background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
-    display: flex; align-items: center; justify-content: center;
-    padding: 2rem;
-    opacity: 0; visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-  }
-  .modal-overlay.open {
-    opacity: 1; visibility: visible;
-  }
-  .modal {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: var(--radius-lg); padding: 2.5rem;
-    width: 100%; max-width: 460px; position: relative;
-    box-shadow: 0 25px 80px rgba(0,0,0,0.6);
-    transform: translateY(20px); transition: transform 0.3s;
-  }
-  .modal-overlay.open .modal { transform: translateY(0); }
-  .modal-close {
-    position: absolute; top: 1rem; right: 1rem;
-    width: 32px; height: 32px; border-radius: 50%;
-    background: var(--bg-elevated); border: 1px solid var(--border);
-    color: var(--text-dim); cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; font-family: 'Sora', sans-serif;
-    transition: all 0.2s;
-  }
-  .modal-close:hover { color: var(--text); border-color: var(--border-hover); }
-  .modal-title {
-    font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem;
-    letter-spacing: -0.01em;
-  }
-  .modal-subtitle {
-    font-size: 0.88rem; color: var(--text-secondary); font-weight: 300;
-    margin-bottom: 2rem; line-height: 1.6;
-  }
-  .form-group { margin-bottom: 1.2rem; }
-  .form-label {
-    display: block; font-size: 0.78rem; font-weight: 500;
-    color: var(--text-secondary); margin-bottom: 0.4rem;
-  }
-  .form-input {
-    width: 100%; padding: 0.7rem 1rem; border-radius: var(--radius-sm);
-    background: var(--bg); border: 1px solid var(--border);
-    color: var(--text); font-family: 'Sora', sans-serif; font-size: 0.88rem;
-    transition: border-color 0.2s; outline: none;
-  }
-  .form-input:focus { border-color: var(--accent); }
-  .form-input::placeholder { color: var(--text-dim); }
-  textarea.form-input { resize: vertical; min-height: 70px; }
-  .form-submit {
-    width: 100%; padding: 0.85rem; margin-top: 0.5rem;
-    background: var(--accent); color: #0a0f0e; border: none;
-    border-radius: var(--radius-sm); font-family: 'Sora', sans-serif;
-    font-size: 0.92rem; font-weight: 600; cursor: pointer;
-    transition: all 0.3s;
-  }
-  .form-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(107,148,184,0.2), 0 8px 30px rgba(0,0,0,0.4);
-  }
-  .form-note {
-    font-size: 0.72rem; color: var(--text-dim); text-align: center;
-    margin-top: 1rem;
-  }
-  .modal-success {
-    text-align: center; padding: 2rem 0; display: none;
-  }
-  .modal-success.show { display: block; }
-  .modal-success .check-icon {
-    width: 48px; height: 48px; border-radius: 50%;
-    background: var(--green-dim); color: var(--green);
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; margin-bottom: 1rem;
-  }
-  .modal-success h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .modal-success p { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; }
-  .modal-form.hidden { display: none; }
-
-  /* ===== ANIMATIONS ===== */
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeSlideDown {
-    from { opacity: 0; transform: translateY(-12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .reveal {
-    opacity: 0; transform: translateY(32px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 900px) {
-    .features-grid, .audience-grid { grid-template-columns: repeat(2, 1fr); }
-    .value-items { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  }
-  @media (max-width: 768px) {
-    nav { padding: 0 1rem; }
-    .nav-links a:not(.nav-cta) { display: none; }
-    .nav-links { gap: 0.8rem; }
-    .hero { padding: 7rem 1.5rem 3rem; }
-    .features, .how, .usecases, .safety, .pricing, .audience { padding: 4rem 1.5rem; }
-    .features-grid, .audience-grid { grid-template-columns: 1fr; }
-    .value-items { grid-template-columns: 1fr; }
-    .step { flex-direction: column; gap: 0.5rem; }
-    .safety-box { padding: 2.5rem 1.5rem; }
-    .price-card { padding: 2.5rem 1.5rem; }
-    .price-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-    footer { flex-direction: column; text-align: center; }
-    .hero-grid { background-size: 40px 40px; }
-  }
-
-  /* ===== COOKIE CONSENT ===== */
-  .cookie-banner {
-    position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
-    max-width: 720px; width: calc(100% - 2.5rem);
-    background: var(--bg-card); border: 1px solid var(--border-hover);
-    border-radius: var(--radius); padding: 1.25rem 1.5rem;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-    z-index: 9000; display: none; gap: 1rem;
-    align-items: center; flex-wrap: wrap;
-    animation: cookieSlideUp 0.4s ease-out;
-  }
-  .cookie-banner.show { display: flex; }
-  .cookie-banner-text {
-    flex: 1; min-width: 240px;
-    color: var(--text-secondary); font-size: 0.85rem; line-height: 1.55;
-  }
-  .cookie-banner-text strong { color: var(--text); font-weight: 600; }
-  .cookie-banner-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-  .cookie-btn {
-    padding: 0.55rem 1.1rem; border-radius: var(--radius-sm);
-    font-size: 0.82rem; font-weight: 600; cursor: pointer;
-    border: 1px solid transparent; font-family: 'Sora', sans-serif;
-    transition: all 0.2s;
-  }
-  .cookie-btn-accept { background: var(--accent); color: #0a0f0e; }
-  .cookie-btn-accept:hover { opacity: 0.9; transform: translateY(-1px); }
-  .cookie-btn-reject { background: transparent; color: var(--text-secondary); border-color: var(--border-hover); }
-  .cookie-btn-reject:hover { color: var(--text); border-color: var(--text-dim); }
-  @keyframes cookieSlideUp { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
-  @media (max-width: 600px) {
-    .cookie-banner { bottom: 0.75rem; padding: 1rem; }
-    .cookie-banner-actions { width: 100%; }
-    .cookie-btn { flex: 1; }
-  }
-</style>
-
-<!--
-  Google Analytics 4 (gtag.js)
-  -----------------------------
-  ZAPNUTÍ:
-  1. Vyplň GA4 Measurement ID níže (formát G-XXXXXXXXXX) v konstantě GA_MEASUREMENT_ID.
-  2. Volitelně doplň consent banner texty / domény.
-  GA se načítá až po souhlasu uživatele (banner níže). Bez souhlasu žádné requesty na google-analytics.com.
--->
-
-<!-- Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "SoftwareApplication",
-      "name": "Ethel",
-      "alternateName": ["ET/HEL", "Embedded Thinking for Helios"],
-      "description": "AI asistentka pro Helios Inuvio ERP. Odpovídá na dotazy, vysvětluje sestavy a pomáhá s orientací v datech – česky, během sekund.",
-      "url": "https://ethel.cz",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Windows",
-      "inLanguage": "cs",
-      "offers": [
-        {
-          "@type": "Offer",
-          "name": "Standard",
-          "price": "1490",
-          "priceCurrency": "CZK",
-          "priceValidUntil": "2026-12-31",
-          "availability": "https://schema.org/InStock"
-        },
-        {
-          "@type": "Offer",
-          "name": "Enterprise",
-          "price": "4990",
-          "priceCurrency": "CZK",
-          "priceValidUntil": "2026-12-31",
-          "availability": "https://schema.org/InStock"
-        }
-      ],
-      "creator": {
-        "@type": "Person",
-        "name": "Jakub Ševela",
-        "url": "https://jakubsevela.cz"
-      }
-    },
-    {
-      "@type": "Organization",
-      "name": "Ethel",
-      "alternateName": "ET/HEL",
-      "url": "https://ethel.cz",
-      "logo": "https://ethel.cz/favicon.svg",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "email": "info@ethel.cz",
-        "contactType": "sales"
-      },
-      "founder": {
-        "@type": "Person",
-        "name": "Jakub Ševela",
-        "jobTitle": "Solution Architect",
-        "url": "https://jakubsevela.cz"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Brno",
-        "addressCountry": "CZ"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "name": "Ethel – AI asistentka pro Helios Inuvio",
-      "description": "Zeptejte se Heliosu místo proklikávání. Ethel je AI asistentka, která rozumí vašim datům, sestavám i SQL – a odpovídá česky.",
-      "url": "https://ethel.cz",
-      "inLanguage": "cs"
-    }
-  ]
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
-</script>
+
+.wrap { max-width: var(--content-max); margin: 0 auto; padding: 0 32px; }
+@media (max-width: 640px) { .wrap { padding: 0 20px; } }
+
+section { padding: 72px 0; scroll-margin-top: 56px; } /* sticky nav nesmí překrýt nadpis po skoku na kotvu */
+section + section { border-top: 1px solid var(--border); }
+.stack > * + * { margin-top: 20px; }
+
+a { color: inherit; }
+
+/* --- typografie ---------------------------------------------------------- */
+.wordmark-sm, .wordmark-ft {
+  font-family: var(--font-wordmark);
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--text);
+  line-height: 1;
+}
+.wordmark-sm { font-size: 26px; }
+.wordmark-ft { font-size: 22px; }
+/* tečka: bold 700 + 125 % velikosti – univerzální pravidlo z manuálu */
+.wordmark-sm .dot, .wordmark-ft .dot {
+  color: var(--accent); font-weight: 700; font-size: 1.25em; line-height: 1;
+}
+.wordmark-sm:hover .dot { color: var(--accent-l); }
+
+.lede {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  line-height: 1.2;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: 28px;
+  line-height: 1.25;
+}
+.card-title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-heading);
+  font-size: 19px;
+  line-height: 1.35;
+}
+.body-text { font-size: 17px; line-height: 1.7; color: var(--text-2); }
+.body-text strong { color: var(--text); font-weight: 700; }
+.section-intro { font-size: 16px; line-height: 1.7; color: var(--text-2); max-width: 68ch; }
+.card-text { font-size: 15px; line-height: 1.7; color: var(--text-2); }
+.card-text + .card-text { margin-top: 10px; }
+.note { font-size: 16px; line-height: 1.7; color: var(--text-2); font-style: italic; }
+.accent { color: var(--accent-l); font-style: normal; }
+.muted  { color: var(--text-3); font-style: normal; }
+.micro { font-size: 13.5px; line-height: 1.6; color: var(--text-3); }
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent-l);
+}
+
+/* --- navigace ------------------------------------------------------------ */
+.topnav {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(10, 10, 12, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topnav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 16px; padding-bottom: 16px; }
+.topnav ul { list-style: none; display: flex; gap: 24px; align-items: center; overflow-x: auto; }
+.topnav ul a {
+  font-family: var(--font-mono);
+  font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-2); text-decoration: none; white-space: nowrap;
+  transition: color 0.15s;
+}
+.topnav ul a:hover { color: var(--text); }
+.topnav ul a.btn { color: var(--accent-l); padding: 8px 16px; font-size: 12.5px; }
+@media (max-width: 860px) {
+  .topnav .wrap { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .topnav ul { flex-wrap: wrap; gap: 12px 20px; max-width: 100%; }
+}
+
+/* --- tlačítka: tónovaná, 12 % podklad + 35 % border ---------------------- */
+.btn-row { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-body); font-weight: 500; font-size: 14.5px;
+  padding: 11px 20px; border-radius: var(--radius-btn);
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-l);
+  text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn:hover { background: var(--accent-tint-hover); border-color: var(--accent-border-hover); }
+.btn svg { width: 0.9em; height: 0.9em; fill: currentColor; flex: 0 0 auto; }
+.btn.ghost { background: transparent; border-color: var(--border-2); color: var(--text); }
+.btn.ghost:hover { background: transparent; border-color: rgba(255, 255, 255, 0.25); }
+
+/* --- hero: jednotná stavba podle manuálu (vzor jakubsevela.cz / feedco.cz)
+   chip label → dvouřádkový H1 → popisek → CTA, radiální záře vlevo nahoře.
+   Vizuál (chat okno) jako fotka na hubu: absolutně od konce textového
+   sloupce doprava, fade do pozadí. Text kotvený dole; sticky nav je v toku,
+   proto se její výška (65 px) odečítá. ------------------------------------- */
+#home {
+  position: relative; overflow: hidden;
+  min-height: calc(84vh - 65px); min-height: calc(84svh - 65px);
+  display: flex; align-items: flex-end;
+  padding: 105px 0 96px;
+}
+#home::before {
+  content: ''; position: absolute; top: -260px; left: -200px;
+  width: 680px; height: 680px;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.10) 0%, rgba(var(--accent-rgb), 0) 68%);
+  pointer-events: none;
+}
+#home .wrap { position: relative; z-index: 1; width: 100%; }
+.hero-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent-l);
+  padding: 0.34rem 0.9rem;
+  border: 1px solid var(--accent-border);
+  background: var(--accent-tint);
+  border-radius: var(--radius-btn);
+}
+/* vertikální rytmus přesně podle hubu: 1.6rem / 1.5rem / 2.3rem */
+#home .lede { font-size: clamp(2.3rem, 4.8vw, 3.8rem); line-height: 1.2; margin-top: 1.6rem; }
+#home .body-text { font-size: 1.05rem; max-width: 52ch; margin-top: 1.5rem; }
+#home .body-text + .body-text { margin-top: 0.9rem; }
+#home .btn-row { margin-top: 2.3rem; }
+#home .micro { margin-top: 1rem; }
+
+.hero-visual {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  left: max(46%, calc(50% - 60px));
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+}
+.hero-visual .chat-window { width: min(88%, 460px); }
+.hero-caption {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-3); width: min(88%, 460px);
+}
+/* fade jako u hero fotky na hubu – vizuál se rozpouští do pozadí vlevo a dole.
+   Pozor: bez z-indexu, jinak overlay překryje i text hero. */
+.hero-visual::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to right, var(--bg) 0%, rgba(10,10,12,0.72) 18%, rgba(10,10,12,0) 46%),
+    linear-gradient(to top, var(--bg) 0%, rgba(10,10,12,0.30) 14%, rgba(10,10,12,0) 34%),
+    linear-gradient(to bottom, rgba(10,10,12,0.75) 0%, rgba(10,10,12,0) 16%);
+}
+@media (max-width: 1100px) {
+  #home { display: flex; flex-direction: column; min-height: 0; padding: 72px 0 64px; }
+  .hero-visual { position: static; order: 2; margin-top: 44px; }
+  .hero-visual .chat-window, .hero-caption { width: 100%; max-width: 440px; margin: 0 auto; }
+  .hero-visual::after { display: none; }
+}
+
+/* --- chat okno (hero vizuál) – postavené na tokenech ---------------------- */
+.chat-window {
+  background: var(--card);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+.chat-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px; border-bottom: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+/* avatar = monogram e. – jeden textový běh, tečka na účaří (pravidlo z manuálu) */
+.chat-avatar {
+  width: 36px; height: 36px; flex: 0 0 36px;
+  border-radius: 10px;
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-wordmark); font-weight: 500; font-size: 17px;
+  color: var(--text); line-height: 1;
+}
+.chat-avatar .dot { color: var(--accent); font-weight: 700; font-size: 1.25em; line-height: 1; }
+.chat-header-name { font-size: 14.5px; font-weight: 500; line-height: 1.3; }
+.chat-header-status {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-3);
+  display: flex; align-items: center; gap: 6px; line-height: 1.4;
+}
+.chat-header-status .online-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+.chat-header-ctx {
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+  color: var(--text-2); background: var(--bg); padding: 4px 10px;
+  border-radius: 6px; border: 1px solid var(--border);
+}
+.chat-body { padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; min-height: 320px; }
+.chat-msg {
+  max-width: 84%; padding: 10px 14px; border-radius: var(--radius-card);
+  font-size: 14px; line-height: 1.55;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.chat-msg.visible { opacity: 1; transform: translateY(0); }
+.chat-msg.user {
+  align-self: flex-end;
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+  color: var(--accent-l);
+  border-bottom-right-radius: 4px;
+}
+.chat-msg.bot {
+  align-self: flex-start;
+  background: var(--bg-alt); border: 1px solid var(--border);
+  color: var(--text-2);
+  border-bottom-left-radius: 4px;
+}
+.chat-msg.bot strong { color: var(--text); font-weight: 500; }
+.chat-msg.bot .hl { color: var(--accent-l); }
+.chat-typing {
+  align-self: flex-start; padding: 12px 14px;
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: var(--radius-card); border-bottom-left-radius: 4px;
+  display: none; gap: 4px; align-items: center;
+}
+.chat-typing.visible { display: flex; }
+.chat-typing span {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--text-3);
+  animation: typingDot 1.4s ease-in-out infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingDot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+.chat-input-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px; border-top: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+.chat-input-fake {
+  flex: 1; padding: 9px 14px; border-radius: var(--radius-btn);
+  background: var(--bg); border: 1px solid var(--border-2);
+  font-size: 13.5px; color: var(--text-3);
+}
+.chat-send-btn {
+  width: 34px; height: 34px; border-radius: var(--radius-btn); flex: 0 0 34px;
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+}
+.chat-send-btn svg { width: 14px; height: 14px; fill: var(--accent-l); }
+@media (prefers-reduced-motion: reduce) {
+  .chat-msg { opacity: 1 !important; transform: none !important; }
+  .chat-typing { display: none !important; }
+}
+
+/* --- karty (přínos / akce / schopnosti / pro koho / příklady) ------------- */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; }
+.card-grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+/* čtyři karty v řadě – ať poslední nezůstane osamocená ve druhém řádku */
+.card-grid.cols-4 { grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); }
+.card-grid.cols-4 .card { padding: 24px 22px; }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 28px 26px;
+}
+.feature-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-btn);
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.feature-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--accent-l); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.card .card-title { margin-bottom: 8px; }
+.audience-role { margin-bottom: 12px; display: block; }
+
+/* seznam příkladů dotazů uvnitř karty – mono odrážka v accentu */
+.qlist { list-style: none; margin-top: 16px; }
+.qlist li {
+  display: flex; gap: 10px; font-size: 14.5px; line-height: 1.6; color: var(--text-2);
+}
+.qlist li + li { margin-top: 8px; }
+.qlist li::before { content: '?'; font-family: var(--font-mono); color: var(--accent-l); flex: 0 0 auto; }
+/* seznam bodů vlastního scénáře – stejná konstrukce, jiná odrážka */
+.blist { list-style: none; margin-top: 6px; }
+.blist li { display: flex; gap: 10px; font-size: 15.5px; line-height: 1.65; color: var(--text-2); }
+.blist li + li { margin-top: 8px; }
+.blist li::before { content: '+'; font-family: var(--font-mono); color: var(--accent-l); flex: 0 0 auto; }
+
+.scenario-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 34px 36px;
+  max-width: 760px;
+}
+@media (max-width: 640px) { .scenario-box { padding: 26px 22px; } }
+
+/* --- kroky (jak probíhá akce / nasazení) --------------------------------- */
+.steps { max-width: 760px; }
+.step {
+  display: flex; gap: 28px; padding: 26px 0;
+  border-bottom: 1px solid var(--border); align-items: flex-start;
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--accent-l); min-width: 44px; padding-top: 3px;
+}
+.step-content h3 { font-family: var(--font-display); font-weight: var(--weight-heading); font-size: 18px; line-height: 1.35; margin-bottom: 5px; }
+.step-content p { color: var(--text-2); font-size: 15.5px; line-height: 1.65; }
+
+.compat-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 24px 26px;
+  max-width: 760px; margin-top: 26px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+}
+.compat-box p { font-size: 15px; line-height: 1.65; color: var(--text-2); max-width: 52ch; }
+
+/* --- příklady ------------------------------------------------------------- */
+.usecase-group + .usecase-group { margin-top: 34px; }
+.usecase-group > .mono-label { display: block; margin-bottom: 16px; }
+.usecase-q {
+  font-family: var(--font-mono); font-size: 13.5px;
+  color: var(--accent-l); line-height: 1.55; margin-bottom: 10px;
+}
+.usecase-a { font-size: 14.5px; color: var(--text-2); line-height: 1.6; }
+
+/* --- bezpečnost ----------------------------------------------------------- */
+.safety-box {
+  background: var(--card);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-card);
+  padding: 48px 40px; text-align: center;
+  max-width: 820px; margin: 0 auto;
+}
+.safety-icon {
+  width: 54px; height: 54px; border-radius: 50%; margin: 0 auto 22px;
+  background: var(--accent-tint);
+  display: flex; align-items: center; justify-content: center;
+}
+.safety-icon svg { width: 26px; height: 26px; fill: none; stroke: var(--accent-l); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.safety-box h2 { font-family: var(--font-display); font-weight: var(--weight-display); font-size: 26px; line-height: 1.25; margin-bottom: 14px; }
+.safety-box > p { color: var(--text-2); font-size: 16px; line-height: 1.7; max-width: 60ch; margin: 0 auto; }
+.safety-box > p + p { margin-top: 12px; }
+.safety-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
+.safety-pill {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
+  padding: 6px 14px; border-radius: var(--radius-btn);
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+  color: var(--accent-l);
+}
+.safety-more {
+  display: inline-block; margin-top: 24px;
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em;
+  color: var(--accent-l);
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;
+}
+.safety-more:hover { text-decoration-thickness: 2px; }
+@media (max-width: 640px) { .safety-box { padding: 32px 22px; } }
+
+/* --- autor + trust -------------------------------------------------------- */
+.author-box {
+  display: flex; align-items: flex-start; gap: 32px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 34px 36px;
+  max-width: 760px; margin: 0 auto;
+}
+.author-photo {
+  width: 132px; height: 132px; border-radius: var(--radius-card); flex: 0 0 132px;
+  object-fit: cover; object-position: center 32%;
+  border: 1px solid var(--border-2);
+}
+.author-name { font-family: var(--font-display); font-weight: var(--weight-heading); font-size: 18px; }
+.author-role { margin: 4px 0 10px; display: block; }
+.author-text { font-size: 15px; color: var(--text-2); line-height: 1.65; }
+.author-text + .author-text { margin-top: 10px; }
+@media (max-width: 640px) { .author-box { flex-direction: column; align-items: center; text-align: center; padding: 28px 22px; } }
+
+.trust-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 34px 36px; text-align: center;
+  max-width: 760px; margin: 0 auto;
+}
+.trust-box h3 { font-family: var(--font-display); font-weight: var(--weight-heading); font-size: 19px; margin-bottom: 8px; }
+.trust-box p { color: var(--text-2); font-size: 15px; line-height: 1.7; max-width: 56ch; margin: 0 auto; }
+
+/* --- tarify: price-card z manuálu (sekce Tarify) -------------------------- */
+.pricing-intro { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; color: var(--accent-l); }
+.pgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 760px; margin-top: 26px; }
+.pcard {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-card);
+  padding: 28px; display: flex; flex-direction: column; position: relative;
+}
+.pcard.featured { border-color: var(--accent-border); }
+.pcard .pbadge {
+  position: absolute; top: 18px; right: 18px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-l); background: var(--accent-tint); border: 1px solid var(--accent-border);
+  border-radius: 6px; padding: 3px 9px;
+}
+.pcard .ptier {
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-l);
+}
+.pcard .psub { font-size: 13.5px; line-height: 1.55; color: var(--text-2); margin-top: 7px; }
+.pcard .pamount {
+  font-family: var(--font-display); font-weight: var(--weight-display);
+  font-size: 38px; line-height: 1.1; letter-spacing: -0.01em; margin-top: 20px;
+}
+.pcard .pamount .pcur { font-size: 0.5em; color: var(--text-2); }
+.pcard .pper { font-size: 13px; color: var(--text-3); margin-top: 5px; }
+.pcard .pdiv { border: 0; border-top: 1px solid var(--border); margin: 20px 0 18px; }
+.pcard .pticks { list-style: none; }
+.pcard .pticks li { display: flex; gap: 10px; font-size: 14.5px; line-height: 1.6; color: var(--text-2); }
+.pcard .pticks li + li { margin-top: 8px; }
+.pcard .pticks li::before { content: '+'; font-family: var(--font-mono); color: var(--accent-l); flex: 0 0 auto; }
+.pcard .pcta { margin-top: auto; padding-top: 26px; }
+/* modul uvnitř karty – modulární varianta price-card z manuálu (label v mono a --text-3, cena u modulu) */
+.pmodule {
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: var(--radius-btn); padding: 14px 16px; margin-top: 18px;
+}
+.pmodule-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.pmodule-label {
+  font-family: var(--font-mono); font-size: 11.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);
+}
+.pmodule-price { font-size: 14.5px; font-weight: 700; color: var(--text); white-space: nowrap; }
+.pmodule-text { font-size: 13px; line-height: 1.6; color: var(--text-2); margin-top: 8px; }
+.pmodule-list { list-style: none; margin-top: 8px; }
+.pmodule-list li { font-size: 13px; line-height: 1.6; color: var(--text-2); display: flex; gap: 8px; }
+.pmodule-list li::before { content: '+'; font-family: var(--font-mono); color: var(--accent-l); flex: 0 0 auto; }
+.pmodule-promo {
+  display: inline-block; margin-top: 10px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-l); background: var(--accent-tint); border: 1px solid var(--accent-border);
+  border-radius: 6px; padding: 3px 9px;
+}
+.pcard .pcta .btn { width: 100%; justify-content: center; }
+.price-sub { margin-top: 22px; font-size: 14px; color: var(--text-3); max-width: 68ch; }
+
+/* --- závěrečné CTA -------------------------------------------------------- */
+.cta-section { text-align: center; }
+.cta-section .section-title { font-size: 32px; }
+.cta-section p { color: var(--text-2); font-size: 16.5px; margin-top: 12px; max-width: 60ch; margin-left: auto; margin-right: auto; }
+.cta-section .btn-row { justify-content: center; margin-top: 28px; }
+.cta-section .micro { margin-top: 16px; }
+
+/* --- kontaktní formulář (komponenta z manuálu, sekce 07) ------------------ */
+.form-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 34px 36px;
+  max-width: 640px; margin-top: 26px;
+}
+@media (max-width: 640px) { .form-box { padding: 26px 22px; } }
+.form-group + .form-group { margin-top: 16px; }
+.form-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-2);
+  margin-bottom: 7px;
+}
+.form-label .opt { color: var(--text-3); text-transform: none; letter-spacing: 0.04em; }
+.form-input {
+  width: 100%; display: block;
+  font-family: var(--font-body); font-size: 15.5px; line-height: 1.6;
+  color: var(--text); background: var(--bg-alt);
+  border: 1px solid var(--border-2); border-radius: var(--radius-btn);
+  padding: 11px 14px; outline: 0;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+textarea.form-input { min-height: 110px; resize: vertical; }
+.form-input::placeholder { color: var(--text-3); }
+.form-input:hover { border-color: rgba(255, 255, 255, 0.22); }
+.form-input:focus-visible {
+  border-color: var(--accent-border-hover);
+  box-shadow: 0 0 0 3px var(--accent-tint);
+}
+/* honeypot – mimo viewport, ne display:none (to boti přeskočí) */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-banner {
+  display: none; gap: 12px; align-items: flex-start;
+  border-radius: var(--radius-btn); padding: 12px 14px;
+  font-size: 14px; line-height: 1.55; margin-bottom: 18px;
+}
+.form-banner.show { display: flex; }
+.form-banner.err { background: var(--danger-tint); border: 1px solid var(--danger-border); color: var(--danger-l); }
+.form-banner.err a { color: var(--danger-l); }
+.form-banner.wait { background: rgba(156,156,156,.12); border: 1px solid rgba(156,156,156,.35); color: var(--text-2); }
+.form-submit-row { margin-top: 22px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.form-note { font-size: 13.5px; color: var(--text-3); }
+.form-success { display: none; gap: 16px; align-items: flex-start; }
+.form-success.show { display: flex; }
+.form-success .fs-icon {
+  flex: 0 0 auto; width: 38px; height: 38px;
+  display: grid; place-items: center; border-radius: 50%;
+  background: var(--accent-tint); color: var(--accent-l);
+}
+.form-success .fs-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.form-success h3 { font-family: var(--font-display); font-weight: var(--weight-heading); font-size: 18px; line-height: 1.35; margin-bottom: 2px; }
+.form-success p { font-size: 15px; line-height: 1.6; color: var(--text-2); }
+.form-fields.hidden { display: none; }
+
+/* --- cookie banner -------------------------------------------------------- */
+.cookie-banner {
+  position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 40;
+  max-width: 560px; margin: 0 auto;
+  background: var(--card); border: 1px solid var(--border-2);
+  border-radius: var(--radius-card); padding: 20px 22px;
+  display: none; gap: 16px; flex-direction: column;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5);
+}
+.cookie-banner.show { display: flex; }
+.cookie-banner-text { font-size: 14px; line-height: 1.6; color: var(--text-2); }
+.cookie-banner-text strong { color: var(--text); font-weight: 500; }
+.cookie-banner-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.cookie-banner-actions .btn { padding: 8px 16px; font-size: 13.5px; }
+
+/* --- sdílená patička (shodná na všech třech webech) ----------------------- */
+footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: var(--bg-alt); }
+
+.ft-head { margin-bottom: 32px; }
+.ft-head .wordmark-ft { display: inline-block; }
+
+.ft-top { display: grid; grid-template-columns: 1.25fr 1.25fr 0.9fr; gap: 48px; align-items: start; }
+@media (max-width: 900px) { .ft-top { grid-template-columns: 1fr 1fr; gap: 36px; } .ft-tagline { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .ft-top { grid-template-columns: 1fr; gap: 32px; } }
+
+.ft-tagline, .ft-name { font-size: 15px; line-height: 1.5; }
+.ft-tagline { color: var(--text-2); max-width: 40ch; margin: 0; }
+
+.ft-col { display: flex; flex-direction: column; }
+.ft-col a {
+  display: block; text-decoration: none;
+  padding-left: 14px;
+  border-left: 1px solid var(--border);
+  transition: border-color 0.15s;
+}
+.ft-col a + a { margin-top: 14px; }
+.ft-col a:hover { border-left-color: var(--accent); }
+.ft-name { display: block; color: var(--text); transition: color 0.15s; }
+.ft-col a:hover .ft-name { color: var(--accent-l); }
+.ft-desc { display: block; margin-top: 2px; font-size: 14px; line-height: 1.5; color: var(--text-2); }
+
+.ft-col a.has-icon { display: flex; align-items: baseline; gap: 8px; }
+.ft-col .ico { width: 14px; height: 14px; fill: currentColor; flex: 0 0 auto; transform: translateY(2px); }
+.ft-col a.has-icon:hover .ico { color: var(--accent-l); }
+
+/* řádek odkazů v patičce – mono, oddělené tečkou */
+.ft-links { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 10px 18px; }
+.ft-links a {
+  font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-2); text-decoration: none; white-space: nowrap; transition: color 0.15s;
+}
+.ft-links a:hover { color: var(--accent-l); }
+
+.ft-legal { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
+.ft-legal p { font-size: 14px; color: var(--text-2); }
+.ft-legal p + p { margin-top: 6px; }
+.ft-copy { margin-top: 12px !important; color: var(--text-3) !important; }
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<header>
-<nav id="nav">
-  <a href="/" class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></a>
-  <div class="nav-links">
-    <a href="#produkt" data-nav="produkt">Produkt</a>
-    <a href="/bezpecnost" data-nav="bezpecnost">Bezpečnost</a>
-    <a href="/faq" data-nav="faq">FAQ</a>
-    <a href="/docs/" data-nav="docs">Nápověda</a>
-    <a href="#cena" data-nav="cena">Cena</a>
-    <a href="#kontakt" data-nav="kontakt">Kontakt</a>
-    <a href="#" class="nav-cta" data-modal="trial">Vyzkoušet zdarma</a>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" display="none" width="0" height="0">
+  <symbol id="arrow-right" viewBox="0 0 40 40">
+    <path d="M34.1,19.9c0,0.3-0.1,0.3-0.1,0.4L21.3,33.1c-0.1,0.1-0.1,0.1-0.4,0.1c-0.3,0-0.3-0.1-0.4-0.1L19,31.6 c-0.1-0.1-0.1-0.1-0.1-0.4s0.1-0.3,0.1-0.4l9.2-9.2H5.8c-0.1,0-0.2,0-0.2,0c0,0,0,0,0,0c-0.1-0.1-0.1-0.2-0.1-0.4v-2.5 c0-0.2,0.1-0.4,0.1-0.5c0,0,0.1,0,0.2,0h22.4L19,9c-0.1-0.1-0.1-0.1-0.1-0.4c0-0.3,0.1-0.3,0.1-0.4l1.5-1.5c0.1-0.1,0.1-0.1,0.4-0.1 c0.3,0,0.3,0.1,0.4,0.1L34,19.5C34,19.6,34.1,19.6,34.1,19.9z"/>
+  </symbol>
+</svg>
+
+<nav class="topnav">
+  <div class="wrap">
+    <a class="wordmark-sm" href="#home" aria-label="ethel.cz">ethel<span class="dot">.</span></a>
+    <ul>
+      <li><a href="#produkt">Produkt</a></li>
+      <li><a href="#akce">Akce</a></li>
+      <li><a href="#priklady">Příklady</a></li>
+      <li><a href="#bezpecnost">Bezpečnost</a></li>
+      <li><a href="#cena">Cena</a></li>
+      <li><a href="/docs/">Nápověda</a></li>
+      <li><a href="#kontakt" class="btn">Vyzkoušet zdarma</a></li>
+    </ul>
   </div>
 </nav>
-</header>
 
-<main>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="pulse-dot"></span>
-      <span class="mono" style="font-size: 0.76rem;">Embedded Thinking for Helios Inuvio</span>
-    </div>
-    <h1>AI pro <span class="accent">Helios Inuvio</span><br><span class="dim">Zeptejte se místo klikání</span></h1>
-    <p class="hero-sub">
-      Ethel je AI asistentka pro Helios Inuvio.
-      Odpoví na dotazy, vysvětlí sestavy a&nbsp;pomůže s&nbsp;orientací v&nbsp;datech – během sekund, česky.
-    </p>
-    <p class="hero-value">Ušetří hodiny, které trávíte hledáním v Helios Inuvio.</p>
-    <div class="hero-actions">
-      <a href="#" class="btn btn-primary" data-modal="trial">Vyzkoušet zdarma</a>
-      <a href="#how" class="btn btn-ghost">Jak to funguje →</a>
-    </div>
-  </div>
-</section>
-
-<!-- CHAT MOCKUP CAROUSEL -->
-<div class="chat-wrap">
-  <div class="chat-carousel">
-    <button class="chat-nav-btn chat-nav-prev" id="chat-prev" aria-label="Předchozí konverzace">←</button>
-    <button class="chat-nav-btn chat-nav-next" id="chat-next" aria-label="Další konverzace">→</button>
+<!-- ============================== HERO ============================== -->
+<section id="home">
+  <div class="hero-visual" aria-hidden="true">
     <div class="chat-window">
       <div class="chat-header">
-        <div class="chat-avatar"><img src="/favicon.svg" alt="Ethel – AI asistentka pro Helios Inuvio" style="width:30px;height:30px;"></div>
-        <div class="chat-header-info">
+        <div class="chat-avatar">e<span class="dot">.</span></div>
+        <div>
           <div class="chat-header-name">Ethel</div>
           <div class="chat-header-status"><span class="online-dot"></span> online</div>
         </div>
-        <div class="chat-header-ctx" id="chat-ctx" style="display:none">Objednávky</div>
+        <div class="chat-header-ctx">Objednávky</div>
       </div>
       <div class="chat-body" id="chat-body">
+        <div class="chat-msg user">Kolik objednávek přišlo včera z e-shopu?</div>
+        <div class="chat-msg bot">Včera přišlo <span class="hl">47 objednávek</span> za <span class="hl">128 450 Kč</span> bez DPH. Tři stále čekají na ruční spárování.</div>
+        <div class="chat-msg user">Z té největší připrav fakturu.</div>
+        <div class="chat-msg bot">Připravila jsem fakturu k&nbsp;objednávce <span class="hl">OB-2026/0847</span> pro <strong>ABC Trade s.r.o.</strong> Obsahuje 3 položky v&nbsp;celkové hodnotě <span class="hl">45 200 Kč</span> bez DPH. Zatím jsem nic nezapsala. Mám ji vytvořit?</div>
         <div class="chat-typing" id="chat-typing"><span></span><span></span><span></span></div>
       </div>
       <div class="chat-input-bar">
@@ -1027,712 +652,689 @@
         <div class="chat-send-btn"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></div>
       </div>
     </div>
-    <div class="chat-dots" id="chat-dots"></div>
-    <p class="chat-disclaimer">Ukázka konverzace. Čísla i&nbsp;názvy položek v odpovědích jsou ilustrační, ne data konkrétního zákazníka.</p>
+    <span class="hero-caption">Ilustrační konverzace</span>
   </div>
-</div>
-
-<!-- VALUE STRIP -->
-<div class="value-strip reveal">
-  <div class="value-strip-title">Co vám to reálně ušetří</div>
-  <div class="value-items">
-    <div class="value-item">
-      <div class="value-before">Klikání v sestavách</div>
-      <div class="value-arrow">↓</div>
-      <div class="value-after">Jedna otázka</div>
-    </div>
-    <div class="value-item">
-      <div class="value-before">Export do Excelu a ruční počítání</div>
-      <div class="value-arrow">↓</div>
-      <div class="value-after">Okamžitá odpověď</div>
-    </div>
-    <div class="value-item">
-      <div class="value-before">Závislost na IT oddělení</div>
-      <div class="value-arrow">↓</div>
-      <div class="value-after">Odpovědi pro každého</div>
-    </div>
-  </div>
-</div>
-
-<!-- FEATURES -->
-<section class="features reveal" id="produkt">
-  <div class="section-label">Funkce</div>
-  <h2 class="section-title">AI asistentka, která rozumí<br>vašemu Helios Inuvio</h2>
-  <p class="section-desc">Ethel nenahrazuje váš ERP. Přidává mu inteligenci – nad daty, kódem i procesy. Vy se ptáte, ona odpovídá.</p>
-  <div class="features-grid">
-    <div class="feature-card reveal reveal-delay-1">
-      <div class="feature-icon">⚡</div>
-      <h3>Zeptejte se místo klikání</h3>
-      <p>Nehledáte v sestavách. Prostě se zeptáte – Ethel odpoví česky, s&nbsp;reálnými daty z vašeho Heliosu. Žádné tabulky s tisíci řádky. Otázku můžete i&nbsp;nadiktovat, psát ji nemusíte.</p>
-    </div>
-    <div class="feature-card reveal reveal-delay-2">
-      <div class="feature-icon">🧭</div>
-      <h3>Vysvětlí Helios novým lidem</h3>
-      <p>Ethel prohledává celou wiki Heliosu, všech 11&nbsp;023 úseků nápovědy. Zeptáte se, jak se dělá inventura, a&nbsp;dostanete postup krok za krokem. Nový kolega se zorientuje bez školení.</p>
-    </div>
-    <div class="feature-card reveal reveal-delay-3">
-      <div class="feature-icon">🔍</div>
-      <h3>Rozumí SQL v Heliosu</h3>
-      <p>Standardní procedury, views a&nbsp;triggery Helios Inuvio. Vysvětlí logiku a&nbsp;závislosti – bez čtení stovek řádků kódu.</p>
-    </div>
-    <div class="feature-card reveal reveal-delay-1">
-      <div class="feature-icon">📖</div>
-      <h3>Vysvětlí vaše sestavy a sloupce</h3>
-      <p>Zeptejte se na uloženou sestavu, počítaný sloupec nebo externí akci – Ethel přečte definici v&nbsp;Heliosu a&nbsp;přeloží ji do běžné češtiny. Bez listování v&nbsp;SQL.</p>
-    </div>
-    <div class="feature-card reveal reveal-delay-2">
-      <div class="feature-icon">🛡️</div>
-      <h3>Data zůstávají u vás</h3>
-      <p>AI vidí strukturu databáze, ale ne obsah vašich tabulek. Do cloudu jde text dotazu a vygenerované SQL – výsledky se spouštějí a skládají lokálně na vašem serveru.</p>
-    </div>
-    <div class="feature-card reveal reveal-delay-3">
-      <div class="feature-icon">📍</div>
-      <h3>Ví, kde v Heliosu stojíte</h3>
-      <p>Otevřete Ethel přímo z&nbsp;dokladu nebo browsu – zná aktuální záznam a&nbsp;odpovídá v&nbsp;jeho kontextu. Žádné vysvětlování, na co se ptáte.</p>
-    </div>
+  <div class="wrap">
+    <span class="hero-label">AI asistentka přímo v Heliosu Inuvio</span>
+    <h1 class="lede">Zeptejte se, co se ve firmě děje.<br>Nebo řekněte Ethel, co má udělat.</h1>
+    <p class="body-text">Ethel odpovídá nad aktuálními daty a&nbsp;pomocí připravených scénářů zvládne i&nbsp;konkrétní úkoly v&nbsp;Heliosu. Připraví fakturu z&nbsp;objednávky, založí organizaci nebo navrhne objednávky pro zboží pod minimem.</p>
+    <p class="body-text">Než cokoliv zapíše, ukáže vám výsledek ke&nbsp;kontrole. <strong>Poslední slovo máte vždy vy.</strong></p>
+    <ul class="btn-row">
+      <li><a href="#kontakt" class="btn" role="button"><span>Vyzkoušet 14 dní zdarma</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
+      <li><a href="#priklady" class="btn ghost" role="button"><span>Prohlédnout příklady</span></a></li>
+    </ul>
+    <p class="micro">Bez omezení, bez platební karty.</p>
   </div>
 </section>
 
-<!-- PRO KOHO -->
-<section class="audience reveal" id="audience">
-  <div class="section-label">Pro koho to je</div>
-  <h2 class="section-title">Ethel pomáhá celé firmě</h2>
-  <p class="section-desc" style="margin-left: auto; margin-right: auto;">Od managementu po IT – každý dostane odpovědi, které potřebuje.</p>
-  <div class="audience-grid">
-    <div class="audience-card reveal reveal-delay-1">
-      <div class="audience-icon">📈</div>
-      <div class="audience-role">Management</div>
-      <h3>Rychlé odpovědi bez čekání na reporty</h3>
-      <p>Chcete vědět, co se děje ve firmě – hned. Ethel vám řekne stav objednávek, faktur nebo skladu jedním dotazem. Bez čekání na IT.</p>
-    </div>
-    <div class="audience-card reveal reveal-delay-2">
-      <div class="audience-icon">🧾</div>
-      <div class="audience-role">Operativa &amp; účetní</div>
-      <h3>Konec ztrácení se v sestavách</h3>
-      <p>Nechcete proklikávat složité sestavy. Stačí se zeptat a dostanete konkrétní odpověď – s&nbsp;čísly, kontextem a bez otevírání deseti oken.</p>
-    </div>
-    <div class="audience-card reveal reveal-delay-3">
-      <div class="audience-icon">💻</div>
-      <div class="audience-role">IT &amp; Helios admin</div>
-      <h3>Nemusíte vysvětlovat systém dokola</h3>
-      <p>Ethel vysvětlí kolegům sestavy, sloupce i logiku systému za vás. A vám pomůže s kódem – rozebere procedury, views i triggery.</p>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how reveal" id="how">
-  <div class="section-label">Jak to funguje</div>
-  <h2 class="section-title">Od instalace k prvnímu dotazu,<br>než dopijete kafe</h2>
-  <p class="section-desc">Žádná měsíční implementace. Ethel se napojí na váš Helios a&nbsp;začne odpovídat.</p>
-  <div class="steps">
-    <div class="step reveal">
-      <div class="step-num">01</div>
-      <div class="step-content">
-        <h3>Spustíte instalační skript</h3>
-        <p>Jeden SQL skript nasadí Ethel do vaší databáze. Připojení k Heliosu přes standardní konfiguraci – bez zásahů do jádra systému.</p>
+<!-- ========================== HLAVNÍ PŘÍNOS ========================= -->
+<section>
+  <div class="wrap stack">
+    <span class="mono-label">Hlavní přínos</span>
+    <h2 class="section-title">Jedna otázka místo hledání.<br>Jeden pokyn místo rutiny.</h2>
+    <div class="card-grid cols-4">
+      <div class="card">
+        <h3 class="card-title">Potřebujete něco zjistit?</h3>
+        <p class="card-text">Zeptáte se česky a dostanete konkrétní odpověď z Heliosu.</p>
       </div>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">02</div>
-      <div class="step-content">
-        <h3>Ethel se propojí s Heliosem</h3>
-        <p>Načte připojení k vaší databázi z&nbsp;konfigurace Heliosu. Standardní tabulky a&nbsp;procedury už zná – nemusí nic skenovat ani indexovat.</p>
+      <div class="card">
+        <h3 class="card-title">Potřebujete něco udělat?</h3>
+        <p class="card-text">Zadáte úkol, Ethel jej připraví a před provedením vám ukáže rekapitulaci.</p>
       </div>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">03</div>
-      <div class="step-content">
-        <h3>Zadáte aktivační token</h3>
-        <p>Token dostanete po objednávce. O AI se staráme my – žádné vlastní API klíče, žádné technické nastavování. Prostě to funguje.</p>
+      <div class="card">
+        <h3 class="card-title">Potřebujete se rozhodnout?</h3>
+        <p class="card-text">Dostanete čísla i souvislosti bez ručního exportu a skládání několika sestav.</p>
       </div>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">04</div>
-      <div class="step-content">
-        <h3>Ptejte se</h3>
-        <p>Otevřete Ethel přímo z Heliosu, napíšete otázku česky a&nbsp;dostanete odpověď s reálnými daty z&nbsp;vašeho Heliosu. Jako byste se ptali kolegy, který zná celý systém.</p>
+      <div class="card">
+        <h3 class="card-title">Opakujete stále stejný postup?</h3>
+        <p class="card-text">Převedeme ho na bezpečný scénář, který Ethel spustí na váš pokyn.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- USE CASES -->
-<section class="usecases reveal" id="usecases">
-  <div class="section-label">Příklady</div>
-  <h2 class="section-title">Co se lidé ptají</h2>
-  <p class="section-desc">Ukázky dotazů z běžného dne v Heliosu a&nbsp;co s nimi Ethel udělá. Odpovídá z vaší databáze, ne z internetu.</p>
-  <div class="usecase-grid">
-    <div class="usecase reveal">
-      <div class="usecase-q">"Kolik objednávek přišlo včera z e-shopu?"</div>
-      <div class="usecase-a">→ Vypíše počet i&nbsp;celkovou částku za včerejšek a&nbsp;upozorní na ty, které čekají na ruční párování.</div>
-      <div class="usecase-benefit">↗ Bez otevírání jediné sestavy</div>
-    </div>
-    <div class="usecase reveal">
-      <div class="usecase-q">"Na co se tady dívám? Co jsou tyhle sloupce?"</div>
-      <div class="usecase-a">→ Ethel přečte definici sestavy a popíše každý sloupec, doplněk i filtr.</div>
-      <div class="usecase-benefit">↗ Nový kolega se zorientuje sám</div>
-    </div>
-    <div class="usecase reveal">
-      <div class="usecase-q">"Vysvětli mi proceduru hp_DosleObj_NovaHlavicka02."</div>
-      <div class="usecase-a">→ Rozebere logiku krok po kroku, identifikuje závislosti na dalších objektech.</div>
-      <div class="usecase-benefit">↗ Nemusíte číst 300 řádků SQL</div>
-    </div>
-    <div class="usecase reveal">
-      <div class="usecase-q">"Je v synchronizačních logech něco divného?"</div>
-      <div class="usecase-a">→ Analyzuje logy a upozorní na skoky v sekvenci, chybové stavy nebo výpadky.</div>
-      <div class="usecase-benefit">↗ Bez ručního scrollování tisíců řádků</div>
-    </div>
-    <div class="usecase reveal">
-      <div class="usecase-q">"Kolik faktur je po splatnosti víc než 30 dnů?"</div>
-      <div class="usecase-a">→ Odpověď s rozpadem podle odběratelů – jeden dotaz, kompletní přehled.</div>
-      <div class="usecase-benefit">↗ Bez jediného otevřeného reportu</div>
-    </div>
-    <div class="usecase reveal">
-      <div class="usecase-q">"Který zákazník měl letos největší obrat?"</div>
-      <div class="usecase-a">→ Seřadí odběratele podle obratu za zvolené období a&nbsp;doplní meziroční změnu.</div>
-      <div class="usecase-benefit">↗ Odpověď za sekundy místo ručního exportu</div>
-    </div>
-  </div>
-</section>
-
-<!-- DATA SAFETY -->
-<section class="safety reveal">
-  <div class="safety-box">
-    <div class="safety-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4" stroke-opacity="0.9"/></svg></div>
-    <h2>Vaše data nikam neodchází</h2>
-    <p>Ethel zná strukturu vašeho Heliosu, ale nevidí reálná čísla. Do cloudu jde jen dotaz – odpověď se sestaví lokálně na vašem serveru. Žádné kopírování databáze, žádná rizika.</p>
-    <div class="safety-pills">
-      <span class="safety-pill">SQL běží u vás</span>
-      <span class="safety-pill">Žádný export dat</span>
-      <span class="safety-pill">Výsledky zůstávají u vás</span>
-      <span class="safety-pill">Vy rozhodujete</span>
-    </div>
-    <p class="safety-note">Ethel je nezávislý nástroj. Není produktem společnosti Asseco Solutions a za jeho provoz zodpovídáme my.</p>
-    <a href="/bezpecnost" class="safety-more">Více o bezpečnosti →</a>
-  </div>
-</section>
-
-<!-- AUTHOR -->
-<section class="author reveal">
-  <div class="author-box">
-    <img class="author-photo" src="data:image/jpeg;base64,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" alt="Jakub Ševela" width="156" height="156">
-    <div class="author-info">
-      <div class="author-name">Jakub Ševela</div>
-      <div class="author-role">Solution architect · Helios Inuvio</div>
-      <p class="author-text">Přes 18 let pracuju s&nbsp;Heliosem – implementace, integrace, SQL na denní bázi. Ethel stavím, protože vím, kolik času lidi tráví proklikáváním sestav. A&nbsp;věřím, že to jde líp.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TRUST – placeholder pro budoucí loga / reference -->
-<section class="trust reveal">
-  <div class="trust-box">
-    <h3>Nasazeno u reálných firem</h3>
-    <p>Ethel testujeme v ostrém provozu. Časem zde přibydou reference – zatím nás posuzujte podle kvality trialu.</p>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing reveal" id="cena">
-  <div class="section-label">Ceník</div>
-  <div class="pricing-intro">14 dní zdarma, bez omezení, bez karty.</div>
-  <h2 class="section-title">Dva tarify podle velikosti provozu</h2>
-  <p class="section-desc">Jedna cena pro běžný provoz, druhá pro firmy s více databázemi nebo širším týmem.</p>
-
-  <div class="price-toggle" id="price-toggle">
-    <span class="price-toggle-label active" data-period="monthly">Měsíčně</span>
-    <span class="price-toggle-label" data-period="annual">Ročně <span class="save-tag">−17 %</span></span>
-  </div>
-
-  <div class="price-grid">
-
-    <!-- STANDARD -->
-    <div class="price-card reveal reveal-delay-1" data-monthly="1 490" data-annual="1 236" data-monthly-period="měsíčně" data-annual-period="při roční platbě" data-monthly-note="bez DPH" data-annual-note="bez DPH" data-monthly-extra="Každý další uživatel: +249 Kč / měsíc" data-annual-extra="Každý další uživatel: +206 Kč / měsíc">
-      <div class="price-tier">Standard</div>
-      <div class="price-subtitle">1 databáze · 5 uživatelů v ceně</div>
-      <div class="price-amount-wrap">
-        <div class="price-original"></div>
-        <div class="price-amount">1 490 <span class="currency">Kč</span></div>
+<!-- ======================= DVĚ HLAVNÍ SCHOPNOSTI ==================== -->
+<section id="produkt">
+  <div class="wrap stack">
+    <span class="mono-label">Dvě hlavní schopnosti</span>
+    <h2 class="section-title">Ethel odpovídá. A Ethel pracuje.</h2>
+    <div class="card-grid cols-2">
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/></svg></div>
+        <h3 class="card-title">Odpovědi nad vašimi daty</h3>
+        <p class="card-text">Nemusíte vědět, ve které sestavě je správné číslo ani jak nastavit filtry. Napíšete, co chcete zjistit, a&nbsp;Ethel vrátí srozumitelnou odpověď z&nbsp;aktuálních dat vašeho Heliosu.</p>
+        <p class="card-text">Můžete se zeptat například:</p>
+        <ul class="qlist">
+          <li>Kolik faktur je více než 30 dní po splatnosti?</li>
+          <li>Které objednávky čekají na ruční zpracování?</li>
+          <li>Co se minulý týden nejvíc prodávalo?</li>
+          <li>Které zboží je pod minimálním stavem?</li>
+          <li>Který zákazník má letos největší obrat?</li>
+        </ul>
       </div>
-      <div class="price-period">měsíčně</div>
-      <div class="price-note">bez DPH</div>
-      <hr class="price-divider">
-      <ul class="price-features">
-        <li><span class="check">✓</span>1 databáze</li>
-        <li><span class="check">✓</span>5 uživatelů v ceně</li>
-        <li class="price-extra"><span class="check">✓</span>Každý další uživatel: +249 Kč / měsíc</li>
-        <li><span class="check">✓</span>Průběžné aktualizace</li>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/><path d="m9 11 3 3L22 4"/></svg></div>
+        <h3 class="card-title">Akce podle připravených scénářů</h3>
+        <p class="card-text">Ethel umí podporované úkoly nejen popsat, ale také připravit a&nbsp;provést. Každá Akce má přesně stanovený postup, povolené kroky a&nbsp;kontroly.</p>
+        <p class="card-text">Před provedením vždy uvidíte, co se má stát. Teprve po&nbsp;vašem schválení Ethel výsledek zapíše do&nbsp;Heliosu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== AKCE ============================== -->
+<section id="akce">
+  <div class="wrap stack">
+    <span class="mono-label">Akce</span>
+    <h2 class="section-title">Rutinní úkol předáte jednou větou</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3 class="card-title">Založení organizace podle IČO</h3>
+        <p class="card-text">Ethel dohledá údaje v ARESu, zkontroluje, zda už firma v Heliosu neexistuje, a připraví nový záznam ke schválení.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/><path d="M9.5 13h5M9.5 16.5h5"/></svg></div>
+        <h3 class="card-title">Faktura z objednávky</h3>
+        <p class="card-text">Vyberete nebo pojmenujete objednávku. Ethel připraví převod, ukáže odběratele, položky i&nbsp;výsledné částky a&nbsp;po schválení fakturu vytvoří.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <h3 class="card-title">Realizace faktury</h3>
+        <p class="card-text">Ethel připraví realizaci podporovaného dokladu podle stanoveného scénáře. Před provedením zkontrolujete, jaký doklad a&nbsp;jakým způsobem zpracuje.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg></div>
+        <h3 class="card-title">Objednávky pro zboží pod minimem</h3>
+        <p class="card-text">Ethel vyhodnotí zásoby a připraví návrh objednávek. Vy zkontrolujete položky, množství a dodavatele.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 6h9M8.5 6v2c0 3.5-2 6.5-4.5 8"/><path d="M7 12.5c1.5 2.5 3.5 4 6 5"/><path d="m13 21 4-10 4 10M14.6 17.5h4.8"/></svg></div>
+        <h3 class="card-title">Překlad popisů zboží</h3>
+        <p class="card-text">Připraví překlady vybraných popisů do požadovaného jazyka a před uložením je nabídne ke kontrole.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <h3 class="card-title">Odeslání faktury e-mailem</h3>
+        <p class="card-text">Připraví podporovaný doklad, příjemce i obsah zprávy. Odeslání proběhne až po potvrzení.</p>
+      </div>
+    </div>
+    <p class="micro">Akce „Založení organizace“ je součástí tarifu Standard. Celý katalog zpřístupňuje modul Akce.</p>
+  </div>
+</section>
+
+<!-- ========================= VLASTNÍ SCÉNÁŘE ======================== -->
+<section>
+  <div class="wrap stack">
+    <span class="mono-label">Vlastní scénáře</span>
+    <h2 class="section-title">Znáte rutinu, kterou by měla dělat Ethel?</h2>
+    <div class="scenario-box">
+      <p class="body-text">Pro konkrétní firemní proces můžeme připravit vlastní scénář. Společně určíme:</p>
+      <ul class="blist">
+        <li>co může uživatel Ethel zadat,</li>
+        <li>které údaje se mají načíst,</li>
+        <li>jaké kontroly musí proběhnout,</li>
+        <li>co se ukáže před schválením,</li>
+        <li>co přesně smí Ethel provést.</li>
       </ul>
-      <div class="price-cta">
-        <a href="#" class="btn btn-primary" data-modal="trial">Vyzkoušet zdarma</a>
-      </div>
-    </div>
-
-    <!-- ENTERPRISE -->
-    <div class="price-card reveal reveal-delay-2" data-monthly="4 990" data-annual="4 141" data-monthly-period="měsíčně" data-annual-period="při roční platbě" data-monthly-note="bez DPH" data-annual-note="bez DPH">
-      <div class="price-tier">Enterprise</div>
-      <div class="price-subtitle">Multi-DB provoz · neomezený tým</div>
-      <div class="price-amount-wrap">
-        <div class="price-original"></div>
-        <div class="price-amount">4 990 <span class="currency">Kč</span></div>
-      </div>
-      <div class="price-period">měsíčně</div>
-      <div class="price-note">bez DPH</div>
-      <hr class="price-divider">
-      <ul class="price-features">
-        <li><span class="check">✓</span>Neomezený počet databází</li>
-        <li><span class="check">✓</span>Neomezený počet uživatelů</li>
-        <li><span class="check">✓</span>Onboarding call + asistované nasazení</li>
-        <li><span class="check">✓</span>Prioritní podpora</li>
-        <li><span class="check">✓</span>Vlastní konfigurace promptů</li>
+      <p class="body-text" style="margin-top:18px">Výsledkem není obecný přístup k celému Heliosu. Je to přesně vymezený postup pro konkrétní práci.</p>
+      <ul class="btn-row" style="margin-top:24px">
+        <li><a href="#kontakt" class="btn" role="button" data-prefill="scenar"><span>Probrat vlastní scénář</span></a></li>
       </ul>
-      <div class="price-cta">
-        <a href="#" class="btn btn-outline" data-modal="demo">Domluvit nasazení</a>
-      </div>
     </div>
-
-  </div>
-  <div class="price-sub">Ceník platný od 24. 7. 2026. Všechny ceny jsou bez DPH.</div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section reveal" id="cta">
-  <h2>Přestaňte hledat v&nbsp;Heliosu</h2>
-  <p>Začněte se ptát. Ethel vám odpoví během sekund.</p>
-  <div class="cta-actions">
-    <a href="#" class="btn btn-primary" data-modal="trial">Vyzkoušet zdarma</a>
-    <a href="#" class="btn btn-ghost" data-modal="demo">Domluvit demo →</a>
   </div>
 </section>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal">
-    <button class="modal-close" id="modal-close">×</button>
-    <div class="modal-form" id="modal-form">
-      <div class="modal-title" id="modal-title">Vyzkoušet Ethel zdarma</div>
-      <div class="modal-subtitle" id="modal-subtitle">Vyplňte údaje a ozveme se vám do 24 hodin s aktivačním tokenem.</div>
-      <div class="form-group">
-        <label class="form-label" for="f-name">Jméno</label>
-        <input class="form-input" type="text" id="f-name" placeholder="Jan Novák" required>
+<!-- ======================== DALŠÍ SCHOPNOSTI ======================== -->
+<section>
+  <div class="wrap stack">
+    <span class="mono-label">Další schopnosti</span>
+    <h2 class="section-title">Pomůže i tehdy, když zrovna nic nezapisujete</h2>
+    <div class="card-grid cols-4">
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.4-6.5-10.5a6.5 6.5 0 0 1 13 0C18.5 15.6 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.3"/></svg></div>
+        <h3 class="card-title">Ví, na co se díváte</h3>
+        <p class="card-text">Otevřete Ethel z konkrétního dokladu nebo přehledu a nemusíte znovu vysvětlovat celý kontext.</p>
       </div>
-      <div class="form-group">
-        <label class="form-label" for="f-email">E-mail</label>
-        <input class="form-input" type="email" id="f-email" placeholder="jan@firma.cz" required>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15.5H6.5A2.5 2.5 0 0 0 4 21V5.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"/></svg></div>
+        <h3 class="card-title">Poradí s Heliosem</h3>
+        <p class="card-text">Zeptáte se, jak udělat inventuru nebo kde nastavit konkrétní funkci. Ethel najde odpovídající část nápovědy a&nbsp;provede vás postupem.</p>
       </div>
-      <div class="form-group">
-        <label class="form-label" for="f-company">Firma</label>
-        <input class="form-input" type="text" id="f-company" placeholder="Název firmy">
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2z"/></svg></div>
+        <h3 class="card-title">Vysvětlí neznámou sestavu</h3>
+        <p class="card-text">Popíše význam sloupců, filtrů a výpočtů v aktuální sestavě. Užitečné zejména při přebírání agendy nebo práci s&nbsp;firemními úpravami.</p>
       </div>
-      <div class="form-group" id="msg-group" style="display:none">
-        <label class="form-label" for="f-msg">Zpráva</label>
-        <textarea class="form-input" id="f-msg" placeholder="Na co se chcete zeptat?"></textarea>
+      <div class="card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></div>
+        <h3 class="card-title">Pomůže správcům a vývojářům</h3>
+        <p class="card-text">Dokáže rozebrat standardní procedury, pohledy a další databázové objekty Heliosu. Tato funkce je určená hlavně administrátorům a&nbsp;technickým uživatelům.</p>
       </div>
-      <div class="form-group" style="position:absolute;left:-9999px" aria-hidden="true">
-        <label class="form-label" for="f-mail">Mail</label>
-        <input class="form-input" type="text" id="f-mail" tabindex="-1" autocomplete="off">
-      </div>
-      <button class="form-submit" id="form-submit">Odeslat</button>
-      <div class="form-note">Žádný spam. Odpovídáme osobně.</div>
-    </div>
-    <div class="modal-success" id="modal-success">
-      <div class="check-icon">✓</div>
-      <h3>Díky!</h3>
-      <p>Ozveme se vám co nejdříve na zadaný e-mail.</p>
     </div>
   </div>
-</div>
+</section>
 
-</main>
+<!-- =========================== PRO KOHO ============================= -->
+<section id="audience">
+  <div class="wrap stack">
+    <span class="mono-label">Pro koho je Ethel</span>
+    <h2 class="section-title">Každému pomůže jinak</h2>
+    <div class="card-grid">
+      <div class="card">
+        <span class="mono-label audience-role">Management</span>
+        <h3 class="card-title">Odpověď bez čekání na další report</h3>
+        <p class="card-text">Zeptáte se na objednávky, faktury, obrat nebo sklad a dostanete aktuální čísla bez zadávání práce kolegům.</p>
+      </div>
+      <div class="card">
+        <span class="mono-label audience-role">Operativa a účetní</span>
+        <h3 class="card-title">Méně přepisování, více hotové práce</h3>
+        <p class="card-text">Ethel potřebné informace dohledá a podporovaný úkol připraví. Vy zkontrolujete údaje a rozhodnete o provedení.</p>
+      </div>
+      <div class="card">
+        <span class="mono-label audience-role">IT a správci Heliosu</span>
+        <h3 class="card-title">Rutinu převedete na řízený scénář</h3>
+        <p class="card-text">Místo opakovaného vysvětlování stejného postupu připravíte Akci, kterou uživatelé spustí sami – v&nbsp;jasně vymezených mezích.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- COOKIE CONSENT BANNER -->
+<!-- ========================= JAK PROBÍHÁ AKCE ======================= -->
+<section id="how">
+  <div class="wrap stack">
+    <span class="mono-label">Jak probíhá Akce</span>
+    <h2 class="section-title">Ethel pracuje. Vy rozhodujete.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Zadáte úkol</h3>
+          <p>Napíšete například: „Připrav fakturu z objednávky OB-2026/0847.“</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Ethel spustí připravený scénář</h3>
+          <p>Dohledá potřebné informace, provede stanovené kontroly a připraví výsledek.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Zobrazí rekapitulaci</h3>
+          <p>Uvidíte, jaký doklad nebo záznam má vzniknout, kterých údajů se týká a co přesně Ethel provede.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Rozhodnete o provedení</h3>
+          <p>Teprve po vašem schválení se změna zapíše do Heliosu. O provedení zůstane auditní záznam.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ NASAZENÍ ============================ -->
+<section>
+  <div class="wrap stack">
+    <span class="mono-label">Nasazení</span>
+    <h2 class="section-title">Od instalace k prvnímu úkolu<br>během desítek minut</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Spustíte instalační skript</h3>
+          <p>Přidá potřebné součásti bez zásahu do jádra Heliosu.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Přidáte klientského agenta</h3>
+          <p>Malá aplikace běží vedle Heliosu a propojuje Ethel s vaším prostředím.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Zadáte aktivační token</h3>
+          <p>Nepotřebujete vlastní účet ani klíč u poskytovatele AI. O provoz a aktualizace se staráme my.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Začnete se ptát a zadávat úkoly</h3>
+          <p>Ethel otevřete přímo z Heliosu a píšete česky. Dostupné Akce se řídí vaším tarifem a připravenými scénáři.</p>
+        </div>
+      </div>
+    </div>
+    <div class="compat-box">
+      <p><strong style="color:var(--text)">Kompatibilita.</strong> Ethel podporuje Helios Inuvio a Helios Easy na Windows s&nbsp;přístupem k&nbsp;SQL Serveru a&nbsp;internetu. Helios Green podporován není.</p>
+      <a href="#kontakt" class="btn ghost" role="button" data-prefill="kompatibilita">Ověřit kompatibilitu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PŘÍKLADY ============================ -->
+<section id="priklady">
+  <div class="wrap stack">
+    <span class="mono-label">Příklady</span>
+    <h2 class="section-title">Co chcete vědět? Co chcete udělat?</h2>
+
+    <div class="usecase-group">
+      <span class="mono-label">Chci odpověď</span>
+      <div class="card-grid cols-4">
+        <div class="card">
+          <div class="usecase-q">„Kolik objednávek přišlo včera z e-shopu?“</div>
+          <div class="usecase-a">→ Počet, hodnota a objednávky vyžadující pozornost.</div>
+        </div>
+        <div class="card">
+          <div class="usecase-q">„Které faktury jsou déle než 30 dní po splatnosti?“</div>
+          <div class="usecase-a">→ Přehled podle odběratelů včetně celkových částek.</div>
+        </div>
+        <div class="card">
+          <div class="usecase-q">„Které zboží je pod minimálním stavem?“</div>
+          <div class="usecase-a">→ Seznam položek, aktuální stav a chybějící množství.</div>
+        </div>
+        <div class="card">
+          <div class="usecase-q">„Který zákazník měl letos největší obrat?“</div>
+          <div class="usecase-a">→ Pořadí zákazníků a dostupné srovnání s předchozím obdobím.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="usecase-group">
+      <span class="mono-label">Chci něco udělat</span>
+      <div class="card-grid cols-4">
+        <div class="card">
+          <div class="usecase-q">„Založ organizaci s IČO 04997476.“</div>
+          <div class="usecase-a">→ Ethel dohledá údaje, zkontroluje duplicitu a připraví nový záznam.</div>
+        </div>
+        <div class="card">
+          <div class="usecase-q">„Připrav fakturu z objednávky OB-2026/0847.“</div>
+          <div class="usecase-a">→ Zrekapituluje odběratele, položky a částky a počká na schválení.</div>
+        </div>
+        <div class="card">
+          <div class="usecase-q">„Připrav objednávky pro zboží pod minimem.“</div>
+          <div class="usecase-a">→ Navrhne položky, množství a dodavatele ke kontrole.</div>
+        </div>
+        <div class="card">
+          <div class="usecase-q">„Přelož německé popisy těchto položek do češtiny.“</div>
+          <div class="usecase-a">→ Připraví překlady a nabídne je ke schválení před uložením.</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="micro">Ukázky jsou ilustrační. Dostupnost konkrétních Akcí závisí na tarifu a aktivovaných scénářích.</p>
+  </div>
+</section>
+
+<!-- =========================== BEZPEČNOST =========================== -->
+<section id="bezpecnost">
+  <div class="wrap">
+    <div class="safety-box">
+      <div class="safety-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <h2>Ethel má přesně vymezeno, co smí udělat</h2>
+      <p>Při běžném dotazování Ethel potřebné informace načte a výsledek sestaví ve vašem prostředí. Vaše databáze se nikam nekopíruje ani neindexuje.</p>
+      <p>Akce fungují pouze prostřednictvím předem připravených scénářů. Každý scénář určuje, jaké údaje může použít, jaké kontroly musí provést a co přesně smí v Heliosu změnit.</p>
+      <p>Před každým zápisem vidíte rekapitulaci. Bez vašeho potvrzení Ethel změnu neprovede a o schválené Akci zůstane auditní záznam.</p>
+      <p>U některých volitelných scénářů může být pro jejich fungování potřeba zpracovat vybrané hodnoty pomocí AI. Takové scénáře jsou standardně vypnuté a aktivují se pouze po dohodě. Přesný tok informací a aktuální výjimky popisujeme na samostatné stránce.</p>
+      <div class="safety-pills">
+        <span class="safety-pill">Databáze se nekopíruje do cloudu</span>
+        <span class="safety-pill">Akce mají přesně stanovené oprávnění</span>
+        <span class="safety-pill">Každý zápis předem schvalujete</span>
+        <span class="safety-pill">Provedené Akce lze auditovat</span>
+        <span class="safety-pill">Volitelné výjimky popisujeme otevřeně</span>
+      </div>
+      <a href="/bezpecnost" class="safety-more">Jak Ethel chrání vaše data →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== AUTOR ============================= -->
+<section>
+  <div class="wrap stack">
+    <span class="mono-label">Kdo za Ethel stojí</span>
+    <h2 class="section-title">Osmnáct let zkušeností s Heliosem<br>v jednom produktu</h2>
+    <div class="author-box">
+      <img class="author-photo" src="/images/jakub-sevela.jpg" alt="Jakub Ševela" loading="lazy">
+      <div>
+        <div class="author-name">Jakub Ševela</div>
+        <span class="mono-label author-role">Solution architect · Helios Inuvio</span>
+        <p class="author-text">Přes 18 let pracuji s&nbsp;Heliosem – od implementací a&nbsp;integrací po SQL a&nbsp;firemní automatizace. Ethel stavím proto, že vidím, kolik času každý den mizí v&nbsp;hledání informací, přepisování údajů a&nbsp;opakování stejných postupů.</p>
+        <p class="author-text">Nechci z&nbsp;Heliosu udělat neprůhledný autopilot. Chci, aby lidé mohli rutinu předat systému a&nbsp;přitom měli výsledek stále pod kontrolou.</p>
+      </div>
+    </div>
+    <div class="trust-box">
+      <h3>Ověřováno v reálném provozu</h3>
+      <p>Ethel testujeme v prostředí skutečných firem. Než zveřejníme zákaznické reference, můžete si její kvalitu ověřit během 14denního trialu na vlastních datech a procesech.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CENÍK ============================== -->
+<section id="cena">
+  <div class="wrap">
+    <span class="mono-label">Cena</span>
+    <h2 class="section-title" style="margin-top:14px">Začněte odpověďmi. Rutinu předejte Akcím.</h2>
+    <p class="section-intro" style="margin-top:14px">Všechny funkce můžete 14 dní vyzkoušet bez omezení a bez platební karty. Ceny jsou uvedeny bez DPH.</p>
+
+    <div class="pgrid">
+
+      <div class="pcard featured">
+        <div class="ptier">Standard</div>
+        <div class="psub">1 databáze · 5 uživatelů</div>
+        <div class="pamount">1 490 <span class="pcur">Kč</span></div>
+        <div class="pper">měsíčně · bez DPH</div>
+        <hr class="pdiv">
+        <ul class="pticks">
+          <li>Odpovědi nad aktuálními daty</li>
+          <li>Kontext otevřeného dokladu nebo přehledu</li>
+          <li>Nápověda a vysvětlování Heliosu</li>
+          <li>Akce „Založení organizace“</li>
+          <li>Průběžné aktualizace</li>
+          <li>Další uživatel za 249 Kč měsíčně</li>
+        </ul>
+        <div class="pmodule">
+          <div class="pmodule-head">
+            <span class="pmodule-label">Modul Akce</span>
+            <span class="pmodule-price">+990 Kč měsíčně</span>
+          </div>
+          <p class="pmodule-text">Celý aktuální katalog připravených scénářů:</p>
+          <ul class="pmodule-list">
+            <li>faktura z objednávky,</li>
+            <li>realizace faktury,</li>
+            <li>objednávky pro zboží pod minimem,</li>
+            <li>překlad popisů,</li>
+            <li>odeslání faktury e-mailem,</li>
+            <li>automaticky také nově přidané standardní Akce.</li>
+          </ul>
+          <span class="pmodule-promo">Early access</span>
+          <p class="pmodule-text" style="margin-top:8px">Pro první klienty prvních šest měsíců v ceně.</p>
+        </div>
+        <div class="pcta"><a href="#kontakt" class="btn" role="button"><span>Vyzkoušet zdarma</span></a></div>
+      </div>
+
+      <div class="pcard">
+        <div class="ptier">Enterprise</div>
+        <div class="psub">Více databází · neomezený počet uživatelů</div>
+        <div class="pamount">4 990 <span class="pcur">Kč</span></div>
+        <div class="pper">měsíčně · bez DPH</div>
+        <hr class="pdiv">
+        <ul class="pticks">
+          <li>Celý modul Akce</li>
+          <li>Asistované nasazení</li>
+          <li>Prioritní podpora</li>
+          <li>Doplnění znalosti specifických firemních úprav</li>
+          <li>Individuální konfigurace</li>
+        </ul>
+        <div class="pcta"><a href="#kontakt" class="btn ghost" role="button" data-prefill="nasazeni"><span>Domluvit nasazení</span></a></div>
+      </div>
+
+    </div>
+    <p class="price-sub"><strong style="color:var(--text);font-weight:500">Vlastní scénář.</strong> Od 9 900 Kč jednorázově podle rozsahu. Společně vymezíme vstupy, kontroly, schvalování a přesný výsledek. Pro provoz vlastního scénáře je potřeba aktivní modul Akce.</p>
+  </div>
+</section>
+
+<!-- =============================== CTA ============================== -->
+<section class="cta-section" id="cta">
+  <div class="wrap">
+    <h2 class="section-title">Co dnes v&nbsp;Heliosu hledáte?<br>A co v&nbsp;něm stále děláte ručně?</h2>
+    <p>Přineste do trialu jednu skutečnou otázku a jeden opakovaný úkol. Během 14 dní zjistíte, co za vás Ethel dokáže najít, připravit a po schválení provést.</p>
+    <ul class="btn-row">
+      <li><a href="#kontakt" class="btn" role="button"><span>Vyzkoušet Ethel zdarma</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
+      <li><a href="#kontakt" class="btn ghost" role="button" data-prefill="scenar"><span>Probrat vlastní scénář</span></a></li>
+    </ul>
+    <p class="micro">Bez karty. Po skončení trialu se nic automaticky nenaúčtuje.</p>
+  </div>
+</section>
+
+<!-- ======================== KONTAKTNÍ FORMULÁŘ ====================== -->
+<section id="kontakt">
+  <div class="wrap">
+    <span class="mono-label">Kontakt</span>
+    <h2 class="section-title" style="margin-top:14px">Vyzkoušejte Ethel ve svém Heliosu</h2>
+    <p class="section-intro" style="margin-top:14px">Vyplňte základní údaje. Do 24 hodin se ozveme s aktivačním tokenem nebo doplňující otázkou k vašemu prostředí.</p>
+
+    <div class="form-box">
+      <div class="form-banner err" id="form-err">Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo napište rovnou na <a href="mailto:info@ethel.cz">info@ethel.cz</a>.</div>
+      <div class="form-banner wait" id="form-wait">Zpráv přišlo za poslední chvíli víc. Zkuste to prosím za pár minut.</div>
+
+      <div class="form-fields" id="form-fields">
+        <div class="form-group">
+          <label class="form-label" for="f-name">Jméno a příjmení</label>
+          <input class="form-input" type="text" id="f-name" name="name" autocomplete="name" placeholder="Jan Novák" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-email">Pracovní e-mail</label>
+          <input class="form-input" type="email" id="f-email" name="email" autocomplete="email" placeholder="jan.novak@firma.cz" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-company">Firma</label>
+          <input class="form-input" type="text" id="f-company" name="company" autocomplete="organization" placeholder="Název firmy">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-msg">Jakou otázku nebo rutinní úkol chcete vyzkoušet? <span class="opt">– nepovinné</span></label>
+          <textarea class="form-input" id="f-msg" name="message" placeholder="Například: každý týden ručně skládám přehled objednávek po splatnosti."></textarea>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="f-mail">Nevyplňujte</label>
+          <input type="text" id="f-mail" name="mail" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form-submit-row">
+          <button class="btn" id="form-submit" type="button">Chci vyzkoušet Ethel</button>
+          <p class="form-note">Žádný spam. Odpovídáme osobně.</p>
+        </div>
+      </div>
+
+      <div class="form-success" id="form-success">
+        <div class="fs-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 6.5"/></svg></div>
+        <div>
+          <h3>Díky!</h3>
+          <p>Ozveme se vám do 24 hodin na zadaný e-mail.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= COOKIE BANNER ========================== -->
 <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
   <div class="cookie-banner-text">
-    <strong>Sušenky? 🍪</strong> Používáme jen analytické cookies (Google Analytics) k pochopení, jak vám web slouží.
+    <strong>Sušenky?</strong> Používáme jen analytické cookies (Google Analytics) k pochopení, jak vám web slouží.
     Žádný marketing, žádný tracking napříč weby. Můžete je odmítnout – web bude fungovat normálně.
   </div>
   <div class="cookie-banner-actions">
-    <button class="cookie-btn cookie-btn-reject" id="cookie-reject" type="button">Odmítnout</button>
-    <button class="cookie-btn cookie-btn-accept" id="cookie-accept" type="button">Přijmout</button>
+    <button class="btn" id="cookie-accept" type="button">Přijmout</button>
+    <button class="btn ghost" id="cookie-reject" type="button">Odmítnout</button>
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer id="kontakt">
-  <div class="footer-left">
-    &copy; 2026 Ethel &middot; Embedded Thinking for Helios
-    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a> &middot; <a href="/bezpecnost">Bezpečnost</a> &middot; <a href="/faq">FAQ</a> &middot; <a href="/docs/changelog">Co je nového</a> &middot; <a href="/partneri">Partneři</a>
-    <br><span class="footer-disclaimer">Ethel není produkt společnosti Asseco Solutions.</span>
+<!-- ============================================================
+     SDÍLENÁ PATIČKA – shodná na jakubsevela.cz / ethel.cz / feedco.cz.
+     Mění se jen wordmark, věta pod ním, prolinky a disclaimer.
+     Když tu něco měníš, propiš to do ostatních dvou rep.
+     ============================================================ -->
+<footer>
+  <div class="wrap">
+    <div class="ft-head">
+      <a class="wordmark-ft" href="#home">ethel<span class="dot">.</span></a>
+    </div>
+
+    <div class="ft-top">
+      <p class="ft-tagline">AI asistentka pro Helios&nbsp;Inuvio. Odpovídá nad aktuálními daty a&nbsp;pomocí připravených scénářů provádí podporované úkoly – vždy pod vaší kontrolou.</p>
+
+      <nav class="ft-col" aria-label="Související weby">
+        <a href="https://jakubsevela.cz">
+          <span class="ft-name">jakubsevela.cz</span>
+          <span class="ft-desc">Doplňky, integrace a automatizace pro Helios&nbsp;Inuvio. Rutinu má dělat systém, ne&nbsp;lidé.</span>
+        </a>
+        <a href="https://feedco.cz">
+          <span class="ft-name">feedco.cz</span>
+          <span class="ft-desc">E-commerce konektor pro Helios&nbsp;Inuvio. Objednávky chodí samy a sklady sedí.</span>
+        </a>
+      </nav>
+
+      <nav class="ft-col" aria-label="Kontakt">
+        <a href="mailto:info@ethel.cz"><span class="ft-name">info@ethel.cz</span></a>
+        <a href="tel:+420774267301"><span class="ft-name" style="white-space:nowrap">+420&nbsp;774&nbsp;267&nbsp;301</span></a>
+        <a href="#kontakt"><span class="ft-name">Vyzkoušet zdarma</span></a>
+        <a href="https://linkedin.com/in/sevela" rel="me noopener" class="has-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.852 3.37-1.852 3.601 0 4.267 2.37 4.267 5.455v6.288zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg><span class="ft-name">LinkedIn</span></a>
+      </nav>
+    </div>
+
+    <nav class="ft-links" aria-label="Obsah webu">
+      <a href="#produkt">Produkt</a>
+      <a href="#akce">Akce</a>
+      <a href="#priklady">Příklady</a>
+      <a href="#bezpecnost">Bezpečnost</a>
+      <a href="/faq">FAQ</a>
+      <a href="/docs/">Nápověda</a>
+      <a href="#cena">Cena</a>
+      <a href="/docs/changelog/">Co je nového</a>
+    </nav>
+
+    <div class="ft-legal">
+      <p>Mgr. Jakub Ševela &middot; Lidická 700/19, 602 00 Brno &middot; IČ: 75185628 &middot; DIČ: CZ8503274703</p>
+      <p>Ethel je nezávislý nástroj a není produktem společnosti Asseco Solutions.</p>
+      <p class="ft-copy">&copy; 2026 Ethel &middot; Embedded Thinking for Helios</p>
+    </div>
   </div>
-  <div class="footer-right">v1.0 &middot; brno, cz</div>
 </footer>
 
 <script>
-/* ===== NAV SCROLL ===== */
-var nav = document.getElementById('nav');
-window.addEventListener('scroll', function() {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-/* ===== NAV ACTIVE STATE ===== */
-(function() {
-  var path = window.location.pathname;
-  var navMap = {
-    bezpecnost: path === '/bezpecnost' || path.indexOf('/bezpecnost') === 0,
-    faq: path === '/faq' || path.indexOf('/faq') === 0,
-    docs: path.indexOf('/docs/') === 0 || path === '/docs'
-  };
-  document.querySelectorAll('.nav-links a[data-nav]').forEach(function(a) {
-    if (navMap[a.getAttribute('data-nav')]) a.classList.add('active');
-  });
-})();
-
-/* ===== REVEAL ON SCROLL ===== */
-var revealObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.reveal').forEach(function(el) {
-  revealObserver.observe(el);
-});
-
-/* ===== CHAT CAROUSEL ===== */
-(function() {
-  var conversations = [
-    {
-      ctx: 'Objednávky',
-      msgs: [
-        { from: 'user', text: 'Kolik objednávek přišlo včera z e-shopu?' },
-        { from: 'bot', text: 'Včera přijato <span class="hl">47 objednávek</span> za <span class="hl">128 450 Kč</span> bez DPH. Tři z nich čekají na ruční párování – chcete je zobrazit?' },
-        { from: 'user', text: 'Ne, díky. Radši řekni, jestli máme faktury hodně po splatnosti.' },
-        { from: 'bot', text: '<span class="hl">12 faktur</span> je po splatnosti víc než 30 dnů, celkem <span class="hl">847 200 Kč</span>. Nejvíc z toho drží jeden odběratel, tři faktury. Chcete rozpad?' }
-      ]
-    },
-    {
-      ctx: 'SQL kód',
-      msgs: [
-        { from: 'user', text: 'Vysvětli mi proceduru hp_DosleObj_NovaHlavicka02.' },
-        { from: 'bot', text: 'Procedura vytváří hlavičku došlé objednávky. Nejdřív ověří oprávnění, pak načte dodavatele podle IČO a založí záznam v <span class="hl">TabDosleObjH02</span> se stavem <span class="hl">0 (koncept)</span>.' },
-        { from: 'user', text: 'A co se stane, když dodavatel neexistuje?' },
-        { from: 'bot', text: 'Vrátí chybu <span class="hl">−1</span> a zapíše warning do <span class="hl">TabLogSynch</span>. Objednávka se nevytvoří – musíte dodavatele nejdřív založit v číselníku.' }
-      ]
-    },
-    {
-      ctx: 'Sklad',
-      msgs: [
-        { from: 'user', text: 'Které produkty mají zásobu pod minimem?' },
-        { from: 'bot', text: '<span class="hl">23 položek</span> je pod minimální zásobou. Nejkritičtější: <strong>Filtr KX-220</strong> – skladem 4 ks, minimum 50 ks. Chcete kompletní seznam?' },
-        { from: 'user', text: 'Ano, seřaď je podle toho, jak moc jsou pod minimem.' },
-        { from: 'bot', text: 'Top 5 podle odchylky: <strong>Filtr KX-220</strong> (−92 %), <strong>Těsnění R-14</strong> (−88 %), <strong>Ventil DN-50</strong> (−76 %), <strong>Ložisko 6204</strong> (−71 %), <strong>Hřídel M-30</strong> (−65 %). Celkem 23 položek.' }
-      ]
-    },
-    {
-      ctx: 'Sestavy',
-      msgs: [
-        { from: 'user', text: 'Co znamenají sloupce v sestavě Přehled tržeb?' },
-        { from: 'bot', text: 'Sestava zobrazuje měsíční tržby podle středisek. Sloupce: <span class="hl">Středisko</span> (org. jednotka), <span class="hl">Tržby netto</span> (bez DPH), <span class="hl">Marže %</span> a <span class="hl">YoY</span> (meziroční změna).' },
-        { from: 'user', text: 'Proč je u střediska 300 marže záporná?' },
-        { from: 'bot', text: 'Středisko 300 (Servis) má marži <span class="hl">−4,2 %</span> – náklady na reklamace v březnu přesáhly tržby o <span class="hl">38 000 Kč</span>. Hlavní položka: tři reklamace od jednoho odběratele.' }
-      ]
-    }
-  ];
-
-  var body = document.getElementById('chat-body');
+/* ===== CHAT – přehraje konverzaci jednou (bez karuselu) ===== */
+(function () {
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var msgs = Array.prototype.slice.call(document.querySelectorAll('#chat-body .chat-msg'));
   var typing = document.getElementById('chat-typing');
-  var ctx = document.getElementById('chat-ctx');
-  var dotsWrap = document.getElementById('chat-dots');
-  var prevBtn = document.getElementById('chat-prev');
-  var nextBtn = document.getElementById('chat-next');
-  var current = 0;
-  var timeouts = [];
-
-  // Build dots
-  conversations.forEach(function(_, idx) {
-    var dot = document.createElement('div');
-    dot.className = 'chat-dot' + (idx === 0 ? ' active' : '');
-    dot.addEventListener('click', function() { goTo(idx); });
-    dotsWrap.appendChild(dot);
-  });
-
-  prevBtn.addEventListener('click', function() {
-    goTo(current === 0 ? conversations.length - 1 : current - 1);
-  });
-  nextBtn.addEventListener('click', function() {
-    goTo(current === conversations.length - 1 ? 0 : current + 1);
-  });
-
-  function goTo(idx) {
-    timeouts.forEach(function(t) { clearTimeout(t); });
-    timeouts = [];
-    typing.classList.remove('visible');
-    current = idx;
-    updateDots();
-    clearChat();
-    ctx.textContent = conversations[idx].ctx;
-    playConversation(conversations[idx].msgs);
+  if (reduced) {
+    msgs.forEach(function (m) { m.classList.add('visible'); });
+    return;
   }
-
-  function updateDots() {
-    var dots = dotsWrap.querySelectorAll('.chat-dot');
-    dots.forEach(function(d, i) {
-      d.classList.toggle('active', i === current);
-    });
-  }
-
-  function clearChat() {
-    var existing = body.querySelectorAll('.chat-msg');
-    existing.forEach(function(el) { el.remove(); });
-  }
-
-  function playConversation(msgs) {
-    var i = 0;
-
-    function showNext() {
-      if (i >= msgs.length) return;
-      var msg = msgs[i];
-
-      if (msg.from === 'bot') {
-        typing.classList.add('visible');
-        var t = setTimeout(function() {
-          typing.classList.remove('visible');
-          appendMsg(msg);
-          i++;
-          var t2 = setTimeout(showNext, 1000);
-          timeouts.push(t2);
-        }, 800 + Math.random() * 300);
-        timeouts.push(t);
-      } else {
-        appendMsg(msg);
+  var i = 0;
+  function next() {
+    if (i >= msgs.length) return;
+    var msg = msgs[i];
+    if (msg.classList.contains('bot')) {
+      typing.classList.add('visible');
+      setTimeout(function () {
+        typing.classList.remove('visible');
+        msg.classList.add('visible');
         i++;
-        var t = setTimeout(showNext, 600);
-        timeouts.push(t);
-      }
+        setTimeout(next, 1000);
+      }, 900);
+    } else {
+      msg.classList.add('visible');
+      i++;
+      setTimeout(next, 700);
     }
-
-    var t = setTimeout(showNext, 400);
-    timeouts.push(t);
   }
-
-  function appendMsg(msg) {
-    var div = document.createElement('div');
-    div.className = 'chat-msg ' + msg.from;
-    div.innerHTML = msg.text;
-    body.insertBefore(div, typing);
-    requestAnimationFrame(function() {
-      div.classList.add('visible');
-    });
-    body.scrollTop = body.scrollHeight;
-  }
-
-  // Start first conversation
-  setTimeout(function() { playConversation(conversations[0].msgs); }, 1500);
+  setTimeout(next, 900);
 })();
 
-/* ===== PRICING TOGGLE ===== */
-(function() {
-  var toggle = document.getElementById('price-toggle');
-  var labels = toggle.querySelectorAll('.price-toggle-label');
-  var section = document.querySelector('.pricing');
-  var cards = document.querySelectorAll('.price-card');
+/* ===== KONTAKTNÍ FORMULÁŘ =====
+   Společný backend všech tří webů: edge funkce web-lead (Supabase).
+   Odpověď v JSON režimu (Accept: application/json), honeypot pole "mail". */
+(function () {
+  var ENDPOINT = 'https://gygwfcattcunbikootbx.supabase.co/functions/v1/web-lead';
 
-  labels.forEach(function(label) {
-    label.addEventListener('click', function() {
-      var period = this.getAttribute('data-period');
-      labels.forEach(function(l) { l.classList.remove('active'); });
-      this.classList.add('active');
-
-      var isAnnual = period === 'annual';
-      section.classList.toggle('annual', isAnnual);
-
-      cards.forEach(function(card) {
-        var amount = card.querySelector('.price-amount');
-        var periodEl = card.querySelector('.price-period');
-        var noteEl = card.querySelector('.price-note');
-        var originalEl = card.querySelector('.price-original');
-        var extraEl = card.querySelector('.price-extra');
-
-        if (isAnnual) {
-          var annualPrice = card.getAttribute('data-annual');
-          var monthlyPrice = card.getAttribute('data-monthly');
-          if (annualPrice) {
-            originalEl.textContent = monthlyPrice + ' Kč';
-            amount.innerHTML = annualPrice + ' <span class="currency">Kč</span>';
-          }
-          var annualPeriod = card.getAttribute('data-annual-period');
-          if (annualPeriod) periodEl.textContent = annualPeriod;
-          var annualNote = card.getAttribute('data-annual-note');
-          if (annualNote) noteEl.textContent = annualNote;
-          var annualExtra = card.getAttribute('data-annual-extra');
-          if (extraEl && annualExtra) extraEl.innerHTML = '<span class="check">✓</span>' + annualExtra;
-        } else {
-          var monthlyPrice = card.getAttribute('data-monthly');
-          if (monthlyPrice) {
-            originalEl.textContent = '';
-            amount.innerHTML = monthlyPrice + ' <span class="currency">Kč</span>';
-          }
-          var monthlyPeriod = card.getAttribute('data-monthly-period');
-          if (monthlyPeriod) periodEl.textContent = monthlyPeriod;
-          var monthlyNote = card.getAttribute('data-monthly-note');
-          if (monthlyNote) noteEl.textContent = monthlyNote;
-          var monthlyExtra = card.getAttribute('data-monthly-extra');
-          if (extraEl && monthlyExtra) extraEl.innerHTML = '<span class="check">✓</span>' + monthlyExtra;
-        }
-      });
-    });
-  });
-})();
-
-/* ===== MODAL ===== */
-(function() {
-  var overlay = document.getElementById('modal-overlay');
-  var closeBtn = document.getElementById('modal-close');
-  var form = document.getElementById('modal-form');
-  var success = document.getElementById('modal-success');
-  var titleEl = document.getElementById('modal-title');
-  var subtitleEl = document.getElementById('modal-subtitle');
-  var msgGroup = document.getElementById('msg-group');
+  var fields = document.getElementById('form-fields');
+  var success = document.getElementById('form-success');
+  var errBanner = document.getElementById('form-err');
+  var waitBanner = document.getElementById('form-wait');
   var submitBtn = document.getElementById('form-submit');
-  var currentType = 'trial';
+  var msgEl = document.getElementById('f-msg');
+  if (!fields || !submitBtn) return;
 
-  // Společný backend pro všechny tři weby (feedco.cz, jakubsevela.cz, ethel.cz) —
-  // dřív dva samostatné Formspree formuláře (trial/demo), teď web-lead. Rozlišení
-  // trial/demo jde přes pole "type", server ho přidá jako řádek do zprávy.
-  var LEAD_ENDPOINT = 'https://gygwfcattcunbikootbx.supabase.co/functions/v1/web-lead';
-
-  var config = {
-    trial: {
-      title: 'Vyzkoušet Ethel zdarma',
-      subtitle: 'Vyplňte údaje a ozveme se vám do 24 hodin s aktivačním tokenem.',
-      showMsg: false
-    },
-    demo: {
-      title: 'Domluvit demo nebo nasazení',
-      subtitle: 'Řekneme si o vašem Heliosu a ukážeme, co Ethel umí s vašimi daty.',
-      showMsg: true
-    }
+  /* CTA s data-prefill předvyplní zprávu, ať lead dorazí s kontextem */
+  var prefills = {
+    scenar: 'Zajímá mě vlastní scénář. Rutina, kterou bych chtěl(a) předat Ethel: ',
+    nasazeni: 'Zajímá mě nasazení v tarifu Enterprise. Náš provoz: ',
+    kompatibilita: 'Chci ověřit kompatibilitu. Verze Heliosu a prostředí: '
   };
-
-  document.addEventListener('click', function(e) {
-    var trigger = e.target.closest('[data-modal]');
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest('[data-prefill]');
     if (!trigger) return;
-    e.preventDefault();
-    currentType = trigger.getAttribute('data-modal');
-    if (typeof gtag === 'function') {
-      gtag('event', 'cta_click', {
-        cta_type: currentType,
-        cta_location: trigger.className || 'unknown',
-      });
-    }
-    var c = config[currentType] || config.trial;
-    titleEl.textContent = c.title;
-    subtitleEl.textContent = c.subtitle;
-    msgGroup.style.display = c.showMsg ? 'block' : 'none';
-    form.classList.remove('hidden');
-    success.classList.remove('show');
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    var key = trigger.getAttribute('data-prefill');
+    if (prefills[key] && msgEl && !msgEl.value.trim()) msgEl.value = prefills[key];
+    if (typeof gtag === 'function') gtag('event', 'cta_click', { cta_type: key });
   });
 
-  // Konverze: scroll na #pricing (jednorázově za session)
-  var pricingEl = document.getElementById('pricing');
+  function hideBanners() {
+    errBanner.classList.remove('show');
+    waitBanner.classList.remove('show');
+  }
+
+  submitBtn.addEventListener('click', function () {
+    var name = document.getElementById('f-name').value.trim();
+    var email = document.getElementById('f-email').value.trim();
+    var company = document.getElementById('f-company').value.trim();
+    var msg = msgEl.value.trim();
+    var honeypot = document.getElementById('f-mail').value.trim();
+
+    if (!name || !email) {
+      (name ? document.getElementById('f-email') : document.getElementById('f-name')).focus();
+      return;
+    }
+
+    hideBanners();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Odesílám…';
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name: name, email: email, company: company || '–',
+        type: 'trial', message: msg, mail: honeypot
+      })
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (payload) {
+        return { res: res, payload: payload };
+      });
+    }).then(function (result) {
+      if (result.res.ok && result.payload.ok) {
+        fields.classList.add('hidden');
+        success.classList.add('show');
+        if (typeof gtag === 'function') gtag('event', 'lead_submit', { lead_type: 'trial' });
+      } else if (result.res.status === 429) {
+        waitBanner.classList.add('show');
+      } else {
+        errBanner.classList.add('show');
+      }
+    }).catch(function () {
+      errBanner.classList.add('show');
+    }).finally(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Chci vyzkoušet Ethel';
+    });
+  });
+
+  /* Konverze: scroll na #cena (jednorázově za session) */
+  var pricingEl = document.getElementById('cena');
   if (pricingEl && 'IntersectionObserver' in window) {
-    var pricingFired = false;
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting && !pricingFired) {
-          pricingFired = true;
-          if (typeof gtag === 'function') {
-            gtag('event', 'pricing_view');
-          }
+    var fired = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !fired) {
+          fired = true;
+          if (typeof gtag === 'function') gtag('event', 'pricing_view');
           io.disconnect();
         }
       });
     }, { threshold: 0.3 });
     io.observe(pricingEl);
   }
-
-  function closeModal() {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  closeBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) closeModal();
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  submitBtn.addEventListener('click', function() {
-    var name = document.getElementById('f-name').value.trim();
-    var email = document.getElementById('f-email').value.trim();
-    var company = document.getElementById('f-company').value.trim();
-    var msg = document.getElementById('f-msg').value.trim();
-    var honeypot = document.getElementById('f-mail').value.trim();
-
-    if (!name || !email) {
-      if (!name) document.getElementById('f-name').focus();
-      else document.getElementById('f-email').focus();
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Odesílám…';
-
-    var data = {
-      name: name,
-      email: email,
-      company: company || '–',
-      type: currentType,
-      message: msg,
-      mail: honeypot
-    };
-
-    fetch(LEAD_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
-    }).then(function(res) {
-      return res.json().catch(function () { return {}; }).then(function (payload) {
-        return { res: res, payload: payload };
-      });
-    }).then(function(result) {
-      if (result.res.ok && result.payload.ok) {
-        form.classList.add('hidden');
-        success.classList.remove('show');
-        success.classList.add('show');
-        if (typeof gtag === 'function') {
-          gtag('event', 'lead_submit', { lead_type: currentType });
-        }
-      } else if (result.res.status === 429) {
-        alert('Zpráv bylo za poslední chvíli víc. Zkuste to prosím za pár minut.');
-      } else {
-        alert('Něco se nepovedlo. Zkuste to prosím znovu.');
-      }
-    }).catch(function() {
-      alert('Chyba připojení. Zkuste to prosím znovu.');
-    }).finally(function() {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Odeslat';
-      document.getElementById('f-name').value = '';
-      document.getElementById('f-email').value = '';
-      document.getElementById('f-company').value = '';
-      document.getElementById('f-msg').value = '';
-      document.getElementById('f-mail').value = '';
-    });
-  });
 })();
 
 /* ===== COOKIE CONSENT + GA4 ===== */
-(function() {
-  // === GA4 KONFIGURACE ===
-  // Pro zapnutí: doplň reálné Measurement ID (formát G-XXXXXXXXXX) z https://analytics.google.com.
-  // Dokud je placeholder, GA se nikdy nenacita (banner se ale stejne zobrazi pro budouci pripravu).
+(function () {
   var GA_MEASUREMENT_ID = 'G-5YGP0D48W7';
   var CONSENT_KEY = 'ethel_cookie_consent_v1';
 
@@ -1758,7 +1360,7 @@ document.querySelectorAll('.reveal').forEach(function(el) {
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_MEASUREMENT_ID);
     document.head.appendChild(s);
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function() { window.dataLayer.push(arguments); };
+    window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag('js', new Date());
     window.gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
   }
@@ -1767,19 +1369,20 @@ document.querySelectorAll('.reveal').forEach(function(el) {
   if (existing === 'accepted') {
     loadGA();
   } else if (existing !== 'rejected' && banner) {
-    setTimeout(function() { banner.classList.add('show'); }, 1200);
+    setTimeout(function () { banner.classList.add('show'); }, 1200);
   }
 
-  if (acceptBtn) acceptBtn.addEventListener('click', function() {
+  if (acceptBtn) acceptBtn.addEventListener('click', function () {
     setConsent('accepted');
     hideBanner();
     loadGA();
   });
-  if (rejectBtn) rejectBtn.addEventListener('click', function() {
+  if (rejectBtn) rejectBtn.addEventListener('click', function () {
     setConsent('rejected');
     hideBanner();
   });
 })();
 </script>
+
 </body>
 </html>
