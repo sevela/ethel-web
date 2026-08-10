@@ -140,7 +140,7 @@
     <p>Ethel posílá jazykovému modelu vaši otázku a popis datové struktury, tedy názvy tabulek a sloupců potřebných k odpovědi. Model z toho sestaví SQL dotaz. Ten se spustí na vašem serveru agentem, který běží vedle Heliosu, a výsledek zůstane u vás.</p>
     <p>Když se zeptáte, kolik jste letos fakturovali konkrétní firmě, odejde do cloudu ta otázka a informace, že odpověď vznikne z tabulky dokladů. Částka, která z dotazu vyjde, do cloudu nejde.</p>
     <p>V provozním záznamu držíme váš dotaz, vygenerované SQL a počet spotřebovaných tokenů. Výsledky dotazů neukládáme.</p>
-    <p data-retention-days="180">Tenhle záznam si necháváme 180 dní. Po té lhůtě z něj text dotazu i vygenerované SQL automaticky zmizí a zůstane jen údaj, že se dotaz stal, a spotřeba tokenů, ze které počítáme vyúčtování. Úklid běží každou noc a hlídá ho kontrola, která se ozve, kdyby přestal.</p>
+    <p data-retention-days="180" data-retention-tables="request_log,feedback">Tenhle záznam si necháváme 180 dní. Po té lhůtě z něj text dotazu i vygenerované SQL automaticky zmizí a zůstane jen údaj, že se dotaz stal, a spotřeba tokenů, ze které počítáme vyúčtování. Stejná lhůta platí pro komentář, který nám k odpovědi napíšete: po 180 dnech z hodnocení zmizí jeho text a zůstane jen palec nahoru nebo dolů, ze kterého sledujeme, jestli se Ethel zlepšuje. Úklid běží každou noc a hlídá ho kontrola, která se ozve, kdyby přestal.</p>
     <p>Že to takhle opravdu funguje, hlídá sada automatických testů. Běží při každé změně kódu; když ji některá úprava poruší, změna neprojde do produkce.</p>
   </section>
 
