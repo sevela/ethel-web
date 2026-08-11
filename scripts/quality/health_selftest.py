@@ -98,7 +98,13 @@ def _health(root, canned, *args):
     return subprocess.run(cmd, cwd=str(root), capture_output=True, text=True, env=env)
 
 
-def _case_zhorseni(root, canned, mutate):
+def _case_zhorseni(root, canned, mutate, priprava=None):
+    """`priprava` bezi PRED zapisem snimku. Je to jediny zpusob, jak overit
+    detekci NEPLATNE vyjimky: kdyz vyjimka az v mutaci pribude, posune se
+    `waivers.total` a `--check` zcervena i s vypnutou validaci — pripad by
+    prosel i s rozbitym meridlem (nalez kontrolora, 11. 8. 2026)."""
+    if priprava:
+        priprava(root)
     _health(root, canned, "--record")
     canned_pro_check = mutate(root, canned)
     result = _health(root, canned_pro_check or canned, "--check")
@@ -114,24 +120,38 @@ def _mut_pridej_continue_on_error(root, canned):
     return canned
 
 
-def _mut_propadla_bezpecnostni_vyjimka(root, canned):
-    vcera = (date.today() - timedelta(days=1)).isoformat()
+def _bezpecnostni_vyjimka(root, expires):
     _write(
         root,
         ".security-quarantine.json",
         json.dumps(
-            {"accepted_advisories": [{"id": "X-1", "reason": "nedosazitelne", "expires": vcera}]}
+            {"accepted_advisories": [{"id": "X-1", "reason": "nedosazitelne", "expires": expires}]}
         ),
     )
+
+
+def _pre_platna_bezpecnostni_vyjimka(root):
+    _bezpecnostni_vyjimka(root, (date.today() + timedelta(days=30)).isoformat())
+
+
+def _mut_propadla_bezpecnostni_vyjimka(root, canned):
+    """Vyjimka uz ve snimku JE (viz priprava) — meni se jen jeji platnost.
+    Pocet vyjimek zustava 1, takze zcervenat muze jedine detekce propadnuti."""
+    _bezpecnostni_vyjimka(root, (date.today() - timedelta(days=1)).isoformat())
     return canned
 
 
+def _karantena(root, polozka):
+    _write(root, ".quality-quarantine.json", json.dumps({"quarantine": [polozka]}))
+
+
+def _pre_karantena_s_tiketem(root):
+    _karantena(root, {"path": "t.py", "test": "t", "reason": "flaky", "ticket": "ETH-1"})
+
+
 def _mut_karantena_bez_tiketu(root, canned):
-    _write(
-        root,
-        ".quality-quarantine.json",
-        json.dumps({"quarantine": [{"path": "t.py", "test": "t", "reason": "flaky"}]}),
-    )
+    """Stejna polozka jako v priprave, jen bez tiketu — pocet se nemeni."""
+    _karantena(root, {"path": "t.py", "test": "t", "reason": "flaky"})
     return canned
 
 
@@ -187,6 +207,18 @@ def _mut_vyjimka_bez_podpory(root, canned):
     return canned
 
 
+def _mut_smaz_job(root, canned):
+    """Umlcet krok jde i tim, ze se cely job smaze. Pocet vyjimek se tim nezvedne
+    — proto je pocet jobu v porovnavanych polich, ne jen v kontextu."""
+    _write(
+        root,
+        ".github/workflows/ci.yml",
+        "name: CI\non: [push]\njobs:\n  test:\n    runs-on: ubuntu-latest\n"
+        "    steps:\n      - run: echo ok\n",
+    )
+    return canned
+
+
 def _mut_zmena_definice(root, canned):
     jina = dict(CANNED_BASELINE, limits={"file_lines": {"soft": 900, "hard": 1200}})
     return _write(root, "canned2.json", json.dumps(jina))
@@ -201,18 +233,30 @@ def _mut_zlepseni(root, canned):
     )
 
 
+# (nazev, mutace, ocekavany exit, priprava pred zapisem snimku)
 PRIPADY = [
-    ("cisty strom projde (pozitivni kontrola)", _mut_nic, 0),
-    ("pribyl continue-on-error krok", _mut_pridej_continue_on_error, 1),
-    ("propadla bezpecnostni vyjimka", _mut_propadla_bezpecnostni_vyjimka, 1),
-    ("karantena testu bez tiketu", _mut_karantena_bez_tiketu, 1),
-    ("platna vyjimka refaktoringu se pocita jako dluh", _mut_platna_vyjimka, 1),
-    ("potlaceni kontroly primo v kodu", _mut_potlaceni_v_kodu, 1),
-    ("vypnuty test (xfail) se pocita", _mut_vypnuty_test, 1),
-    ("zminka o atributu v komentari se NEpocita", _mut_atribut_v_komentari, 0),
-    ("vyjimka v repu, ktery ji neumi vynutit", _mut_vyjimka_bez_podpory, 3),
-    ("zmena definice mereni", _mut_zmena_definice, 3),
-    ("zlepseni bez prepsani snimku", _mut_zlepseni, 1),
+    ("cisty strom projde (pozitivni kontrola)", _mut_nic, 0, None),
+    ("pribyl continue-on-error krok", _mut_pridej_continue_on_error, 1, None),
+    (
+        "platna bezp. vyjimka propadla (pocet se nemeni)",
+        _mut_propadla_bezpecnostni_vyjimka,
+        1,
+        _pre_platna_bezpecnostni_vyjimka,
+    ),
+    (
+        "karantene testu zmizel tiket (pocet se nemeni)",
+        _mut_karantena_bez_tiketu,
+        1,
+        _pre_karantena_s_tiketem,
+    ),
+    ("platna vyjimka refaktoringu se pocita jako dluh", _mut_platna_vyjimka, 1, None),
+    ("potlaceni kontroly primo v kodu", _mut_potlaceni_v_kodu, 1, None),
+    ("vypnuty test (xfail) se pocita", _mut_vypnuty_test, 1, None),
+    ("zminka o atributu v komentari se NEpocita", _mut_atribut_v_komentari, 0, None),
+    ("vyjimka v repu, ktery ji neumi vynutit", _mut_vyjimka_bez_podpory, 3, None),
+    ("zmena definice mereni", _mut_zmena_definice, 3, None),
+    ("zlepseni bez prepsani snimku", _mut_zlepseni, 1, None),
+    ("zmizel job z CI (pocet jobu se hlida)", _mut_smaz_job, 1, None),
 ]
 
 
@@ -307,11 +351,11 @@ def _vysledek(chyby, nazev, kod, ocekavany, vystup):
 def run_selftest():
     print("ETH-277 selftest meridla — kazdy pripad musi zcervenat prave ocekavanym kodem:")
     chyby = []
-    for nazev, mutate, ocekavany in PRIPADY:
+    for nazev, mutate, ocekavany, priprava in PRIPADY:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             canned = _build_fixture(root)
-            kod, vystup = _case_zhorseni(root, canned, mutate)
+            kod, vystup = _case_zhorseni(root, canned, mutate, priprava)
             _vysledek(chyby, nazev, kod, ocekavany, vystup)
     for nazev, stary, novy, expirace, ocekavany in [
         ("budik: dluh za 40 dni vzrostl", 10, 20, None, 1),

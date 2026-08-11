@@ -88,7 +88,11 @@ kroky v CI — v tomhle repu vědomé (neblokující `npm audit`, viz výš). Po
 zruší, index klesne a je to v trendu vidět.
 
 Když tvoje dávka změní počet porušení nebo výjimek, spusť `--record` a snímek commitni —
-`--check` selže při jakémkoli rozdílu proti snímku, i při zlepšení.
+`--check` selže při rozdílu v kterémkoli z dvanácti porovnávaných polí (`COMPARED`
+v `health.py`), i při zlepšení.
+
+**Job `code-health` zatím není required status check** — červený je vidět, ale merge
+nezastaví. Zařazení do rulesetu je na Jakubovi.
 
 Definice a jak by šla která metrika ošidit: `ethel-proxy/docs/eth277-health-check.md`,
 rozhodnutí ADR 0027 a 0028.

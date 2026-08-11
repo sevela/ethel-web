@@ -49,10 +49,29 @@ METRIC_VERSION = 1
 # ktery nikdo nedodrzel.
 WEIGHTS = {"soft": 1, "hard": 3, "waiver": 5, "invalid_waiver": 20}
 
-# Polozky, ktere `--check` porovnava. Zbytek bodu (debt_score, velikost repa,
-# datum) je kontext: meni se pri kazde zmene kodu, takze porovnavat ho by
-# znamenalo prepisovat snimek v kazdem PR a nikdo by uz necetl, co se zmenilo.
-COMPARED = ("index", "structure.soft", "structure.hard", "waivers.total")
+# Polozky, ktere `--check` porovnava: vsechno, co se **nemeni pri bezne zmene
+# kodu**. Souctove `total` na to nestaci — umlcet krok jde i tim, ze se cely job
+# smaze, a to `total` nezvedne (nalez kontrolora, 11. 8. 2026). Proto se hlida
+# kazda slozka zvlast, vcetne poctu jobu a workflow.
+#
+# `debt_score`, `worst_score`, `worst_file` a `size.*` v seznamu **nejsou** a je
+# to vedome: meni se pri kazdem pridanem radku, takze by si `--record` vyzadal
+# kazdy PR a nikdo by uz necetl, co se zmenilo. Dusledek, ktery je potreba znat:
+# jejich hodnota ve snimku muze byt zastarala (viz docs/eth277-health-check.md §6).
+COMPARED = (
+    "index",
+    "structure.soft",
+    "structure.hard",
+    "structure.items",
+    "waivers.total",
+    "waivers.ci_continue_on_error",
+    "waivers.ci_jobs",
+    "waivers.ci_workflows",
+    "waivers.quarantined_tests",
+    "waivers.security_exceptions",
+    "waivers.refactor_allowances",
+    "waivers.inline_suppressions",
+)
 
 SNAPSHOT_NAME = ".quality-health.json"
 
@@ -168,9 +187,14 @@ def build_point(root=ROOT, canned=None, today=None):
 
 
 def _dig(point, dotted):
+    """Chybejici pole = None, ne pad. Snimek zapsany starsi verzi meridla nema
+    vsechna dnesni pole; to je rozdil proti skutecnosti (a `--check` ho ma
+    nahlasit a vyzadat `--record`), ne duvod k tracebacku."""
     value = point
     for part in dotted.split("."):
-        value = value[part]
+        if not isinstance(value, dict):
+            return None
+        value = value.get(part)
     return value
 
 
