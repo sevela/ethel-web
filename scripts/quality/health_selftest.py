@@ -2,100 +2,36 @@
 
 Bezi jednim prikazem v kazdem repu (`health.py --selftest`), takze nepotrebuje
 testovaci framework a plati stejne tam, kde zadny neni. Kazdy pripad postavi
-fixture strom v tmp, schvalne v nem neco zhorsi a overi, ze `--check` **zcervena**
-prave ocekavanym kodem. Soucasti je pozitivni kontrola (cisty strom projde) — bez
-ni by "vzdycky cervena" prosla stejne dobre.
+fixture strom v tmp (`health_fixture.py`), schvalne v nem neco zhorsi a overi,
+ze `--check` **zcervena prave ocekavanym kodem**. Soucasti je pozitivni kontrola
+(cisty strom projde) — bez ni by "vzdycky cervena" prosla stejne dobre.
 
 Vzor prevzaty z ETH-342 (`tests/eth342-hlidka-limitu.test.js` v ethel-app), kde
 se ukazalo, ze meridlo umi tise ztratit nalez a vypadat pritom jako "cisto".
+
+**Pripad, ktery by prosel i s rozbitym meridlem, sem nepatri.** Dva takove tu byly
+(detekce neplatne vyjimky) a nasla je az nezavisla kontrola — proto ma kazdy pripad
+moznost predpripravit stav PRED zapisem snimku, aby se v mutaci menila jen ta jedna
+vec, kterou pripad meri.
 """
 
 import json
-import os
-import subprocess
 import sys
 import tempfile
 from datetime import date, timedelta
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-HEALTH = HERE / "health.py"
-
-WORKFLOW_CLEAN = """name: CI
-on: [push]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ok
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ok
-"""
-
-WORKFLOW_SILENCED = WORKFLOW_CLEAN.replace(
-    "  lint:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo ok\n",
-    "  lint:\n    runs-on: ubuntu-latest\n    steps:\n      - continue-on-error: true\n"
-    "        run: echo ok\n",
+from health_fixture import (
+    CANNED_BASELINE,
+    HERE,
+    WORKFLOW_SILENCED,
+    _build_fixture,
+    _commit_snapshot,
+    _health,
+    _run_git,
+    _snapshot,
+    _write,
 )
-
-CANNED_BASELINE = {
-    "ecosystem": "python",
-    "measured_by": "fixture",
-    "limits": {"file_lines": {"soft": 400, "hard": 600}},
-    "violations": {
-        "files": [{"path": "a.py", "metric": "file_lines", "value": 700, "level": "hard"}],
-        "functions": [
-            {"path": "a.py", "name": "f", "metric": "params", "value": 6, "level": "soft"}
-        ],
-        "classes": [],
-    },
-    "top10_worst_files": [{"path": "a.py", "lines": 700, "max_complexity": 12, "score": 0.933}],
-}
-
-
-def _run_git(root, *args, env_extra=None):
-    env = dict(os.environ)
-    env.setdefault("GIT_AUTHOR_NAME", "selftest")
-    env.setdefault("GIT_AUTHOR_EMAIL", "selftest@example.com")
-    env.setdefault("GIT_COMMITTER_NAME", "selftest")
-    env.setdefault("GIT_COMMITTER_EMAIL", "selftest@example.com")
-    env.update(env_extra or {})
-    return subprocess.run(
-        ["git", *args], cwd=str(root), capture_output=True, text=True, env=env, check=True
-    )
-
-
-def _write(root, rel, text):
-    path = root / rel
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
-    return path
-
-
-def _build_fixture(root):
-    """Minimalni repo: jeden zdrojak, jeden workflow, prazdne karanteny."""
-    _run_git(root, "init", "-q")
-    _write(root, "a.py", "def f(a, b, c, d, e, g):\n    return a\n")
-    _write(root, ".github/workflows/ci.yml", WORKFLOW_CLEAN)
-    _write(root, ".quality-quarantine.json", json.dumps({"quarantine": []}))
-    _write(root, ".security-quarantine.json", json.dumps({"accepted_advisories": []}))
-    _write(root, ".quality-refactor.json", json.dumps({"allowances": []}))
-    # Znacka "meridlo limitu v tomhle repu umi vyjimky" — viz `waivers()`.
-    _write(root, "scripts/quality/allowances.py", "# fixture\n")
-    _run_git(root, "add", "a.py", ".github/workflows/ci.yml")
-    canned = _write(root, "canned.json", json.dumps(CANNED_BASELINE))
-    return canned
-
-
-def _health(root, canned, *args):
-    env = dict(os.environ, ETHEL_HEALTH_ROOT=str(root), PYTHONUTF8="1", PYTHONIOENCODING="utf-8")
-    env.pop("ETHEL_HEALTH_BASELINE_CMD", None)
-    cmd = [sys.executable, str(HEALTH), *args]
-    if canned:
-        cmd += ["--baseline-json", str(canned)]
-    return subprocess.run(cmd, cwd=str(root), capture_output=True, text=True, env=env)
 
 
 def _case_zhorseni(root, canned, mutate, priprava=None):
@@ -224,6 +160,24 @@ def _mut_zmena_definice(root, canned):
     return _write(root, "canned2.json", json.dumps(jina))
 
 
+def _mut_zuzeni_rozsahu(root, canned):
+    """Limit rika, jak vysoko je latka; rozsah, pres ktere sektory se skace.
+    Vynechat adresar z mereni srazi index stejne jako zvednuti limitu — a musi
+    se to poznat stejne, tedy jako zmena definice (nalez kontrolora)."""
+    jina = dict(
+        CANNED_BASELINE,
+        measurement_scope={"excluded_dir_parts": [".git", "tests"], "extensions": [".py"]},
+    )
+    return _write(root, "canned4.json", json.dumps(jina))
+
+
+def _mut_meridlo_nedeklaruje_rozsah(root, canned):
+    """Meridlo, ktere nerekne, co meri, nesmi projit — jinak by zuzeni rozsahu
+    nebylo videt nikde."""
+    jina = {k: v for k, v in CANNED_BASELINE.items() if k != "measurement_scope"}
+    return _write(root, "canned5.json", json.dumps(jina))
+
+
 def _mut_zlepseni(root, canned):
     """Snimek se zapise v zhorsenem stavu, pak se dluh odstrani."""
     return _write(
@@ -233,10 +187,12 @@ def _mut_zlepseni(root, canned):
     )
 
 
-# (nazev, mutace, ocekavany exit, priprava pred zapisem snimku)
+# (nazev, mutace, ocekavany exit, priprava pred zapisem snimku, retezec ve vystupu)
+# Posledni polozka je volitelna kontrola TEXTU: exit kod rekne, ze brana zcervenala,
+# ne uz, jestli autorovi PR rekla pravdu o smeru zmeny.
 PRIPADY = [
     ("cisty strom projde (pozitivni kontrola)", _mut_nic, 0, None),
-    ("pribyl continue-on-error krok", _mut_pridej_continue_on_error, 1, None),
+    ("pribyl continue-on-error krok", _mut_pridej_continue_on_error, 1, None, "ZHORSENI"),
     (
         "platna bezp. vyjimka propadla (pocet se nemeni)",
         _mut_propadla_bezpecnostni_vyjimka,
@@ -255,43 +211,11 @@ PRIPADY = [
     ("zminka o atributu v komentari se NEpocita", _mut_atribut_v_komentari, 0, None),
     ("vyjimka v repu, ktery ji neumi vynutit", _mut_vyjimka_bez_podpory, 3, None),
     ("zmena definice mereni", _mut_zmena_definice, 3, None),
-    ("zlepseni bez prepsani snimku", _mut_zlepseni, 1, None),
-    ("zmizel job z CI (pocet jobu se hlida)", _mut_smaz_job, 1, None),
+    ("zuzeni rozsahu mereni je taky zmena definice", _mut_zuzeni_rozsahu, 3, None),
+    ("meridlo nedeklaruje rozsah mereni", _mut_meridlo_nedeklaruje_rozsah, 3, None),
+    ("zlepseni bez prepsani snimku", _mut_zlepseni, 1, None, "ZLEPSENI"),
+    ("zmizel job z CI (pocet jobu se hlida)", _mut_smaz_job, 1, None, "ZHORSENI"),
 ]
-
-
-def _snapshot(index, waivers_total, den):
-    return {
-        "schema_version": 1,
-        "recorded_at": den,
-        "ecosystem": "python",
-        "definition": "abcdef123456",
-        "index": index,
-        "structure": {
-            "soft": index,
-            "hard": 0,
-            "items": index,
-            "worst_score": 1.0,
-            "debt_score": 1.0,
-            "worst_file": "a.py",
-        },
-        "waivers": {"total": waivers_total, "invalid": []},
-        "size": {"source_files": 1, "source_lines": 2},
-    }
-
-
-def _commit_snapshot(root, point, den):
-    _write(root, ".quality-health.json", json.dumps(point))
-    _run_git(root, "add", ".quality-health.json")
-    stamp = f"{den}T12:00:00+00:00"
-    _run_git(
-        root,
-        "commit",
-        "-q",
-        "-m",
-        f"snimek {den}",
-        env_extra={"GIT_AUTHOR_DATE": stamp, "GIT_COMMITTER_DATE": stamp},
-    )
 
 
 def _case_trend(root, stary_index, novy_index, expirace_za_dni=None):
@@ -351,11 +275,15 @@ def _vysledek(chyby, nazev, kod, ocekavany, vystup):
 def run_selftest():
     print("ETH-277 selftest meridla — kazdy pripad musi zcervenat prave ocekavanym kodem:")
     chyby = []
-    for nazev, mutate, ocekavany, priprava in PRIPADY:
+    for pripad in PRIPADY:
+        nazev, mutate, ocekavany, priprava = pripad[:4]
+        ocekavany_text = pripad[4] if len(pripad) > 4 else None
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             canned = _build_fixture(root)
             kod, vystup = _case_zhorseni(root, canned, mutate, priprava)
+            if ocekavany_text and ocekavany_text not in vystup:
+                kod = f"{kod} bez '{ocekavany_text}' ve vystupu"
             _vysledek(chyby, nazev, kod, ocekavany, vystup)
     for nazev, stary, novy, expirace, ocekavany in [
         ("budik: dluh za 40 dni vzrostl", 10, 20, None, 1),

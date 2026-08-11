@@ -12,7 +12,8 @@ Proc to existuje: `.quality-baseline.json` odpovi "je tenhle soubor pres limit?"
 ale ne "roste dluh, nebo klesa?". Tenhle skript meri stav jednim cislem a snimek
 commituje do `.quality-health.json` — **historie je pak historie toho souboru
 v gitu**, zadna externi databaze ani bot. Aby ta historie byla uplna, `--check`
-odmitne strom, jehoz snimek nesedi se skutecnosti (v OBOU smerech).
+odmitne strom, jehoz snimek nesedi se skutecnosti v nekterem z porovnavanych poli
+(`COMPARED`) — a to v OBOU smerech, tedy i pri zlepseni.
 
 Co se do ukazatele pocita a jak by se to dalo osidit: docs/eth277-health-check.md.
 
@@ -140,8 +141,20 @@ def structure_stats(report):
 
 def definition_fingerprint(report):
     """Otisk definice mereni. Zvednout limity je legitimni krok, ale ma se poznat
-    jako zmena definice, ne jako pokles dluhu."""
+    jako zmena definice, ne jako pokles dluhu.
+
+    Do otisku patri **oboji**: jak vysoko je latka (`limits`) i pres ktere sektory
+    se skace (`measurement_scope`, `skipped_metrics`). Do 11. 8. 2026 tam byly jen
+    limity — a jeden radek pridany do `EXCLUDE_DIR_PARTS` v `baseline.py` tak srazil
+    index z 235 na 212 se stejnym otiskem, takze `--check` to ohlasil jako ZLEPSENI
+    a bod se zapsal do trendu bez priznaku zmenene definice (nalez kontrolora).
+    """
     waivers = waivers_module()
+    if "measurement_scope" not in report:
+        raise waivers.MeasurementError(
+            "report meridla limitu nema klic 'measurement_scope' — meridlo nedeklaruje, "
+            "co vlastne meri, a zuzeni rozsahu by se tvarilo jako pokles dluhu"
+        )
     payload = json.dumps(
         {
             "metric_version": METRIC_VERSION,
@@ -150,6 +163,8 @@ def definition_fingerprint(report):
             "suppressions": list(waivers.SUPPRESSIONS),
             "suppressions_ignored": list(waivers.SUPPRESSION_IGNORED_CODES),
             "limits": report.get("limits"),
+            "measurement_scope": report["measurement_scope"],
+            "skipped_metrics": sorted(report.get("skipped_metrics") or {}),
             "measured_by": report.get("measured_by"),
             "baseline_schema": report.get("schema_version"),
         },
@@ -207,10 +222,19 @@ def _drift(current, snapshot):
 
 
 def load_snapshot(root=ROOT):
+    """Rozbity nebo nesmyslny snimek je chyba mereni, ne traceback — stejne
+    pravidlo jako `health_waivers.read_json`."""
     path = root / SNAPSHOT_NAME
     if not path.exists():
         return None
-    return json.loads(path.read_text(encoding="utf-8"))
+    chyba = waivers_module().MeasurementError
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        raise chyba(f"{SNAPSHOT_NAME} nejde precist ({exc}) — spust --record") from exc
+    if not isinstance(data, dict):
+        raise chyba(f"{SNAPSHOT_NAME} neni objekt — spust --record")
+    return data
 
 
 def record_mode(current, root=ROOT):
@@ -230,9 +254,39 @@ def _print_invalid(current):
         print(f"  - {defect}", file=sys.stderr)
 
 
+# Pole, u kterych je **pokles** zhorsenim: pocet jobu a workflow v CI. Umlcet
+# kontrolu jde i tim, ze se cely job smaze — a to je min kontroly, ne min dluhu.
+# U vsech ostatnich porovnavanych poli je to obracene (vic porusenych limitu,
+# vic vyjimek = hur).
+MENE_JE_HUR = ("waivers.ci_jobs", "waivers.ci_workflows")
+
+
+def _smer(current, snapshot):
+    """Smer se neurcuje podle indexu: `ci_jobs` a `ci_workflows` do indexu
+    nevstupuji, takze smazany job z CI by se autorovi PR ohlasil jako zlepseni
+    (nalez kontrolora, 11. 8. 2026)."""
+    horsi = lepsi = False
+    for pole in COMPARED:
+        stara, nova = _dig(snapshot, pole), _dig(current, pole)
+        if not (isinstance(stara, int) and isinstance(nova, int)) or stara == nova:
+            continue
+        roste = nova > stara
+        if roste != (pole in MENE_JE_HUR):
+            horsi = True
+        else:
+            lepsi = True
+    if horsi and lepsi:
+        return "ZHORSENI I ZLEPSENI naraz"
+    if horsi:
+        return "ZHORSENI"
+    if lepsi:
+        return "ZLEPSENI"
+    # Zadne cislo se nezmenilo — pole tedy chybi nebo ma jiny typ (stary snimek).
+    return "NESROVNATELNY SNIMEK"
+
+
 def _print_drift(current, snapshot, drift):
-    smer = "ZHORSENI" if current["index"] > snapshot["index"] else "ZLEPSENI"
-    print(f"{smer} proti {SNAPSHOT_NAME}:", file=sys.stderr)
+    print(f"{_smer(current, snapshot)} proti {SNAPSHOT_NAME}:", file=sys.stderr)
     for line in drift:
         print(f"  - {line}", file=sys.stderr)
     print(
@@ -243,9 +297,12 @@ def _print_drift(current, snapshot, drift):
 
 
 def check_mode(current, root=ROOT):
-    """Brana. Selze pri neplatne vyjimce, pri zmene definice a pri JAKEMKOLI
-    rozdilu proti snimku — i pri zlepseni. Snimek je tvrzeni o repu; kdyz nesedi,
-    trend postaveny na jeho historii je fikce, at uz lze v kterykoli smer."""
+    """Brana. Selze pri neplatne vyjimce, pri zmene definice a pri rozdilu
+    v kteremkoli z porovnavanych poli (`COMPARED`) — i pri zlepseni. Snimek je
+    tvrzeni o repu; kdyz nesedi, trend postaveny na jeho historii je fikce, at uz
+    lze v kterykoli smer. Pole mimo `COMPARED` (debt_score, size) se schvalne
+    neporovnavaji a jejich hodnota ve snimku muze byt o davku pozadu — proc,
+    viz docs/eth277-health-check.md §6 bod 1."""
     snapshot = load_snapshot(root)
     if snapshot is None:
         print(f"Chybi {SNAPSHOT_NAME} — spust --record.", file=sys.stderr)

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "recorded_at": "2026-08-11",
   "ecosystem": "javascript",
-  "definition": "95277471861e",
+  "definition": "bea674bd20e7",
   "index": 10,
   "structure": {
     "soft": 0,
@@ -25,6 +25,6 @@
   },
   "size": {
     "source_files": 9,
-    "source_lines": 1724
+    "source_lines": 1717
   }
 }
