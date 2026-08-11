@@ -67,6 +67,32 @@ rozdíl od ostatních tří repů tu žádný produkční kód neběží proti d
 statický landing page. ETH-309 se ho proto netýkal; schedule (týdenní cron) tu už existoval
 z ETH-270 stejně jako všude jinde.
 
+### Zdravotní ukazatel a trend dluhu (ETH-277)
+
+`.quality-baseline.json` odpoví „je tenhle soubor přes limit?", ale ne „roste dluh, nebo
+klesá?". Na to je `scripts/quality/health.py` — **zrcadlo z `ethel-proxy`**, mění se tam
+a kopíruje sem, soubory mají být bajt po bajtu shodné.
+
+```bash
+npm ci                                      # baseline.js měří přes ESLint
+python scripts/quality/health.py            # dnešní bod (JSON)
+python scripts/quality/health.py --record   # zapíše ho do .quality-health.json
+python scripts/quality/health.py --check    # brána v CI (job code-health)
+python scripts/quality/health.py --trend    # tabulka trendu z historie gitu
+python scripts/quality/health.py --selftest # negativní kontroly měřidla
+```
+
+`index = 1×měkká + 3×tvrdá porušení + 5×výjimky + 20×neplatné výjimky`. **Strukturální
+část je tu dnes nulová** (baseline je prázdná), takže celý index drží `continue-on-error`
+kroky v CI — v tomhle repu vědomé (neblokující `npm audit`, viz výš). Pokud je někdo
+zruší, index klesne a je to v trendu vidět.
+
+Když tvoje dávka změní počet porušení nebo výjimek, spusť `--record` a snímek commitni —
+`--check` selže při jakémkoli rozdílu proti snímku, i při zlepšení.
+
+Definice a jak by šla která metrika ošidit: `ethel-proxy/docs/eth277-health-check.md`,
+rozhodnutí ADR 0027 a 0028.
+
 ## Karanténa testů
 
 `.quality-quarantine.json` existuje, ale je prázdná a nepoužívá se — repo nemá testovací
