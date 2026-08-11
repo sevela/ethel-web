@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bezpečnost — Ethel · náhled 3</title>
+<meta name="description" content="Kde v Ethel zůstávají data z Heliosu, co vidí jazykový model, jak probíhají Akce, které něco mění, a kde odchází víc než dotaz a struktura.">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="Jakub Ševela">
+
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/brand/dm-sans-latin-ext-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/brand/lora-latin-ext-400-normal.woff2" crossorigin>
+<link rel="stylesheet" href="/brand/fonts.css">
+<link rel="stylesheet" href="/brand/tokens.css">
+<link rel="stylesheet" href="/nahled-3/assets/site.css">
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" display="none" width="0" height="0">
+  <symbol id="arrow-right" viewBox="0 0 40 40">
+    <path d="M34.1,19.9c0,0.3-0.1,0.3-0.1,0.4L21.3,33.1c-0.1,0.1-0.1,0.1-0.4,0.1c-0.3,0-0.3-0.1-0.4-0.1L19,31.6 c-0.1-0.1-0.1-0.1-0.1-0.4s0.1-0.3,0.1-0.4l9.2-9.2H5.8c-0.1,0-0.2,0-0.2,0c0,0,0,0,0,0c-0.1-0.1-0.1-0.2-0.1-0.4v-2.5 c0-0.2,0.1-0.4,0.1-0.5c0,0,0.1,0,0.2,0h22.4L19,9c-0.1-0.1-0.1-0.1-0.1-0.4c0-0.3,0.1-0.3,0.1-0.4l1.5-1.5c0.1-0.1,0.1-0.1,0.4-0.1 c0.3,0,0.3,0.1,0.4,0.1L34,19.5C34,19.6,34.1,19.6,34.1,19.9z"/>
+  </symbol>
+</svg>
+
+<nav class="topnav">
+  <div class="wrap">
+    <a class="wordmark-sm" href="/nahled-3/" aria-label="ethel.cz">ethel<span class="dot">.</span></a>
+    <ul>
+      <li><a href="/nahled-3/#produkt">Produkt</a></li>
+      <li><a href="/nahled-3/akce/">Akce</a></li>
+      <li><a href="/nahled-3/bezpecnost/">Bezpečnost</a></li>
+      <li><a href="/nahled-3/#cena">Cena</a></li>
+      <li><a href="/nahled-3/faq/">FAQ</a></li>
+      <li><a href="/docs/">Nápověda</a></li>
+      <li><a href="/nahled-3/#kontakt" class="btn">Vyzkoušet zdarma</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="crumb"><a href="/nahled-3/">ethel.cz</a><span class="sep">/</span>bezpečnost</p>
+    <h1 class="lede">Bezpečnost</h1>
+    <p class="rev-date" style="margin-top:14px">Poslední revize: 11. srpna 2026</p>
+  </div>
+</section>
+
+<!-- ===================== KDE ZŮSTÁVAJÍ VAŠE DATA ==================== -->
+<section id="kde-zustavaji-vase-data">
+  <div class="wrap stack">
+    <h2 class="section-title">Kde zůstávají vaše data</h2>
+    <div class="prose">
+      <p>Ethel posílá jazykovému modelu vaši otázku a popis datové struktury, tedy názvy tabulek a sloupců potřebných k odpovědi. Model z toho sestaví SQL dotaz. Ten se spustí na vašem serveru agentem, který běží vedle Heliosu, a výsledek zůstane u vás.</p>
+      <p>Když se zeptáte, kolik jste letos fakturovali konkrétní firmě, odejde do cloudu ta otázka a informace, že odpověď vznikne z tabulky dokladů. Částka, která z dotazu vyjde, do cloudu nejde.</p>
+      <p>V provozním záznamu držíme váš dotaz, vygenerované SQL a počet spotřebovaných tokenů. Výsledky dotazů neukládáme.</p>
+      <p data-retention-days="180">Tenhle záznam si necháváme 180 dní. Po té lhůtě z něj text dotazu i vygenerované SQL automaticky zmizí a zůstane jen údaj, že se dotaz stal, a spotřeba tokenů, ze které počítáme vyúčtování. Úklid běží každou noc a hlídá ho kontrola, která se ozve, kdyby přestal.</p>
+      <p>Že to takhle opravdu funguje, hlídá sada automatických testů. Běží při každé změně kódu; když ji některá úprava poruší, změna neprojde do produkce.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NOVÝ BLOK: ZAPISUJÍCÍ AKCE ==================== -->
+<section id="akce">
+  <div class="wrap stack">
+    <h2 class="section-title">Jak probíhají Akce, které něco mění</h2>
+    <div class="prose">
+      <p>Běžné otázky nad daty nic v Heliosu nemění. Zápis nebo odeslání je možné jen prostřednictvím aktivované Akce s předem připraveným scénářem.</p>
+      <p>Scénář přesně určuje, které údaje může Ethel načíst, jaké kontroly musí provést a co smí změnit nebo odeslat. Před provedením vždy zobrazí rekapitulaci. Uživatel Akci schválí, nebo zruší; bez potvrzení se nic nestane.</p>
+      <p>Po schválení Ethel provede pouze kroky vymezené scénářem a uloží se auditní záznam. Zadání, které neodpovídá žádné aktivované Akci, nemůže samo vést k zápisu.</p>
+      <p>U založení organizace podle IČO se zadané IČO odešle do veřejného rejstříku ARES. Jde o veřejná data, ne o obsah vaší databáze.</p>
+      <p>Některé volitelné scénáře potřebují pro svou funkci zpracovat vybrané hodnoty pomocí AI. Jsou ve výchozím stavu vypnuté a před jejich aktivací vždy popíšeme, které hodnoty opustí vaše prostředí a proč. Aktuální výjimky jsou uvedené níže na této stránce.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== TRÉNOVÁNÍ MODELU ======================= -->
+<section id="trenovani-modelu">
+  <div class="wrap stack">
+    <h2 class="section-title">Trénování modelu</h2>
+    <div class="prose">
+      <p>Anthropic, jehož model Ethel používá, podle své dokumentace ve výchozím nastavení nepoužívá vstupy ani výstupy z komerčních produktů a API k trénování svých modelů.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== KDE ODCHÁZÍ VÍC NEŽ DOTAZ ================== -->
+<section id="kde-odchazi-vic">
+  <div class="wrap stack">
+    <h2 class="section-title">Kde odchází víc než dotaz a struktura</h2>
+    <div class="prose">
+      <p>Tři místa. Vypisujeme je radši sami, než abyste je hledali.</p>
+
+      <h3 id="asistovane-akce">Asistované akce nad větším počtem záznamů</h3>
+      <p>U kontroly zásob pod minimem odejde modelu stav skladu a aktuální dodavatel u dotčených položek zboží. U kontroly nepřeložených popisů interní ID a název položky. Obojí je ve výchozím stavu vypnuté a zapíná se pro každého zákazníka zvlášť.</p>
+
+      <h3 id="diagnostika-chyb">Diagnostika chyb</h3>
+      <p>Když SQL dotaz selže, odejde zařazení chyby a název dotčeného objektu, například že sloupec neexistuje. Původní text chybové hlášky z databáze, který může nést konkrétní hodnoty, se ven neposílá.</p>
+
+      <h3 id="hlasove-cteni">Hlasové čtení odpovědí</h3>
+      <p>Ethel čte odpovědi hlasem, který běží na vašem počítači. Existuje i cloudová varianta: ta posílá text odpovědi včetně dat, která obsahuje, poskytovateli hlasové syntézy. Zapíná se jen účtům, kterým to výslovně povolíme, a dnes ji nemá zapnutou žádný zákazník.</p>
+    </div>
+    <ul class="btn-row" style="margin-top:26px">
+      <li><a href="/nahled-3/akce/" class="btn ghost" role="button"><span>Jak fungují Akce</span></a></li>
+      <li><a href="/nahled-3/faq/" class="btn ghost" role="button"><span>Časté otázky</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= COOKIE LIŠTA =========================== -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
+  <div class="cookie-banner-text">
+    <strong>Sušenky?</strong> Používáme jen analytické cookies, abychom věděli, jak vám web slouží.
+    Žádný marketing ani sledování napříč weby. Můžete je odmítnout; web bude fungovat normálně.
+  </div>
+  <div class="cookie-banner-actions">
+    <button class="btn" id="cookie-accept" type="button">Přijmout</button>
+    <button class="btn ghost" id="cookie-reject" type="button">Odmítnout</button>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="ft-head">
+      <a class="wordmark-ft" href="/nahled-3/">ethel<span class="dot">.</span></a>
+    </div>
+
+    <div class="ft-top">
+      <p class="ft-tagline">AI asistentka pro Helios&nbsp;Inuvio. Odpovídá nad aktuálními daty a&nbsp;pomocí připravených scénářů provádí podporované úkoly – vždy pod vaší kontrolou.</p>
+
+      <nav class="ft-col" aria-label="Související weby">
+        <a href="https://jakubsevela.cz">
+          <span class="ft-name">jakubsevela.cz</span>
+          <span class="ft-desc">Doplňky, integrace a automatizace pro Helios&nbsp;Inuvio.</span>
+        </a>
+        <a href="https://feedco.cz">
+          <span class="ft-name">feedco.cz</span>
+          <span class="ft-desc">E-commerce konektor pro Helios&nbsp;Inuvio.</span>
+        </a>
+      </nav>
+
+      <nav class="ft-col" aria-label="Kontakt">
+        <a href="mailto:info@ethel.cz"><span class="ft-name">info@ethel.cz</span></a>
+        <a href="tel:+420774267301"><span class="ft-name" style="white-space:nowrap">+420&nbsp;774&nbsp;267&nbsp;301</span></a>
+        <a href="/nahled-3/#kontakt"><span class="ft-name">Vyzkoušet zdarma</span></a>
+        <a href="https://linkedin.com/in/sevela" rel="me noopener" class="has-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.852 3.37-1.852 3.601 0 4.267 2.37 4.267 5.455v6.288zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg><span class="ft-name">LinkedIn</span></a>
+      </nav>
+    </div>
+
+    <nav class="ft-links" aria-label="Obsah webu">
+      <a href="/nahled-3/#produkt">Produkt</a>
+      <a href="/nahled-3/akce/">Akce</a>
+      <a href="/nahled-3/bezpecnost/">Bezpečnost</a>
+      <a href="/nahled-3/#cena">Cena</a>
+      <a href="/nahled-3/faq/">FAQ</a>
+      <a href="/docs/">Nápověda</a>
+      <a href="/nahled-3/download/">Ke stažení</a>
+      <a href="/nahled-3/demo/">Demo</a>
+      <a href="/docs/changelog/">Co je nového</a>
+    </nav>
+
+    <div class="ft-legal">
+      <p>Mgr. Jakub Ševela &middot; Lidická 700/19, 602 00 Brno &middot; IČ: 75185628 &middot; DIČ: CZ8503274703</p>
+      <p>Ethel je nezávislý nástroj a není produktem společnosti Asseco Solutions.</p>
+      <p class="ft-copy">&copy; 2026 Ethel &middot; Embedded Thinking for Helios</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/nahled-3/assets/site.js"></script>
+</body>
+</html>
