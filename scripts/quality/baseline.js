@@ -320,6 +320,14 @@ function buildReport() {
       'docs, faq) je marketingovy/dokumentacni obsah, ne kod — limity na delku souboru ' +
       'na nej nedavaji smysl.',
     limits: LIMITS,
+    // ETH-277: co se vubec meri. Limity rikaji "jak vysoko je latka", tohle
+    // "pres ktere sektory se skace" — bez toho druheho jde index srazit zuzenim
+    // rozsahu, aniz by se zmenil otisk definice v health.py (nalez kontrolora).
+    measurement_scope: {
+      git_pathspec: 'scripts',
+      extensions: ['.js'],
+      skipped_metrics: Object.keys(SKIPPED_METRICS).sort(),
+    },
     skipped_metrics: SKIPPED_METRICS,
     violations: { files, functions, classes: [] },
     score_formula:

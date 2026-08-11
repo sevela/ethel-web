@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-11",
+  "ecosystem": "javascript",
+  "definition": "bea674bd20e7",
+  "index": 10,
+  "structure": {
+    "soft": 0,
+    "hard": 0,
+    "items": 0,
+    "worst_score": 0,
+    "debt_score": 0,
+    "worst_file": null
+  },
+  "waivers": {
+    "ci_continue_on_error": 2,
+    "ci_jobs": 8,
+    "ci_workflows": 1,
+    "quarantined_tests": 0,
+    "security_exceptions": 0,
+    "refactor_allowances": 0,
+    "inline_suppressions": 0,
+    "total": 2,
+    "invalid": []
+  },
+  "size": {
+    "source_files": 9,
+    "source_lines": 1717
+  }
+}
