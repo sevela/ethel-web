@@ -191,7 +191,11 @@ def load_snapshot(root=ROOT):
 
 def record_mode(current, root=ROOT):
     path = root / SNAPSHOT_NAME
-    path.write_text(json.dumps(current, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    # newline="\n" schvalne: na Windows by `write_text` udelal CRLF, git by ho pri
+    # commitu prevedl na LF a Prettier (ethel-app/-web) by soubor v pracovnim strome
+    # oznacil za nenaformatovany. Snimek se zapisuje porad stejne na vsech systemech.
+    with path.open("w", encoding="utf-8", newline="\n") as soubor:
+        soubor.write(json.dumps(current, indent=2, ensure_ascii=False) + "\n")
     print(f"Zapsano {path.name}: index={current['index']}")
     return 0
 
