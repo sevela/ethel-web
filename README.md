@@ -42,3 +42,5 @@ Commit + push na `main` → GitHub Pages automaticky publikuje. Bez build kroku.
 | [ethel-app](https://github.com/sevela/ethel-app) | Cloud chat frontend (`app.ethel.cz`) |
 | [ethel-proxy](https://github.com/sevela/ethel-proxy) | Backend proxy → Claude API |
 | [ethel-agent](https://github.com/sevela/ethel-agent) | Lokální Tauri exe (Rust) – SQL agent v Heliosu |
+
+<!-- ETH-277: neutrální řádek kontrolního vzorku, PR se zavírá. -->
