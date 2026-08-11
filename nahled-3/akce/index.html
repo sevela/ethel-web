@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akce v Ethel — řízené úkoly v Heliosu · náhled 3</title>
+<meta name="description" content="Zadejte Ethel úkol v Heliosu. Připraví výsledek, provede stanovené kontroly a změnu zapíše až po vašem schválení.">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="Jakub Ševela">
+
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/brand/dm-sans-latin-ext-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/brand/lora-latin-ext-400-normal.woff2" crossorigin>
+<link rel="stylesheet" href="/brand/fonts.css">
+<link rel="stylesheet" href="/brand/tokens.css">
+<link rel="stylesheet" href="/nahled-3/assets/site.css">
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" display="none" width="0" height="0">
+  <symbol id="arrow-right" viewBox="0 0 40 40">
+    <path d="M34.1,19.9c0,0.3-0.1,0.3-0.1,0.4L21.3,33.1c-0.1,0.1-0.1,0.1-0.4,0.1c-0.3,0-0.3-0.1-0.4-0.1L19,31.6 c-0.1-0.1-0.1-0.1-0.1-0.4s0.1-0.3,0.1-0.4l9.2-9.2H5.8c-0.1,0-0.2,0-0.2,0c0,0,0,0,0,0c-0.1-0.1-0.1-0.2-0.1-0.4v-2.5 c0-0.2,0.1-0.4,0.1-0.5c0,0,0.1,0,0.2,0h22.4L19,9c-0.1-0.1-0.1-0.1-0.1-0.4c0-0.3,0.1-0.3,0.1-0.4l1.5-1.5c0.1-0.1,0.1-0.1,0.4-0.1 c0.3,0,0.3,0.1,0.4,0.1L34,19.5C34,19.6,34.1,19.6,34.1,19.9z"/>
+  </symbol>
+</svg>
+
+<nav class="topnav">
+  <div class="wrap">
+    <a class="wordmark-sm" href="/nahled-3/" aria-label="ethel.cz">ethel<span class="dot">.</span></a>
+    <ul>
+      <li><a href="/nahled-3/#produkt">Produkt</a></li>
+      <li><a href="/nahled-3/akce/">Akce</a></li>
+      <li><a href="/nahled-3/bezpecnost/">Bezpečnost</a></li>
+      <li><a href="/nahled-3/#cena">Cena</a></li>
+      <li><a href="/nahled-3/faq/">FAQ</a></li>
+      <li><a href="/docs/">Nápověda</a></li>
+      <li><a href="/nahled-3/#kontakt" class="btn">Vyzkoušet zdarma</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================== HERO ============================== -->
+<section class="page-hero" id="home">
+  <div class="wrap">
+    <p class="crumb"><a href="/nahled-3/">ethel.cz</a><span class="sep">/</span>akce</p>
+    <span class="hero-label" style="margin-top:14px">Akce v Ethel</span>
+    <h1 class="lede">Rutinní úkoly v Heliosu předáte jednou větou</h1>
+    <p class="body-text">Ethel provádí podporované úkoly podle předem připravených scénářů. Každý scénář má přesně stanovené kroky, kontroly a&nbsp;výsledek.</p>
+    <p class="body-text">Než se cokoliv zapíše do&nbsp;Heliosu nebo odešle, uvidíte rekapitulaci. Bez vašeho schválení Ethel Akci neprovede.</p>
+    <ul class="btn-row">
+      <li><a href="/nahled-3/#kontakt" class="btn" role="button"><span>Vyzkoušet 14 dní zdarma</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
+      <li><a href="#katalog" class="btn ghost" role="button"><span>Prohlédnout katalog Akcí</span></a></li>
+    </ul>
+    <p class="note">V trialu vyzkoušíte odpovědi nad daty a Akci „Založení organizace podle IČO“ — tu vám zapneme při aktivaci tokenu. Bez platební karty.</p>
+  </div>
+</section>
+
+<!-- ====================== ILUSTRAČNÍ KONVERZACE ===================== -->
+<section>
+  <div class="wrap stack">
+    <span class="mono-label">Ilustrační konverzace</span>
+    <div class="chat-window" style="max-width:520px">
+      <div class="chat-header">
+        <div class="chat-avatar">e<span class="dot">.</span></div>
+        <div>
+          <div class="chat-header-name">Ethel</div>
+          <div class="chat-header-status"><span class="online-dot"></span> online</div>
+        </div>
+        <div class="chat-header-ctx">Organizace</div>
+      </div>
+      <div class="chat-body" id="chat-body" style="min-height:0">
+        <div class="chat-msg user">Založ organizaci s IČO 04997476.</div>
+        <div class="chat-msg bot">V rejstříku je to <strong>ABC Trade s.r.o.</strong>, Lidická 700/19, Brno. V&nbsp;Heliosu ji zatím nemáte. Zatím jsem nic nezapsala. Mám ji založit?</div>
+        <div class="chat-typing" id="chat-typing"><span></span><span></span><span></span></div>
+      </div>
+      <div class="chat-input-bar">
+        <div class="chat-input-fake">Napište dotaz…</div>
+        <div class="chat-send-btn"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== CO JE SCÉNÁŘ ========================= -->
+<section id="scenar">
+  <div class="wrap stack">
+    <span class="mono-label">Co je scénář</span>
+    <h2 class="section-title">Akce není volný přístup k Heliosu</h2>
+    <div class="scenario-box">
+      <p class="body-text">Každá Akce funguje prostřednictvím předem připraveného scénáře. Ten určuje:</p>
+      <ul class="blist">
+        <li>co může uživatel zadat,</li>
+        <li>které údaje Ethel načte,</li>
+        <li>jaké kontroly musí proběhnout,</li>
+        <li>co se zobrazí před schválením,</li>
+        <li>co přesně smí Ethel provést.</li>
+      </ul>
+      <p class="body-text" style="margin-top:18px">Ethel tedy nemění data libovolně. Pokud zadání neodpovídá žádnému aktivovanému scénáři, zápis ani odeslání neprovede.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= KATALOG ============================ -->
+<section id="katalog">
+  <div class="wrap stack">
+    <span class="mono-label">Katalog</span>
+    <h2 class="section-title">Co Ethel umí dnes a co stavíme</h2>
+    <p class="section-intro">Katalog rozdělujeme na dvě části schválně. Nahoře je Akce, kterou dnes u&nbsp;zákazníků spustíte. Dole scénáře, na&nbsp;kterých pracujeme — ty zatím zapnuté nejsou a&nbsp;termín u&nbsp;nich neuvádíme, dokud ho nebudeme umět dodržet.</p>
+
+    <!-- ---------------------- DOSTUPNÉ DNES ------------------------- -->
+    <div class="catalog-group">
+      <div class="catalog-head">
+        <h3 class="section-title">Funguje dnes</h3>
+        <span class="status-tag live">1 Akce</span>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+          <span class="status-tag live">Funguje dnes</span>
+          <h3 class="card-title">Založení organizace podle IČO</h3>
+          <p class="card-text">Ethel dohledá údaje v&nbsp;ARESu, zkontroluje, zda už firma v&nbsp;Heliosu neexistuje, a&nbsp;připraví nový záznam ke&nbsp;schválení. Po&nbsp;vašem potvrzení organizaci založí.</p>
+          <p class="card-foot"><strong>Součást tarifu Standard.</strong> IČO se při hledání odešle do veřejného rejstříku ARES.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------------------- PŘIPRAVUJEME -------------------------- -->
+    <div class="catalog-group">
+      <div class="catalog-head">
+        <h3 class="section-title">Připravujeme</h3>
+        <span class="status-tag soon">Zatím nedostupné</span>
+      </div>
+      <p class="section-intro">Tyhle scénáře popisujeme proto, abyste věděli, kam Ethel míří. Objednat si je dnes nejde a&nbsp;v&nbsp;trialu se neobjeví.</p>
+      <div class="card-grid">
+
+        <div class="card is-soon">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/><path d="M9.5 13h5M9.5 16.5h5"/></svg></div>
+          <span class="status-tag soon">Připravujeme</span>
+          <h3 class="card-title">Faktura z objednávky</h3>
+          <p class="card-text">Vyberete nebo pojmenujete objednávku. Ethel připraví převod a&nbsp;ukáže odběratele, položky i&nbsp;výsledné částky. Po&nbsp;schválení fakturu vytvoří.</p>
+          <p class="card-foot">Scénář stavíme. Chcete ho zkusit mezi prvními? Napište nám.</p>
+        </div>
+
+        <div class="card is-soon">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+          <span class="status-tag soon">Připravujeme</span>
+          <h3 class="card-title">Realizace faktury</h3>
+          <p class="card-text">Realizace podporovaného dokladu podle stanoveného scénáře. Před provedením zkontrolujete, který doklad a&nbsp;jakým způsobem zpracuje.</p>
+          <p class="card-foot">Má účetní a skladové dopady, proto ji dokončujeme obezřetně a bez termínu.</p>
+        </div>
+
+        <div class="card is-soon">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg></div>
+          <span class="status-tag soon">Připravujeme</span>
+          <h3 class="card-title">Objednávky pro zboží pod minimem</h3>
+          <p class="card-text">Ethel vyhodnotí zásoby a&nbsp;připraví návrh objednávek. Vy zkontrolujete položky, množství a&nbsp;dodavatele.</p>
+          <p class="card-foot">U téhle Akce se stav skladu a dodavatel dotčených položek zpracovávají pomocí AI. Půjde zapnout jen po dohodě — <a href="/nahled-3/bezpecnost/#akce" style="color:var(--accent-l)">popisujeme to na stránce Bezpečnost</a>.</p>
+        </div>
+
+        <div class="card is-soon">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 6h9M8.5 6v2c0 3.5-2 6.5-4.5 8"/><path d="M7 12.5c1.5 2.5 3.5 4 6 5"/><path d="m13 21 4-10 4 10M14.6 17.5h4.8"/></svg></div>
+          <span class="status-tag soon">Připravujeme</span>
+          <h3 class="card-title">Překlad popisů zboží</h3>
+          <p class="card-text">Ethel připraví překlady vybraných popisů do&nbsp;požadovaného jazyka. Před uložením je můžete zkontrolovat.</p>
+          <p class="card-foot">Zpracování probíhá pomocí AI nad názvem a interním ID položky, proto i tenhle scénář půjde zapnout jen po dohodě.</p>
+        </div>
+
+        <div class="card is-soon">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg></div>
+          <span class="status-tag soon">Připravujeme</span>
+          <h3 class="card-title">Odeslání faktury e-mailem</h3>
+          <p class="card-text">Ethel připraví doklad, příjemce i&nbsp;obsah zprávy. Po&nbsp;vašem potvrzení ji předá odchozí poště Heliosu — samotné odeslání zajišťuje Helios, ne&nbsp;Ethel.</p>
+          <p class="card-foot">Z celého katalogu je tenhle scénář nejdál od dokončení.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <ul class="btn-row" style="margin-top:30px">
+      <li><a href="/nahled-3/#kontakt" class="btn" role="button"><span>Vyzkoušet Ethel zdarma</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
+      <li><a href="/nahled-3/?tema=scenar#kontakt" class="btn ghost" role="button"><span>Napsat, kterou Akci chcete první</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================== PRŮBĚH AKCE ========================== -->
+<section id="jak-akce-funguji">
+  <div class="wrap stack">
+    <span class="mono-label">Průběh Akce</span>
+    <h2 class="section-title">Od zadání k auditnímu záznamu</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Zadáte úkol</h3>
+          <p>Napíšete například: „Založ organizaci s IČO 04997476.“</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Ethel provede kontroly</h3>
+          <p>Dohledá potřebné informace a ověří podmínky stanovené pro daný scénář.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Zkontrolujete rekapitulaci</h3>
+          <p>Uvidíte, co má vzniknout, kterých údajů se Akce týká a co přesně Ethel provede.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Rozhodnete o provedení</h3>
+          <p>Výsledek schválíte, nebo Akci zrušíte. Bez vašeho potvrzení se nic nezapíše ani neodešle.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h3>Ethel Akci provede</h3>
+          <p>Po schválení provede pouze kroky vymezené scénářem. O provedené Akci zůstane auditní záznam.</p>
+        </div>
+      </div>
+    </div>
+    <p class="section-intro" style="margin-top:24px">Vaše databáze se nikam nekopíruje ani neindexuje. U&nbsp;některých volitelných scénářů ale může být potřeba zpracovat vybrané hodnoty pomocí AI. Takové scénáře jsou standardně vypnuté a&nbsp;aktivují se pouze po&nbsp;dohodě, včetně přesného popisu toku informací.</p>
+    <ul class="btn-row">
+      <li><a href="/nahled-3/bezpecnost/" class="btn ghost" role="button"><span>Jak Ethel chrání vaše data</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= VLASTNÍ SCÉNÁŘE ======================== -->
+<section id="vlastni-scenare">
+  <div class="wrap stack">
+    <span class="mono-label">Vlastní scénáře</span>
+    <h2 class="section-title">Vlastní scénář pro vaši rutinu</h2>
+    <div class="scenario-box">
+      <p class="body-text">Opakujete stále stejný postup, který v&nbsp;katalogu zatím není? Pro konkrétní firemní proces můžeme připravit vlastní scénář. Společně vymezíme:</p>
+      <ul class="blist">
+        <li>jak může uživatel úkol zadat,</li>
+        <li>které údaje se mají načíst,</li>
+        <li>jaké kontroly musí proběhnout,</li>
+        <li>co uživatel uvidí před schválením,</li>
+        <li>co přesně smí Ethel provést.</li>
+      </ul>
+      <p class="body-text" style="margin-top:18px">Výsledkem není obecný přístup k&nbsp;celému Heliosu. Je to řízený postup pro konkrétní práci, s&nbsp;jasnými vstupy, kontrolami a&nbsp;výsledkem.</p>
+      <p class="micro" style="margin-top:14px">Cena: od 9 900 Kč jednorázově podle rozsahu. Pro provoz vlastního scénáře je potřeba aktivní modul Akce.</p>
+      <ul class="btn-row" style="margin-top:22px">
+        <li><a href="/nahled-3/?tema=scenar#kontakt" class="btn" role="button"><span>Probrat vlastní scénář</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== DOSTUPNOST =========================== -->
+<section id="dostupnost">
+  <div class="wrap stack">
+    <span class="mono-label">Dostupnost</span>
+    <h2 class="section-title">Jak Akce získáte</h2>
+    <div class="card-grid cols-2">
+      <div class="card">
+        <h3 class="card-title">14denní trial</h3>
+        <p class="card-text">Vyzkoušíte odpovědi nad&nbsp;aktuálními daty a&nbsp;Akci „Založení organizace podle IČO“, kterou vám zapneme při&nbsp;aktivaci tokenu. Bez platební karty; po&nbsp;skončení trialu se nic automaticky nenaúčtuje.</p>
+        <p class="card-foot">Trial má stejné limity jako tarif Standard: jedna databáze a pět uživatelů.</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Standard · 1 490 Kč měsíčně</h3>
+        <p class="card-text">Akce „Založení organizace podle IČO“ je součástí tarifu. Ceny jsou bez&nbsp;DPH.</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Modul Akce · +990 Kč měsíčně</h3>
+        <p class="card-text">Zpřístupní scénáře z&nbsp;katalogu, jakmile je uvolníme, a&nbsp;automaticky i&nbsp;nově přidané standardní Akce. Dnes je hotová jedna Akce a&nbsp;patří do&nbsp;Standardu, takže modul má smysl objednávat, až v&nbsp;katalogu něco přibude.</p>
+        <!-- EARLY ACCESS: časově omezené. Zrušit = smazat tenhle jeden odstavec. -->
+        <p class="card-foot"><strong>Early access:</strong> pro první klienty je modul prvních šest měsíců bez příplatku.</p>
+        <!-- /EARLY ACCESS -->
+      </div>
+      <div class="card">
+        <h3 class="card-title">Enterprise · 4 990 Kč měsíčně</h3>
+        <p class="card-text">Tarif pro více databází a&nbsp;neomezený počet uživatelů obsahuje celý modul Akce.</p>
+      </div>
+    </div>
+    <ul class="btn-row" style="margin-top:26px">
+      <li><a href="/nahled-3/#kontakt" class="btn" role="button"><span>Vyzkoušet 14 dní zdarma</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
+      <li><a href="/nahled-3/#cena" class="btn ghost" role="button"><span>Porovnat tarify</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- =========================== ZÁVĚREČNÁ CTA ======================== -->
+<section class="cta-section">
+  <div class="wrap">
+    <h2 class="section-title">Který úkol dnes v Heliosu děláte ručně?</h2>
+    <p>Přineste do trialu jeden skutečný úkol. Během 14 dní zjistíte, co za vás Ethel dokáže připravit a po vašem schválení provést.</p>
+    <ul class="btn-row">
+      <li><a href="/nahled-3/#kontakt" class="btn" role="button"><span>Vyzkoušet Ethel zdarma</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
+      <li><a href="/nahled-3/?tema=scenar#kontakt" class="btn ghost" role="button"><span>Probrat vlastní scénář</span></a></li>
+    </ul>
+    <p class="micro">Bez platební karty. Bez závazku. Bez automatického naúčtování.</p>
+  </div>
+</section>
+
+<!-- ========================= COOKIE LIŠTA =========================== -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
+  <div class="cookie-banner-text">
+    <strong>Sušenky?</strong> Používáme jen analytické cookies, abychom věděli, jak vám web slouží.
+    Žádný marketing ani sledování napříč weby. Můžete je odmítnout; web bude fungovat normálně.
+  </div>
+  <div class="cookie-banner-actions">
+    <button class="btn" id="cookie-accept" type="button">Přijmout</button>
+    <button class="btn ghost" id="cookie-reject" type="button">Odmítnout</button>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="ft-head">
+      <a class="wordmark-ft" href="/nahled-3/">ethel<span class="dot">.</span></a>
+    </div>
+
+    <div class="ft-top">
+      <p class="ft-tagline">AI asistentka pro Helios&nbsp;Inuvio. Odpovídá nad aktuálními daty a&nbsp;pomocí připravených scénářů provádí podporované úkoly – vždy pod vaší kontrolou.</p>
+
+      <nav class="ft-col" aria-label="Související weby">
+        <a href="https://jakubsevela.cz">
+          <span class="ft-name">jakubsevela.cz</span>
+          <span class="ft-desc">Doplňky, integrace a automatizace pro Helios&nbsp;Inuvio.</span>
+        </a>
+        <a href="https://feedco.cz">
+          <span class="ft-name">feedco.cz</span>
+          <span class="ft-desc">E-commerce konektor pro Helios&nbsp;Inuvio.</span>
+        </a>
+      </nav>
+
+      <nav class="ft-col" aria-label="Kontakt">
+        <a href="mailto:info@ethel.cz"><span class="ft-name">info@ethel.cz</span></a>
+        <a href="tel:+420774267301"><span class="ft-name" style="white-space:nowrap">+420&nbsp;774&nbsp;267&nbsp;301</span></a>
+        <a href="/nahled-3/#kontakt"><span class="ft-name">Vyzkoušet zdarma</span></a>
+        <a href="https://linkedin.com/in/sevela" rel="me noopener" class="has-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.852 3.37-1.852 3.601 0 4.267 2.37 4.267 5.455v6.288zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg><span class="ft-name">LinkedIn</span></a>
+      </nav>
+    </div>
+
+    <nav class="ft-links" aria-label="Obsah webu">
+      <a href="/nahled-3/#produkt">Produkt</a>
+      <a href="/nahled-3/akce/">Akce</a>
+      <a href="/nahled-3/bezpecnost/">Bezpečnost</a>
+      <a href="/nahled-3/#cena">Cena</a>
+      <a href="/nahled-3/faq/">FAQ</a>
+      <a href="/docs/">Nápověda</a>
+      <a href="/nahled-3/download/">Ke stažení</a>
+      <a href="/nahled-3/demo/">Demo</a>
+      <a href="/docs/changelog/">Co je nového</a>
+    </nav>
+
+    <div class="ft-legal">
+      <p>Mgr. Jakub Ševela &middot; Lidická 700/19, 602 00 Brno &middot; IČ: 75185628 &middot; DIČ: CZ8503274703</p>
+      <p>Ethel je nezávislý nástroj a není produktem společnosti Asseco Solutions.</p>
+      <p class="ft-copy">&copy; 2026 Ethel &middot; Embedded Thinking for Helios</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/nahled-3/assets/site.js"></script>
+</body>
+</html>
