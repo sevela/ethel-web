@@ -5,3 +5,10 @@ scripts/_fonts.css
 
 # ETH-277: health.py importuje sourozence, Python vedle nej necha __pycache__
 scripts/quality/__pycache__/
+
+# Claude Code / lokální
+.claude/settings.local.json
+.claude/worktrees/
+__pycache__/
+*.pyc
+*.log
