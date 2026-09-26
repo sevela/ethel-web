@@ -22,15 +22,14 @@ const PAGES = [
     src: 'prvni-kroky.md',
     title: 'První kroky',
     breadcrumb: 'první kroky',
-    description: 'Jak začít s Ethel v Helios Inuvio: spuštění, příklady dotazů, tipy a klávesové zkratky.',
+    description:
+      'Jak začít s Ethel v Helios Inuvio: spuštění, příklady dotazů, tipy a klávesové zkratky.',
     activeKey: 'PRVNI_KROKY',
   },
 ];
 
 // Mapa pro prepis cross-linku mezi navody (relativni .md -> clean URL)
-const LINK_MAP = Object.fromEntries(
-  PAGES.map((p) => [p.src, `/docs/${p.slug}/`])
-);
+const LINK_MAP = Object.fromEntries(PAGES.map((p) => [p.src, `/docs/${p.slug}/`]));
 
 function renderMarkdown(md) {
   let processed = md;
@@ -45,7 +44,8 @@ function renderMarkdown(md) {
         const text = this.parser.parseInline(tokens);
         const slug = text
           .toLowerCase()
-          .normalize('NFD').replace(/[̀-ͯ]/g, '')
+          .normalize('NFD')
+          .replace(/[̀-ͯ]/g, '')
           .replace(/[^a-z0-9]+/g, '-')
           .replace(/^-|-$/g, '');
         return `<h${depth} id="${slug}">${text}</h${depth}>\n`;
@@ -62,8 +62,7 @@ function fillTemplate(opts) {
     PRVNI_KROKY: '',
   };
   activeMarkers[activeKey] = 'class="active"';
-  return TEMPLATE
-    .replaceAll('{{TITLE}}', title)
+  return TEMPLATE.replaceAll('{{TITLE}}', title)
     .replaceAll('{{DESCRIPTION}}', description.replace(/"/g, '&quot;'))
     .replaceAll('{{CANONICAL}}', `${SITE}/docs/${slug}/`)
     .replaceAll('{{BREADCRUMB_LEAF}}', breadcrumb)
