@@ -26,6 +26,15 @@ const PAGES = [
       'Jak začít s Ethel v Helios Inuvio: spuštění, příklady dotazů, tipy a klávesové zkratky.',
     activeKey: 'PRVNI_KROKY',
   },
+  {
+    slug: 'pro-spravce',
+    src: 'pro-spravce.md',
+    title: 'Pro správce: účty a práva',
+    breadcrumb: 'pro správce',
+    description:
+      'Pod jakým účtem Ethel čte z databáze Heliosu, jaká práva potřebuje, hotové SQL pro správce a co si Ethel hlídá sama.',
+    activeKey: 'PRO_SPRAVCE',
+  },
 ];
 
 // Mapa pro prepis cross-linku mezi navody (relativni .md -> clean URL)
@@ -60,6 +69,7 @@ function fillTemplate(opts) {
   const activeMarkers = {
     INSTALACE: '',
     PRVNI_KROKY: '',
+    PRO_SPRAVCE: '',
   };
   activeMarkers[activeKey] = 'class="active"';
   return TEMPLATE.replaceAll('{{TITLE}}', title)
@@ -68,6 +78,7 @@ function fillTemplate(opts) {
     .replaceAll('{{BREADCRUMB_LEAF}}', breadcrumb)
     .replaceAll('{{ACTIVE_INSTALACE}}', activeMarkers.INSTALACE)
     .replaceAll('{{ACTIVE_PRVNI_KROKY}}', activeMarkers.PRVNI_KROKY)
+    .replaceAll('{{ACTIVE_PRO_SPRAVCE}}', activeMarkers.PRO_SPRAVCE)
     .replaceAll('{{CONTENT}}', html);
 }
 

@@ -83,7 +83,7 @@
   "url": "https://ethel.cz/bezpecnost/",
   "inLanguage": "cs",
   "datePublished": "2026-06-10",
-  "dateModified": "2026-08-02",
+  "dateModified": "2026-09-26",
   "isPartOf": {
     "@type": "WebSite",
     "name": "Ethel",
@@ -133,7 +133,7 @@
     <div class="docs-content">
 
   <h1>Bezpečnost</h1>
-  <p class="rev-date">Poslední revize: 10. srpna 2026</p>
+  <p class="rev-date">Poslední revize: 26. září 2026</p>
 
   <section class="sec-section" id="kde-zustavaji-vase-data">
     <h2>Kde zůstávají vaše data</h2>
@@ -142,6 +142,13 @@
     <p>V provozním záznamu držíme váš dotaz, vygenerované SQL a počet spotřebovaných tokenů. Výsledky dotazů neukládáme.</p>
     <p data-retention-days="180" data-retention-tables="request_log,feedback">Tenhle záznam si necháváme 180 dní. Po té lhůtě z něj text dotazu i vygenerované SQL automaticky zmizí a zůstane jen údaj, že se dotaz stal, a spotřeba tokenů, ze které počítáme vyúčtování. Stejná lhůta platí pro komentář, který nám k odpovědi napíšete: po 180 dnech z hodnocení zmizí jeho text a zůstane jen palec nahoru nebo dolů, ze kterého sledujeme, jestli se Ethel zlepšuje. Úklid běží každou noc a hlídá ho kontrola, která se ozve, kdyby přestal.</p>
     <p>Že to takhle opravdu funguje, hlídá sada automatických testů. Běží při každé změně kódu; když ji některá úprava poruší, změna neprojde do produkce.</p>
+  </section>
+
+  <section class="sec-section" id="ucty-a-prava">
+    <h2>Pod jakým účtem Ethel čte a kdo o tom rozhoduje</h2>
+    <p>Ethel čte z databáze Heliosu pod účtem, který jí při instalaci založí správce SQL Serveru přímo v okně Ethel: jeden login pro každou instalaci, s právem číst a spouštět procedury Ethel, bez práva zapisovat do tabulek Heliosu. Heslo se odvozuje z aktivačního tokenu a nikde není uložené. Kde se do Heliosu přihlašujete účtem Windows, žádný login nevzniká a Ethel čte pod účtem přihlášeného uživatele. Při spuštění mimo Helios běží dotazy pod účtem, kterým se uživatel přihlásil.</p>
+    <p>Co uživatel v Ethel vidí, nastavuje správce v Nastavení: kdo Ethel smí používat a které tabulky který uživatel čte. Mzdy, personalistika a banka jsou vyloučené pro všechny a zapnout je nejde. Tohle hlídá Ethel sama, dotaz po dotazu, bez ohledu na to, jaká práva má účet na SQL Serveru. Kdo chce druhý zámek i na úrovni databáze, může citlivé tabulky zakázat přímo na SQL Serveru; Ethel pak při pokusu řekne, že právo chybí, místo prázdného výsledku.</p>
+    <p>Přesný výčet práv, hotové SQL a postup odinstalace jsou v návodu <a href="/docs/pro-spravce/">Pro správce: účty a práva</a>.</p>
   </section>
 
   <section class="sec-section" id="treninkovani-modelu">
