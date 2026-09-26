@@ -710,6 +710,21 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--text-3);
 }
 @media (max-width: 640px) { .dl-box { padding: 24px 20px; } }
+/* hlavička karty se souborem: název + verze vlevo, tlačítko vpravo */
+.dl-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.dl-version { font-family: var(--font-mono); font-size: 13px; color: var(--text-2); margin-top: 6px; }
+.dl-box .card-text { margin-top: 14px; }
+/* varování k nepodepsanému souboru: neutrální šedá, ne accent – není to chyba
+   Ethel, ale stav, na který má uživatel být připravený */
+.dl-warn { border-color: var(--neutral-border); background: var(--neutral-tint); }
+.dl-code {
+  font-family: var(--font-mono); font-size: 13px; line-height: 1.6;
+  background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-btn);
+  padding: 12px 16px; margin-top: 12px; overflow-x: auto; white-space: pre;
+}
+.dl-box code, .step-content code, .page-hero code, .section-intro code, .micro code {
+  font-family: var(--font-mono); font-size: 0.92em; color: var(--text);
+}
 
 /* --- dvousloupcový blok (bezpečnost + nasazení) ---------------------------
    Grid bez explicitního pořadí: na mobilu se sloupce skládají v pořadí,
