@@ -54,7 +54,7 @@ if(caseDemo){
  const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
  const slug=t=>t.toLowerCase().normalize('NFD').replace(/\p{M}/gu,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40);
  let view='table',timer=null,current=0;
- const buttons=[...document.querySelectorAll('.usecase[data-case]')];
+ const buttons=[...document.querySelectorAll('button[data-case]')];
  const context=document.getElementById('case-context');
  const table=c=>`<table><thead><tr><th>${c.cols[0]}</th><th class="num">${c.cols[1]}</th></tr></thead><tbody>${c.rows.map(([n,v])=>`<tr><td>${esc(n)}</td><td class="num">${fmt(v,c.unit)}</td></tr>`).join('')}</tbody></table>`;
  const chart=c=>{const max=Math.max(...c.rows.map(r=>r[1]));return `<div class="hbar-chart" role="img" aria-label="${esc(c.cols[1])}: ${c.rows.map(([n,v])=>esc(n)+' '+fmt(v,c.unit)).join(', ')}">${c.rows.map(([n,v])=>`<div class="hbar"><span class="hbar-label">${esc(n)}</span><span class="hbar-track"><i style="width:${Math.max(4,v/max*100)}%"></i></span><span class="hbar-value">${fmt(v,c.unit)}</span></div>`).join('')}</div>`};
