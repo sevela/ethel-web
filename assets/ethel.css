@@ -344,8 +344,9 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .prose h2+p,.prose h3+p{margin-top:10px}
 .prose ul,.prose ol{padding-left:22px}
 .prose li+li{margin-top:4px}
-.prose pre{margin:16px 0;padding:14px 16px;border-radius:8px;background:var(--surface-alt);font:400 13px/1.6 var(--font-code);color:var(--text);overflow-x:auto}
-.prose code{font:400 .92em var(--font-code);padding:1px 5px;border-radius:4px;background:var(--surface-alt);color:var(--text)}
+.prose pre,.card pre{margin:16px 0;padding:14px 16px;border-radius:8px;background:var(--surface-alt);font:400 13px/1.6 var(--font-code);color:var(--text);overflow-x:auto}
+.card pre{margin:0}
+.prose code,.lead code,.block-head code,.block-note code,.card code{font:400 .92em var(--font-code);padding:1px 5px;border-radius:4px;background:var(--surface-alt);color:var(--text)}
 .prose pre code{padding:0;background:none;font-size:inherit}
 .prose img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:var(--radius-card)}
 .prose blockquote{margin:16px 0;padding:12px 18px;border-left:3px solid var(--accent-line);border-radius:0 8px 8px 0;background:var(--accent-tint);color:var(--text)}
