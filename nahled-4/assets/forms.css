@@ -5,7 +5,6 @@
 #kontakt h2{font-size:clamp(32px,3.4vw,48px);line-height:1.12}
 #kontakt .contact-lead{color:var(--text-muted);font-size:17px;line-height:1.75;margin:24px 0 32px;max-width:390px}
 .contact-person{display:flex;align-items:center;gap:12px;margin:0 0 20px}
-.contact-person-mark{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--border);border-radius:50%;color:var(--brand);font-size:13px;font-weight:650;background:var(--surface)}
 .contact-person strong{font-size:15px;display:block}
 .contact-person div>span{font-size:12px;color:var(--text-muted);display:block;margin-top:3px}
 .contact-email{display:inline-flex;align-items:center;gap:10px;color:var(--brand);font-weight:600;text-decoration:none;font-size:16px}
@@ -14,7 +13,6 @@
 .contact-form-panel{padding:28px;border:1px solid var(--border);border-radius:12px;background:var(--surface);min-width:0}
 .form-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .form-heading h3{font-size:25px}
-.form-demo-label{font-size:11px;color:var(--accent-orange);background:var(--accent-orange-tint);padding:4px 8px;border-radius:4px}
 .form-description{font-size:12px;color:var(--text-muted);margin:10px 0 24px}
 .form-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
 .form-field{margin-bottom:18px;min-width:0}
@@ -37,7 +35,6 @@
 .form-success{padding:28px 0;outline:none}
 .form-success h3{font-size:27px}
 #kontakt .form-success p{font-size:15px;line-height:1.7;color:var(--text-muted);margin:16px 0}
-#kontakt .form-success .success-demo-note{font-size:13px;color:var(--accent-orange)}
 .form-success .button{margin-top:14px}
 .contact-form-panel [hidden]{display:none!important}
 @media(max-width:1000px){#kontakt{padding:32px;gap:28px;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}.contact-form-panel{padding:24px}.form-row{grid-template-columns:1fr;gap:0}}

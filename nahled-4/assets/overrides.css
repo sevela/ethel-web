@@ -54,8 +54,8 @@ nav a{font-size:15px;font-weight:550}
 #moznosti .feature-grid article:nth-child(2) blockquote{border-color:var(--brand)}
 
 /* Orange hand-drawn accents and quiet section markers. */
-.hero h1 span em{font-style:normal;position:relative;display:inline-block;z-index:0}
-.hero h1 span em::after{content:"";position:absolute;z-index:-1;inset:-.05em -.16em -.02em;border:2px solid #e66e4d;border-radius:52% 48% 50% 46%;transform:rotate(-3deg);pointer-events:none}
+.hero h1 em{font-style:normal;position:relative;display:inline-block;z-index:0}
+.hero h1 em::after{content:"";position:absolute;z-index:-1;inset:-.05em -.16em -.02em;border:2px solid #e66e4d;border-radius:52% 48% 50% 46%;transform:rotate(-3deg);pointer-events:none}
 .hero h1 span{text-decoration:none}
 .section-intro::before{content:"";display:block;width:54px;height:3px;margin-bottom:26px;background:#e66e4d}
 .band,.pricing-section,#moznosti{position:relative;overflow:hidden}
@@ -64,17 +64,15 @@ nav a{font-size:15px;font-weight:550}
 .window-brand img{display:block;width:62px;height:auto}
 #moznosti{background:#172B38;color:#EDF3F6}
 #moznosti h2,#moznosti h3,#moznosti .feature-grid blockquote{color:#EDF3F6}
-[data-theme="dark"] #moznosti{background:#1D2A34}
 .contact-section{border-left:3px solid #e66e4d}
 /* Orange identifies the selected example, its source, and onboarding steps. */
 :root{--accent-orange:#B64722;--accent-orange-line:#E66E4D;--accent-orange-tint:#FBEDE7}
-[data-theme="dark"]{--accent-orange:#FFAA83;--accent-orange-tint:#34271F}
 .demo-choice button[aria-pressed=true]{background:var(--accent-orange-tint);border-color:var(--accent-orange);color:var(--accent-orange);font-weight:650}
 .demo-choice button:hover{border-color:var(--accent-orange)}
 .source{border-left:2px solid var(--accent-orange-line);padding:7px 0 7px 10px}
 .steps li>span{color:var(--accent-orange);background:var(--accent-orange-tint);border:1px solid color-mix(in srgb,var(--accent-orange) 30%,transparent);border-radius:50%;width:34px;height:34px;flex:0 0 34px;display:flex;align-items:center;justify-content:center;padding:0;font-weight:600}
 @media(max-width:850px){.hero{padding-top:62px;padding-bottom:62px;gap:42px}}
-@media(max-width:600px){.hero h1{font-size:clamp(34px,8.8vw,50px);line-height:1.12}.hero h1 span em::after{inset:-.015em -.10em -.01em}.hero-copy{min-width:0}.hero .eyebrow{letter-spacing:.06em}.hero h2,h2{font-size:34px}#moznosti{padding-inline:20px}}
+@media(max-width:600px){.hero h1{font-size:clamp(34px,8.8vw,50px);line-height:1.12}.hero h1 em::after{inset:-.015em -.10em -.01em}.hero-copy{min-width:0}.hero .eyebrow{letter-spacing:.06em}.hero h2,h2{font-size:34px}#moznosti{padding-inline:20px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button,.button:hover,.hero .actions .button:first-child:hover{transition:none;transform:none}}
 
 /* Plan accents explain the choice; references illustrate the review layout. */
@@ -127,7 +125,6 @@ nav a{font-size:15px;font-weight:550}
 #moznosti .feature-grid article{display:flex;flex-direction:column}
 #moznosti .feature-grid blockquote{position:relative;margin:8px 0 0 12px;min-height:96px;padding:19px 20px;border:1px solid #3F5D70;border-radius:16px 16px 3px 16px;background:#223E50;color:#EDF3F6;margin-top:auto}
 #moznosti .feature-grid article:nth-child(2) blockquote{border-color:#3F5D70}
-[data-theme="dark"] #jak{background:#14212A}
 .safety-grid,.faq-grid{padding-block:80px}
 .references-section{padding-top:88px;padding-bottom:104px}
 .reference-grid{grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:0 40px}

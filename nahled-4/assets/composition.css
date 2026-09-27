@@ -4,7 +4,6 @@
 :root{--layout-width:1120px;--section-space:88px;--panel-radius:14px}
 .wrap{width:min(var(--layout-width),calc(100% - 64px))}
 .section{padding-block:var(--section-space)}
-.review-bar{font-size:11px;padding-block:5px}
 .nav-row{min-height:82px}
 .site-header{background:color-mix(in srgb,var(--page) 95%,transparent)}
 h2{font-size:clamp(34px,3.8vw,48px);line-height:1.12;letter-spacing:-.025em}
@@ -31,7 +30,6 @@ h2{font-size:clamp(34px,3.8vw,48px);line-height:1.12;letter-spacing:-.025em}
 .demo-note::after{bottom:auto;top:-7px;right:auto;left:22px;transform:rotate(225deg)}
 .hero .text-link{font-size:14px}
 #moznosti{padding-inline:max(32px,calc((100% - var(--layout-width))/2));padding-block:80px 88px;background:#172B38;border:0}
-[data-theme="dark"] #moznosti{background:#1D2F3C}
 .split-intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:0 70px;max-width:none;align-items:end}
 .split-intro .eyebrow{grid-column:1/-1}
 .split-intro>p:last-child{margin:0 0 3px;max-width:410px;font-size:16px;line-height:1.75}
@@ -53,7 +51,7 @@ h2{font-size:clamp(34px,3.8vw,48px);line-height:1.12;letter-spacing:-.025em}
 .reference-card:not(.reference-featured) blockquote{font-size:16px;line-height:1.7}
 .reference-card .quote-mark{color:var(--accent-orange-line)}
 .onboarding-band{background:var(--surface-alt);border-block:1px solid var(--border)}
-#jak,[data-theme="dark"] #jak{background:transparent;border:0;padding-block:80px 50px;overflow:visible}
+#jak{background:transparent;border:0;padding-block:80px 50px;overflow:visible}
 .process-grid{display:block}
 .process-intro{display:grid;grid-template-columns:1.2fr 1fr;column-gap:70px;align-items:end;margin-bottom:40px}
 .process-intro .eyebrow{grid-column:1/-1}
