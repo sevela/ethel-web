@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="cs"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Grafický manuál webu ethel.cz · v2.2</title>
-<meta name="description" content="Grafický manuál webu ethel.cz: barvy, písmo, logo, komponenty, rozvržení stránek a pravidla. Verze 2.2, 27. 9. 2026.">
+<title>Grafický manuál webu ethel.cz · v2.3</title>
+<meta name="description" content="Grafický manuál webu ethel.cz: barvy, písmo, logo, komponenty, rozvržení stránek a pravidla. Verze 2.3, 27. 9. 2026.">
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="/favicon.ico" sizes="32x32"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/tokens.css"><link rel="stylesheet" href="/assets/ethel.css"><link rel="stylesheet" href="/assets/forms.css">
@@ -53,11 +53,11 @@ pre.m-code{margin:14px 0 0;padding:14px 16px;border-radius:8px;background:var(--
 </head>
 <body>
 <a class="skip" href="#obsah">Přejít k obsahu</a>
-<header class="site-header"><div class="wrap nav-row"><a class="logo" href="/" aria-label="Ethel, úvod"><img src="/assets/logos/ethel-light-animated.svg" alt="Ethel" width="105" height="29"></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu</button><nav id="main-nav" aria-label="Manuál"><a href="#logo">Logo</a><a href="#barvy">Barvy</a><a href="#pismo">Písmo</a><a href="#rozvrzeni">Rozvržení</a><a href="#komponenty">Komponenty</a><a href="#stranky">Stránky</a><a href="#soubory">Soubory</a></nav></div></header>
+<header class="site-header"><div class="wrap nav-row"><a class="logo" href="/" aria-label="Ethel, úvod"><img src="/assets/logos/ethel-light-animated.svg" alt="Ethel" width="105" height="29"></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu</button><nav id="main-nav" aria-label="Manuál"><a href="#logo">Logo</a><a href="#barvy">Barvy</a><a href="#pismo">Písmo</a><a href="#rozvrzeni">Rozvržení</a><a href="#komponenty">Komponenty</a><a href="#bloky">Bloky</a><a href="#stranky">Stránky</a><a href="#soubory">Soubory</a></nav></div></header>
 
 <main id="obsah">
-<section class="page-hero wrap"><p class="eyebrow">Grafický manuál webu · v2.2 · 27. 9. 2026</p><h1>Jak vypadá ethel.cz</h1><p class="lead">Jediný zdroj pravdy pro vzhled webu ethel.cz a všech jeho podstránek včetně dokumentace. Každá hodnota tady odpovídá souborům v <code>/assets/</code>; když se liší, platí manuál a soubory se opraví.</p>
-<ul class="m-toc"><li><a href="#principy">Principy</a></li><li><a href="#logo">Logo a tečka</a></li><li><a href="#barvy">Barvy</a></li><li><a href="#pismo">Písmo</a></li><li><a href="#rozvrzeni">Rozvržení a rytmus</a></li><li><a href="#komponenty">Komponenty</a></li><li><a href="#okno">Okno Ethel</a></li><li><a href="#stranky">Stránky</a></li><li><a href="#pohyb">Pohyb a přístupnost</a></li><li><a href="#texty">Texty</a></li><li><a href="#soubory">Soubory a implementace</a></li></ul></section>
+<section class="page-hero wrap"><p class="eyebrow">Grafický manuál webu · v2.3 · 27. 9. 2026</p><h1>Jak vypadá ethel.cz</h1><p class="lead">Jediný zdroj pravdy pro vzhled webu ethel.cz a všech jeho podstránek včetně dokumentace. Každá hodnota tady odpovídá souborům v <code>/assets/</code>; když se liší, platí manuál a soubory se opraví.</p>
+<ul class="m-toc"><li><a href="#principy">Principy</a></li><li><a href="#logo">Logo a tečka</a></li><li><a href="#barvy">Barvy</a></li><li><a href="#pismo">Písmo</a></li><li><a href="#rozvrzeni">Rozvržení a rytmus</a></li><li><a href="#komponenty">Komponenty</a></li><li><a href="#okno">Okno Ethel</a></li><li><a href="#bloky">Stavební bloky</a></li><li><a href="#stranky">Stránky</a></li><li><a href="#pohyb">Pohyb a přístupnost</a></li><li><a href="#texty">Texty</a></li><li><a href="#soubory">Soubory a implementace</a></li></ul></section>
 
 <section id="principy" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">01 · Principy</p><h2>Klidný nástroj, který v Heliosu žije.</h2><p>Web vypadá jako aplikace, kterou prodává: světlý, věcný, bez efektů navíc. Pět pravidel, ze kterých plyne všechno ostatní.</p></div>
 <div class="cards cards-2">
@@ -252,7 +252,127 @@ pre.m-code{margin:14px 0 0;padding:14px 16px;border-radius:8px;background:var(--
 <p class="m-note">Ručně psaná poznámka <code>.demo-note</code> stojí vpravo pod oknem, natočená o −2°. Ručně kreslená šipka ukazuje, k čemu se poznámka vztahuje: <code>.note-up</code> (šipka vlevo, míří nahoru na okno) a <code>.note-down</code> (šipka vpravo dole, míří na prvek pod poznámkou). Bez třídy je poznámka bez šipky. Na webu jsou nejvýš dvě (hero a V praxi, obě <code>.note-up</code>). Jinde se nepoužívá.</p></div>
 </div></div></section>
 
-<section id="stranky" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">08 · Stránky</p><h2>Šest veřejných stránek, dokumentace a stažení.</h2><p>Každá stránka má stejnou hlavičku a patičku. Liší se jen tím, co je mezi nimi.</p></div>
+<section id="bloky" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">08 · Stavební bloky</p><h2>Z čeho se skládá obsah sekce.</h2><p>Každá sekce webu je <code>.block</code> → <code>.wrap</code> → hlava sekce → jeden obsahový celek. Tady jsou všechny celky, které existují. Nová stránka se skládá jen z nich; když chybí, nejdřív přibude sem.</p></div>
+
+<h3>Přehled</h3>
+<table class="m-spec" style="margin-top:12px"><thead><tr><th>Blok</th><th>Třída</th><th>Kdy</th></tr></thead><tbody>
+<tr><td>Hlava sekce</td><td><code>.block-head</code>, <code>.block-head-row</code></td><td>vždy jako první uvnitř <code>.wrap</code> (viz 05)</td></tr>
+<tr><td>Textový blok</td><td><code>.prose</code></td><td>souvislý text: odstavce, seznamy, citace, kód, tabulka (Bezpečnost, nápověda)</td></tr>
+<tr><td>Tabulka dat</td><td><code>.data-table-wrap</code> › <code>.data-table</code></td><td>tabulka s vysvětlením ve třech sloupcích (viz 06)</td></tr>
+<tr><td>Karty</td><td><code>.cards.cards-2/-3/-4</code>, varianty karty</td><td>rovnocenné položky (viz 06)</td></tr>
+<tr><td>Kroky</td><td><code>.cards.card-steps-list</code></td><td>očíslovaný postup (Akce, Ke stažení)</td></tr>
+<tr><td>Seznamy</td><td><code>.ticks</code>, <code>.chips</code>, <code>.ask-list</code>, <code>.help-steps</code>, <code>.faq-list</code></td><td>níže, každý má jiný účel</td></tr>
+<tr><td>Dva sloupce</td><td><code>.split</code>, uvnitř <code>.stack</code></td><td>kroky vedle ukázky, text vedle karty</td></tr>
+<tr><td>Otázky a odpovědi</td><td><code>.qa-group</code> › <code>.block-head</code> + <code>.faq-list</code></td><td>stránka FAQ, nadpis skupiny vlevo</td></tr>
+<tr><td>Autor</td><td><code>.author</code></td><td>fotka a text, jednou na webu</td></tr>
+<tr><td>Kontakt</td><td><code>.contact-grid</code> › <code>.block-head</code> + <code>.card.contact-form-panel</code></td><td>text vedle formuláře, jen na úvodu</td></tr>
+<tr><td>Příklady V praxi</td><td><code>.usecases</code> › <code>.usecase-list</code> + <code>.usecase-demo</code></td><td>tlačítka s otázkami vedle okna Ethel</td></tr>
+<tr><td>Nápověda</td><td><code>.docs-grid</code> › <code>.docs-nav</code> + <code>.prose</code></td><td>všechny stránky /docs/</td></tr>
+<tr><td>Poznámka pod blokem</td><td><code>.block-note</code></td><td>jedna věta drobným písmem pod obsahem (ceny bez DPH, datum revize)</td></tr>
+<tr><td>Zakončení sekce</td><td><code>a.more</code>, <code>.actions</code>, <code>.cta-band</code></td><td>nejvýš jeden odkaz „… →"; víc tlačítek jen v <code>.actions</code></td></tr>
+</tbody></table>
+
+<h3 style="margin-top:36px">Textový blok <code>.prose</code></h3>
+<p class="m-note" style="margin-top:8px">Jediné místo pro souvislý text. Šířka nejvýš 760 px, odstavce 16 px / 1,8 v <code>text-muted</code>, důraz <code>strong</code> v barvě textu, odkazy modré s podtržením. Uvnitř smí být všechno, co vyrobí Markdown: <code>h2</code>, <code>h3</code>, odstavce, <code>ul</code>/<code>ol</code>, citace, <code>code</code>, <code>pre</code>, tabulka, <code>hr</code>, obrázek.</p>
+<div class="m-demo on-white"><div class="prose">
+<h3>Pod jakým účtem Ethel čte</h3>
+<p>Ethel čte přes <strong>vlastní SQL účet</strong>, který založí správce při instalaci. Heslo se odvozuje z aktivačního klíče a nikde není uložené. Podrobnosti jsou v návodu <a href="/docs/pro-spravce/">Pro správce: účty a práva</a>.</p>
+<ul><li>tabulky <code>Tabx_Ethel_*</code> (nastavení uživatelů, profily práv, audit),</li><li>procedury <code>epx_Ethel_*</code> (kontext z přehledu, scénáře Akcí),</li><li>externí akce <strong>Ethel</strong> v menu Heliosu.</li></ul>
+<ol><li>V přehledu označte fakturu.</li><li>Spusťte storno dokladu.</li><li>Opravný doklad zkontrolujte a zrealizujte.</li></ol>
+<blockquote><p>„Kolik máme faktur vydaných v roce 2026 a jaká je jejich celková hodnota?"</p></blockquote>
+<pre>USE [HeliosData]
+SELECT name FROM sys.tables WHERE name LIKE N'Tabx_Ethel_%'</pre>
+<table><thead><tr><th>Co</th><th>Kdy</th></tr></thead><tbody><tr><td>Vaše otázka</td><td>vždy</td></tr><tr><td>Vygenerované SQL</td><td>u otázek nad daty</td></tr></tbody></table>
+<hr>
+<p>Odstavec za oddělovačem. Poslední odstavec sekce nemá spodní okraj navíc.</p>
+</div></div>
+<pre class="m-code">&lt;div class="prose"&gt;
+  &lt;h3&gt;Podnadpis&lt;/h3&gt;
+  &lt;p&gt;Odstavec s &lt;strong&gt;důrazem&lt;/strong&gt; a &lt;a href="/docs/"&gt;odkazem&lt;/a&gt;.&lt;/p&gt;
+  &lt;ul&gt;&lt;li&gt;položka,&lt;/li&gt;&lt;li&gt;položka.&lt;/li&gt;&lt;/ul&gt;
+  &lt;blockquote&gt;&lt;p&gt;„Citace nebo příklad otázky."&lt;/p&gt;&lt;/blockquote&gt;
+  &lt;pre&gt;kód&lt;/pre&gt;
+&lt;/div&gt;</pre>
+
+<h3 style="margin-top:36px">Drobné texty</h3>
+<p class="m-note" style="margin-top:8px"><code>.lead</code> je úvodní odstavec hero (19 px). <code>.block-note</code> je jedna věta pod obsahem sekce (14 px). V kartě: <code>.card-sub</code> (13 px, terakota, podtitulek), <code>.card-fine</code> (13 px, drobná poznámka), <code>.card-quote</code> (bublina s příkladem otázky). Nic z toho se neřetězí do odstavců; delší text patří do <code>.prose</code>.</p>
+<div class="m-demo on-white"><p class="lead" style="margin:0">Ethel provádí úkoly podle připravených scénářů a do Heliosu zapíše až po kliknutí na Potvrdit.</p><p class="block-note">Ceny bez DPH. Vlastní scénář od 9 900 Kč jednorázově. Instalace zabere 10 až 20 minut.</p><div class="cards cards-2" style="margin-top:18px"><article class="card"><h3>Vedení a obchod</h3><p class="card-sub">Čísla bez čekání na report</p><p class="card-quote">„Top 10 zákazníků v maloobchodu za letos"</p><p class="card-fine">Pomůže i <strong>novému kolegovi</strong>, který se v Heliosu teprve rozkoukává.</p></article><article class="card"><h3>Založení organizace</h3><p>Najde firmu v ARES podle IČO, zkontroluje duplicitu, doplní údaje.</p><p class="card-fine">IČO nebo název se při hledání odešle do veřejného rejstříku ARES.</p></article></div></div>
+
+<h3 style="margin-top:36px">Seznamy</h3>
+<p class="m-note" style="margin-top:8px">Pět seznamů, každý na jednu věc. Běžný výčet v textu je obyčejné <code>ul</code> uvnitř <code>.prose</code>.</p>
+<div class="m-demo on-white"><div class="cards cards-3">
+<article class="card"><h3>Co je v ceně</h3><ul class="ticks"><li>Dotazy nad daty, vysvětlování a nápověda</li><li>Grafy a exporty do Excelu, CSV a PDF</li><li>Akce Založení organizace</li></ul><p class="card-fine"><code>.ticks</code>: zaškrtnutí, modré; v ceníku na hover karty terakotové. Linka nahoře odděluje od ceny.</p></article>
+<article class="card"><h3>Oblasti a hodnoty</h3><ul class="chips"><li>Faktury vydané</li><li>Sklad</li><li>Výroba</li><li>storno faktury</li><li>inventura</li></ul><p class="card-fine"><code>.chips</code>: krátká hesla vedle sebe, modrý podklad, bez interpunkce. Výčet modulů, témat nápovědy, požadavků.</p></article>
+<article class="card card-accent-icon"><h3>Příklady otázek</h3><ul class="ask-list"><li>Kolik máme faktur po splatnosti?</li><li>Top 10 nejprodávanějších položek za květen</li></ul><p class="card-fine"><code>.ask-list</code>: celé věty, jak by je uživatel napsal Ethel; modrý čárkovaný rámeček a modrá odrážka, nejvýš tři.</p></article>
+</div></div>
+<div class="m-demo on-white"><div class="split"><div><ol class="help-steps"><li>V přehledu Faktury vydané označte fakturu, kterou chcete stornovat.</li><li>Spusťte storno dokladu. Helios k faktuře připraví opravný doklad.</li><li>Opravný doklad zkontrolujte a zrealizujte.</li></ol><p class="m-note"><code>.help-steps</code>: očíslovaný postup v odpovědi Ethel. Jen uvnitř okna Ethel (<code>.demo-answer</code>), na stránce mimo okno se nepoužívá.</p></div><div><div class="faq-list"><details open><summary>Musím znát SQL?</summary><p>Ne. Ptáte se česky, jako byste se ptali kolegy.</p></details><details><summary>Jak Ethel spustím?</summary><p>Z menu Doplňky nebo klávesou Ctrl+I.</p></details></div><p class="m-note"><code>.faq-list</code>: <code>details/summary</code>, otázka 16 px, odpověď v <code>text-muted</code>; může mít i <code>ul</code>. Na stránce FAQ uvnitř <code>.qa-group</code>.</p></div></div></div>
+<pre class="m-code">&lt;ul class="ticks"&gt;&lt;li&gt;…&lt;/li&gt;&lt;/ul&gt;            výhody, co je v ceně
+&lt;ul class="chips"&gt;&lt;li&gt;…&lt;/li&gt;&lt;/ul&gt;            hesla vedle sebe
+&lt;ul class="ask-list"&gt;&lt;li&gt;…&lt;/li&gt;&lt;/ul&gt;         příklady otázek v kartě
+&lt;ol class="help-steps"&gt;&lt;li&gt;…&lt;/li&gt;&lt;/ol&gt;       postup v odpovědi Ethel (jen v okně)
+&lt;ol class="cards card-steps-list"&gt;&lt;li class="card"&gt;&lt;span class="card-num"&gt;1&lt;/span&gt;&lt;div&gt;&lt;h3&gt;…&lt;/h3&gt;&lt;p&gt;…&lt;/p&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;   kroky na stránce
+&lt;div class="faq-list"&gt;&lt;details&gt;&lt;summary&gt;Otázka?&lt;/summary&gt;&lt;p&gt;Odpověď.&lt;/p&gt;&lt;/details&gt;&lt;/div&gt;</pre>
+
+<h3 style="margin-top:36px">Dva sloupce <code>.split</code> a svislý sloupec <code>.stack</code></h3>
+<p class="m-note" style="margin-top:8px"><code>.split</code> rozdělí obsah na dva stejné sloupce s mezerou 20 px (pod 850 px pod sebou). Do sloupce patří jeden celek: seznam kroků, karta, <code>.stack</code> s více kartami nad sebou, text v <code>.prose</code>. Používá se na stránce Akce (kroky vedle kontrolní karty) a v tomhle manuálu.</p>
+<div class="m-demo on-white"><div class="split"><ol class="cards card-steps-list"><li class="card"><span class="card-num">1</span><div><h3>Zadáte úkol</h3><p>„Založ organizaci s IČO 04997476."</p></div></li><li class="card"><span class="card-num">2</span><div><h3>Ethel dohledá a zkontroluje</h3><p>Najde firmu v ARES a ověří, že v Heliosu ještě není.</p></div></li></ol><div class="stack"><article class="card"><h3>Karta vedle kroků</h3><p>Například kontrolní karta nebo ukázka výsledku.</p></article><article class="card card-accent"><h3>Co když se něco pokazí</h3><p>Druhá karta ve <code>.stack</code> pod první.</p></article></div></div></div>
+<pre class="m-code">&lt;div class="split"&gt;
+  &lt;ol class="cards card-steps-list"&gt;…&lt;/ol&gt;
+  &lt;div class="stack"&gt;&lt;article class="card"&gt;…&lt;/article&gt;&lt;article class="card card-accent"&gt;…&lt;/article&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<h3 style="margin-top:36px">Otázky a odpovědi <code>.qa-group</code></h3>
+<p class="m-note" style="margin-top:8px">Skupina otázek na stránce FAQ: nadpis skupiny vlevo (H2 28 px, bez eyebrow), otázky vpravo. Každá skupina je vlastní <code>section.block</code>, pozadí se střídají.</p>
+<div class="m-demo on-white"><div class="qa-group"><div class="block-head"><h2>Trial a ceny</h2></div><div class="faq-list"><details><summary>Můžeme Ethel vyzkoušet zdarma?</summary><p>Ano, 14 dní. Klíč dostanete e-mailem do 24 hodin od registrace.</p></details><details><summary>Co se stane po trialu?</summary><p>Nic automaticky. Když chcete pokračovat, pošleme fakturu a klíč prodloužíme.</p></details></div></div></div>
+<pre class="m-code">&lt;section class="block block-white"&gt;&lt;div class="wrap qa-group"&gt;
+  &lt;div class="block-head"&gt;&lt;h2&gt;Skupina&lt;/h2&gt;&lt;/div&gt;
+  &lt;div class="faq-list"&gt;&lt;details&gt;…&lt;/details&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;</pre>
+
+<h3 style="margin-top:36px">Autor <code>.author</code></h3>
+<p class="m-note" style="margin-top:8px">Fotka 200 × 200 px se zaoblením karty vlevo, vpravo hlava sekce a podpis <code>.author-sign</code>. Na webu jednou, na úvodní stránce před formulářem.</p>
+<div class="m-demo"><div class="author"><img class="author-photo" src="/images/jakub-sevela.jpg" alt="Jakub Ševela" width="200" height="200"><div><div class="block-head"><p class="eyebrow">Kdo stojí za Ethel</p><h2 style="font-size:28px">S Heliosem pracuji od roku 2008</h2><p>Sedm let v Asseco Solutions, od roku 2015 na volné noze: implementace, integrace a hlavně SQL.</p></div><p class="author-sign"><strong>Jakub Ševela</strong> · Solution architect · Helios Inuvio</p></div></div></div>
+<pre class="m-code">&lt;section class="block block-grey"&gt;&lt;div class="wrap author"&gt;
+  &lt;img class="author-photo" src="/images/jakub-sevela.jpg" alt="Jakub Ševela" width="200" height="200"&gt;
+  &lt;div&gt;&lt;div class="block-head"&gt;…&lt;/div&gt;&lt;p class="author-sign"&gt;&lt;strong&gt;Jméno&lt;/strong&gt; · role&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;</pre>
+
+<h3 style="margin-top:36px">Kontakt <code>.contact-grid</code> a příklady <code>.usecases</code></h3>
+<p class="m-note" style="margin-top:8px">Dvě dvousloupcové mřížky, které mají místo <code>.block-head</code> vlastní rozložení. <code>.contact-grid</code>: vlevo hlava sekce s textem, vpravo <code>.card.contact-form-panel</code> s formulářem (viz 06). <code>.usecases</code>: vlevo <code>.usecase-list</code> s tlačítky <code>button.card.usecase</code> (role v <code>.usecase-role</code>, otázka jako text, stav <code>aria-pressed</code>), vpravo <code>.usecase-demo</code> s oknem Ethel (viz 07).</p>
+<div class="m-demo"><div class="usecase-list" style="max-width:420px"><button type="button" class="card usecase" aria-pressed="true"><span class="usecase-role">Vedení a obchod</span>Top 5 zákazníků v maloobchodu za letos</button><button type="button" class="card usecase" aria-pressed="false"><span class="usecase-role">Sklad</span>Jaká je volná zásoba položky 51003?</button></div></div>
+<pre class="m-code">&lt;div class="wrap contact-grid"&gt;&lt;div class="block-head"&gt;…&lt;/div&gt;&lt;div class="card contact-form-panel"&gt;&lt;form class="contact-form"&gt;…&lt;/form&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="usecases"&gt;
+  &lt;div class="usecase-list" aria-label="Příklady otázek"&gt;&lt;button type="button" class="card usecase" data-case="0" aria-pressed="true"&gt;&lt;span class="usecase-role"&gt;Role&lt;/span&gt;Otázka&lt;/button&gt;…&lt;/div&gt;
+  &lt;div class="usecase-demo"&gt;&lt;div class="hero-product case-window"&gt;…&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<h3 style="margin-top:36px">Nápověda <code>.docs-grid</code></h3>
+<p class="m-note" style="margin-top:8px">Všechny stránky /docs/: vlevo přilepená navigace <code>ul.docs-nav</code> (aktivní položka <code>aria-current="page"</code>), vpravo <code>article.prose</code> z Markdownu nebo <code>.cards.cards-2</code> na rozcestníku. Pod 850 px navigace nad textem jako vodorovný pás.</p>
+<div class="m-demo on-white"><div class="docs-grid"><ul class="docs-nav" style="position:static"><li><a href="#bloky" aria-current="page">První kroky</a></li><li><a href="#bloky">Pro správce</a></li><li><a href="#bloky">Co je nového</a></li></ul><article class="prose"><h2 style="margin:0">Jak Ethel spustit</h2><p>V Heliosu stiskněte <strong>Ctrl+I</strong> nebo zvolte akci <strong>Ethel</strong> v menu. Otevře se okno chatu.</p></article></div></div>
+<pre class="m-code">&lt;section class="page-hero wrap"&gt;&lt;p class="eyebrow"&gt;Nápověda&lt;/p&gt;&lt;h1&gt;Název&lt;/h1&gt;&lt;p class="lead"&gt;Popis.&lt;/p&gt;&lt;/section&gt;
+&lt;section class="block block-white"&gt;&lt;div class="wrap docs-grid"&gt;
+  &lt;ul class="docs-nav"&gt;&lt;li&gt;&lt;a href="/docs/prvni-kroky/" aria-current="page"&gt;První kroky&lt;/a&gt;&lt;/li&gt;…&lt;/ul&gt;
+  &lt;article class="prose"&gt;…&lt;/article&gt;
+&lt;/div&gt;&lt;/section&gt;</pre>
+
+<h3 style="margin-top:36px">Zakončení sekce</h3>
+<p class="m-note" style="margin-top:8px">Sekce končí nejvýš jedním odkazem <code>a.more</code> („Všechno, co Ethel umí →"). Když je potřeba víc cest dál, jsou to obrysová tlačítka v <code>.actions</code> (Ke stažení: tři návody). Podstránku zavírá <code>.cta-band</code> (viz 06); na úvodu ho nahrazuje formulář.</p>
+<div class="m-demo on-white"><a class="more" href="#bloky" style="margin:0">Všechno, co Ethel umí →</a><div class="actions" style="margin-top:18px"><a class="button" href="#bloky">Návod pro správce: účty a práva</a><a class="button" href="#bloky">První kroky pro uživatele</a><a class="text-link" href="#bloky">Co je nového ↓</a></div></div>
+
+<h3 style="margin-top:36px">Hotové skladby sekcí</h3>
+<pre class="m-code">Text:            .block-head → .prose [→ .block-note]
+Text s tabulkou: .block-head → .prose → .data-table-wrap → .prose
+Karty:           .block-head → .cards.cards-3 [→ a.more]
+Kroky + ukázka:  .block-head → .split (ol.card-steps-list | .stack karet) → .block-note
+FAQ:             .qa-group (.block-head h2 | .faq-list), jedna skupina = jedna sekce
+Ceník:           .block-head.block-head-row (+ .price-toggle) → .cards.cards-2.plans → .block-note → a.more
+Autor:           .author (img | .block-head + .author-sign)
+Kontakt:         .contact-grid (.block-head | .card.contact-form-panel)
+Nápověda:        .page-hero → .docs-grid (.docs-nav | .prose nebo .cards-2) → .cta-band</pre>
+</div></section>
+
+<section id="stranky" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">09 · Stránky</p><h2>Šest veřejných stránek, dokumentace a stažení.</h2><p>Každá stránka má stejnou hlavičku a patičku. Liší se jen tím, co je mezi nimi.</p></div>
 <table class="m-spec"><thead><tr><th>Stránka</th><th>Skladba</th></tr></thead><tbody>
 <tr><td>/ úvod</td><td>hero (text + přehrávané okno + poznámka) → Co umí (bílá, 4 karty s terakotovou ikonou) → Bezpečnost (tmavá, 4 karty) → V praxi (šedá, otázky + okno) → Cena (bílá, přepínač + 2 stejné tarify) → Autor (šedá, fotka + text) → Vyzkoušet (bílá, text + formulář).</td></tr>
 <tr><td>/funkce/</td><td>page-hero → sekce Kontext, Zjistí, Vysvětlí, Poradí, Zapíše, Práce s výsledkem, Pro koho (střídání bílá/šedá, karty) → CTA pás</td></tr>
@@ -278,19 +398,19 @@ pre.m-code{margin:14px 0 0;padding:14px 16px;border-radius:8px;background:var(--
 <p class="m-note">Hlavní navigace: Co umí · Akce · Bezpečnost · Cena (/#cena) · FAQ, vpravo Vyzkoušet zdarma (/#kontakt). Patička navíc: Nápověda, Ke stažení, Co je nového. Aktivní stránka má <code>aria-current="page"</code>.</p>
 </div></section>
 
-<section id="pohyb" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">09 · Pohyb a přístupnost</p><h2>Hýbe se jen to, co něco říká.</h2></div>
+<section id="pohyb" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">10 · Pohyb a přístupnost</p><h2>Hýbe se jen to, co něco říká.</h2></div>
 <div class="split"><div><h3>Animace</h3><ul class="m-dont m-do" style="margin-top:12px"><li>Tečka v logu: 4,8 s smyčka.</li><li>Přehrávání rozhovoru v hero: kroky 0,7 až 2,6 s, pauza 7 s, pak znovu.</li><li>Nová bublina nebo odpověď: 0,4 s vjezd zdola (<code>seq-in</code>).</li><li>Sloupce a pruhy grafu rostou 0,6 až 0,8 s.</li><li>Tlačítko na hover o 1 px nahoru, 0,15 s.</li><li>Při <code>prefers-reduced-motion</code> všechno stojí a hero ukáže rovnou výsledný stav.</li></ul></div>
 <div><h3>Přístupnost</h3><ul class="m-dont m-do" style="margin-top:12px"><li>Kontrast textu všude aspoň 4,7 : 1 (viz Barvy).</li><li>Fokus: 3 px modrý obrys s odstupem 5 px; ve formuláři 2 px.</li><li>Odkaz „Přejít k obsahu" jako první prvek stránky.</li><li>Ozdobné prvky mají <code>aria-hidden</code>, grafy <code>aria-label</code> s čísly.</li><li>Cílové plochy tlačítek aspoň 40 px na výšku; na mobilu pole formuláře 16 px, aby iOS nezoomoval.</li><li>Menu a příklady jsou tlačítka se stavem (<code>aria-expanded</code>, <code>aria-pressed</code>).</li></ul></div></div>
 </div></section>
 
-<section id="texty" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">10 · Texty</p><h2>Konkrétně, česky, bez vykřičníků.</h2></div>
+<section id="texty" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">11 · Texty</p><h2>Konkrétně, česky, bez vykřičníků.</h2></div>
 <div class="cards cards-3">
 <article class="card"><h3>Jména</h3><p>Helios Inuvio (nikdy iNuvio). Ethel je žena: „Ethel odpoví", „zeptáte se jí". Akce s velkým A, když jde o modul nebo katalogovou akci. Asseco Solutions v disclaimeru v patičce.</p></article>
 <article class="card"><h3>Tón</h3><p>Vykání, krátké věty, čísla místo přídavných jmen. Nadpisy jsou věty, ne hesla; H1 s tečkou, nadpisy sekcí bez tečky. Žádné vykřičníky, žádné „revoluční", „chytrý", „jednoduše". Klávesová zkratka Ctrl+I se píše takhle.</p></article>
 <article class="card"><h3>Čísla a jednotky</h3><p>Tisíce mezerou (1 490 Kč), nezlomitelné mezery mezi číslem a jednotkou i za jednopísmennými předložkami. Ceny bez DPH, a říká se to. Data jen v ukázkách, vždy označená „Ukázková data".</p></article>
 </div></div></section>
 
-<section id="soubory" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">11 · Soubory a implementace</p><h2>Tři CSS soubory, dva skripty, čtyři loga.</h2><p>Pořadí načítání je pevné. Stránka bez formuláře <code>forms.css</code> nenačítá. Žádné inline styly kromě <code>--v</code> u sloupců grafu.</p></div>
+<section id="soubory" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">12 · Soubory a implementace</p><h2>Tři CSS soubory, dva skripty, čtyři loga.</h2><p>Pořadí načítání je pevné. Stránka bez formuláře <code>forms.css</code> nenačítá. Žádné inline styly kromě <code>--v</code> u sloupců grafu.</p></div>
 <table class="m-spec"><thead><tr><th>Soubor</th><th>Obsah</th></tr></thead><tbody>
 <tr><td>assets/tokens.css</td><td>všechny proměnné: barvy, písmo, rádiusy, rozměry, stíny. Jediné místo s hex hodnotami.</td></tr>
 <tr><td>assets/ethel.css</td><td>základ, typografie, hlavička, tlačítka, hero, okno Ethel, bloky a karty, ceník, podstránky, dokumentace, patička, cookies, body zlomu</td></tr>
@@ -312,10 +432,10 @@ pre.m-code{margin:14px 0 0;padding:14px 16px;border-radius:8px;background:var(--
 &lt;script src="/assets/web.js"&gt;&lt;/script&gt;
 &lt;script src="/assets/forms.js"&gt;&lt;/script&gt;      &lt;!-- jen se formulářem --&gt;</pre>
 <ul class="m-dont" style="margin-top:24px"><li>Žádný další CSS soubor, žádný <code>&lt;style&gt;</code> ve stránce, žádný <code>style=""</code> (výjimka <code>--v</code>).</li><li>Žádné <code>!important</code> mimo variantu karty <code>.card-accent</code> a dvě poznámky v odpovědi, které už v CSS jsou.</li><li>Žádné selektory podle <code>id</code> v CSS. Varianta prvku je vždy třída.</li><li>Nový prvek nejdřív sem do manuálu s ukázkou, pak na web.</li><li>Verze manuálu se zvedne při každé změně tokenů nebo přidání komponenty; datum v hlavičce.</li></ul>
-<p class="m-note" style="margin-top:28px"><strong>Historie.</strong> v2.2 (27. 9. 2026): jedno okno Ethel pro hero i V praxi podle aplikace (otázka v bublině vpravo s rámečkem, nástroje Tabulka/Graf/Excel/PDF v obou, řádek <code>.chat-input</code> „Zadej otázku…“ dole, <code>.chat-log</code> s pevnou výškou: nové zprávy přibývají dole, starší odjíždějí nahoru; <code>.result-actions</code> zrušeno); příklady otázek <code>.ask-list</code> bez podkladu s modrým čárkovaným rámečkem a modrou odrážkou; hover tarifu přebarví i <code>.plan-tag</code> a <code>.addon</code>. · v2.1 (27. 9. 2026): rámeček karty vždy stejně silný ze všech stran (<code>.card-topline</code> a <code>.card-featured</code> zrušeny, <code>.card-accent</code> je celý rámeček 1,5 px); sekce Co umí s terakotovou ikonou a odrážkami (<code>.card-accent-icon</code>); pulzující tečka jen v logu, nadpisy sekcí bez tečky; oba tarify stejné, terakota až na hover; štítek nad sesterskými weby v patičce; kód v kartě, leadu a poznámce (<code>.card pre</code>, <code>.card code</code>, <code>.lead code</code>, <code>.block-head code</code>, <code>.block-note code</code>); dokumentace na mobilu <code>minmax(0,1fr)</code>. · v2.0 (27. 9. 2026): nový světlý systém podle návrhu /nahled-4, šest vrstvených CSS souborů sloučeno do tokens + ethel + forms, doplněna dokumentace (docs-grid, prose), varianty <code>.card-topline</code> a <code>.card-price.small</code> místo selektorů podle id, plné tlačítko vždy přes <code>.button-solid</code>, jeden systémový font stack; tečka u nadpisů s mezerou podle loga; ručně psaná poznámka se šipkou nahoru nebo dolů. Předchozí manuály Ethel v1.4 a v1.5 (dark-first, azurová, Space Grotesk) tímto neplatí.</p>
+<p class="m-note" style="margin-top:28px"><strong>Historie.</strong> v2.3 (27. 9. 2026): nová sekce 08 Stavební bloky (textový blok, drobné texty, pět seznamů, dva sloupce, otázky a odpovědi, autor, kontakt, příklady, nápověda, zakončení sekce, hotové skladby); sekce 08–11 přečíslovány na 09–12. · v2.2 (27. 9. 2026): jedno okno Ethel pro hero i V praxi podle aplikace (otázka v bublině vpravo s rámečkem, nástroje Tabulka/Graf/Excel/PDF v obou, řádek <code>.chat-input</code> „Zadej otázku…“ dole, <code>.chat-log</code> s pevnou výškou: nové zprávy přibývají dole, starší odjíždějí nahoru; <code>.result-actions</code> zrušeno); příklady otázek <code>.ask-list</code> bez podkladu s modrým čárkovaným rámečkem a modrou odrážkou; hover tarifu přebarví i <code>.plan-tag</code> a <code>.addon</code>. · v2.1 (27. 9. 2026): rámeček karty vždy stejně silný ze všech stran (<code>.card-topline</code> a <code>.card-featured</code> zrušeny, <code>.card-accent</code> je celý rámeček 1,5 px); sekce Co umí s terakotovou ikonou a odrážkami (<code>.card-accent-icon</code>); pulzující tečka jen v logu, nadpisy sekcí bez tečky; oba tarify stejné, terakota až na hover; štítek nad sesterskými weby v patičce; kód v kartě, leadu a poznámce (<code>.card pre</code>, <code>.card code</code>, <code>.lead code</code>, <code>.block-head code</code>, <code>.block-note code</code>); dokumentace na mobilu <code>minmax(0,1fr)</code>. · v2.0 (27. 9. 2026): nový světlý systém podle návrhu /nahled-4, šest vrstvených CSS souborů sloučeno do tokens + ethel + forms, doplněna dokumentace (docs-grid, prose), varianty <code>.card-topline</code> a <code>.card-price.small</code> místo selektorů podle id, plné tlačítko vždy přes <code>.button-solid</code>, jeden systémový font stack; tečka u nadpisů s mezerou podle loga; ručně psaná poznámka se šipkou nahoru nebo dolů. Předchozí manuály Ethel v1.4 a v1.5 (dark-first, azurová, Space Grotesk) tímto neplatí.</p>
 </div></section>
 </main>
 
-<footer class="site-footer"><div class="wrap"><div class="footer-top"><div><span class="footer-brand"><img src="/assets/logos/ethel-on-dark-animated.svg" alt="Ethel"></span><p>Grafický manuál webu ethel.cz · v2.2 · 27. 9. 2026</p></div><div class="related"><p class="related-label">Další projekty Jakuba Ševely</p><div class="related-links"><a href="https://feedco.cz/" target="_blank" rel="noopener"><strong>feedco<span class="feed-dot">.</span></strong><span>Propojení systémů ↗</span></a><a href="https://jakubsevela.cz/" target="_blank" rel="noopener"><strong>jakub<span class="jakub-dot">.</span>ševela</strong><span>Integrace a automatizace ↗</span></a></div></div></div><div class="footer-bottom"><p>© 2026 Ethel · Mgr. Jakub Ševela</p><p>Ethel je nezávislý nástroj a není produktem společnosti Asseco Solutions.</p></div></div></footer>
+<footer class="site-footer"><div class="wrap"><div class="footer-top"><div><span class="footer-brand"><img src="/assets/logos/ethel-on-dark-animated.svg" alt="Ethel"></span><p>Grafický manuál webu ethel.cz · v2.3 · 27. 9. 2026</p></div><div class="related"><p class="related-label">Další projekty Jakuba Ševely</p><div class="related-links"><a href="https://feedco.cz/" target="_blank" rel="noopener"><strong>feedco<span class="feed-dot">.</span></strong><span>Propojení systémů ↗</span></a><a href="https://jakubsevela.cz/" target="_blank" rel="noopener"><strong>jakub<span class="jakub-dot">.</span>ševela</strong><span>Integrace a automatizace ↗</span></a></div></div></div><div class="footer-bottom"><p>© 2026 Ethel · Mgr. Jakub Ševela</p><p>Ethel je nezávislý nástroj a není produktem společnosti Asseco Solutions.</p></div></div></footer>
 <script src="/assets/web.js"></script>
 </body></html>
