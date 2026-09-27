@@ -12,7 +12,7 @@ nav a[aria-current=page]{color:var(--brand)}
 /* Hero H1: no hand-drawn ellipse, second line in brand colour. */
 .hero h1{font-size:clamp(44px,5vw,64px)}
 
-/* The final full stop of every H1 is the logo's pulsing dot (blue, then terracotta). */
+/* Section headings (H2) end with the logo's pulsing dot (blue, then terracotta). */
 .pulse-dot{display:inline-block;width:.17em;height:.17em;margin-left:.05em;border-radius:50%;background:#326C92;vertical-align:baseline;animation:dot-pulse 4.8s ease-in-out infinite}
 @keyframes dot-pulse{0%,100%{opacity:.35;transform:scale(.62);background:#326C92}22%,28%{opacity:1;transform:scale(1);background:#348FEA}48%{opacity:.35;transform:scale(.62);background:#348FEA}52%{opacity:.35;transform:scale(.62);background:#E66E4D}72%,78%{opacity:1;transform:scale(1);background:#E66E4D}96%{opacity:.35;transform:scale(.62);background:#E66E4D}}
 @media(prefers-reduced-motion:reduce){.pulse-dot{animation:none}}
@@ -117,8 +117,8 @@ nav a[aria-current=page]{color:var(--brand)}
 .block-dark .card-icon{background:#2E4C60}
 .block-dark .card-icon svg{stroke:#91BEDC}
 .ask-list{display:grid;gap:8px;margin:6px 0 0;padding:0;list-style:none}
-.ask-list li{position:relative;padding:9px 14px 9px 38px;border-radius:10px;background:var(--accent-orange-tint);font-size:14px;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ask-list li::before{content:"";position:absolute;left:14px;top:50%;width:13px;height:11px;margin-top:-5.5px;border-radius:4px 4px 4px 1px;background:var(--accent-orange-line)}
+.ask-list li{position:relative;padding:9px 14px 9px 38px;border-radius:10px;background:var(--brand-tint);font-size:14px;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ask-list li::before{content:"";position:absolute;left:14px;top:50%;width:13px;height:11px;margin-top:-5.5px;border-radius:4px 4px 4px 1px;background:var(--brand);opacity:.55}
 
 /* "V praxi": question list + interactive Ethel window. */
 .usecases{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:28px;align-items:start}
