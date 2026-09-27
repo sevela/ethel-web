@@ -1,0 +1,100 @@
+/* ==========================================================================
+   ethel.cz — design tokeny (grafický manuál webu v2.0, 27. 9. 2026)
+   Manuál: https://ethel.cz/brand/  (repo ethel-web, brand/index.html)
+
+   Jediný zdroj barev, písem, rádiusů a rozměrů pro celý web. Komponenty
+   jsou v ethel.css a forms.css a berou hodnoty výhradně odsud — žádná barva
+   natvrdo mimo tenhle soubor (výjimka: SVG loga, která mají barvy v sobě).
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* --- Plochy ---------------------------------------------------------- */
+  --page:        #F3F6F7;   /* pozadí stránky, hero, hlavička */
+  --surface:     #FFFFFF;   /* bílé bloky, karty, okno Ethel */
+  --surface-alt: #EAF0F3;   /* šedé bloky, lišta okna, pozadí grafů */
+  --border:      #CDD9DF;   /* všechny linky a rámečky ve světlé části */
+
+  /* --- Text ------------------------------------------------------------ */
+  --text:        #172B38;   /* inkoust: nadpisy, běžný text, tmavé plochy */
+  --text-muted:  #526774;   /* popisky, doprovodný text; ne pod 12 px */
+
+  /* --- Značka: modrá --------------------------------------------------- */
+  --brand:       #326C92;   /* tečka v logu, odkazy, plná tlačítka, ikony */
+  --on-brand:    #FFFFFF;
+  --brand-tint:  #E0ECF3;   /* bubliny, chipy, ikonové dlaždice, CTA pás */
+  --focus:       #326C92;
+
+  /* --- Akcent: terakota ------------------------------------------------ */
+  /* Ručně psané poznámky, čárka před eyebrow, vybraný příklad, čísla kroků,
+     „zaškrtnutí" v ceníku, hvězdička u povinných polí. Nikdy plocha, nikdy
+     tlačítko — akcent ukazuje, nevolá k akci. */
+  --accent:      #B64722;   /* text a drobné prvky */
+  --accent-line: #E66E4D;   /* linky, rámečky, tečka v animaci */
+  --accent-tint: #FBEDE7;   /* podklad štítků a čísel kroků */
+  --accent-on-ink: #FFAA83; /* akcent na inkoustovém podkladu (aktivní přepínač ceny) */
+
+  /* Ručně kreslené šipky k poznámce (barva = --accent, v data URI nejde použít proměnná) */
+  --hand-arrow-up:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 60' fill='none' stroke='%23B64722' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 56C11 45 30 30 17 9'/%3E%3Cpath d='M8 17l9-9 10 6'/%3E%3C/svg%3E");
+  --hand-arrow-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 60' fill='none' stroke='%23B64722' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 4C29 15 10 30 23 51'/%3E%3Cpath d='M32 43l-9 9-10-6'/%3E%3C/svg%3E");
+
+  /* --- Tmavá plocha (jeden blok na webu + patička) --------------------- */
+  --ink:         #172B38;
+  --ink-surface: #223E50;   /* karta na tmavé ploše */
+  --ink-border:  #3F5D70;
+  --ink-icon:    #2E4C60;   /* dlaždice ikony na tmavé ploše */
+  --ink-rule:    #334550;   /* linka v patičce */
+  --ink-text:    #EDF3F6;
+  --ink-body:    #D5E0E7;   /* text karet na tmavé ploše */
+  --ink-muted:   #A8BAC6;
+  --ink-link:    #91BEDC;   /* odkazy a ikony na tmavé ploše */
+  --ink-text-2:  #C9D6DE;   /* běžný text patičky */
+
+  /* --- Stavy (formuláře; success a warning zatím bez použití) ---------- */
+  --success:     #346B48;
+  --warning:     #94621D;
+  --danger:      #AE3F45;
+
+  /* --- Data a animace -------------------------------------------------- */
+  --chart-muted: #BFD6E6;   /* sloupce grafu mimo aktuální období */
+  --pulse-blue:  #348FEA;   /* rozsvícená tečka, 1. fáze */
+  --pulse-warm:  #E66E4D;   /* rozsvícená tečka, 2. fáze (= --accent-line) */
+  --file-xlsx:   #1F7A4C;
+  --file-pdf:    #B64722;
+  --sister-feedco-dark: #B5D385;   /* tečka feedco. v patičce */
+  --sister-jakub-dark:  #E4B777;   /* tečka jakub.ševela v patičce */
+
+  /* --- Písmo ----------------------------------------------------------- */
+  /* Segoe UI = písmo Windows a Heliosu; web má vypadat jako nástroj, který
+     v Heliosu žije. Mimo Windows padá na systémové písmo platformy. */
+  --font-body:    "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-body);
+  --font-code:    Consolas, "Cascadia Mono", ui-monospace, Menlo, monospace;
+  --font-hand:    "Caveat", "Segoe Print", cursive;   /* jen ručně psané poznámky */
+
+  --weight-display: 650;   /* h1–h3; na Windows = Segoe UI Semibold */
+  --weight-ui:      550;   /* navigace, otázky ve FAQ */
+
+  /* --- Rádiusy --------------------------------------------------------- */
+  --radius-control: 7px;    /* tlačítka, pole, drobné štítky, přepínače */
+  --radius-card:    14px;   /* karty, okno Ethel, fotka autora */
+  --radius-bubble:  10px;   /* bubliny v chatu, formulářový panel */
+  --radius-pill:    999px;
+
+  /* --- Rozměry --------------------------------------------------------- */
+  --layout-width:  1120px;
+  --gutter:        32px;    /* okraj po stranách; 20 px pod 850 px */
+  --nav-height:    82px;
+  --block-space:   84px;    /* svislý rytmus bloků; 60 px pod 850 px */
+
+  /* --- Stíny ----------------------------------------------------------- */
+  --shadow-window: 0 18px 48px rgba(23, 43, 56, 0.047);   /* okno Ethel */
+  --shadow-lift:   0 10px 26px rgba(23, 43, 56, 0.078);   /* vybraný příklad */
+  --shadow-float:  0 18px 48px rgba(23, 43, 56, 0.078);   /* zvýrazněný tarif */
+  --shadow-modal:  0 18px 48px rgba(23, 43, 56, 0.122);   /* cookie lišta */
+}
+
+@media (max-width: 850px) {
+  :root { --gutter: 20px; --block-space: 60px; --nav-height: 76px; }
+}
