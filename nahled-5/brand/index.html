@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="cs"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grafický manuál webu ethel.cz · v2.0</title>
+<meta name="description" content="Grafický manuál webu ethel.cz: barvy, písmo, logo, komponenty, rozvržení stránek a pravidla. Verze 2.0, 27. 9. 2026.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.ico" sizes="32x32"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/nahled-5/assets/tokens.css"><link rel="stylesheet" href="/nahled-5/assets/ethel.css"><link rel="stylesheet" href="/nahled-5/assets/forms.css">
+<style>
+/* Styly jen pro tenhle manuál. Do webu nepatří. */
+.m-toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin:24px 0 0;padding:0;list-style:none;font-size:14px}
+.m-toc a{color:var(--brand);text-decoration:none;font-weight:var(--weight-ui)}
+.m-toc a:hover{text-decoration:underline;text-underline-offset:3px}
+.m-swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:0;padding:0;list-style:none}
+.m-swatch{border:1px solid var(--border);border-radius:var(--radius-bubble);overflow:hidden;background:var(--surface);font-size:12px;line-height:1.45}
+.m-swatch i{display:block;height:64px}
+.m-swatch div{padding:9px 11px}
+.m-swatch strong{display:block;font-size:13px;color:var(--text)}
+.m-swatch code{font:500 11px var(--font-code);color:var(--text-muted)}
+.m-swatch span{display:block;color:var(--text-muted);margin-top:3px}
+.m-spec{width:100%;font-size:14px;border-collapse:collapse;background:var(--surface)}
+.m-spec th,.m-spec td{padding:10px 14px 10px 0;vertical-align:top;border-bottom:1px solid var(--border)}
+.m-spec th{font-weight:600;color:var(--text)}
+.m-spec td{color:var(--text-muted)}
+.m-spec td:first-child{color:var(--text);font-weight:600;white-space:nowrap}
+.m-spec code{font:500 12px var(--font-code);color:var(--text)}
+.m-demo{margin:18px 0 0;padding:28px;border:1px dashed var(--border);border-radius:var(--radius-card);background:var(--page)}
+.m-demo.on-white{background:var(--surface)}
+.m-demo.on-dark{background:var(--ink);border-color:var(--ink-border)}
+.m-demo>*+*{margin-top:18px}
+.m-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.m-note{margin:14px 0 0;font-size:14px;color:var(--text-muted)}
+.m-note strong{color:var(--text)}
+.m-dont{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:15px;color:var(--text-muted)}
+.m-dont li{position:relative;padding-left:24px}
+.m-dont li::before{content:"×";position:absolute;left:0;top:-1px;font-weight:700;color:var(--danger)}
+.m-do li::before{content:"✓";color:var(--success)}
+.m-type{display:grid;gap:14px}
+.m-type>div{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--border)}
+.m-type code{font:500 12px/1.6 var(--font-code);color:var(--text-muted)}
+.m-logo{display:flex;align-items:center;justify-content:center;padding:36px;border-radius:var(--radius-bubble);border:1px solid var(--border)}
+.m-logo img{width:220px;height:auto;display:block}
+.m-logo.dark{background:var(--ink);border-color:var(--ink-border)}
+.m-logo.small img{width:105px}
+.m-logo.icon img{width:64px}
+.m-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.m-file{font:500 13px var(--font-code)}
+pre.m-code{margin:14px 0 0;padding:14px 16px;border-radius:8px;background:var(--ink);color:var(--ink-text);font:400 12.5px/1.6 var(--font-code);overflow-x:auto}
+.m-bp{display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px 20px;font-size:14px;color:var(--text-muted)}
+.m-bp b{color:var(--text);font-variant-numeric:tabular-nums}
+@media(max-width:700px){.m-type>div{grid-template-columns:1fr;gap:6px}.m-demo{padding:18px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#obsah">Přejít k obsahu</a>
+<header class="site-header"><div class="wrap nav-row"><a class="logo" href="/nahled-5/" aria-label="Ethel, úvod"><img src="/nahled-5/assets/logos/ethel-light-animated.svg" alt="Ethel" width="105" height="29"></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu</button><nav id="main-nav" aria-label="Manuál"><a href="#logo">Logo</a><a href="#barvy">Barvy</a><a href="#pismo">Písmo</a><a href="#rozvrzeni">Rozvržení</a><a href="#komponenty">Komponenty</a><a href="#stranky">Stránky</a><a href="#soubory">Soubory</a></nav></div></header>
+
+<main id="obsah">
+<section class="page-hero wrap"><p class="eyebrow">Grafický manuál webu · v2.0 · 27. 9. 2026</p><h1>Jak vypadá ethel.cz<span class="pulse-dot"><span class="sr-only">.</span></span></h1><p class="lead">Jediný zdroj pravdy pro vzhled webu ethel.cz a všech jeho podstránek včetně dokumentace. Každá hodnota tady odpovídá souborům v <code>/assets/</code>; když se liší, platí manuál a soubory se opraví.</p>
+<ul class="m-toc"><li><a href="#principy">Principy</a></li><li><a href="#logo">Logo a tečka</a></li><li><a href="#barvy">Barvy</a></li><li><a href="#pismo">Písmo</a></li><li><a href="#rozvrzeni">Rozvržení a rytmus</a></li><li><a href="#komponenty">Komponenty</a></li><li><a href="#okno">Okno Ethel</a></li><li><a href="#stranky">Stránky</a></li><li><a href="#pohyb">Pohyb a přístupnost</a></li><li><a href="#texty">Texty</a></li><li><a href="#soubory">Soubory a implementace</a></li></ul></section>
+
+<section id="principy" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">01 · Principy</p><h2>Klidný nástroj, který v Heliosu žije.</h2><p>Web vypadá jako aplikace, kterou prodává: světlý, věcný, bez efektů navíc. Pět pravidel, ze kterých plyne všechno ostatní.</p></div>
+<div class="cards cards-2">
+<article class="card"><h3>Světlý základ, jeden tmavý blok</h3><p>Pozadí se střídá světle šedá a bílá. Tmavý inkoust nese na celém webu jediný blok (bezpečnost) a patička. Víc tmavých ploch se nepřidává.</p></article>
+<article class="card"><h3>Modrá vede, terakota ukazuje</h3><p>Modrá značky je na všem, na co se kliká: odkazy, tlačítka, ikony, tečka v logu. Terakota jen ukazuje prstem: ručně psané poznámky, čárka před štítkem sekce, vybraný příklad, čísla kroků. Nikdy není plocha ani tlačítko.</p></article>
+<article class="card"><h3>Jedna karta, jedno písmo</h3><p>Na celém webu existuje jediný typ karty, který se přizpůsobí pozadí. Jediné písmo je Segoe UI, tedy písmo Windows a Heliosu. Ručně psané poznámky mají písmo Caveat a nic jiného se v něm nesází.</p></article>
+<article class="card"><h3>Sekce má pevný tvar</h3><p>Štítek, nadpis, nejvýš dvě věty úvodu, jeden obsahový celek a nejvýš jeden odkaz „… →". Když se do toho sekce nevejde, jsou to dvě sekce.</p></article>
+</div>
+<p class="m-note"><strong>Vztah k rodinnému manuálu.</strong> Rodinný brand systém (jakubsevela.cz/brand, dark-first, Lora/DM Sans, azurová #56a8e8) pro ethel.cz od v2.0 neplatí; wordmark Space Grotesk a přechozí manuály Ethel v1.4/v1.5 jsou překonané. S ostatními weby Ethel sdílí tón a odkazy v patičce, ne barvy a písmo.</p></div></section>
+
+<section id="logo" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">02 · Logo a tečka</p><h2>Wordmark „ethel" s modrou tečkou.</h2><p>Logo je jen SVG. Nikdy se nesází jako text, nepřebarvuje a nedeformuje. Tečka je jediný barevný prvek a jediný, který se hýbe.</p></div>
+<div class="m-grid">
+<div><div class="m-logo"><img src="/nahled-5/assets/logos/ethel-light.svg" alt="ethel, světlá varianta"></div><p class="m-note"><span class="m-file">logos/ethel-light.svg</span><br>Statická varianta pro světlé pozadí. Lišta okna Ethel, náhledy, tisk.</p></div>
+<div><div class="m-logo"><img src="/nahled-5/assets/logos/ethel-light-animated.svg" alt="ethel, světlá varianta s pulzující tečkou"></div><p class="m-note"><span class="m-file">logos/ethel-light-animated.svg</span><br>Hlavička webu. Tečka pulzuje.</p></div>
+<div><div class="m-logo dark"><img src="/nahled-5/assets/logos/ethel-on-dark-animated.svg" alt="ethel, varianta na tmavé pozadí"></div><p class="m-note"><span class="m-file">logos/ethel-on-dark-animated.svg</span><br>Patička a tmavý blok. Písmo #EDF3F6, tečka #6FA8D0 v klidu.</p></div>
+<div><div class="m-logo icon"><img src="/nahled-5/assets/logos/ethel-icon-light.svg" alt="ikona e s tečkou"></div><p class="m-note"><span class="m-file">logos/ethel-icon-light.svg</span><br>Čtvercové formáty: favicon, ikona aplikace, avatar. Modrá dlaždice, bílé „e" a tečka.</p></div>
+</div>
+<table class="m-spec" style="margin-top:28px"><thead><tr><th>Kde</th><th>Šířka</th><th>Soubor</th></tr></thead><tbody>
+<tr><td>Hlavička</td><td>105 px (i na mobilu)</td><td>ethel-light-animated.svg</td></tr>
+<tr><td>Lišta okna Ethel</td><td>62 px</td><td>ethel-light.svg</td></tr>
+<tr><td>Patička</td><td>150 px, na mobilu 130 px</td><td>ethel-on-dark-animated.svg</td></tr>
+<tr><td>Ochranná zóna</td><td colspan="2">Kolem loga volný prostor aspoň o výšce písmene „e". Nejmenší velikost 62 px.</td></tr>
+</tbody></table>
+<h3 style="margin-top:36px">Pulzující tečka</h3>
+<p class="m-note" style="margin-top:8px">Tečka v logu a na konci nadpisů sekcí na úvodní stránce dýchá ve smyčce 4,8 s: zhasnutá modrá → rozsvícená #348FEA → zhasnutá → rozsvícená terakota #E66E4D → zhasnutá. Stejné klíčové snímky jsou v SVG i v CSS (<code>@keyframes dot-pulse</code>). Při <code>prefers-reduced-motion</code> stojí.</p>
+<div class="m-demo on-white"><h2 style="font-size:32px">Nadpis sekce na úvodní stránce<span class="pulse-dot"><span class="sr-only">.</span></span></h2><p class="m-note">Nadpisy H2 na úvodní stránce končí tečkou <code>.pulse-dot</code> (uvnitř <code>span.sr-only</code> s tečkou pro čtečky). Tečka má průměr 0,17 em a mezeru 0,12 em od posledního písmene, stejný poměr jako v logu. Nadpisy na podstránkách končí obyčejnou tečkou, H1 tečku nemá nikdy.</p></div>
+<ul class="m-dont"><li>Nesázet „ethel." jako text, ani ve Space Grotesk. Vždy SVG.</li><li>Nepřebarvovat tečku podle pozadí ani podle sekce.</li><li>Nedávat logo na modrou nebo terakotovou plochu.</li><li>Nepoužívat víc než jednu pulzující tečku v zorném poli (v hlavičce je vždy jedna, v nadpisu sekce jedna).</li></ul>
+</div></section>
+
+<section id="barvy" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">03 · Barvy</p><h2>Čtyři plochy, dva textové odstíny, modrá a terakota.</h2><p>Všechny hodnoty jsou v <code>tokens.css</code>. Do komponent se nikdy nepíše hex, jen proměnná. Kontrasty jsou změřené proti pozadí, na kterém se barva používá.</p></div>
+<h3>Plochy a text</h3>
+<ul class="m-swatches" style="margin-top:14px">
+<li class="m-swatch"><i style="background:#F3F6F7"></i><div><strong>page</strong><code>#F3F6F7</code><span>pozadí stránky, hero, hlavička</span></div></li>
+<li class="m-swatch"><i style="background:#FFFFFF;border-bottom:1px solid var(--border)"></i><div><strong>surface</strong><code>#FFFFFF</code><span>bílé bloky, karty, okno</span></div></li>
+<li class="m-swatch"><i style="background:#EAF0F3"></i><div><strong>surface-alt</strong><code>#EAF0F3</code><span>šedé bloky, lišta okna, grafy</span></div></li>
+<li class="m-swatch"><i style="background:#CDD9DF"></i><div><strong>border</strong><code>#CDD9DF</code><span>všechny linky a rámečky</span></div></li>
+<li class="m-swatch"><i style="background:#172B38"></i><div><strong>text / ink</strong><code>#172B38</code><span>nadpisy, text, tmavé plochy · 13,4 : 1</span></div></li>
+<li class="m-swatch"><i style="background:#526774"></i><div><strong>text-muted</strong><code>#526774</code><span>popisky, úvody · 5,1 až 5,9 : 1</span></div></li>
+</ul>
+<h3 style="margin-top:32px">Značka a akcent</h3>
+<ul class="m-swatches" style="margin-top:14px">
+<li class="m-swatch"><i style="background:#326C92"></i><div><strong>brand</strong><code>#326C92</code><span>odkazy, tlačítka, ikony, tečka · 5,7 : 1 na bílé</span></div></li>
+<li class="m-swatch"><i style="background:#E0ECF3"></i><div><strong>brand-tint</strong><code>#E0ECF3</code><span>bubliny, chipy, dlaždice ikon, CTA pás</span></div></li>
+<li class="m-swatch"><i style="background:#B64722"></i><div><strong>accent</strong><code>#B64722</code><span>ruční poznámky, štítky, ✓ · 5,4 : 1</span></div></li>
+<li class="m-swatch"><i style="background:#E66E4D"></i><div><strong>accent-line</strong><code>#E66E4D</code><span>čárka eyebrow, rámeček, tečka v animaci</span></div></li>
+<li class="m-swatch"><i style="background:#FBEDE7"></i><div><strong>accent-tint</strong><code>#FBEDE7</code><span>podklad štítků a čísel kroků</span></div></li>
+<li class="m-swatch"><i style="background:#348FEA"></i><div><strong>pulse-blue</strong><code>#348FEA</code><span>jen rozsvícená tečka, nikde jinde</span></div></li>
+</ul>
+<h3 style="margin-top:32px">Tmavá plocha</h3>
+<ul class="m-swatches" style="margin-top:14px">
+<li class="m-swatch"><i style="background:#172B38"></i><div><strong>ink</strong><code>#172B38</code><span>blok Bezpečnost, patička</span></div></li>
+<li class="m-swatch"><i style="background:#223E50"></i><div><strong>ink-surface</strong><code>#223E50</code><span>karta na tmavé ploše</span></div></li>
+<li class="m-swatch"><i style="background:#3F5D70"></i><div><strong>ink-border</strong><code>#3F5D70</code><span>rámeček karty</span></div></li>
+<li class="m-swatch"><i style="background:#2E4C60"></i><div><strong>ink-icon</strong><code>#2E4C60</code><span>dlaždice ikony</span></div></li>
+<li class="m-swatch"><i style="background:#EDF3F6"></i><div><strong>ink-text</strong><code>#EDF3F6</code><span>nadpisy, logo · 13 : 1</span></div></li>
+<li class="m-swatch"><i style="background:#D5E0E7"></i><div><strong>ink-body</strong><code>#D5E0E7</code><span>text karet · 8,4 : 1</span></div></li>
+<li class="m-swatch"><i style="background:#A8BAC6"></i><div><strong>ink-muted</strong><code>#A8BAC6</code><span>úvod, drobný text · 7,3 : 1</span></div></li>
+<li class="m-swatch"><i style="background:#91BEDC"></i><div><strong>ink-link</strong><code>#91BEDC</code><span>odkazy, ikony, eyebrow · 7,4 : 1</span></div></li>
+</ul>
+<h3 style="margin-top:32px">Stavy a data</h3>
+<ul class="m-swatches" style="margin-top:14px">
+<li class="m-swatch"><i style="background:#AE3F45"></i><div><strong>danger</strong><code>#AE3F45</code><span>chyby formuláře</span></div></li>
+<li class="m-swatch"><i style="background:#346B48"></i><div><strong>success</strong><code>#346B48</code><span>rezerva, zatím bez použití</span></div></li>
+<li class="m-swatch"><i style="background:#94621D"></i><div><strong>warning</strong><code>#94621D</code><span>rezerva, zatím bez použití</span></div></li>
+<li class="m-swatch"><i style="background:#BFD6E6"></i><div><strong>chart-muted</strong><code>#BFD6E6</code><span>sloupce grafu mimo aktuální období</span></div></li>
+<li class="m-swatch"><i style="background:#1F7A4C"></i><div><strong>file-xlsx</strong><code>#1F7A4C</code><span>štítek souboru Excel</span></div></li>
+<li class="m-swatch"><i style="background:#B5D385"></i><div><strong>sister-feedco</strong><code>#B5D385</code><span>tečka feedco. v patičce</span></div></li>
+<li class="m-swatch"><i style="background:#E4B777"></i><div><strong>sister-jakub</strong><code>#E4B777</code><span>tečka jakub.ševela v patičce</span></div></li>
+</ul>
+<ul class="m-dont"><li>Žádná nová barva bez zápisu do <code>tokens.css</code> a do tohoto manuálu.</li><li>Modrá nikdy jako pozadí sekce. Jediné plné modré plochy jsou tlačítka, ikona a přepínače.</li><li>Terakota nikdy jako tlačítko ani odkaz.</li><li><code>text-muted</code> nikdy pod 12 px; pod 14 px jen krátké popisky.</li></ul>
+</div></section>
+
+<section id="pismo" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">04 · Písmo</p><h2>Segoe UI, jeden řez pro nadpisy, těsný proklad.</h2><p>Segoe UI je písmo Windows a Heliosu, takže web působí jako součást nástroje. Nic se nestahuje; mimo Windows padá na systémové písmo platformy. Jediné stažené písmo je Caveat pro ručně psané poznámky.</p></div>
+<table class="m-spec"><thead><tr><th>Role</th><th>Stack</th><th>Kde</th></tr></thead><tbody>
+<tr><td>Text i nadpisy</td><td><code>"Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif</code></td><td>všechno kromě níže uvedeného</td></tr>
+<tr><td>Mono</td><td><code>Consolas, "Cascadia Mono", ui-monospace, Menlo, monospace</code></td><td>vzorce v odpovědích, čísla kroků, kód v dokumentaci</td></tr>
+<tr><td>Ruční písmo</td><td><code>"Caveat" 600, "Segoe Print", cursive</code> (woff2 v <code>assets/fonts/</code>)</td><td>jen <code>.demo-note</code></td></tr>
+</tbody></table>
+<h3 style="margin-top:36px">Velikosti</h3>
+<div class="m-type" style="margin-top:14px">
+<div><code>.hero h1<br>clamp(44px, 5vw, 64px) / 1.08<br>650 · −.025em</code><div class="hero" style="display:block;padding:0"><h1 style="max-width:none">Zeptejte se Heliosu česky.<br><span>Odpoví z vašich dat.</span></h1></div></div>
+<div><code>.page-hero h1<br>clamp(40px, 5vw, 60px) / 1.08<br>650 · −.03em</code><div class="page-hero" style="padding:0"><h1>Kam tečou vaše data, říkáme přesně.</h1></div></div>
+<div><code>.block-head h2<br>clamp(30px, 3.2vw, 42px) / 1.15<br>650 · −.025em</code><div class="block-head" style="margin:0"><h2>Víte přesně, co Ethel vidí a co smí.</h2></div></div>
+<div><code>.prose h2 (dokumentace)<br>clamp(26px, 2.6vw, 32px) / 1.2</code><div class="prose"><h2 style="margin:0">Instalace na server</h2></div></div>
+<div><code>.card h3<br>19px / 1.35 · 650 · −.01em</code><article class="card" style="padding:0;border:0;background:none"><h3>Zapisuje až po potvrzení</h3></article></div>
+<div><code>.eyebrow<br>11px · 700 · .12em · verzálky</code><p class="eyebrow" style="margin:0">Bezpečnost</p></div>
+<div><code>.lead<br>19px / 1.75 (hero 18px)</code><p class="lead" style="margin:0;max-width:none">Ethel provádí úkoly podle připravených scénářů a do Heliosu zapíše až po kliknutí na Potvrdit.</p></div>
+<div><code>body<br>16px / 1.65 · 400</code><p style="margin:0">Na čísla z fakturace, skladů, objednávek nebo výroby se zeptáte vlastními slovy. Na další otázky navazuje.</p></div>
+<div><code>.card p, .faq-list p<br>15px / 1.7 · text-muted</code><p style="margin:0;font-size:15px;line-height:1.7;color:var(--text-muted)">Popíše sestavu, sloupec nebo pojem jako DUZP. Pod každou odpovědí ukáže, jak k výsledku došla.</p></div>
+<div><code>drobný text<br>12 až 14px · text-muted</code><p style="margin:0;font-size:13px;color:var(--text-muted)">Ceny bez DPH. Instalace zabere 10 až 20 minut.</p></div>
+<div><code>.demo-note.note-up<br>Caveat 600 · 29 / 24px · −2°</code><aside class="demo-note note-up" style="margin:0"><strong>Ptejte se vlastními slovy.</strong><span>Stejně jako kolegy.</span></aside></div>
+<div><code>.demo-note.note-down</code><aside class="demo-note note-down" style="margin:0 0 24px"><strong>Klikejte přímo v ukázce.</strong><span>Tabulka, graf, nebo Excel?</span></aside></div>
+</div>
+<ul class="m-dont" style="margin-top:24px"><li>Nadpisy mají jediný řez 650. Žádný nadpis v 400 ani 700.</li><li>Nadpis H1 se v hero láme ručně (<code>&lt;br&gt;</code>) a druhý řádek je v modré (<code>span</code>). Na podstránkách je H1 celý inkoustový.</li><li>Kurzíva se nepoužívá. Důraz je <code>strong</code> v barvě textu.</li><li>Verzálky jen v eyebrow, rolích příkladů a drobných štítcích.</li></ul>
+</div></section>
+
+<section id="rozvrzeni" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">05 · Rozvržení a rytmus</p><h2>Jeden kontejner, střídání ploch, pevný tvar sekce.</h2></div>
+<div class="split">
+<div><h3>Rozměry</h3><table class="m-spec" style="margin-top:12px"><tbody>
+<tr><td>Kontejner</td><td><code>.wrap</code> = min(1120 px, 100 % − 2 × 32 px); pod 850 px okraj 20 px</td></tr>
+<tr><td>Rytmus bloků</td><td><code>.block</code> 84 px nahoře i dole; pod 850 px 60 px</td></tr>
+<tr><td>Hlavička</td><td>82 px, pod 850 px 76 px, sticky s rozostřením</td></tr>
+<tr><td>Mezery v mřížce</td><td>karty 20 px; sloupce sekcí 28 až 48 px</td></tr>
+<tr><td>Rádiusy</td><td>tlačítka a pole 7 px · karty a okno 14 px · bubliny 10 px · chipy 999 px</td></tr>
+<tr><td>Stíny</td><td>okno 0 18 48 / 5 % · vybraný příklad 0 10 26 / 8 % · zvýrazněný tarif 0 18 48 / 8 % · cookies 12 %</td></tr>
+</tbody></table></div>
+<div><h3>Body zlomu</h3><div class="m-bp" style="margin-top:12px">
+<b>≥ 1500 px</b><span>hero má 100 px nahoře i dole</span>
+<b>≤ 1200 px</b><span>menší mezery v navigaci</span>
+<b>≤ 1150 px</b><span>mizí CTA v hlavičce</span>
+<b>≤ 1100 px</b><span>4 karty → 2; akce v hero pod sebou</span>
+<b>≤ 1000 px</b><span>formulář na jeden sloupec</span>
+<b>≤ 850 px</b><span>hero, sekce a dokumentace na jeden sloupec; menu za tlačítkem; příklady v pásu s posuvem</span>
+<b>≤ 600 px</b><span>2 karty → 1; okno bez postranní lišty; menší poznámka a patička</span>
+</div></div>
+</div>
+<h3 style="margin-top:36px">Anatomie sekce</h3>
+<p class="m-note" style="margin-top:8px">Každá sekce je <code>section.block</code> s pozadím <code>.block-white</code> nebo <code>.block-grey</code>, které se střídají. Tmavý <code>.block-dark</code> je na webu jeden. Uvnitř <code>.wrap</code> → <code>.block-head</code> (eyebrow, H2, nejvýš dvě věty v <code>p</code>) → jeden obsahový celek → nejvýš jeden <code>a.more</code>.</p>
+<pre class="m-code">&lt;section id="…" class="block block-grey"&gt;&lt;div class="wrap"&gt;
+  &lt;div class="block-head"&gt;
+    &lt;p class="eyebrow"&gt;Štítek&lt;/p&gt;
+    &lt;h2&gt;Nadpis sekce&lt;span class="pulse-dot"&gt;&lt;span class="sr-only"&gt;.&lt;/span&gt;&lt;/span&gt;&lt;/h2&gt;
+    &lt;p&gt;Nejvýš dvě věty.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="cards cards-3"&gt;…&lt;/div&gt;
+  &lt;a class="more" href="/nahled-5/funkce/"&gt;Všechno, co Ethel umí →&lt;/a&gt;
+&lt;/div&gt;&lt;/section&gt;</pre>
+<p class="m-note"><code>.block-head-row</code> položí vedle nadpisu ovládací prvek (přepínač období v ceníku). Sekce s formulářem nebo autorem má místo <code>.block-head</code> uvnitř dvousloupcovou mřížku (<code>.contact-grid</code>, <code>.author</code>).</p>
+</div></section>
+
+<section id="komponenty" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">06 · Komponenty</p><h2>Co je v krabici.</h2><p>Každý prvek níže je živý, ze stejných souborů jako web. Když něco na webu není tady, na web to nepatří.</p></div>
+
+<h3>Tlačítka</h3>
+<div class="m-demo"><div class="m-row"><a class="button button-solid" href="#">Vyzkoušet 14 dní zdarma</a><a class="button" href="#">Domluvit nasazení</a><a class="button button-solid small" href="#">Vyzkoušet zdarma</a><a class="button small" href="#">Odmítnout</a></div></div>
+<p class="m-note">Výchozí <code>.button</code> je obrysové: modrý text, rámeček 1,5 px v 36 % modré, hover podklad brand-tint a posun o 1 px nahoru. Plné <code>.button-solid</code> je jen hlavní CTA: v hlavičce, v hero, odeslání formuláře, tarif Standard, Přijmout cookies. Na stránce je vždy nejvýš jedno plné tlačítko v zorném poli. <code>.small</code> pro hlavičku a cookies.</p>
+
+<h3 style="margin-top:36px">Odkazy</h3>
+<div class="m-demo"><div class="m-row"><a class="text-link" href="#">Co Ethel umí ↓</a><a class="more" href="#" style="margin:0">Všechno, co Ethel umí →</a><span>Odkaz <a href="#" style="color:var(--brand)">v běžném textu</a> je modrý a podtržený.</span></div></div>
+<p class="m-note"><code>.text-link</code> vedle hlavního tlačítka v hero (šipka dolů, spodní linka). <code>.more</code> na konci sekce (650, šipka vpravo, podtržení na hover). Odkaz v běžném textu je modrý s výchozím podtržením; v patičce světlý bez podtržení.</p>
+
+<h3 style="margin-top:36px">Eyebrow a štítky</h3>
+<div class="m-demo"><p class="eyebrow" style="margin:0">Co Ethel umí</p><div class="m-row"><span class="tier">Modul Akce</span><span class="tier tier-std">Standard</span><span class="plan-tag">1 databáze · 5 uživatelů</span><span class="usecase-role">Vedení a obchod</span><ul class="chips" style="margin:0"><li>Faktury vydané</li><li>Sklad</li></ul></div></div>
+<p class="m-note"><code>.eyebrow</code> vždy s terakotovou čárkou před textem. <code>.tier</code> modrý štítek (varianta <code>.tier-std</code> terakotová pro Standard), <code>.plan-tag</code> pilulka u tarifu, <code>.usecase-role</code> role nad otázkou, <code>.chips</code> výčet modulů.</p>
+
+<h3 style="margin-top:36px">Karty</h3>
+<div class="m-demo on-white"><div class="cards cards-3">
+<article class="card card-topline"><h3><span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/></svg></span>Zjistí</h3><p>Karta s ikonou a modrou horní linkou (<code>.card-topline</code>, sekce Co umí).</p><ul class="ask-list" aria-label="Příklady"><li>Kolik máme faktur po splatnosti?</li><li>Top 10 položek za květen</li></ul></article>
+<article class="card card-featured"><h3>Zvýrazněná</h3><p><code>.card-featured</code>: terakotový rámeček 1,5 px. Tarif Enterprise, ukázková karta.</p><p class="card-sub">Doplněk v terakotě</p><p class="card-fine">Drobný text <strong>se zvýrazněním</strong>.</p></article>
+<article class="card card-accent"><h3>S linkou vlevo</h3><p><code>.card-accent</code>: terakotová linka 3 px vlevo. Pro varování a výjimky („Co když se něco pokazí").</p><div class="card-quote">Bublina citace uvnitř karty, <code>.card-quote</code>.</div></article>
+</div></div>
+<div class="m-demo on-dark"><div class="cards cards-2"><article class="card"><h3><span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>Na tmavé ploše</h3><p>Stejná karta uvnitř <code>.block-dark</code>: tmavší podklad, ikona nad nadpisem, text 16 px.</p></article><article class="card"><h3><span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16.5 9"/></svg></span>Bez dalších variant</h3><p>Na tmavé ploše se nepoužívá featured ani accent.</p></article></div></div>
+<div class="m-demo"><div class="cards card-steps-list"><article class="card"><span class="card-num">1</span><div><h3>Zadáte úkol</h3><p>Seznam kroků: <code>.cards.card-steps-list</code>, číslo v terakotovém kolečku (<code>.card-num</code>).</p></div></article><article class="card"><span class="card-num">2</span><div><h3>Ethel dohledá a zkontroluje</h3><p>Karta je v řádku, číslo vlevo.</p></div></article></div></div>
+<p class="m-note">Mřížky <code>.cards-2 / -3 / -4</code>. <code>.cards-sub .cards-sub-3</code> zarovná řádky karet napříč mřížkou (nadpis, text, příklady na stejné výšce). Na šedém bloku karta nemá rámeček, na bílém má. Karta má <code>padding</code> 24 px, tarify 30 px. Tlačítko v kartě sedí dole (<code>margin-top:auto</code>).</p>
+
+<h3 style="margin-top:36px">Ceník</h3>
+<div class="m-demo on-white"><div class="block-head block-head-row" style="margin-bottom:18px"><div><p class="eyebrow">Cena</p><h2 style="font-size:28px">Pevná měsíční cena.</h2></div><div class="price-toggle" role="group" aria-label="Období platby"><button type="button" aria-pressed="true">Měsíčně</button><button type="button" aria-pressed="false">Ročně <span>−17 %</span></button></div></div>
+<div class="cards cards-2 plans"><article class="card card-plan"><div class="plan-top"><h3>Standard</h3><span class="plan-tag">1 databáze · 5 uživatelů</span></div><p class="card-price">1 490 Kč <span class="per">/ měsíc</span></p><p class="card-fine">měsíční platba</p><ul class="ticks"><li>Dotazy nad daty, vysvětlování a nápověda</li><li>Další uživatel 249 Kč / měsíc</li></ul><label class="addon"><input type="checkbox"><span><strong>Přidat modul Akce</strong> <span class="addon-price">+990 Kč / měsíc</span><small>Faktura z objednávky, realizace faktury a další Akce z katalogu.</small></span></label><a href="#" class="button button-solid">Vyzkoušet zdarma</a></article><article class="card card-plan card-featured"><div class="plan-top"><h3>Enterprise</h3><span class="plan-tag">Pro více databází</span></div><p class="card-price">4 990 Kč <span class="per">/ měsíc</span></p><p class="card-fine">měsíční platba</p><ul class="ticks"><li>Neomezeně databází a uživatelů</li><li>Celý modul Akce v ceně</li></ul><a href="#" class="button">Domluvit nasazení</a></article></div></div>
+<p class="m-note">Cena 40 px / 600, na stránce Akce v kartách dostupnosti 26 px (<code>.card-price.small</code>). Zaškrtnutí v seznamu je terakotové. Doplněk <code>.addon</code> je čárkovaná modrá, po zaškrtnutí plná linka na bílé.</p>
+
+<h3 style="margin-top:36px">Tabulky, FAQ, CTA pás</h3>
+<div class="m-demo on-white"><div class="data-table-wrap" style="margin:0"><table class="data-table"><thead><tr><th>Co</th><th>Kdy</th><th>Proč</th></tr></thead><tbody><tr><td>Otázka a kontext</td><td>při každém dotazu</td><td>bez ní model neví, na co se ptáte</td></tr><tr><td>Vygenerované SQL</td><td>při dotazu na data</td><td>vrací se k vám ke spuštění</td></tr></tbody></table></div></div>
+<div class="m-demo on-white"><div class="faq-list"><details open><summary>Musím mít Helios v cloudu?</summary><p>Ne. Ethel běží u vás vedle Heliosu a k databázi přistupuje lokálně.</p></details><details><summary>Kolik uživatelů může Ethel používat?</summary><p>V tarifu Standard pět, další za příplatek.</p></details></div></div>
+<div class="cta-band" style="border-radius:var(--radius-card);margin-top:18px"><div class="wrap cta-band-inner"><div><h2>Vyzkoušejte Ethel na vlastních datech.</h2><p>14 dní zdarma, aktivační klíč do 24 hodin.</p></div><a class="button button-solid" href="#">Vyzkoušet 14 dní zdarma</a></div></div>
+<p class="m-note"><code>.data-table</code> se pod 600 px rozpadne na bloky s popisky „Kdy:" a „Proč:". FAQ je <code>details/summary</code> s linkou pod položkou; skupiny otázek na stránce FAQ jsou <code>.qa-group</code> (nadpis vlevo, otázky vpravo). <code>.cta-band</code> zavírá každou podstránku; na úvodní stránce není, tam je formulář.</p>
+
+<h3 style="margin-top:36px">Formulář</h3>
+<div class="m-demo on-white"><div class="card contact-form-panel" style="max-width:560px"><form class="contact-form" novalidate onsubmit="return false"><div class="form-error-summary" role="alert">Zkontrolujte prosím označená pole.</div><div class="form-row"><div class="form-field"><label for="m-name">Jméno a příjmení <span aria-hidden="true">*</span></label><input id="m-name" type="text" placeholder="Jan Novák" aria-invalid="true"><div class="field-error">Vyplňte prosím jméno.</div></div><div class="form-field"><label for="m-mail">Pracovní e-mail <span aria-hidden="true">*</span></label><input id="m-mail" type="email" placeholder="jan@firma.cz"></div></div><div class="form-field"><label for="m-msg">Na co se chcete zeptat jako první? <span class="optional">nepovinné</span></label><textarea id="m-msg" rows="2" placeholder="Například: Kolik máme faktur po splatnosti?"></textarea></div><button class="button button-solid form-submit" type="submit"><span>Chci vyzkoušet Ethel</span></button><p class="form-note">Máte otázku? <a href="/nahled-5/faq/">Časté otázky →</a></p></form></div></div>
+<p class="m-note">Panel je karta (<code>.card.contact-form-panel</code>). Pole mají podklad <code>page</code>, na fokus bílý s modrým obrysem. Povinná pole označuje terakotová hvězdička, nepovinná slovo „nepovinné". Chyby jsou v <code>danger</code>: souhrn nahoře, hláška pod polem. Odeslání je jediné plné tlačítko na celou šířku.</p>
+
+<h3 style="margin-top:36px">Hlavička, patička, cookies</h3>
+<p class="m-note" style="margin-top:8px">Hlavička: logo 105 px, navigace 15 px / 550 v <code>text-muted</code>, aktivní stránka modře (<code>aria-current="page"</code>), vpravo plné malé CTA (mizí pod 1150 px). Pod 850 px tlačítko Menu a navigace pod ním. Patička je tmavá: logo na tmavé, jedna věta, kontakty, odkazy na sesterské weby s barevnou tečkou, řádek odkazů, právní řádek 12 px a disclaimer o Asseco Solutions. Cookie lišta plave dole, bílá karta s 12px rádiusem, Přijmout plné, Odmítnout obrysové.</p>
+</div></section>
+
+<section id="okno" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">07 · Okno Ethel</p><h2>Ukázka aplikace je vždy stejné okno.</h2><p>Hero i sekce V praxi používají tentýž prvek <code>.hero-product</code>: lišta s logem a kontextem, postranní lišta, chat. Data v ukázkách jsou smyšlená a jsou tak označená.</p></div>
+<div class="split">
+<div class="hero-product case-window"><div class="window-bar"><span class="window-brand"><img src="/nahled-5/assets/logos/ethel-light.svg" alt="Ethel"></span><span>Faktury vydané / přehled</span><span class="window-close" aria-hidden="true">_ &nbsp; □</span></div><div class="product-inner"><div class="app-rail" aria-hidden="true"><span class="rail-active">☰</span><span>▦</span><span>⚙</span></div><div class="chat" style="min-height:0"><div class="chat-meta">Kontext z Heliosu <span>Ukázková data</span></div><p class="user-message">Které faktury jsou víc než 30 dní po splatnosti?</p><p class="status-line">Ethel hledá data<span class="dots" aria-hidden="true"></span></p><div class="demo-answer" style="margin-top:14px"><p>Celkem <strong>12 faktur za 328 500 Kč.</strong></p><div class="answer-tools"><div class="view-toggle"><button type="button" aria-pressed="true">Tabulka</button><button type="button" aria-pressed="false">Graf</button></div><div class="export-buttons"><button type="button">Excel</button><button type="button">PDF</button></div></div><table><thead><tr><th>Odběratel</th><th class="num">Po splatnosti</th></tr></thead><tbody><tr><td>Alfa trade</td><td class="num">184 200 Kč</td></tr><tr><td>Delta servis</td><td class="num">96 500 Kč</td></tr></tbody></table><div class="saved-file"><span class="file-ext file-xlsx">XLSX</span><span><strong>pohledavky-po-splatnosti.xlsx</strong><small>uloženo do Stažené soubory</small></span></div></div></div></div></div>
+<div><table class="m-spec"><tbody>
+<tr><td>Lišta</td><td><code>.window-bar</code>: logo 62 px, název přehledu, ovládací znaky (mizí pod 850 px)</td></tr>
+<tr><td>Postranní lišta</td><td><code>.app-rail</code> 46 px, aktivní položka modře; pod 600 px mizí</td></tr>
+<tr><td>Otázka</td><td><code>.user-message</code>: bublina brand-tint, 14 px, zaražený pravý dolní roh, odsazená zleva 17 px</td></tr>
+<tr><td>Hledání</td><td><code>.status-line</code> s pulzující modrou tečkou a třemi tečkami</td></tr>
+<tr><td>Odpověď</td><td><code>.demo-answer</code> 14 px / 1.75; tabulka 12 px, čísla vpravo tabulárně</td></tr>
+<tr><td>Grafy</td><td><code>.bar-chart</code> (sloupce, aktuální modře, ostatní chart-muted) a <code>.hbar-chart</code> (vodorovné pruhy); rostou animací</td></tr>
+<tr><td>Nástroje</td><td><code>.view-toggle</code> tabulka/graf, <code>.export-buttons</code>, <code>.saved-file</code> se štítkem XLSX/PDF</td></tr>
+<tr><td>Nápověda</td><td><code>.help-steps</code> číslované kroky, <code>.answer-source</code> zdroj</td></tr>
+<tr><td>Vysvětlení</td><td><code>.formula</code> vzorec v mono, <code>.answer-note</code> poznámka</td></tr>
+<tr><td>Kontrolní karta</td><td><code>.check-card</code>: pole s původem (ARES / vy / výchozí), Potvrdit plné, Zrušit obrysové</td></tr>
+<tr><td>Přehrávání</td><td>hero: <code>.chat-log.is-playing</code> ve smyčce (web.js); V praxi: klik na otázku vlevo přepíše okno</td></tr>
+</tbody></table>
+<aside class="demo-note note-up"><strong>Klikejte přímo v ukázce.</strong><span>Tabulka, graf, nebo Excel?</span></aside>
+<p class="m-note">Ručně psaná poznámka <code>.demo-note</code> stojí vpravo pod oknem, natočená o −2°. Ručně kreslená šipka ukazuje, k čemu se poznámka vztahuje: <code>.note-up</code> (šipka vlevo, míří nahoru na okno) a <code>.note-down</code> (šipka vpravo dole, míří na prvek pod poznámkou). Bez třídy je poznámka bez šipky. Na webu jsou nejvýš dvě (hero a V praxi, obě <code>.note-up</code>). Jinde se nepoužívá.</p></div>
+</div></div></section>
+
+<section id="stranky" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">08 · Stránky</p><h2>Šest veřejných stránek, dokumentace a stažení.</h2><p>Každá stránka má stejnou hlavičku a patičku. Liší se jen tím, co je mezi nimi.</p></div>
+<table class="m-spec"><thead><tr><th>Stránka</th><th>Skladba</th></tr></thead><tbody>
+<tr><td>/ úvod</td><td>hero (text + přehrávané okno + poznámka) → Co umí (bílá, 4 karty topline) → Bezpečnost (tmavá, 4 karty) → V praxi (šedá, otázky + okno) → Cena (bílá, přepínač + 2 tarify) → Autor (šedá, fotka + text) → Vyzkoušet (bílá, text + formulář). H2 s pulzující tečkou.</td></tr>
+<tr><td>/funkce/</td><td>page-hero → sekce Kontext, Zjistí, Vysvětlí, Poradí, Zapíše, Práce s výsledkem, Pro koho (střídání bílá/šedá, karty) → CTA pás</td></tr>
+<tr><td>/akce/</td><td>page-hero → Jak Akce funguje (kroky + kontrolní karta) → Katalog (šedá, 6 karet se štítky) → Vlastní scénář → Dostupnost (4 karty s cenou small) → CTA pás</td></tr>
+<tr><td>/bezpecnost/</td><td>page-hero → pět očíslovaných otázek (eyebrow „01 · Cloud" …) v <code>.prose</code>, střídání pozadí → CTA pás</td></tr>
+<tr><td>/faq/</td><td>page-hero → skupiny <code>.qa-group</code> (O produktu, Používání, Akce, Bezpečnost a data, Nasazení a provoz, Trial a ceny) → CTA pás</td></tr>
+<tr><td>/docs/ a /docs/*</td><td>page-hero → <code>.block-white</code> s <code>.docs-grid</code>: vlevo <code>.docs-nav</code> (První kroky, Pro správce, Bezpečnost, FAQ, Co je nového, Ke stažení), vpravo <code>.prose</code> vygenerovaná z Markdownu → CTA pás. Rozcestník /docs/ má místo textu karty <code>.cards-2</code> (První kroky, Pro správce, Co je nového, Ke stažení).</td></tr>
+<tr><td>/docs/changelog/</td><td>stejná mřížka, každá verze je <code>h2</code> s datem v <code>.tier</code> a seznam změn</td></tr>
+<tr><td>/download/</td><td>page-hero s plným tlačítkem ke stažení → Co budete potřebovat (karty) → Jak proběhne instalace (<code>.card-steps-list</code>) → Když Windows soubor zastaví (<code>.card-accent</code>) → CTA pás</td></tr>
+</tbody></table>
+<h3 style="margin-top:36px">Kostra podstránky</h3>
+<pre class="m-code">&lt;section class="page-hero wrap"&gt;
+  &lt;p class="eyebrow"&gt;Akce&lt;/p&gt;
+  &lt;h1&gt;Rutinní úkoly v Heliosu předáte jednou větou.&lt;/h1&gt;
+  &lt;p class="lead"&gt;Jedna až dvě věty.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section class="block block-white"&gt;…&lt;/section&gt;
+&lt;section class="block block-grey"&gt;…&lt;/section&gt;
+&lt;section class="cta-band"&gt;&lt;div class="wrap cta-band-inner"&gt;
+  &lt;div&gt;&lt;h2&gt;Vyzkoušejte Ethel na vlastních datech.&lt;/h2&gt;&lt;p&gt;14 dní zdarma, aktivační klíč do 24 hodin.&lt;/p&gt;&lt;/div&gt;
+  &lt;a class="button button-solid" href="/nahled-5/#kontakt"&gt;Vyzkoušet 14 dní zdarma&lt;/a&gt;
+&lt;/div&gt;&lt;/section&gt;</pre>
+<p class="m-note">Hlavní navigace: Co umí · Akce · Bezpečnost · Cena (/#cena) · FAQ, vpravo Vyzkoušet zdarma (/#kontakt). Patička navíc: Nápověda, Ke stažení, Co je nového. Aktivní stránka má <code>aria-current="page"</code>.</p>
+</div></section>
+
+<section id="pohyb" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">09 · Pohyb a přístupnost</p><h2>Hýbe se jen to, co něco říká.</h2></div>
+<div class="split"><div><h3>Animace</h3><ul class="m-dont m-do" style="margin-top:12px"><li>Tečka v logu a v nadpisech: 4,8 s smyčka.</li><li>Přehrávání rozhovoru v hero: kroky 0,7 až 2,6 s, pauza 7 s, pak znovu.</li><li>Nová bublina nebo odpověď: 0,4 s vjezd zdola (<code>seq-in</code>).</li><li>Sloupce a pruhy grafu rostou 0,6 až 0,8 s.</li><li>Tlačítko na hover o 1 px nahoru, 0,15 s.</li><li>Při <code>prefers-reduced-motion</code> všechno stojí a hero ukáže rovnou výsledný stav.</li></ul></div>
+<div><h3>Přístupnost</h3><ul class="m-dont m-do" style="margin-top:12px"><li>Kontrast textu všude aspoň 4,7 : 1 (viz Barvy).</li><li>Fokus: 3 px modrý obrys s odstupem 5 px; ve formuláři 2 px.</li><li>Odkaz „Přejít k obsahu" jako první prvek stránky.</li><li>Ozdobné prvky mají <code>aria-hidden</code>, grafy <code>aria-label</code> s čísly, tečka v nadpisu skrytou textovou tečku.</li><li>Cílové plochy tlačítek aspoň 40 px na výšku; na mobilu pole formuláře 16 px, aby iOS nezoomoval.</li><li>Menu a příklady jsou tlačítka se stavem (<code>aria-expanded</code>, <code>aria-pressed</code>).</li></ul></div></div>
+</div></section>
+
+<section id="texty" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">10 · Texty</p><h2>Konkrétně, česky, bez vykřičníků.</h2></div>
+<div class="cards cards-3">
+<article class="card"><h3>Jména</h3><p>Helios Inuvio (nikdy iNuvio). Ethel je žena: „Ethel odpoví", „zeptáte se jí". Akce s velkým A, když jde o modul nebo katalogovou akci. Asseco Solutions v disclaimeru v patičce.</p></article>
+<article class="card"><h3>Tón</h3><p>Vykání, krátké věty, čísla místo přídavných jmen. Nadpisy jsou věty s tečkou, ne hesla. Žádné vykřičníky, žádné „revoluční", „chytrý", „jednoduše". Klávesová zkratka Ctrl+I se píše takhle.</p></article>
+<article class="card"><h3>Čísla a jednotky</h3><p>Tisíce mezerou (1 490 Kč), nezlomitelné mezery mezi číslem a jednotkou i za jednopísmennými předložkami. Ceny bez DPH, a říká se to. Data jen v ukázkách, vždy označená „Ukázková data".</p></article>
+</div></div></section>
+
+<section id="soubory" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">11 · Soubory a implementace</p><h2>Tři CSS soubory, dva skripty, čtyři loga.</h2><p>Pořadí načítání je pevné. Stránka bez formuláře <code>forms.css</code> nenačítá. Žádné inline styly kromě <code>--v</code> u sloupců grafu.</p></div>
+<table class="m-spec"><thead><tr><th>Soubor</th><th>Obsah</th></tr></thead><tbody>
+<tr><td>assets/tokens.css</td><td>všechny proměnné: barvy, písmo, rádiusy, rozměry, stíny. Jediné místo s hex hodnotami.</td></tr>
+<tr><td>assets/ethel.css</td><td>základ, typografie, hlavička, tlačítka, hero, okno Ethel, bloky a karty, ceník, podstránky, dokumentace, patička, cookies, body zlomu</td></tr>
+<tr><td>assets/forms.css</td><td>formulářová pole, chyby, odeslání; jen na stránkách s formulářem</td></tr>
+<tr><td>assets/web.js</td><td>menu, přehrávání hero, příklady V praxi, přepínač ceny, cookies a GA4; každý blok si ověří, že jeho prvky existují</td></tr>
+<tr><td>assets/forms.js</td><td>odeslání kontaktního formuláře (Supabase edge function web-lead), předvyplnění přes <code>data-prefill</code> a <code>?tema=</code></td></tr>
+<tr><td>assets/logos/</td><td>ethel-light.svg, ethel-light-animated.svg, ethel-on-dark-animated.svg, ethel-icon-light.svg</td></tr>
+<tr><td>assets/fonts/</td><td>caveat-latin-600-normal.woff2, caveat-latin-ext-600-normal.woff2</td></tr>
+<tr><td>brand/index.html</td><td>tento manuál; načítá stejné soubory, takže změna v CSS se tu projeví hned</td></tr>
+</tbody></table>
+<h3 style="margin-top:36px">Hlavička dokumentu</h3>
+<pre class="m-code">&lt;link rel="icon" href="/favicon.ico" sizes="32x32"&gt;
+&lt;link rel="icon" href="/favicon.svg" type="image/svg+xml"&gt;
+&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png"&gt;
+&lt;link rel="stylesheet" href="/nahled-5/assets/tokens.css"&gt;
+&lt;link rel="stylesheet" href="/nahled-5/assets/ethel.css"&gt;
+&lt;link rel="stylesheet" href="/nahled-5/assets/forms.css"&gt;   &lt;!-- jen se formulářem --&gt;
+…
+&lt;script src="/nahled-5/assets/web.js"&gt;&lt;/script&gt;
+&lt;script src="/nahled-5/assets/forms.js"&gt;&lt;/script&gt;      &lt;!-- jen se formulářem --&gt;</pre>
+<ul class="m-dont" style="margin-top:24px"><li>Žádný další CSS soubor, žádný <code>&lt;style&gt;</code> ve stránce, žádný <code>style=""</code> (výjimka <code>--v</code>).</li><li>Žádné <code>!important</code> mimo dvě varianty karty a dvě poznámky v odpovědi, které už v CSS jsou.</li><li>Žádné selektory podle <code>id</code> v CSS. Varianta prvku je vždy třída.</li><li>Nový prvek nejdřív sem do manuálu s ukázkou, pak na web.</li><li>Verze manuálu se zvedne při každé změně tokenů nebo přidání komponenty; datum v hlavičce.</li></ul>
+<p class="m-note" style="margin-top:28px"><strong>Historie.</strong> v2.0 (27. 9. 2026): nový světlý systém podle návrhu /nahled-4, šest vrstvených CSS souborů sloučeno do tokens + ethel + forms, doplněna dokumentace (docs-grid, prose), varianty <code>.card-topline</code> a <code>.card-price.small</code> místo selektorů podle id, plné tlačítko vždy přes <code>.button-solid</code>, jeden systémový font stack; tečka u nadpisů s mezerou podle loga; ručně psaná poznámka se šipkou nahoru nebo dolů. Předchozí manuály Ethel v1.4 a v1.5 (dark-first, azurová, Space Grotesk) tímto neplatí.</p>
+</div></section>
+</main>
+
+<footer class="site-footer"><div class="wrap"><div class="footer-top"><div><span class="footer-brand"><img src="/nahled-5/assets/logos/ethel-on-dark-animated.svg" alt="Ethel"></span><p>Grafický manuál webu ethel.cz · v2.0 · 27. 9. 2026</p></div><div class="related"><a href="https://feedco.cz/" target="_blank" rel="noopener"><strong>feedco<span class="feed-dot">.</span></strong><span>Propojení systémů ↗</span></a><a href="https://jakubsevela.cz/" target="_blank" rel="noopener"><strong>jakub<span class="jakub-dot">.</span>ševela</strong><span>Integrace a automatizace ↗</span></a></div></div><div class="footer-bottom"><p>© 2026 Ethel · Mgr. Jakub Ševela</p><p>Ethel je nezávislý nástroj a není produktem společnosti Asseco Solutions.</p></div></div></footer>
+<script src="/nahled-5/assets/web.js"></script>
+</body></html>
