@@ -63,29 +63,37 @@ if(caseDemo){
   if(c.kind==='explain')return `<div class="formula"><span>Jak se počítá</span><code>${esc(c.formula)}</code></div><p class="answer-note">${esc(c.note)}</p>`;
   return `<div class="answer-tools"><div class="view-toggle" role="group" aria-label="Zobrazení výsledku"><button type="button" data-view="table" aria-pressed="${view==='table'}">Tabulka</button><button type="button" data-view="chart" aria-pressed="${view==='chart'}">Graf</button></div><div class="export-buttons" role="group" aria-label="Uložit výsledek"><button type="button" data-export="xlsx">Excel</button><button type="button" data-export="pdf">PDF</button></div></div><div class="case-view">${view==='table'?table(c):chart(c)}</div><div class="saved-file" aria-live="polite"></div>`;
  };
- const answer=c=>`<div class="demo-answer is-new"><p>${c.a}</p>${body(c)}</div>`;
+ const answer=(i,c)=>`<div class="demo-answer is-new" data-case="${i}"><p>${c.a}</p>${body(c)}</div>`;
+ /* Same behaviour as the app: a new question is appended at the bottom, older messages move up.
+    Keep the log short so the masked window never holds more than a few exchanges. */
+ const MAX_NODES=6;
+ const append=html=>{caseDemo.insertAdjacentHTML('beforeend',html);while(caseDemo.children.length>MAX_NODES)caseDemo.firstElementChild.remove()};
  const show=(i,animate)=>{
   current=i;const c=CASES[i];
   buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.case===String(i))));
   context.textContent=c.ctx;
   clearTimeout(timer);
+  caseDemo.querySelector('.status-line')?.remove();
   const question=`<p class="user-message is-new">${esc(c.q)}</p>`;
-  if(!animate){caseDemo.innerHTML=question+answer(c);return}
+  if(!animate){caseDemo.innerHTML=question+answer(i,c);return}
   const status=c.kind==='help'?'Ethel hledá v nápovědě Heliosu':c.kind==='explain'?'Ethel čte definici sloupce':'Ethel hledá data';
-  caseDemo.innerHTML=question+`<p class="status-line is-new">${status}<span class="dots" aria-hidden="true"></span></p>`;
-  timer=setTimeout(()=>{caseDemo.innerHTML=question.replace(' is-new','')+answer(c)},SEARCH_MS);
+  append(question+`<p class="status-line is-new">${status}<span class="dots" aria-hidden="true"></span></p>`);
+  timer=setTimeout(()=>{caseDemo.querySelector('.status-line')?.remove();append(answer(i,c))},SEARCH_MS);
  };
  buttons.forEach(b=>b.addEventListener('click',()=>show(Number(b.dataset.case),true)));
  caseDemo.addEventListener('click',e=>{
   const viewBtn=e.target.closest('[data-view]'),exportBtn=e.target.closest('[data-export]');
+  const box=e.target.closest('.demo-answer');
+  if(!box)return;
+  const c=CASES[Number(box.dataset.case)];
   if(viewBtn){
    view=viewBtn.dataset.view;
-   caseDemo.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===viewBtn)));
-   caseDemo.querySelector('.case-view').innerHTML=view==='table'?table(CASES[current]):chart(CASES[current]);
+   box.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===viewBtn)));
+   box.querySelector('.case-view').innerHTML=view==='table'?table(c):chart(c);
   }
   if(exportBtn){
    const ext=exportBtn.dataset.export;
-   caseDemo.querySelector('.saved-file').innerHTML=`<span class="file-ext file-${ext}">${ext.toUpperCase()}</span><span><strong>${slug(CASES[current].q)}.${ext}</strong><small>Uloženo ve vašem počítači${ext==='xlsx'?', i s listem s otázkou a časem':''}. V ukázce se nic nestahuje.</small></span>`;
+   box.querySelector('.saved-file').innerHTML=`<span class="file-ext file-${ext}">${ext.toUpperCase()}</span><span><strong>${slug(c.q)}.${ext}</strong><small>Uloženo ve vašem počítači${ext==='xlsx'?', i s listem s otázkou a časem':''}. V ukázce se nic nestahuje.</small></span>`;
   }
  });
  show(0,false);
