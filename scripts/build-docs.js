@@ -21,7 +21,6 @@ const PAGES = [
     slug: 'prvni-kroky',
     src: 'prvni-kroky.md',
     title: 'První kroky',
-    breadcrumb: 'první kroky',
     description:
       'Jak začít s Ethel v Helios Inuvio: spuštění, příklady dotazů, tipy a klávesové zkratky.',
     activeKey: 'PRVNI_KROKY',
@@ -30,7 +29,6 @@ const PAGES = [
     slug: 'pro-spravce',
     src: 'pro-spravce.md',
     title: 'Pro správce: účty a práva',
-    breadcrumb: 'pro správce',
     description:
       'Pod jakým účtem Ethel čte z databáze Heliosu, jaká práva potřebuje, hotové SQL pro správce a co si Ethel hlídá sama.',
     activeKey: 'PRO_SPRAVCE',
@@ -39,6 +37,16 @@ const PAGES = [
 
 // Mapa pro prepis cross-linku mezi navody (relativni .md -> clean URL)
 const LINK_MAP = Object.fromEntries(PAGES.map((p) => [p.src, `/docs/${p.slug}/`]));
+
+/**
+ * Uvodni `# Nadpis` z Markdownu jde do H1 v page-hero, ne do .prose —
+ * stranka by jinak mela dva H1 (hero + text).
+ */
+function splitHeading(md) {
+  const match = md.match(/^# (.+)\r?\n/);
+  if (!match) return { heading: '', body: md };
+  return { heading: match[1].trim(), body: md.slice(match[0].length) };
+}
 
 function renderMarkdown(md) {
   let processed = md;
@@ -65,18 +73,16 @@ function renderMarkdown(md) {
 }
 
 function fillTemplate(opts) {
-  const { title, description, slug, breadcrumb, html, activeKey } = opts;
+  const { title, heading, description, slug, html, activeKey } = opts;
   const activeMarkers = {
-    INSTALACE: '',
     PRVNI_KROKY: '',
     PRO_SPRAVCE: '',
   };
-  activeMarkers[activeKey] = 'class="active"';
+  activeMarkers[activeKey] = ' aria-current="page"';
   return TEMPLATE.replaceAll('{{TITLE}}', title)
+    .replaceAll('{{HEADING}}', heading || title)
     .replaceAll('{{DESCRIPTION}}', description.replace(/"/g, '&quot;'))
     .replaceAll('{{CANONICAL}}', `${SITE}/docs/${slug}/`)
-    .replaceAll('{{BREADCRUMB_LEAF}}', breadcrumb)
-    .replaceAll('{{ACTIVE_INSTALACE}}', activeMarkers.INSTALACE)
     .replaceAll('{{ACTIVE_PRVNI_KROKY}}', activeMarkers.PRVNI_KROKY)
     .replaceAll('{{ACTIVE_PRO_SPRAVCE}}', activeMarkers.PRO_SPRAVCE)
     .replaceAll('{{CONTENT}}', html);
@@ -91,12 +97,13 @@ function writePage(slug, contents) {
 function main() {
   for (const page of PAGES) {
     const md = readFileSync(resolve(DOCS, page.src), 'utf8');
-    const rawHtml = renderMarkdown(md);
+    const { heading, body } = splitHeading(md);
+    const rawHtml = renderMarkdown(body);
     const filled = fillTemplate({
       title: page.title,
+      heading,
       description: page.description,
       slug: page.slug,
-      breadcrumb: page.breadcrumb,
       html: rawHtml,
       activeKey: page.activeKey,
     });
