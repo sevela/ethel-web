@@ -416,7 +416,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  .author{grid-template-columns:140px minmax(0,1fr);gap:28px}
  .author-photo{width:140px;height:140px}
  .page-hero{padding-block:48px 40px}
- .docs-grid{grid-template-columns:1fr;gap:24px}
+ .docs-grid{grid-template-columns:minmax(0,1fr);gap:24px}
  .docs-nav{position:static;grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;padding-bottom:6px}
  .docs-nav-heading{display:none}
 }
