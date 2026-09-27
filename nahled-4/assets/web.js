@@ -1,4 +1,4 @@
-/* ethel.cz /nahled-4: menu, hero demo, pricing, cookie consent + GA4.
+/* ethel.cz /nahled-4: menu, hero demo, use cases, pricing, cookie consent + GA4.
    Shared by all pages; every block checks that its elements exist. */
 (()=>{
 /* Mobile menu */
@@ -35,6 +35,47 @@ if(chat){
   };
   play();
  }
+}
+
+/* "V praxi": pick a question on the left, the Ethel window answers it; table / chart toggle inside the window.
+   Illustrative data only. */
+const caseDemo=document.getElementById('case-demo');
+if(caseDemo){
+ const CASES=[
+  {ctx:'Faktury vydané / přehled',q:'Top 5 zákazníků v maloobchodu za letos',a:'Pět největších odběratelů v maloobchodu odebralo za <strong>13,2 mil. Kč</strong>.',cols:['Odběratel','Obrat bez DPH'],unit:'Kč',rows:[['Alfa trade',4120000],['Delta servis',3080000],['Beta market',2460000],['Gama obchod',1940000],['Omega retail',1610000]]},
+  {ctx:'Faktury vydané / přehled',q:'Kolik máme faktur po splatnosti?',a:'Po splatnosti je <strong>12 faktur za 328 500 Kč</strong>. Největší část připadá na Alfa trade.',cols:['Odběratel','Po splatnosti'],unit:'Kč',rows:[['Alfa trade',184200],['Delta servis',96500],['Ostatní',47800]]},
+  {ctx:'Dobropisy vydané / přehled',q:'Kolik dobropisů jsme vystavili v srpnu?',a:'V srpnu jsme vystavili <strong>14 dobropisů za 86 200 Kč</strong>, víc než polovinu v obchodě.',cols:['Středisko','Dobropisy'],unit:'Kč',rows:[['Obchod',52400],['E-shop',21300],['Servis',12500]]},
+  {ctx:'Skladové karty / přehled',q:'Jaká je volná zásoba položky 51003?',a:'Volná zásoba položky 51003 je <strong>335 ks</strong> na třech skladech.',cols:['Sklad','Volná zásoba'],unit:'ks',rows:[['Hlavní sklad',240],['Brno',60],['Expedice',35]]},
+  {ctx:'Expediční příkazy / přehled',q:'Kolik expedičních příkazů je ve stavu sklad?',a:'Ve stavu sklad čeká <strong>23 expedičních příkazů</strong>, nejvíc v hlavním skladu.',cols:['Sklad','Příkazy'],unit:'',rows:[['Hlavní sklad',15],['Brno',5],['Expedice',3]]},
+  {ctx:'Výrobní příkazy / přehled',q:'Jaký normovaný čas odvedli zaměstnanci ve výrobě minulý týden?',a:'Minulý týden odvedli <strong>612 normohodin</strong>, nejvíc ve středu.',cols:['Den','Normohodiny'],unit:'h',rows:[['Pondělí',118],['Úterý',124],['Středa',136],['Čtvrtek',122],['Pátek',112]]}
+ ];
+ const SEARCH_MS=800;
+ const fmt=(n,unit)=>n.toLocaleString('cs-CZ')+(unit?' '+unit:'');
+ const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ let view='table',timer=null,current=0;
+ const buttons=[...document.querySelectorAll('.usecase[data-case]')];
+ const context=document.getElementById('case-context');
+ const table=c=>`<table><thead><tr><th>${c.cols[0]}</th><th class="num">${c.cols[1]}</th></tr></thead><tbody>${c.rows.map(([n,v])=>`<tr><td>${esc(n)}</td><td class="num">${fmt(v,c.unit)}</td></tr>`).join('')}</tbody></table>`;
+ const chart=c=>{const max=Math.max(...c.rows.map(r=>r[1]));return `<div class="hbar-chart" role="img" aria-label="${esc(c.cols[1])}: ${c.rows.map(([n,v])=>esc(n)+' '+fmt(v,c.unit)).join(', ')}">${c.rows.map(([n,v])=>`<div class="hbar"><span class="hbar-label">${esc(n)}</span><span class="hbar-track"><i style="width:${Math.max(4,v/max*100)}%"></i></span><span class="hbar-value">${fmt(v,c.unit)}</span></div>`).join('')}</div>`};
+ const answer=c=>`<div class="demo-answer is-new"><p>${c.a}</p><div class="view-toggle" role="group" aria-label="Zobrazení výsledku"><button type="button" data-view="table" aria-pressed="${view==='table'}">Tabulka</button><button type="button" data-view="chart" aria-pressed="${view==='chart'}">Graf</button></div><div class="case-view">${view==='table'?table(c):chart(c)}</div></div>`;
+ const show=(i,animate)=>{
+  current=i;const c=CASES[i];
+  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.case===String(i))));
+  context.textContent=c.ctx;
+  clearTimeout(timer);
+  const question=`<p class="user-message is-new">${esc(c.q)}</p>`;
+  if(!animate){caseDemo.innerHTML=question+answer(c);return}
+  caseDemo.innerHTML=question+'<p class="status-line is-new">Ethel hledá data<span class="dots" aria-hidden="true"></span></p>';
+  timer=setTimeout(()=>{caseDemo.innerHTML=question.replace(' is-new','')+answer(c)},SEARCH_MS);
+ };
+ buttons.forEach(b=>b.addEventListener('click',()=>show(Number(b.dataset.case),true)));
+ caseDemo.addEventListener('click',e=>{
+  const btn=e.target.closest('[data-view]');if(!btn)return;
+  view=btn.dataset.view;
+  caseDemo.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));
+  caseDemo.querySelector('.case-view').innerHTML=view==='table'?table(CASES[current]):chart(CASES[current]);
+ });
+ show(0,false);
 }
 
 /* Pricing: monthly / annual (−17 %) and the optional Akce module on Standard.
