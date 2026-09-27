@@ -1,0 +1,462 @@
+/* ==========================================================================
+   ethel.cz — styl webu (grafický manuál v2.0, 27. 9. 2026)
+   Načítá se za tokens.css. Formuláře jsou v forms.css (jen stránky s formulářem).
+
+   Obsah:
+   1. Základ a typografie      6. Bloky a karty
+   2. Hlavička a navigace      7. „V praxi" (příklady + okno)
+   3. Tlačítka a odkazy        8. Ceník, autor, kontakt
+   4. Hero                     9. Podstránky
+   5. Okno Ethel a chat       10. Patička, cookies, breakpointy
+   ========================================================================== */
+
+/* --- 1. Základ a typografie ------------------------------------------------ */
+
+@font-face{font-family:"Caveat";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/caveat-latin-ext-600-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Caveat";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/caveat-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{margin:0;background:var(--page);color:var(--text);font:400 16px/1.65 var(--font-body)}
+a{color:inherit}
+button,input,textarea,select{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+button{cursor:pointer}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:5px}
+::selection{background:var(--brand);color:var(--on-brand)}
+
+.wrap{width:min(var(--layout-width),calc(100% - 2*var(--gutter)));margin-inline:auto}
+.skip{position:absolute;left:20px;top:-80px;z-index:20;background:var(--brand);color:var(--on-brand);padding:12px}
+.skip:focus{top:16px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Nadpisy: jeden řez (650), těsný proklad, záporný prostrkání. Čím větší, tím těsnější. */
+h1,h2,h3{font-family:var(--font-display);font-weight:var(--weight-display);line-height:1.1;letter-spacing:-.045em;margin:0;color:var(--text)}
+h1{font-size:clamp(48px,5.5vw,74px);line-height:1.04;letter-spacing:-.035em}
+h1 span{color:var(--brand)}
+h2{font-size:clamp(34px,3.8vw,48px);line-height:1.12;letter-spacing:-.025em}
+h3{font-size:28px;line-height:1.3;letter-spacing:-.035em}
+
+/* Eyebrow: štítek nad každým nadpisem sekce, s terakotovou čárkou. */
+.eyebrow{display:flex;align-items:center;gap:12px;margin:0 0 22px;font:700 11px/1.6 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--brand)}
+.eyebrow::before{content:"";width:30px;height:2px;flex:none;background:var(--accent-line)}
+
+.lead{font-size:19px;line-height:1.75;color:var(--text-muted);max-width:475px;margin:27px 0 0}
+.actions{display:flex;align-items:center;gap:23px;flex-wrap:wrap;margin-top:31px}
+
+/* Pulzující tečka z loga na konci nadpisů sekcí (modrá, pak terakota; 4,8 s). */
+.pulse-dot{display:inline-block;width:.17em;height:.17em;margin-left:.12em;border-radius:50%;background:var(--brand);vertical-align:baseline;animation:dot-pulse 4.8s ease-in-out infinite}
+@keyframes dot-pulse{0%,100%{opacity:.35;transform:scale(.62);background:var(--brand)}22%,28%{opacity:1;transform:scale(1);background:var(--pulse-blue)}48%{opacity:.35;transform:scale(.62);background:var(--pulse-blue)}52%{opacity:.35;transform:scale(.62);background:var(--pulse-warm)}72%,78%{opacity:1;transform:scale(1);background:var(--pulse-warm)}96%{opacity:.35;transform:scale(.62);background:var(--pulse-warm)}}
+
+/* Tabulky (ukázky dat v okně Ethel). */
+table{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:400;color:var(--text-muted)}
+th,td{border-bottom:1px solid var(--border);padding:10px 6px 10px 0}
+.num{text-align:right;white-space:nowrap}
+
+/* --- 2. Hlavička a navigace ------------------------------------------------ */
+
+.site-header{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--page) 95%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-row{min-height:var(--nav-height);display:flex;align-items:center;gap:26px}
+.logo{display:inline-flex;flex:none}
+.logo img{width:105px;height:auto;display:block}
+nav{display:flex;gap:25px;margin-left:auto}
+nav a{text-decoration:none;font-size:15px;font-weight:var(--weight-ui);color:var(--text-muted);white-space:nowrap}
+nav a:hover,nav a[aria-current=page]{color:var(--brand)}
+.menu-toggle{display:none;font-size:15px;font-weight:var(--weight-ui)}
+
+/* --- 3. Tlačítka a odkazy -------------------------------------------------- */
+
+/* Výchozí tlačítko je obrysové. Plné (.button-solid) je jen hlavní CTA
+   (hlavička, hero, formulář, ceník Standard, cookies). */
+.button{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border:1.5px solid color-mix(in srgb,var(--brand) 36%,transparent);border-radius:var(--radius-control);background:transparent;color:var(--brand);font-weight:650;font-size:15px;text-decoration:none;box-shadow:none;transition:transform .15s,background .15s,border-color .15s}
+.button:hover{transform:translateY(-1px);background:var(--brand-tint);border-color:var(--brand)}
+.button:active{transform:none;background:var(--brand-tint)}
+.button.small{padding:9px 13px;font-size:13px}
+.button-solid,.button-solid:hover,.button-solid:active{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+
+.text-link{font-size:15px;font-weight:500;text-decoration:none;color:var(--brand);display:inline-block;padding:5px 0;border-bottom:1px solid var(--border)}
+.more{display:inline-block;margin-top:28px;font-size:15px;font-weight:650;color:var(--brand);text-decoration:none}
+.more:hover{text-decoration:underline;text-underline-offset:4px}
+.block a:not(.button):not(.more){color:var(--brand)}
+
+/* --- 4. Hero --------------------------------------------------------------- */
+
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);gap:56px;align-items:center;padding-block:68px 86px}
+.hero-copy{position:relative;padding-bottom:30px}
+.hero h1{font-size:clamp(44px,5vw,64px);line-height:1.08;letter-spacing:-.025em}
+.hero .lead{font-size:18px;line-height:1.75;margin-top:28px;max-width:425px}
+.hero .actions{gap:16px 22px}
+.hero .text-link{font-size:14px;border-bottom-color:var(--brand)}
+.hero-demo{position:relative;min-width:0;width:100%;max-width:none;padding-bottom:30px}
+
+/* Ručně psaná poznámka (Caveat, terakota, mírně natočená). */
+.demo-note{display:block;position:relative;width:fit-content;max-width:320px;margin:18px 18px 0 auto;padding:4px 8px;font:600 24px/1.18 var(--font-hand);letter-spacing:0;color:var(--accent);transform:rotate(-2deg);transform-origin:center;z-index:1}
+.demo-note strong,.demo-note>span{display:block;font:inherit;color:inherit}
+.demo-note strong{font-size:29px;line-height:1.14;margin-bottom:5px}
+.demo-note>span{font-size:24px;line-height:1.2;margin:0}
+/* Varianty se šipkou: .note-up ukazuje na prvek nad poznámkou (šipka vlevo), .note-down na prvek pod ní (šipka vpravo dole). */
+.demo-note.note-up{padding-left:50px}
+.demo-note.note-up::before{content:"";position:absolute;left:2px;top:-10px;width:36px;height:54px;background:var(--hand-arrow-up) no-repeat center/contain;transform:rotate(-10deg)}
+.demo-note.note-down{padding-right:50px}
+.demo-note.note-down::after{content:"";position:absolute;right:0;bottom:-20px;width:36px;height:54px;background:var(--hand-arrow-down) no-repeat center/contain;transform:rotate(-10deg)}
+
+/* --- 5. Okno Ethel a chat -------------------------------------------------- */
+
+.hero-product{border:1px solid var(--border);background:var(--surface);border-radius:var(--radius-card);overflow:hidden;box-shadow:var(--shadow-window);min-width:0}
+.window-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;background:var(--surface-alt);border-bottom:1px solid var(--border);color:var(--text-muted);font-size:12px}
+.window-brand{display:block;flex:none}
+.window-brand img{display:block;width:62px;height:auto}
+.product-inner{display:flex}
+.app-rail{width:46px;flex:none;background:var(--surface-alt);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:24px;padding:17px 6px;color:var(--text-muted);font-size:20px}
+.app-rail .rail-active{color:var(--brand);background:var(--brand-tint);border-radius:6px;width:32px;height:32px;text-align:center}
+.chat{padding:18px 20px;min-width:0;flex:1}
+.chat-meta{display:flex;justify-content:space-between;gap:8px;color:var(--text-muted);font-size:12px;margin-bottom:18px}
+.chat-meta span{font-size:11px}
+.user-message{background:var(--brand-tint);border-radius:var(--radius-bubble) var(--radius-bubble) 2px var(--radius-bubble);padding:12px 15px;margin:0 0 18px 17px;font-size:14px;line-height:1.65}
+.demo-answer{font-size:14px;line-height:1.75}
+.demo-answer p{margin:0 0 12px}
+.result-actions{display:flex;gap:6px;margin-top:14px}
+.result-actions span{font-size:11px;border:1px solid var(--border);border-radius:6px;padding:4px 9px;color:var(--text-muted);background:var(--surface)}
+.result-actions span:last-child{font-weight:700;color:var(--brand)}
+
+/* Přehrávaný rozhovor v hero (web.js): otázka, hledání, odpověď, doplňující otázka, graf. */
+.chat-log{display:flex;flex-direction:column;gap:14px}
+.chat-log .user-message{margin:0 0 0 17px}
+.chat-log.is-playing{height:410px;overflow:hidden;justify-content:flex-end;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 48px);mask-image:linear-gradient(to bottom,transparent 0,#000 48px)}
+.seq-transient,.chat-log.is-playing .seq{display:none}
+.chat-log.is-playing .seq.is-shown{display:block;animation:seq-in .45s ease-out}
+.chat-log.is-playing .status-line.is-shown{display:flex}
+.is-new{animation:seq-in .4s ease-out}
+@keyframes seq-in{from{opacity:0;transform:translateY(8px)}}
+.status-line{display:flex;align-items:center;gap:9px;margin:0;font-size:13px;color:var(--text-muted)}
+.status-line::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand);animation:status-pulse 1s ease-in-out infinite}
+.dots::after{content:"…";animation:dots 1.2s steps(1) infinite}
+@keyframes status-pulse{50%{opacity:.3;transform:scale(.7)}}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"…"}}
+
+/* Sloupcový graf v odpovědi. */
+.bar-chart{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;align-items:end;height:136px;margin:8px 0 0}
+.bar-chart div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
+.bar-chart i{display:block;width:100%;max-width:36px;height:calc(var(--v) * .7);border-radius:5px 5px 2px 2px;background:var(--chart-muted);transform-origin:bottom}
+.bar-chart .is-now i{background:var(--brand)}
+.bar-chart span{font-size:10px;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.bar-chart b{font-size:11px;font-weight:500;color:var(--text-muted)}
+.seq.is-shown .bar-chart i{animation:bar-grow .8s cubic-bezier(.2,.7,.3,1) both}
+.bar-chart div:nth-child(2) i{animation-delay:.08s}.bar-chart div:nth-child(3) i{animation-delay:.16s}.bar-chart div:nth-child(4) i{animation-delay:.24s}.bar-chart div:nth-child(5) i{animation-delay:.32s}.bar-chart div:nth-child(6) i{animation-delay:.4s}
+@keyframes bar-grow{from{transform:scaleY(0)}}
+.chart-caption{margin:2px 0 0!important;font-size:11px;color:var(--text-muted)}
+
+/* Vodorovný graf, přepínač tabulka/graf, exporty, uložený soubor (generuje web.js). */
+.view-toggle{display:inline-flex;gap:2px;margin:0 0 12px;padding:3px;border:1px solid var(--border);border-radius:8px}
+.view-toggle button{border:0;border-radius:6px;padding:5px 12px;background:transparent;font-size:12px;font-weight:600;color:var(--text-muted)}
+.view-toggle button[aria-pressed=true]{background:var(--brand);color:var(--on-brand)}
+.answer-tools{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.answer-tools .view-toggle{margin:0}
+.export-buttons{display:flex;gap:6px}
+.export-buttons button{border:1px solid var(--border);border-radius:6px;padding:5px 11px;background:var(--surface);font-size:12px;font-weight:600;color:var(--text-muted)}
+.export-buttons button:hover{border-color:var(--brand);color:var(--brand)}
+.saved-file:not(:empty){display:flex;align-items:center;gap:12px;margin-top:14px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--page);animation:seq-in .35s ease-out}
+.saved-file strong{display:block;font-size:13px}
+.saved-file small{display:block;font-size:11px;color:var(--text-muted)}
+.file-ext{flex:none;padding:5px 6px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.04em;color:#fff}
+.file-xlsx{background:var(--file-xlsx)}
+.file-pdf{background:var(--file-pdf)}
+.hbar-chart{display:grid;gap:10px;padding-top:4px}
+.hbar{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:12px}
+.hbar-label{color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar-track{height:14px;border-radius:4px;background:var(--surface-alt);overflow:hidden}
+.hbar-track i{display:block;height:100%;border-radius:4px;background:var(--brand);transform-origin:left;animation:hbar-grow .6s cubic-bezier(.2,.7,.3,1) both}
+.hbar-value{font-variant-numeric:tabular-nums;white-space:nowrap}
+@keyframes hbar-grow{from{transform:scaleX(0)}}
+
+/* Odpověď typu nápověda / vysvětlení. */
+.help-steps{margin:0;padding:0;list-style:none;counter-reset:step}
+.help-steps li{position:relative;padding:8px 0 8px 36px;border-bottom:1px solid var(--border);font-size:14px;line-height:1.55;counter-increment:step}
+.help-steps li::before{content:counter(step);position:absolute;left:0;top:8px;width:24px;height:24px;border-radius:50%;background:var(--brand-tint);color:var(--brand);font:600 12px/24px var(--font-body);text-align:center}
+.answer-source{margin:12px 0 0!important;font-size:12px;color:var(--text-muted)}
+.answer-source span{color:var(--brand);text-decoration:underline;text-underline-offset:3px}
+.formula{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:8px;background:var(--surface-alt)}
+.formula span{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+.formula code{font:500 16px/1.4 var(--font-code);color:var(--text)}
+.answer-note{margin:12px 0 0!important;font-size:13px;color:var(--text-muted)}
+
+/* Kontrolní karta akce (uvnitř .card). */
+.check-card dl{margin:0}
+.check-card dl>div{display:grid;grid-template-columns:minmax(80px,.8fr) minmax(0,1.6fr) auto;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.check-card dt{color:var(--text-muted)}
+.check-card dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.check-card .origin{font-size:10px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--brand-tint);color:var(--brand);white-space:nowrap}
+.check-card .origin-you{background:var(--accent-tint);color:var(--accent)}
+.check-card .origin-default{background:var(--surface-alt);color:var(--text-muted)}
+.check-card-actions{display:flex;gap:8px;margin-top:6px}
+.check-card-actions span{font-size:12px;font-weight:600;border:1px solid var(--border);border-radius:var(--radius-control);padding:6px 14px;color:var(--text-muted)}
+.check-card-actions .check-confirm{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+
+/* --- 6. Bloky a karty ------------------------------------------------------ */
+
+/* Každá sekce = .block: eyebrow, H2, nejvýš dvě věty úvodu, jeden obsahový
+   celek, nejvýš jeden odkaz „… →". Pozadí se střídají bílá / šedá, tmavý
+   blok je na celém webu jeden (bezpečnost). */
+.block{padding-block:var(--block-space)}
+.block-white{background:var(--surface)}
+.block-grey{background:var(--surface-alt)}
+.block-dark{background:var(--ink);color:var(--ink-text)}
+.block-head{max-width:720px;margin-bottom:36px}
+.block-head .eyebrow{margin-bottom:18px}
+.block-head h2{font-size:clamp(30px,3.2vw,42px);line-height:1.15;letter-spacing:-.025em}
+.block-head>p:not(.eyebrow){margin:16px 0 0;font-size:17px;line-height:1.7;color:var(--text-muted)}
+.block-head-row{max-width:none;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.block-dark h2,.block-dark h3{color:var(--ink-text)}
+.block-dark .eyebrow{color:var(--ink-link)}
+.block-dark .block-head>p:not(.eyebrow){color:var(--ink-muted)}
+.block-dark .more{color:var(--ink-link)}
+.block-note{margin:20px 0 0;font-size:14px;color:var(--text-muted)}
+
+/* Jedna karta pro celý web; na šedém bloku bez rámečku, na tmavém tmavší. */
+.cards{display:grid;gap:20px;margin:0;padding:0;list-style:none}
+.cards-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cards-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cards-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{--card-bg:var(--surface);--card-border:var(--border);display:flex;flex-direction:column;gap:10px;min-width:0;padding:24px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-card)}
+.block-grey .card{border-color:transparent}
+.block-dark .card{--card-bg:var(--ink-surface);--card-border:var(--ink-border);color:var(--ink-text)}
+.card h3{display:flex;align-items:center;gap:10px;font:650 19px/1.35 var(--font-body);letter-spacing:-.01em}
+.card p{margin:0;font-size:15px;line-height:1.7;color:var(--text-muted)}
+.block-dark .card p{color:var(--ink-body);font-size:16px}
+.card .card-quote{margin-top:auto;padding:10px 14px;border-radius:12px 12px 3px 12px;background:var(--brand-tint);color:var(--text);font-size:14px;line-height:1.55}
+.card .card-quote+.card-quote{margin-top:0}
+.card .card-sub{font-size:13px;font-weight:600;color:var(--accent)}
+.card .card-fine{font-size:13px;color:var(--text-muted)}
+.card .card-fine strong,.card p strong{color:var(--text)}
+.card .button{align-self:flex-start;margin-top:auto}
+.card-featured{border:1.5px solid var(--accent-line)!important}
+.card-accent{border-left:3px solid var(--accent-line)!important}
+.card-num{display:flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border-radius:50%;background:var(--accent-tint);color:var(--accent);font:600 13px var(--font-code)}
+.card-steps .card p{color:var(--text);font-size:16px}
+.card-steps-list{grid-template-columns:1fr}
+.card-steps-list .card{flex-direction:row;align-items:flex-start;gap:16px}
+.card-steps-list h3{font-size:17px}
+.card-steps-list .card p{color:var(--text-muted);font-size:14px;margin-top:4px}
+
+/* Ikona v nadpisu karty, chipy, štítky tarifů, seznam otázek. */
+.card-icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;flex:none;border-radius:10px;background:var(--brand-tint)}
+.card-icon svg{width:19px;height:19px;fill:none;stroke:var(--brand);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card-topline{border-top:3px solid var(--brand-tint)}
+.block-dark .card h3{flex-direction:column;align-items:flex-start;gap:14px;font-size:18px}
+.block-dark .card-icon{background:var(--ink-icon)}
+.block-dark .card-icon svg{stroke:var(--ink-link)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 0;padding:0;list-style:none}
+.chips li{padding:7px 13px;border-radius:var(--radius-pill);background:var(--brand-tint);font-size:14px;line-height:1.4}
+.tier{align-self:flex-start;font-size:11px;font-weight:650;padding:3px 8px;border-radius:4px;background:var(--brand-tint);color:var(--brand)}
+.tier-std{background:var(--accent-tint);color:var(--accent)}
+.ask-list{display:grid;gap:8px;margin:6px 0 0;padding:0;list-style:none}
+.ask-list li{position:relative;padding:9px 14px 9px 38px;border-radius:10px;background:var(--brand-tint);font-size:14px;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ask-list li::before{content:"";position:absolute;left:14px;top:50%;width:13px;height:11px;margin-top:-5.5px;border-radius:4px 4px 4px 1px;background:var(--brand);opacity:.55}
+
+/* Karty se zarovnanými řádky napříč mřížkou (nadpis, text, příklady). */
+.cards-sub>.card{display:grid;grid-template-rows:subgrid;gap:10px;align-content:start}
+.cards-sub-2>.card{grid-row:span 2}
+.cards-sub-3>.card{grid-row:span 3}
+.cards-sub .card-quote{margin-top:0;align-self:start}
+
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.stack{display:grid;gap:20px;min-width:0}
+.prose{max-width:760px}
+.prose p,.prose li{font-size:16px;line-height:1.8;color:var(--text-muted)}
+.prose p strong,.prose li strong{color:var(--text)}
+.prose h3{display:block;font:650 19px/1.4 var(--font-body);letter-spacing:0;margin:28px 0 0}
+
+/* --- 7. „V praxi": seznam otázek + interaktivní okno --------------------------- */
+
+.usecases{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:28px;align-items:start}
+.usecase-list{display:grid;gap:10px}
+.usecases .usecase{gap:4px;padding:14px 18px;border:1.5px solid transparent;text-align:left;font:500 15px/1.45 var(--font-body);color:var(--text);cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.usecases .usecase:hover{border-color:color-mix(in srgb,var(--brand) 40%,transparent)}
+.usecases .usecase[aria-pressed=true]{border-color:var(--brand);box-shadow:var(--shadow-lift)}
+.usecase-role{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.case-window .chat{min-height:400px}
+.case-window .user-message{margin:0 0 14px 17px}
+
+/* --- 8. Ceník, autor, kontakt ---------------------------------------------- */
+
+.price-toggle{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--border);border-radius:8px;background:var(--surface)}
+.price-toggle button{border:0;border-radius:6px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--text-muted);background:transparent}
+.price-toggle button span{color:var(--accent);margin-left:4px}
+.price-toggle button[aria-pressed=true]{background:var(--text);color:var(--page)}
+.price-toggle button[aria-pressed=true] span{color:var(--accent-on-ink)}
+.card .card-price{margin:4px 0 0;font-size:40px;font-weight:600;letter-spacing:-.04em;line-height:1.2;color:var(--text)}
+.card .card-price .per{font-size:15px;font-weight:400;letter-spacing:0;color:var(--text-muted)}
+.card .card-price.small{font-size:26px}
+.plans .card{padding:30px}
+.card-plan.card-featured{box-shadow:var(--shadow-float)}
+.plan-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.plan-top h3{font-size:22px}
+.plan-tag{font-size:12px;font-weight:600;color:var(--brand);background:var(--brand-tint);padding:4px 10px;border-radius:var(--radius-pill)}
+.card-featured .plan-tag{color:var(--accent);background:var(--accent-tint)}
+.addon{display:flex;gap:12px;align-items:flex-start;margin:0 0 14px;padding:14px 16px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:10px;background:var(--brand-tint);cursor:pointer;transition:background .15s,border-color .15s}
+.addon:has(input:checked){border-style:solid;border-color:var(--brand);background:var(--surface)}
+.addon input{width:18px;height:18px;margin:3px 0 0;flex:none;accent-color:var(--brand);cursor:pointer}
+.addon strong{font-size:15px}
+.addon-price{margin-left:4px;font-size:14px;font-weight:650;color:var(--brand);white-space:nowrap}
+.addon small{display:block;margin-top:4px;font-size:13px;line-height:1.55;color:var(--text-muted)}
+.ticks{list-style:none;margin:8px 0 12px;padding:14px 0 0;border-top:1px solid var(--border);font-size:15px}
+.ticks li{position:relative;padding:4px 0 4px 22px}
+.ticks li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700}
+
+.author{display:grid;grid-template-columns:200px minmax(0,1fr);gap:48px;align-items:start}
+.author-photo{width:200px;height:200px;object-fit:cover;border-radius:var(--radius-card);display:block}
+.author .block-head{margin-bottom:18px}
+.author-sign{margin:0;font-size:14px;color:var(--text-muted)}
+.author-sign strong{color:var(--text)}
+
+.contact-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:start}
+
+/* --- 9. Podstránky --------------------------------------------------------- */
+
+.page-hero{padding-block:72px 56px}
+.page-hero h1{font-size:clamp(40px,5vw,60px);line-height:1.08;letter-spacing:-.03em;max-width:820px}
+.page-hero .lead{max-width:680px}
+.page-hero .lead a{color:var(--brand)}
+.data-table-wrap{overflow-x:auto;margin:8px 0 24px}
+.data-table{font-size:14px;background:var(--surface)}
+.data-table th,.data-table td{padding:12px 16px 12px 0;vertical-align:top}
+.data-table td{color:var(--text-muted)}
+.data-table td:first-child{font-weight:600;min-width:180px;color:var(--text)}
+.qa-group{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:24px 70px}
+.qa-group .block-head{margin:0}
+.qa-group .block-head h2{font-size:28px}
+.faq-list details{border-bottom:1px solid var(--border);padding:17px 0}
+.faq-list details:first-child{padding-top:0}
+.faq-list summary{font-size:16px;font-weight:var(--weight-ui);cursor:pointer}
+.faq-list p,.faq-list li{color:var(--text-muted);font-size:15px;line-height:1.75}
+.faq-list p{margin:15px 0 4px}
+.faq-list ul{padding-left:20px}
+/* Dokumentace (/docs, /download, changelog): postranní navigace + text z Markdownu v .prose. */
+.docs-grid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;align-items:start}
+.docs-nav{position:sticky;top:calc(var(--nav-height) + 24px);margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.docs-nav-heading{padding:8px 12px 4px;font:700 11px/1.6 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+.docs-nav a{display:block;padding:8px 12px;border-radius:var(--radius-control);font-size:14px;font-weight:var(--weight-ui);color:var(--text-muted);text-decoration:none}
+.docs-nav a:hover{color:var(--brand)}
+.docs-nav a[aria-current=page]{background:var(--brand-tint);color:var(--brand)}
+.prose h2{font-size:clamp(26px,2.6vw,32px);line-height:1.2;letter-spacing:-.025em;margin:40px 0 0}
+.prose h2:first-child,.prose h3:first-child{margin-top:0}
+.prose h2+p,.prose h3+p{margin-top:10px}
+.prose ul,.prose ol{padding-left:22px}
+.prose li+li{margin-top:4px}
+.prose pre,.card pre{margin:16px 0;padding:14px 16px;border-radius:8px;background:var(--surface-alt);font:400 13px/1.6 var(--font-code);color:var(--text);overflow-x:auto}
+.card pre{margin:0}
+.prose code,.lead code,.block-head code,.block-note code,.card code{font:400 .92em var(--font-code);padding:1px 5px;border-radius:4px;background:var(--surface-alt);color:var(--text)}
+.prose pre code{padding:0;background:none;font-size:inherit}
+.prose img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:var(--radius-card)}
+.prose blockquote{margin:16px 0;padding:12px 18px;border-left:3px solid var(--accent-line);border-radius:0 8px 8px 0;background:var(--accent-tint);color:var(--text)}
+.prose blockquote p{color:var(--text)}
+.prose hr{border:0;border-top:1px solid var(--border);margin:32px 0}
+.prose table{font-size:14px}
+.prose th,.prose td{padding:10px 16px 10px 0;vertical-align:top}
+
+.cta-band{background:var(--brand-tint);padding-block:56px}
+.cta-band-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta-band h2{font-size:clamp(26px,2.6vw,34px);line-height:1.2}
+.cta-band p{margin:8px 0 0;color:var(--text-muted)}
+
+/* --- 10. Patička, cookies, breakpointy ------------------------------------- */
+
+.site-footer{background:var(--ink);color:var(--ink-text-2);padding-block:56px 36px}
+.footer-top{display:flex;justify-content:space-between;align-items:center;gap:35px;flex-wrap:wrap}
+.footer-top p{color:var(--ink-muted);font-size:14px}
+.footer-brand{display:block}
+.footer-brand img{width:150px;height:auto;display:block}
+.footer-contact{display:flex;flex-wrap:wrap;gap:6px 18px;margin:6px 0 0;font-size:14px}
+.footer-contact a{text-decoration:none;color:var(--ink-text)}
+.footer-contact a:hover,.footer-links a:hover{color:var(--ink-link)}
+.related{display:flex;gap:55px}
+.related a{text-decoration:none}
+.related strong{font-size:20px;letter-spacing:-.6px;color:var(--ink-text)}
+.related a>span{display:block;color:var(--ink-muted);font-size:12px;margin-top:8px}
+.feed-dot{color:var(--sister-feedco-dark)}
+.jakub-dot{color:var(--sister-jakub-dark)}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:28px;font-size:14px}
+.footer-links a{text-decoration:none;color:var(--ink-text-2)}
+.footer-bottom{display:flex;flex-direction:column;gap:2px;flex-wrap:wrap;border-top:1px solid var(--ink-rule);padding-top:24px;margin-top:30px;color:var(--ink-muted);font-size:12px}
+.footer-bottom p{margin:0;font-size:12px;line-height:1.6;color:var(--ink-muted)}
+.site-footer a:focus-visible{outline-color:var(--ink-link)}
+
+.cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:60;max-width:640px;margin-inline:auto;display:flex;gap:18px;align-items:center;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-modal);font-size:13px;line-height:1.6}
+.cookie-banner[hidden]{display:none}
+.cookie-banner p{margin:0}
+.cookie-actions{display:flex;gap:8px;flex:none}
+
+@media(min-width:1500px){.hero{padding-block:100px}}
+@media(min-width:851px) and (max-width:1200px){nav{gap:16px}.nav-row{gap:18px}}
+@media(max-width:1150px){.header-cta{display:none}}
+@media(max-width:1100px){
+ .cards-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero{gap:36px}
+ .hero .actions{align-items:flex-start;flex-direction:column;gap:10px}
+}
+@media(max-width:850px){
+ .hero{grid-template-columns:1fr;gap:36px;padding-block:48px 56px}
+ .hero-copy{padding-bottom:0;max-width:650px}
+ .hero .lead{max-width:530px}
+ .hero .actions{flex-direction:row;align-items:center;gap:20px}
+ .hero-demo{max-width:610px}
+ .hero-product{width:100%}
+ .demo-note{margin-right:18px}
+ .window-close{display:none}
+ .nav-row{flex-wrap:wrap;gap:16px;padding-block:19px}
+ nav{gap:17px}
+ .menu-toggle{display:block;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text);padding:6px 11px;font-size:15px;font-weight:var(--weight-ui);margin-left:auto}
+ nav{display:none;order:5;flex-basis:100%;margin:5px 0 0;padding-top:15px;border-top:1px solid var(--border);justify-content:space-between;flex-wrap:wrap}
+ nav.is-open{display:flex}
+ .cards-3,.split,.contact-grid,.qa-group,.usecases{grid-template-columns:1fr}
+ .usecase-list{grid-auto-flow:column;grid-auto-columns:minmax(240px,78%);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+ .usecase{scroll-snap-align:start}
+ .contact-grid{gap:8px}
+ .author{grid-template-columns:140px minmax(0,1fr);gap:28px}
+ .author-photo{width:140px;height:140px}
+ .page-hero{padding-block:48px 40px}
+ .docs-grid{grid-template-columns:minmax(0,1fr);gap:24px}
+ .docs-nav{position:static;grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;padding-bottom:6px}
+ .docs-nav-heading{display:none}
+}
+@media(max-width:600px){
+ h2{font-size:34px}
+ .hero{padding-top:36px;gap:28px}
+ .hero .lead{font-size:17px}
+ .hero .actions{align-items:flex-start;flex-direction:column;gap:12px}
+ .hero .eyebrow{font-size:10px;letter-spacing:.07em}
+ .eyebrow::before{width:24px}
+ .hero-product .chat{padding:17px 14px}
+ .app-rail{display:none}
+ .user-message{margin-left:12px}
+ .chat-meta{gap:10px}
+ .window-bar{gap:8px;font-size:11px}
+ .chat-log.is-playing{height:360px}
+ .demo-note{max-width:min(100%,300px);padding-inline:5px;margin-top:18px;margin-right:5px}
+ .demo-note strong{font-size:27px}
+ .demo-note>span{font-size:23px}
+ .nav-row{gap:8px}
+ .menu-toggle{padding:5px 8px}
+ .cards-2,.cards-4{grid-template-columns:1fr}
+ .ask-list li{white-space:normal}
+ .author{grid-template-columns:1fr}
+ .author-photo{width:112px;height:112px}
+ .check-card dl>div{grid-template-columns:minmax(0,1fr) auto;gap:2px 10px}
+ .check-card dt{grid-column:1/-1}
+ .related{gap:30px;flex-wrap:wrap}
+ .footer-top{gap:24px}
+ .footer-brand img{width:130px}
+ .cookie-banner{flex-direction:column;align-items:flex-start}
+ .data-table thead{display:none}
+ .data-table,.data-table tbody,.data-table tr,.data-table td{display:block;width:100%}
+ .data-table tr{padding:14px 0;border-bottom:1px solid var(--border)}
+ .data-table td{border:0;padding:2px 0}
+ .data-table td:nth-child(2)::before{content:"Kdy: ";font-weight:600;color:var(--text)}
+ .data-table td:nth-child(3)::before{content:"Proč: ";font-weight:600;color:var(--text)}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .button,.button:hover{transition:none;transform:none}
+ .pulse-dot{animation:none}
+}
