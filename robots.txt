@@ -1,8 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /nahled/
-Disallow: /nahled-2/
-Disallow: /nahled-3/
+Disallow: /brand/
 Disallow: /.github/
 
 Sitemap: https://ethel.cz/sitemap.xml

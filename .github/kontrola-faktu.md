@@ -1,5 +1,9 @@
 2. 8. 2026
 
+> **Historický záznam.** Popisuje stav webu k 2. 8. 2026. Náhledy `/nahled*`, `fonts/`,
+> `docs/_assets/docs.css` a `brand/tokens.css`, na které se odkazuje, byly odstraněny
+> v ETH-395/ETH-396 (27. 9. 2026); celý web od té doby jede na `assets/` podle manuálu `/brand/`.
+
 # Křížová kontrola faktů — ethel.cz, vrstva A (náhled `/nahled-2/`)
 
 Interní soubor. Leží v `.github/`, protože GitHub Pages publikují z kořene repa a `.github/`

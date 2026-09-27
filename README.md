@@ -6,10 +6,13 @@ Landing page projektu **Ethel** – AI asistentky pro **Helios Inuvio** ERP.
 
 ## Co tu je
 
-- Statická landing page (`index.html`) – jeden HTML soubor s inline CSS
-- `/docs/` – návody pro uživatele, IT administrátory a Helios partnery
-- `/blog/` – release notes a roadmap
-- Self-hostované Google Fonts (Sora, JetBrains Mono, Space Mono) v `fonts/`
+- Veřejné stránky: `index.html` (úvod s formulářem), `funkce/`, `akce/`, `bezpecnost/`, `faq/`
+- `/docs/` – nápověda: rozcestník, `prvni-kroky/` a `pro-spravce/` (generované z `docs/*.md`),
+  `changelog/` (ručně psaný)
+- `/download/` – stažení Ethel.exe, verze se načítá z proxy (`assets/download.js`)
+- `assets/` – celý vzhled webu: `tokens.css` (proměnné), `ethel.css` (komponenty), `forms.css`
+  (jen stránky s formulářem), `web.js`, `forms.js`, loga v `assets/logos/`, písmo v `assets/fonts/`
+- `/brand/` – živý grafický manuál webu (v2.0), načítá stejné soubory jako web; `noindex`
 - OG image generátor v `scripts/generate-og.js` (Puppeteer)
 
 ## Tech
@@ -17,10 +20,11 @@ Landing page projektu **Ethel** – AI asistentky pro **Helios Inuvio** ERP.
 | Co | Jak |
 |---|---|
 | Hosting | GitHub Pages s custom doménou `ethel.cz` (CNAME) |
-| Build | Žádný – čisté HTML/CSS/JS |
-| Fonts | Self-hostované woff2 (subset latin + latin-ext) |
-| Analytics | Google Analytics 4 (`G-5YGP0D48W7`) |
-| SEO | sitemap.xml, robots.txt, JSON-LD `SoftwareApplication` + `Article` |
+| Build | Jen `npm run build:docs` (Markdown → HTML), jinak čisté HTML/CSS/JS |
+| Fonts | Systémové Segoe UI; jediné stažené písmo je Caveat (woff2 v `assets/fonts/`) pro ručně psané poznámky |
+| Styl | Tři CSS soubory v `assets/`, manuál na `/brand/`; žádné inline styly ani `<style>` ve stránkách |
+| Analytics | Google Analytics 4 (`G-5YGP0D48W7`), až po souhlasu v cookie liště |
+| SEO | sitemap.xml, robots.txt, JSON-LD `SoftwareApplication` na úvodu |
 
 ## Vývoj
 
