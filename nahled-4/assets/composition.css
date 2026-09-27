@@ -1,0 +1,133 @@
+/* One rhythm for the public site: demonstrate, explain, reassure, invite. */
+@font-face{font-family:"Caveat";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/caveat-latin-ext-600-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Caveat";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/caveat-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{--layout-width:1120px;--section-space:88px;--panel-radius:14px}
+.wrap{width:min(var(--layout-width),calc(100% - 64px))}
+.section{padding-block:var(--section-space)}
+.review-bar{font-size:11px;padding-block:5px}
+.nav-row{min-height:82px}
+.site-header{background:color-mix(in srgb,var(--page) 95%,transparent)}
+h2{font-size:clamp(34px,3.8vw,48px);line-height:1.12;letter-spacing:-.025em}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.12em;margin-bottom:22px}
+.eyebrow::before{content:"";width:30px;height:2px;flex:none;background:var(--accent-orange-line)}
+.section-intro::before{content:none}
+.section-intro{margin-bottom:42px}
+.hero{position:relative;align-items:center;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);gap:56px;padding-block:68px 86px}
+.hero-copy{padding-top:0;padding-bottom:30px}
+.hero h1{font-size:clamp(48px,5.7vw,72px);line-height:1.08;letter-spacing:-.025em}
+.hero .lead{font-size:18px;line-height:1.75;margin-top:28px;max-width:425px}
+.hero .actions{gap:16px 22px}
+.hero .fine{margin-top:22px}
+.hero-demo{position:relative;padding-bottom:30px;max-width:none}
+.hero-product{border-radius:var(--panel-radius);border-top-width:1px;box-shadow:0 18px 48px #172b380c}
+.window-bar{padding:14px 16px}
+.hero-product .chat{padding:18px 20px}
+.chat-meta{margin-bottom:18px}
+.user-message{margin-bottom:18px}
+.hero #demo-answer{min-height:218px}
+.demo-choice{margin-top:18px}
+.demo-note{position:relative;margin:-4px 24px 0 auto;transform:translateY(18px);padding:12px 18px;border-radius:3px 14px 14px 14px;font-size:13px;z-index:1}
+.demo-note strong{font-weight:600}
+.demo-note::after{bottom:auto;top:-7px;right:auto;left:22px;transform:rotate(225deg)}
+.hero .text-link{font-size:14px}
+#moznosti{padding-inline:max(32px,calc((100% - var(--layout-width))/2));padding-block:80px 88px;background:#172B38;border:0}
+[data-theme="dark"] #moznosti{background:#1D2F3C}
+.split-intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:0 70px;max-width:none;align-items:end}
+.split-intro .eyebrow{grid-column:1/-1}
+.split-intro>p:last-child{margin:0 0 3px;max-width:410px;font-size:16px;line-height:1.75}
+#moznosti .feature-grid{gap:28px;margin-top:52px}
+#moznosti .feature-grid article{padding-top:24px;border-top:1px solid #486171}
+.feature-index{font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:.08em;margin-bottom:18px}
+.feature-grid h3{font-size:26px;line-height:1.22;letter-spacing:-.025em}
+#moznosti .feature-grid article>p{font-size:14px;line-height:1.8;margin:18px 0 24px}
+#moznosti .feature-grid blockquote{margin-left:0;padding:17px 18px;border:0;border-radius:14px 14px 3px 14px;background:#233F51;font-size:13px;min-height:82px;line-height:1.7}
+.references-section{padding-block:88px 92px}
+.reference-heading{align-items:center;margin-bottom:36px}
+.reference-disclosure{border:0;padding-left:0;font-size:11px;max-width:260px}
+.reference-disclosure>span{color:var(--text-muted);font-weight:600}
+.reference-featured{border:0;border-radius:var(--panel-radius);padding:34px 36px;background:var(--brand-tint)}
+.reference-featured .reference-topic{min-height:54px}
+.reference-featured blockquote{font-size:clamp(25px,2.5vw,31px);line-height:1.45}
+.reference-featured .reference-photo{width:76px;height:76px}
+.reference-card:not(.reference-featured){padding:20px 0}
+.reference-card:not(.reference-featured) blockquote{font-size:16px;line-height:1.7}
+.reference-card .quote-mark{color:var(--accent-orange-line)}
+.onboarding-band{background:var(--surface-alt);border-block:1px solid var(--border)}
+#jak,[data-theme="dark"] #jak{background:transparent;border:0;padding-block:80px 50px;overflow:visible}
+.process-grid{display:block}
+.process-intro{display:grid;grid-template-columns:1.2fr 1fr;column-gap:70px;align-items:end;margin-bottom:40px}
+.process-intro .eyebrow{grid-column:1/-1}
+.process-intro .muted{max-width:410px;margin:0 0 3px;line-height:1.75}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.steps li,.steps li:last-child{position:relative;display:block;border:0;padding:0;margin:0}
+.steps li::before{content:"";position:absolute;left:46px;right:-20px;top:17px;border-top:1px solid var(--border)}
+.steps li:last-child::before{right:0}
+.steps li>span{position:relative;z-index:1;width:35px;height:35px;margin-bottom:20px;font-family:var(--font-code);font-size:11px}
+.steps h3{font-size:18px;font-weight:600;line-height:1.5}
+.steps p{font-size:14px;line-height:1.8;margin-top:10px}
+#bezpecnost{padding-block:32px 48px;border-top:1px solid var(--border);grid-template-columns:1.2fr 1fr;gap:70px}
+#bezpecnost h2{font-size:30px;line-height:1.2}
+#bezpecnost .eyebrow{margin-bottom:14px}
+#bezpecnost .lead-small{font-size:16px;line-height:1.7;margin:0 0 12px}
+#bezpecnost .muted{font-size:14px;line-height:1.75;margin-top:0}
+#bezpecnost .text-link{font-size:13px}
+.pricing-section{background:var(--page);border:0;padding-bottom:60px}
+.trial-note{border-left:2px solid var(--accent-orange-line);padding:0 0 0 18px;font-size:15px!important}
+.trial-note strong{color:var(--text);font-weight:600}
+.price-card{border-radius:var(--panel-radius);padding:32px 34px}
+.price-card-featured{border-color:var(--accent-orange-line);padding-top:30px}
+.price-card .eyebrow::before{content:none}
+.price-card h3{font-size:26px}
+.price-card .price{font-size:46px;font-weight:500;letter-spacing:-.04em}
+.price-card ul{font-size:14px;padding-top:22px}
+.faq-grid{border-top:1px solid var(--border);padding-block:38px 72px;gap:70px;grid-template-columns:1.2fr 1fr}
+.faq-grid h2{font-size:30px}
+.faq-grid .eyebrow{margin-bottom:16px}
+.faq-list summary{font-size:15px}
+.faq-list details{padding-block:17px}
+#kontakt{border-radius:var(--panel-radius);padding:44px;gap:44px;margin-bottom:64px;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr)}
+#kontakt h2{font-size:clamp(32px,3.6vw,44px)}
+#kontakt .contact-lead{font-size:16px}
+.contact-form-panel{border:0;border-radius:10px;padding:26px}
+.form-heading h3{font-size:23px}
+.button{border-radius:7px;box-shadow:none}
+.footer-top{align-items:center}
+@media(max-width:700px){.reference-heading{align-items:flex-start}}
+@media(max-width:1100px){.hero{gap:36px}.hero h1{font-size:clamp(44px,5.7vw,64px)}.hero .actions{align-items:flex-start;flex-direction:column;gap:10px}.split-intro,.process-intro{column-gap:40px}#bezpecnost,.faq-grid{gap:40px}.feature-grid h3{font-size:24px}#kontakt{gap:28px;padding:36px}.reference-grid{gap:0 32px}}
+@media(max-width:850px){:root{--section-space:64px}.wrap{width:calc(100% - 40px)}.nav-row{min-height:76px}.hero{grid-template-columns:1fr;padding-block:48px 56px;gap:36px}.hero-copy{padding-bottom:0;max-width:650px}.hero h1{font-size:clamp(40px,7.8vw,64px)}.hero .lead{max-width:530px}.hero .actions{flex-direction:row;align-items:center;gap:20px}.hero-demo{max-width:610px}.hero-product{width:100%}.demo-note{margin-right:18px}.split-intro,.process-intro{column-gap:32px}.split-intro>p:last-child,.process-intro .muted{font-size:14px}#moznosti{padding:64px 20px}.feature-grid h3{font-size:22px}#moznosti .feature-grid{gap:20px}.steps{gap:22px}.steps h3{font-size:16px}#bezpecnost,.faq-grid{column-gap:32px}.references-section{padding-block:64px}.reference-featured{padding:28px}.onboarding-band #jak{padding-block:64px 40px}#kontakt{grid-template-columns:1fr;padding:32px;gap:28px}.contact-form-panel{padding:26px}.contact-intro{padding:0}#kontakt .contact-lead{max-width:520px;margin-bottom:24px}.contact-hint{margin-top:20px}}
+@media(max-width:600px){h2{font-size:34px}.hero{padding-top:36px;gap:28px}.hero h1{font-size:clamp(35px,9.2vw,52px)}.hero .lead{font-size:17px}.hero .actions{align-items:flex-start;flex-direction:column;gap:12px}.hero-product .chat{padding:17px 14px}.hero #demo-answer{min-height:250px}.hero .eyebrow{font-size:10px;letter-spacing:.07em}.eyebrow::before{width:24px}.split-intro,.process-intro{grid-template-columns:1fr;gap:0}.split-intro>p:last-child,.process-intro .muted{margin-top:20px;font-size:15px}.split-intro .eyebrow,.process-intro .eyebrow{grid-column:auto}.section-intro{margin-bottom:32px}#moznosti .feature-grid{margin-top:34px;grid-template-columns:1fr;gap:30px}.feature-grid h3{font-size:26px}#moznosti .feature-grid article>p{margin-bottom:18px}#moznosti .feature-grid blockquote{min-height:0}.reference-heading{gap:18px}.reference-featured{padding:26px 24px}.reference-featured blockquote{font-size:26px}.reference-grid{gap:0}.reference-card:not(.reference-featured){padding:24px 0}.reference-disclosure{max-width:290px}.steps{grid-template-columns:1fr;gap:28px}.steps li,.steps li:last-child{display:grid;grid-template-columns:35px 1fr;gap:18px}.steps li>span{margin:0}.steps li::before{left:17px;right:auto;top:42px;bottom:-20px;border-top:0;border-left:1px solid var(--border)}.steps li:last-child::before{display:none}.steps h3{font-size:18px}.steps p{margin-top:6px}#bezpecnost{grid-template-columns:1fr;gap:22px;padding-block:28px 40px}#bezpecnost h2,.faq-grid h2{font-size:29px}.pricing-section{padding-bottom:40px}.trial-note{margin-top:24px!important}.price-card{padding:26px 24px}.price-card-featured{padding-top:24px}.faq-grid{grid-template-columns:1fr;gap:30px;padding-block:32px 52px}#kontakt{padding:28px 20px;margin-bottom:48px;gap:28px}.contact-form-panel{padding:22px 16px}#kontakt h2{font-size:32px}.footer-brand img{width:130px}}
+
+/* Complete, even outlines; annotations share a single handwritten treatment. */
+.hero-product{border:1px solid var(--border)}
+.price-card-featured{border:1.5px solid var(--accent-orange-line);padding-top:32px}
+#kontakt{border:1px solid var(--border)}
+.source{border:0;padding-left:0}
+.form-error-summary{border:1px solid var(--danger);border-radius:7px}
+.demo-note.handwritten-note,.reference-disclosure.handwritten-note,.split-intro>.trial-note.handwritten-note{
+  display:block;position:relative;width:fit-content;max-width:320px;padding:4px 8px;
+  border:0;border-radius:0;background:transparent;box-shadow:none;
+  font:600 24px/1.18 "Caveat","Segoe Print",cursive!important;
+  letter-spacing:0;color:var(--accent-orange);transform:rotate(-2deg);transform-origin:center;
+}
+.handwritten-note strong,.handwritten-note>span{display:block;font:inherit;color:inherit}
+.handwritten-note strong{font-size:29px;font-weight:600;line-height:1.14;margin-bottom:5px}
+.handwritten-note>span{font-size:24px;line-height:1.2;font-weight:600;margin:0}
+.demo-note.handwritten-note{margin:18px 18px 0 auto}
+.demo-note.handwritten-note::after{content:none}
+.reference-disclosure.handwritten-note{margin:0 4px 0 0}
+.split-intro>.trial-note.handwritten-note{margin:0 0 6px}
+@media(max-width:850px){.reference-disclosure.handwritten-note{max-width:290px}}
+@media(max-width:600px){
+ .price-card-featured{padding-top:26px}
+ .demo-note.handwritten-note,.reference-disclosure.handwritten-note,.split-intro>.trial-note.handwritten-note{max-width:min(100%,300px);padding-inline:5px}
+ .handwritten-note strong{font-size:27px}.handwritten-note>span{font-size:23px}
+ .demo-note.handwritten-note{margin-top:18px;margin-right:5px}
+ .split-intro>.trial-note.handwritten-note{margin-top:24px}
+}
+
+/* A compact, centered comparison for two plans. */
+.pricing-section>.wrap{max-width:900px}
+.pricing-section .split-intro{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);column-gap:36px}
+.pricing-section .price-card{padding:30px}
+.pricing-section .plan-heading{min-height:32px}
+@media(max-width:700px){.pricing-section .pricing-grid{grid-template-columns:1fr;max-width:440px;margin-inline:auto}.pricing-section>.wrap{max-width:540px}.pricing-section .split-intro{grid-template-columns:1fr;gap:0}.pricing-section .trial-note.handwritten-note{margin-top:22px}.pricing-section .price-card{padding:28px}}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ethel — Méně hledání. Více přehledu.</title>
+<meta name="description" content="Návrh webu Ethel. AI asistentka pro Helios Inuvio. Odpovědi, souvislosti a pomoc s každodenní prací.">
+<meta name="robots" content="noindex,nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/brand/fonts.css"><link rel="stylesheet" href="assets/tokens.css"><link rel="stylesheet" href="assets/web.css"><link rel="stylesheet" href="assets/overrides.css">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('ethel-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}</script>
+<link rel="stylesheet" href="assets/forms.css"><link rel="stylesheet" href="assets/composition.css">
+</head>
+<body>
+<a class="skip" href="#obsah">Přejít k obsahu</a>
+<div class="review-bar"><span>Návrh webu · verze 3.2</span></div>
+<header class="site-header"><div class="wrap nav-row"><a class="logo" href="#" aria-label="Ethel – úvod"><img class="logo-light" src="assets/logos/ethel-light-animated.svg" alt="Ethel" width="103" height="35"><img class="logo-dark" src="assets/logos/ethel-dark-animated.svg" alt="Ethel" width="103" height="35"></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu</button><nav id="main-nav" aria-label="Hlavní navigace"><a href="#moznosti">Co Ethel umí</a><a href="#reference">Reference</a><a href="#jak">Jak funguje</a><a href="#bezpecnost">Bezpečnost</a><a href="#cena">Cena</a></nav><div class="theme-picker" role="group" aria-label="Barevný režim"><button type="button" data-set-theme="light" aria-pressed="true">Světlý</button><button type="button" data-set-theme="dark" aria-pressed="false">Tmavý</button></div><a class="button small header-cta" href="#kontakt">Domluvit demo ↗</a></div></header>
+<main id="obsah">
+<section class="hero wrap"><div class="hero-copy"><p class="eyebrow">AI asistentka pro Helios Inuvio</p><h1>Méně hledání.<br><span>Více <em>přehledu</em>.</span></h1><p class="lead">Zeptejte se Ethel. Najde odpověď ve vašem Heliosu, vysvětlí souvislosti a pomůže vám s každodenní prací.</p><div class="actions"><a class="button" href="#kontakt">Vyzkoušet Ethel ↗</a><a class="text-link" href="#ukazka">Podívat se, jak odpovídá ↓</a></div><p class="fine">Přímo v Heliosu. Česky. V kontextu vaší práce.</p></div><div class="hero-demo"><div class="hero-product" id="ukazka"><div class="window-bar"><span class="window-brand"><img class="logo-light" src="assets/logos/ethel-light.svg" alt="Ethel"><img class="logo-dark" src="assets/logos/ethel-dark.svg" alt="Ethel"></span><span>Faktury vydané / přehled</span><span class="window-close" aria-hidden="true">— &nbsp; □</span></div><div class="product-inner"><div class="app-rail" aria-hidden="true"><span class="rail-active">☰</span><span>▦</span><span>⚙</span></div><div class="chat"><div class="chat-meta">Kontext z Heliosu <span>Ukázková data</span></div><p class="user-message" id="demo-question">Které faktury jsou více než 30 dní po splatnosti?</p><img class="app-avatar" src="assets/logos/ethel-icon-light.svg" alt="Ethel" width="30" height="30"><div id="demo-answer" aria-live="polite"><p>Celkem <strong>12 faktur za 328 500 Kč.</strong><br>Největší část připadá na Alfa trade.</p><table><caption class="sr-only">Ukázkový přehled pohledávek</caption><thead><tr><th>Odběratel</th><th>Doklady</th><th class="num">Po splatnosti</th></tr></thead><tbody><tr><td>Alfa trade</td><td>5</td><td class="num">184 200 Kč</td></tr><tr><td>Delta servis</td><td>4</td><td class="num">96 500 Kč</td></tr><tr><td>Ostatní</td><td>3</td><td class="num">47 800 Kč</td></tr></tbody></table></div><div class="source" id="demo-source">Zdroj: Faktury vydané · CZK</div><div class="demo-choice" role="group" aria-label="Ukázková otázka"><button type="button" data-demo="invoices" aria-pressed="true">Pohledávky</button><button type="button" data-demo="columns" aria-pressed="false">Sestava</button><button type="button" data-demo="sql" aria-pressed="false">SQL</button></div></div></div></div><aside class="demo-note handwritten-note" aria-label="Jak se ptát Ethel"><strong>Ptejte se vlastními slovy.</strong><span>Třeba jako kolegy.</span></aside></div></section>
+
+<section id="moznosti" class="section wrap"><div class="section-intro split-intro"><p class="eyebrow">V každodenním provozu</p><h2>Helios zná vaše data.<br>Ethel vám v nich pomůže.</h2><p>Od rychlé otázky po vysvětlení složité sestavy. Pro lidi, kteří v Heliosu pracují, i pro ty, kteří se o něj starají.</p></div><div class="feature-grid"><article><div class="feature-index"><span>01 / ODPOVĚDI</span></div><h3>Z otázky rovnou <br>k přehledu.</h3><p>Objednávky, faktury, zákazníci nebo sklady. Popište, co potřebujete zjistit, vlastními slovy.</p><blockquote>„Který zákazník měl letos největší obrat?“</blockquote></article><article><div class="feature-index"><span>02 / SOUVISLOSTI</span></div><h3>Víte, na co <br>se právě díváte.</h3><p>Ethel pomůže vysvětlit sestavu, sloupec i logiku systému. Nový kolega se snáz zorientuje.</p><blockquote>„Co znamenají tyto sloupce a filtry?“</blockquote></article><article><div class="feature-index"><span>03 / TECHNICKÁ POMOC</span></div><h3>Méně času <br>nad cizím kódem.</h3><p>Vysvětlí SQL dotaz, proceduru nebo vazby mezi objekty. Podpora pro správce a vývojáře.</p><blockquote>„Vysvětli mi, co dělá tato procedura.“</blockquote></article></div></section>
+<section id="reference" hidden class="section wrap references-section" aria-labelledby="references-title">
+  <div class="reference-heading">
+    <div class="section-intro"><p class="eyebrow">Z každodenní praxe</p><h2 id="references-title">Jak se s Ethel<br>pracuje.</h2></div>
+    <p class="reference-disclosure handwritten-note"><strong>Ukázkové reference</strong><span>Jména, firmy i citace jsou fiktivní. Portréty vytvořila AI.</span></p>
+  </div>
+  <div class="reference-grid">
+    <figure class="reference-card reference-featured">
+      <div class="reference-topic"><span>Finance a přehledy</span><span class="quote-mark" aria-hidden="true">“</span></div>
+      <blockquote>„Když potřebuju zjistit, kdo nám dluží, prostě se zeptám. <strong>Nemusím čekat na kolegu</strong>, který mi připraví sestavu.“</blockquote>
+      <figcaption><div><strong>Jana Novotná</strong><span>Vedoucí ekonomiky · Firma A</span></div></figcaption>
+    </figure>
+    <figure class="reference-card">
+      <div class="reference-topic"><span>Obchod a zákazníci</span><span class="quote-mark" aria-hidden="true">“</span></div>
+      <blockquote>„Před schůzkou mi Ethel pomůže <strong>najít souvislosti</strong> v objednávkách zákazníka. V tabulkách bych je hledal dlouho.“</blockquote>
+      <figcaption><div><strong>Martin Kovář</strong><span>Obchodní ředitel · Firma B</span></div></figcaption>
+    </figure>
+    <figure class="reference-card">
+      <div class="reference-topic"><span>Správa Heliosu</span><span class="quote-mark" aria-hidden="true">“</span></div>
+      <blockquote>„S Ethel se rychleji zorientuju i ve starším SQL bez dokumentace. Při úpravách se <strong>mám od čeho odrazit.</strong>“</blockquote>
+      <figcaption><div><strong>Petr Dvořák</strong><span>Správce systému · Firma C</span></div></figcaption>
+    </figure>
+  </div>
+</section>
+<div class="onboarding-band">
+<section id="jak" class="band"><div class="wrap process-grid"><div class="process-intro"><p class="eyebrow">Začít je jednoduché</p><h2>Znáte Helios.<br>Ethel se přidá.</h2><p class="muted">Pomůžeme vám s prvním zapojením. Pak se můžete věnovat tomu, co potřebujete zjistit.</p></div><ol class="steps"><li><span>01</span><div><h3>Propojíte Ethel s Heliosem</h3><p>Společně nastavíme připojení k vaší databázi a provedeme vás prvním zapojením.</p></div></li><li><span>02</span><div><h3>Aktivujete přístup</h3><p>Po domluvě dostanete aktivační token. O nastavení AI se postaráme my.</p></div></li><li><span>03</span><div><h3>Začnete se ptát</h3><p>Otevřete Ethel přímo z Heliosu. Otázku můžete položit v kontextu aktuální sestavy.</p></div></li></ol></div></section>
+<section id="bezpecnost" class="section wrap safety-grid"><div><p class="eyebrow">Důvěra stojí na podrobnostech</p><h2>Jasně popsané<br>zacházení s daty.</h2></div><div><p class="lead-small">U firemních dat potřebujete vědět, co se zpracovává, kde a za jakých podmínek.</p><p class="muted">Před nasazením s vámi projdeme připojení, přístupová oprávnění a způsob zpracování dotazů. Podrobný popis najdete na stránce bezpečnosti Ethel.</p><a class="text-link" href="https://ethel.cz/bezpecnost" target="_blank" rel="noopener">Podrobnosti o bezpečnosti ↗</a></div></section>
+
+</div>
+<section id="cena" class="section pricing-section"><div class="wrap"><div class="section-intro split-intro"><p class="eyebrow">Cena podle vašeho provozu</p><h2>Pro jeden tým.<br>I pro celou firmu.</h2><p class="trial-note handwritten-note"><strong>Nejdřív si to vyzkoušejte.</strong><span>14 dní zdarma. Bez platební karty.</span></p></div><div class="pricing-grid"><article class="price-card price-card-featured" aria-label="Tarif Standard">
+<div class="plan-heading"><p class="eyebrow">Standard</p><span class="plan-pick">Pro první tým</span></div><h3>Každodenní práce<br>v jedné databázi.</h3><p class="price">1 490 <span>Kč / měsíc</span></p><p class="fine">Bez DPH · měsíční platba</p><ul><li>1 databáze</li><li>5 uživatelů v ceně</li><li>Další uživatel za 249 Kč / měsíc</li><li>Průběžné aktualizace</li></ul><a href="mailto:info@ethel.cz?subject=Vyzkou%C5%A1en%C3%AD%20Ethel%20Standard" class="button">Vyzkoušet Standard ↗</a></article><article class="price-card" aria-label="Tarif Enterprise"><div class="plan-heading"><p class="eyebrow">Enterprise</p><span class="plan-scale">Pro širší provoz</span></div><h3>Více databází.<br>Širší tým.</h3><p class="price">4 990 <span>Kč / měsíc</span></p><p class="fine">Bez DPH · měsíční platba</p><ul><li>Neomezený počet databází a uživatelů</li><li>Úvodní konzultace a pomoc s nasazením</li><li>Prioritní podpora</li><li>Vlastní konfigurace promptů</li></ul><a href="mailto:info@ethel.cz?subject=Nasazen%C3%AD%20Ethel%20Enterprise" class="button">Domluvit nasazení ↗</a></article></div></div></section>
+<section class="section wrap faq-grid"><div><p class="eyebrow">Než začnete</p><h2>Možná vás<br>ještě zajímá.</h2></div><div class="faq-list"><details><summary>Pro koho je Ethel určená?</summary><p>Pro firmy používající Helios Inuvio. Pomáhá s orientací v datech a sestavách, běžnými dotazy i technickými otázkami kolem SQL.</p></details><details><summary>Musím znát SQL?</summary><p>Pro běžné otázky ne. Dotaz můžete napsat česky, podobně jako byste se ptali kolegy. Technické možnosti jsou k dispozici také správcům a vývojářům.</p></details><details><summary>Jak Ethel vyzkouším?</summary><p>Napište nám. Domluvíme vhodný postup zapojení a aktivaci čtrnáctidenní zkušební doby.</p></details><details><summary>Kdo za Ethel stojí?</summary><p>Ethel vyvíjí Jakub Ševela, solution architect zaměřený na Helios Inuvio. Ethel je nezávislý nástroj a není produktem společnosti Asseco Solutions.</p></details></div></section>
+<section id="kontakt" class="wrap contact-section" aria-labelledby="contact-title">
+  <div class="contact-intro">
+    <p class="eyebrow">Teď vaše otázka</p>
+    <h2 id="contact-title">Co byste chtěli<br>zjistit jako první?</h2>
+    <p class="contact-lead">Napište, co dnes řešíte. Společně se podíváme, kde vám Ethel může ušetřit práci.</p>
+    <div class="contact-person"><span class="contact-person-mark" aria-hidden="true">JŠ</span><div><strong>Jakub Ševela</strong><span>Autor Ethel · propojení s Heliosem</span></div></div>
+    <a class="contact-email" href="mailto:info@ethel.cz"><span>info@ethel.cz</span></a>
+    <div class="contact-hint">Stačí pár vět. Technické podrobnosti můžeme probrat společně.</div>
+  </div>
+  <div class="contact-form-panel">
+    <div class="form-heading"><h3>Napište mi</h3><span class="form-demo-label">Ukázkový formulář</span></div>
+    <p class="form-description">Pole označená * jsou povinná.</p>
+    <form id="contact-form" class="contact-form" novalidate="">
+      <div class="form-error-summary" id="contact-errors" role="alert" hidden="">Zkontrolujte prosím označená pole.</div>
+      <div class="form-row">
+        <div class="form-field"><label for="contact-name">Vaše jméno <span aria-hidden="true">*</span></label><input id="contact-name" name="name" type="text" autocomplete="name" required="" maxlength="100" placeholder="Jméno a příjmení" aria-describedby="name-error"><div class="field-error" id="name-error" hidden=""></div></div>
+        <div class="form-field"><label for="contact-email">E-mail <span aria-hidden="true">*</span></label><input id="contact-email" name="email" type="email" autocomplete="email" required="" maxlength="254" placeholder="vy@firma.cz" aria-describedby="email-error"><div class="field-error" id="email-error" hidden=""></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label for="contact-company">Firma <span class="optional">nepovinné</span></label><input id="contact-company" name="company" type="text" autocomplete="organization" maxlength="150" placeholder="Název vaší firmy"></div>
+        <div class="form-field"><label for="contact-topic">Co vás zajímá?</label><select id="contact-topic" name="topic"><option value="demo">Chci si Ethel vyzkoušet</option>Zapojení do našeho Heliosu<option value="question">Mám dotaz</option></select></div>
+      </div>
+      <div class="form-field"><label for="contact-message">S čím vám můžu pomoci? <span aria-hidden="true">*</span></label><textarea id="contact-message" name="message" rows="4" required="" maxlength="4000" placeholder="Například: Chceme se rychleji orientovat v pohledávkách…" aria-describedby="message-error"></textarea><div class="field-error" id="message-error" hidden=""></div></div>
+      <button class="button form-submit" type="submit"><span>Odeslat zprávu</span></button>
+      <div class="form-note">V tomto náhledu se údaje nikam neodesílají. Můžete si vyzkoušet vyplnění i potvrzovací obrazovku.</div>
+      <noscript>Pro vyzkoušení formuláře zapněte JavaScript. Napsat můžete na info@ethel.cz.</noscript>
+    </form>
+    <div id="contact-success" class="form-success" tabindex="-1" role="status" hidden="">
+      <h3>Děkuji za zprávu.</h3>
+      <p>Takto bude vypadat potvrzení po odeslání.</p>
+      <p class="success-demo-note">Toto je pouze ukázka. Zpráva nebyla odeslána.</p>
+      <button class="button" id="contact-again" type="button">Vyzkoušet znovu</button>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="wrap"><div class="footer-top"><div><span class="footer-brand"><img class="logo-light" src="assets/logos/ethel-light-animated.svg" alt="Ethel"><img class="logo-dark" src="assets/logos/ethel-dark-animated.svg" alt="Ethel"></span><p>AI asistentka pro Helios Inuvio.</p></div><div class="related"><a href="https://feedco.cz/" target="_blank" rel="noopener"><strong>feedco<span class="feed-dot">.</span></strong><span>Propojení systémů ↗</span></a><a href="https://jakubsevela.cz/" target="_blank" rel="noopener"><strong>jakub<span class="jakub-dot">.</span>ševela</strong><span>Integrace a automatizace ↗</span></a></div></div><div class="footer-bottom"><span>© 2026 Ethel · Mgr. Jakub Ševela · IČ: 75185628</span><a href="https://ethel.cz/docs/" target="_blank" rel="noopener">Nápověda ↗</a><a href="https://ethel.cz/bezpecnost" target="_blank" rel="noopener">Bezpečnost ↗</a></div><p class="fine">Ethel není produktem společnosti Asseco Solutions.</p></footer>
+<script src="assets/web.js"></script>
+<script src="assets/forms.js"></script>
+
+</body></html>
