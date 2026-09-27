@@ -44,9 +44,6 @@ h3{font-size:28px;line-height:1.3;letter-spacing:-.035em}
 .lead{font-size:19px;line-height:1.75;color:var(--text-muted);max-width:475px;margin:27px 0 0}
 .actions{display:flex;align-items:center;gap:23px;flex-wrap:wrap;margin-top:31px}
 
-/* Pulzující tečka z loga na konci nadpisů sekcí (modrá, pak terakota; 4,8 s). */
-.pulse-dot{display:inline-block;width:.17em;height:.17em;margin-left:.12em;border-radius:50%;background:var(--brand);vertical-align:baseline;animation:dot-pulse 4.8s ease-in-out infinite}
-@keyframes dot-pulse{0%,100%{opacity:.35;transform:scale(.62);background:var(--brand)}22%,28%{opacity:1;transform:scale(1);background:var(--pulse-blue)}48%{opacity:.35;transform:scale(.62);background:var(--pulse-blue)}52%{opacity:.35;transform:scale(.62);background:var(--pulse-warm)}72%,78%{opacity:1;transform:scale(1);background:var(--pulse-warm)}96%{opacity:.35;transform:scale(.62);background:var(--pulse-warm)}}
 
 /* Tabulky (ukázky dat v okně Ethel). */
 table{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums}
@@ -230,8 +227,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .card .card-fine{font-size:13px;color:var(--text-muted)}
 .card .card-fine strong,.card p strong{color:var(--text)}
 .card .button{align-self:flex-start;margin-top:auto}
-.card-featured{border:1.5px solid var(--accent-line)!important}
-.card-accent{border-left:3px solid var(--accent-line)!important}
+.card-accent{border:1.5px solid var(--accent-line)!important}
 .card-num{display:flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border-radius:50%;background:var(--accent-tint);color:var(--accent);font:600 13px var(--font-code)}
 .card-steps .card p{color:var(--text);font-size:16px}
 .card-steps-list{grid-template-columns:1fr}
@@ -242,7 +238,10 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 /* Ikona v nadpisu karty, chipy, štítky tarifů, seznam otázek. */
 .card-icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;flex:none;border-radius:10px;background:var(--brand-tint)}
 .card-icon svg{width:19px;height:19px;fill:none;stroke:var(--brand);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.card-topline{border-top:3px solid var(--brand-tint)}
+/* Karta s terakotovou ikonou a terakotovými odrážkami příkladů (sekce Co umí). */
+.card-accent-icon .card-icon{background:var(--accent-tint)}
+.card-accent-icon .card-icon svg{stroke:var(--accent)}
+.card-accent-icon .ask-list li::before{background:var(--accent);opacity:.8}
 .block-dark .card h3{flex-direction:column;align-items:flex-start;gap:14px;font-size:18px}
 .block-dark .card-icon{background:var(--ink-icon)}
 .block-dark .card-icon svg{stroke:var(--ink-link)}
@@ -289,11 +288,14 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .card .card-price .per{font-size:15px;font-weight:400;letter-spacing:0;color:var(--text-muted)}
 .card .card-price.small{font-size:26px}
 .plans .card{padding:30px}
-.card-plan.card-featured{box-shadow:var(--shadow-float)}
+/* Oba tarify vypadají stejně; hover přebarví rámeček, odrážky a tlačítko na terakotu. */
+.card-plan{transition:border-color .15s}
+.card-plan:hover{border-color:var(--accent-line)}
+.card-plan:hover .ticks li::before{color:var(--accent)}
+.card-plan:hover .button{border-color:var(--accent-line);color:var(--accent);background:var(--accent-tint)}
 .plan-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .plan-top h3{font-size:22px}
 .plan-tag{font-size:12px;font-weight:600;color:var(--brand);background:var(--brand-tint);padding:4px 10px;border-radius:var(--radius-pill)}
-.card-featured .plan-tag{color:var(--accent);background:var(--accent-tint)}
 .addon{display:flex;gap:12px;align-items:flex-start;margin:0 0 14px;padding:14px 16px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:10px;background:var(--brand-tint);cursor:pointer;transition:background .15s,border-color .15s}
 .addon:has(input:checked){border-style:solid;border-color:var(--brand);background:var(--surface)}
 .addon input{width:18px;height:18px;margin:3px 0 0;flex:none;accent-color:var(--brand);cursor:pointer}
@@ -302,7 +304,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .addon small{display:block;margin-top:4px;font-size:13px;line-height:1.55;color:var(--text-muted)}
 .ticks{list-style:none;margin:8px 0 12px;padding:14px 0 0;border-top:1px solid var(--border);font-size:15px}
 .ticks li{position:relative;padding:4px 0 4px 22px}
-.ticks li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700}
+.ticks li::before{content:"✓";position:absolute;left:0;color:var(--brand);font-weight:700;transition:color .15s}
 
 .author{display:grid;grid-template-columns:200px minmax(0,1fr);gap:48px;align-items:start}
 .author-photo{width:200px;height:200px;object-fit:cover;border-radius:var(--radius-card);display:block}
@@ -370,7 +372,9 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .footer-contact{display:flex;flex-wrap:wrap;gap:6px 18px;margin:6px 0 0;font-size:14px}
 .footer-contact a{text-decoration:none;color:var(--ink-text)}
 .footer-contact a:hover,.footer-links a:hover{color:var(--ink-link)}
-.related{display:flex;gap:55px}
+.related{display:grid;gap:14px}
+.footer-top .related-label{margin:0;font:700 11px/1.6 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
+.related-links{display:flex;gap:55px}
 .related a{text-decoration:none}
 .related strong{font-size:20px;letter-spacing:-.6px;color:var(--ink-text)}
 .related a>span{display:block;color:var(--ink-muted);font-size:12px;margin-top:8px}
@@ -444,7 +448,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  .author-photo{width:112px;height:112px}
  .check-card dl>div{grid-template-columns:minmax(0,1fr) auto;gap:2px 10px}
  .check-card dt{grid-column:1/-1}
- .related{gap:30px;flex-wrap:wrap}
+ .related-links{gap:30px;flex-wrap:wrap}
  .footer-top{gap:24px}
  .footer-brand img{width:130px}
  .cookie-banner{flex-direction:column;align-items:flex-start}
@@ -458,5 +462,4 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 @media(prefers-reduced-motion:reduce){
  html{scroll-behavior:auto}
  .button,.button:hover{transition:none;transform:none}
- .pulse-dot{animation:none}
 }
