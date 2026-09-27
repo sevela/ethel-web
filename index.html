@@ -785,6 +785,10 @@
     transform: translateY(-2px);
     box-shadow: 0 0 30px rgba(107,148,184,0.2), 0 8px 30px rgba(0,0,0,0.4);
   }
+  .form-note a, .cookie-banner-text a {
+    color: var(--text-secondary); text-decoration: underline; text-underline-offset: 2px;
+  }
+  .form-note a:hover, .cookie-banner-text a:hover { color: var(--text); }
   .form-note {
     font-size: 0.72rem; color: var(--text-dim); text-align: center;
     margin-top: 1rem;
@@ -1330,7 +1334,7 @@
         <input class="form-input" type="text" id="f-mail" tabindex="-1" autocomplete="off">
       </div>
       <button class="form-submit" id="form-submit">Odeslat</button>
-      <div class="form-note">Žádný spam. Odpovídáme osobně.</div>
+      <div class="form-note">Žádný spam. Odpovídáme osobně. Jak s&nbsp;údaji nakládáme, popisují <a href="/zasady-ochrany-osobnich-udaju/">Zásady zpracování osobních údajů</a>.</div>
     </div>
     <div class="modal-success" id="modal-success">
       <div class="check-icon">✓</div>
@@ -1346,7 +1350,7 @@
 <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
   <div class="cookie-banner-text">
     <strong>Sušenky? 🍪</strong> Používáme jen analytické cookies (Google Analytics) k pochopení, jak vám web slouží.
-    Žádný marketing, žádný tracking napříč weby. Můžete je odmítnout – web bude fungovat normálně.
+    Žádný marketing, žádný tracking napříč weby. Můžete je odmítnout – web bude fungovat normálně. Více v <a href="/zasady-ochrany-osobnich-udaju/">Zásadách zpracování osobních údajů</a>.
   </div>
   <div class="cookie-banner-actions">
     <button class="cookie-btn cookie-btn-reject" id="cookie-reject" type="button">Odmítnout</button>
@@ -1358,7 +1362,7 @@
 <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
   <div class="cookie-banner-text">
     <strong>Sušenky? 🍪</strong> Používáme jen analytické cookies (Google Analytics) k pochopení, jak vám web slouží.
-    Žádný marketing, žádný tracking napříč weby. Můžete je odmítnout – web bude fungovat normálně.
+    Žádný marketing, žádný tracking napříč weby. Můžete je odmítnout – web bude fungovat normálně. Více v <a href="/zasady-ochrany-osobnich-udaju/">Zásadách zpracování osobních údajů</a>.
   </div>
   <div class="cookie-banner-actions">
     <button class="cookie-btn cookie-btn-reject" id="cookie-reject" type="button">Odmítnout</button>
@@ -1370,7 +1374,7 @@
 <footer id="kontakt">
   <div class="footer-left">
     &copy; 2026 Ethel &middot; Embedded Thinking for Helios
-    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a> &middot; <a href="/bezpecnost">Bezpečnost</a> &middot; <a href="/faq">FAQ</a> &middot; <a href="/download/">Ke stažení</a> &middot; <a href="/docs/changelog">Co je nového</a> &middot; <a href="/partneri">Partneři</a>
+    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a> &middot; <a href="/bezpecnost">Bezpečnost</a> &middot; <a href="/zasady-ochrany-osobnich-udaju/">Zásady zpracování osobních údajů</a> &middot; <a href="/faq">FAQ</a> &middot; <a href="/download/">Ke stažení</a> &middot; <a href="/docs/changelog">Co je nového</a> &middot; <a href="/partneri">Partneři</a>
     <br><span class="footer-disclaimer">Ethel není produkt společnosti Asseco Solutions.</span>
   </div>
   <div class="footer-right">v1.0 &middot; brno, cz</div>
