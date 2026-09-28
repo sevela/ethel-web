@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="cs"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ke stažení · Ethel, AI asistentka pro Helios Inuvio</title>
+<meta name="description" content="Stáhněte si aktuální verzi Ethel pro Windows. Co budete potřebovat, jak proběhne instalace a co dělat, když Windows soubor zastaví.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="author" content="Jakub Ševela">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Ke stažení · Ethel, AI asistentka pro Helios Inuvio">
+<meta property="og:description" content="Aktuální verze Ethel pro Windows, požadavky a průběh instalace.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ethel.cz/download/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Ethel">
+<meta property="og:image" content="https://ethel.cz/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ke stažení · Ethel, AI asistentka pro Helios Inuvio">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ke stažení · Ethel, AI asistentka pro Helios Inuvio">
+<meta name="twitter:description" content="Aktuální verze Ethel pro Windows, požadavky a průběh instalace.">
+<meta name="twitter:image" content="https://ethel.cz/og-image.png">
+<meta name="twitter:image:alt" content="Ke stažení · Ethel, AI asistentka pro Helios Inuvio">
+
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/nahled-6/assets/tokens.css">
+<link rel="stylesheet" href="/nahled-6/assets/ethel.css">
+</head>
+<body>
+<a class="skip" href="#obsah">Přejít k obsahu</a>
+<header class="site-header"><div class="wrap nav-row"><a class="logo" href="/nahled-6/" aria-label="Ethel, úvod"><img src="/nahled-6/assets/logos/ethel-light-animated.svg" alt="Ethel" width="105" height="29"></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu</button><nav id="main-nav" aria-label="Hlavní navigace"><a href="/nahled-6/#jak">Jak Ethel funguje</a><a href="/nahled-6/#scenare">Scénáře</a><a href="/nahled-6/#kontrola">Bezpečnost</a><a href="/nahled-6/#cena">Cena</a><a href="/nahled-6/#autor">Kontakt</a></nav><a class="button small button-solid header-cta" href="/nahled-6/#kontakt">Vyzkoušet zdarma</a></div></header>
+<main id="obsah">
+<section class="page-hero wrap"><p class="eyebrow">Ke stažení</p><h1>Ethel pro Windows</h1><p class="lead">Jeden soubor, <code>Ethel.exe</code>. Uložíte ho do&nbsp;složky Heliosu, spustíte a&nbsp;v&nbsp;Nastavení vložíte aktivační token, který jste dostali e-mailem. Databázi připraví Ethel sama.</p><div class="actions"><a class="button button-solid" href="https://proxy.ethel.cz/api/agent/download" id="dl-hero">Stáhnout Ethel.exe</a><a class="more" href="/nahled-6/#kontakt">Nemáte token? Napište si o trial →</a></div></section>
+
+<section id="soubor" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">Soubor</p><h2>Aktuální verze</h2></div>
+<div class="cards cards-3">
+<article class="card"><h3>Ethel.exe</h3><!-- Verzi a datum doplní /assets/download.js z proxy.ethel.cz/api/agent/latest.
+     Odkaz vede vždy na nejnovější zapnuté vydání, i bez skriptu. --><p id="dl-version" aria-live="polite">Zjišťuji aktuální verzi…</p><p id="dl-notes" hidden></p><ul class="chips"><li>Windows 10 a novější</li><li>64bit</li><li>Bez instalátoru, jeden soubor</li><li>Stále stejný odkaz: proxy.ethel.cz/api/agent/download</li></ul><a class="button" href="https://proxy.ethel.cz/api/agent/download">Stáhnout</a></article>
+<article class="card"><h3>Co budete potřebovat</h3><p>Helios Inuvio nebo Helios Easy na&nbsp;Windows, účet na&nbsp;SQL Serveru s&nbsp;rolí <code>sysadmin</code> pro instalaci a&nbsp;internet. Helios Green podporován není.</p><p>Dále aktivační token — ten dostanete e-mailem po&nbsp;založení trialu nebo objednávce. Bez něj Ethel neodpoví.</p><ul class="chips"><li>Helios Inuvio · Helios Easy</li><li>SQL Server, role sysadmin pro instalaci</li><li>Internet</li><li>Aktivační token</li></ul></article>
+<article class="card"><h3>Windows může soubor zastavit</h3><p>Ethel.exe zatím nenese podpis vydavatele, a&nbsp;tak ho prohlížeč může označit jako neznámý a&nbsp;Windows při prvním spuštění ukázat varování SmartScreen. Soubor stahujte jen z&nbsp;téhle stránky nebo z&nbsp;odkazu výš, jinou cestu k&nbsp;němu nenabízíme.</p><p>Co s&nbsp;tím: v&nbsp;prohlížeči zvolte <strong>Ponechat</strong>. Stažený soubor pak odblokujte: pravé tlačítko → <strong>Vlastnosti</strong> → zaškrtnout <strong>Odblokovat</strong> → OK. Totéž udělá příkaz v&nbsp;PowerShellu:</p><pre>Unblock-File -Path "$env:USERPROFILE\Downloads\Ethel.exe"</pre></article>
+</div></div></section>
+
+<section id="instalace" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">Průběh instalace</p><h2>Pět kroků, žádný skript</h2><p>Databázové objekty vytváří Ethel sama z&nbsp;okna Nastavení. Do&nbsp;jádra Heliosu se nezasahuje, do&nbsp;databáze přibudou jen tabulky a&nbsp;procedury s&nbsp;předponou <code>Ethel</code>.</p></div>
+<ol class="cards card-steps-list">
+<li class="card"><span class="card-num">1</span><div><h3>Uložíte Ethel.exe do složky Heliosu</h3><p>Vedle <code>Helios.INI</code>, nebo do podsložky <code>win64</code>. Odblokujte ho podle postupu výš.</p></div></li>
+<li class="card"><span class="card-num">2</span><div><h3>Spustíte Ethel.exe a přihlásíte se</h3><p>Účtem SQL Serveru s rolí sysadmin, nebo účtem Windows, když ho server zná. Otevře se okno Ethel a&nbsp;správce v něm vidí sekci Správa.</p></div></li>
+<li class="card"><span class="card-num">3</span><div><h3>Vložíte aktivační token</h3><p>Nastavení → Licence a token. Zadává se jednou pro celou firmu, ukládá se do <code>Ethel.ini</code> vedle programu, ne do databáze.</p></div></li>
+<li class="card"><span class="card-num">4</span><div><h3>Nainstalujete Ethel do databáze</h3><p>Nastavení → Databáze: vyberete databázi Heliosu a uživatele, kteří budou Ethel používat. Ethel založí své tabulky, procedury a přihlašovací účet s právy popsanými v návodu pro správce.</p></div></li>
+<li class="card"><span class="card-num">5</span><div><h3>Otevřete Ethel z Heliosu</h3><p>V podporovaných přehledech přes menu Doplňky → Ethel nebo zkratku <strong>Ctrl+I</strong>. Ethel ví, ze kterého přehledu a záznamu jste ji vyvolali.</p></div></li>
+</ol>
+<p class="block-note">Nové verze pak nabízí Ethel sama: správce je uvidí v okně po přihlášení a jedním kliknutím program vymění. Předchozí verze zůstane vedle jako <code>Ethel.exe.predchozi</code>. Odinstalace: Nastavení → Databáze → Odinstalovat. Soubor programu pak smažete ručně.</p>
+<div class="actions"><a class="button" href="/nahled-6/docs/pro-spravce/">Návod pro správce: účty a práva</a><a class="button" href="/nahled-6/docs/prvni-kroky/">První kroky pro uživatele</a><a class="button" href="/nahled-6/docs/changelog/">Co je nového</a></div>
+</div></section>
+
+<section class="cta-band"><div class="wrap cta-band-inner"><div><h2>Vyzkoušejte Ethel na vlastních datech</h2><p>14 dní zdarma, aktivační klíč do 24 hodin.</p></div><a class="button button-solid" href="/nahled-6/#kontakt">Vyzkoušet 14 dní zdarma</a></div></section>
+</main>
+
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies" hidden><p><strong>Sušenky?</strong> Používáme jen analytické cookies, abychom věděli, jak vám web slouží. Žádný marketing ani sledování napříč weby. Můžete je odmítnout, web bude fungovat normálně. Více v&nbsp;<a href="/nahled-6/zasady-ochrany-osobnich-udaju/">Zásadách zpracování osobních údajů</a>.</p><div class="cookie-actions"><button class="button small button-solid" id="cookie-accept" type="button">Přijmout</button><button class="button small" id="cookie-reject" type="button">Odmítnout</button></div></div>
+
+<footer class="site-footer"><div class="wrap"><div class="footer-top"><div><span class="footer-brand"><img src="/nahled-6/assets/logos/ethel-on-dark-animated.svg" alt="Ethel"></span><p>AI asistentka pro Helios Inuvio.</p><p class="footer-contact"><a href="mailto:info@ethel.cz">info@ethel.cz</a><a href="tel:+420774267301">+420&nbsp;774&nbsp;267&nbsp;301</a><a href="https://www.linkedin.com/company/ethel-cz" target="_blank" rel="noopener">LinkedIn</a></p></div><div class="footer-sites"><p class="footer-sites-label">Další weby</p><div class="footer-sites-links"><a href="https://jakubsevela.cz/" target="_blank" rel="noopener">jakubsevela.cz ↗</a><a href="https://feedco.cz/" target="_blank" rel="noopener">feedco.cz ↗</a><a href="https://jaknahelios.cz/" target="_blank" rel="noopener">jaknahelios.cz ↗</a></div></div></div><div class="footer-links"><nav aria-label="Obsah webu"><a href="/nahled-6/funkce/">Co umí</a><a href="/nahled-6/bezpecnost/">Bezpečnost</a><a href="/nahled-6/#cena">Cena</a><a href="/nahled-6/download/">Ke stažení</a><a href="/nahled-6/novinky/">Novinky</a><a href="/nahled-6/zasady-ochrany-osobnich-udaju/">Osobní údaje</a></nav><nav aria-label="Nápověda"><a href="/nahled-6/docs/prvni-kroky/">První kroky</a><a href="/nahled-6/docs/pro-spravce/">Pro správce</a><a href="/nahled-6/docs/faq/">Časté otázky</a><a href="/nahled-6/docs/changelog/">Co je nového</a></nav></div><div class="footer-bottom footer-legal"><p>© 2026 Ethel · Mgr. Jakub Ševela · Lidická 700/19, 602 00 Brno · IČ: 75185628 · DIČ: CZ8503274703</p><p>Ethel je nezávislý nástroj a&nbsp;není produktem společnosti Asseco Solutions.</p></div></div></footer>
+<script src="/nahled-6/assets/web.js"></script>
+<script src="/nahled-6/assets/download.js"></script>
+</body></html>
