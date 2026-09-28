@@ -253,6 +253,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .cards-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .cards-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .cards-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.cards+.cards{margin-top:20px}
 .card{--card-bg:var(--surface);--card-border:var(--border);display:flex;flex-direction:column;gap:10px;min-width:0;padding:24px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-card)}
 .block-grey .card{border-color:transparent}
 .block-dark .card{--card-bg:var(--ink-surface);--card-border:var(--ink-border);color:var(--ink-text)}
@@ -364,6 +365,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .prose h2{font-size:clamp(26px,2.6vw,32px);line-height:1.2;letter-spacing:-.025em;margin:40px 0 0}
 .prose h2:first-child,.prose h3:first-child{margin-top:0}
 .prose h2+p,.prose h3+p{margin-top:10px}
+.prose h2+.faq-list{margin-top:18px}
 .prose ul,.prose ol{padding-left:22px}
 .prose li+li{margin-top:4px}
 .prose pre,.card pre{margin:16px 0;padding:14px 16px;border-radius:8px;background:var(--surface-alt);font:400 13px/1.6 var(--font-code);color:var(--text);overflow-x:auto}
