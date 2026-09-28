@@ -34,7 +34,7 @@
 </head>
 <body>
 <a class="skip" href="#obsah">Přejít k obsahu</a>
-<header class="site-header"><div class="wrap nav-row"><a class="logo" href="/" aria-label="Ethel, úvod"><img src="/assets/logos/ethel-light-animated.svg" alt="Ethel" width="105" height="29"></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu</button><nav id="main-nav" aria-label="Hlavní navigace"><a href="/#jak">Jak to funguje</a><a href="/#akce">Akce</a><a href="/#kontrola">Bezpečnost</a><a href="/#cena">Cena</a><a href="/#autor">Kontakt</a></nav><a class="button small button-solid header-cta" href="/#kontakt">Vyzkoušet zdarma</a></div></header>
+<header class="site-header"><div class="wrap nav-row"><a class="logo" href="/" aria-label="Ethel, úvod"><img src="/assets/logos/ethel-light-animated.svg" alt="Ethel" width="105" height="29"></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu</button><nav id="main-nav" aria-label="Hlavní navigace"><a href="/#jak">Jak to funguje</a><a href="/#scenare">Scénáře</a><a href="/#kontrola">Bezpečnost</a><a href="/#cena">Cena</a><a href="/#autor">Kontakt</a></nav><a class="button small button-solid header-cta" href="/#kontakt">Vyzkoušet zdarma</a></div></header>
 <main id="obsah">
 <section class="page-hero wrap"><p class="eyebrow">Nápověda</p><h1>Ethel pro správce: účty a práva</h1><p class="lead">Pod jakým účtem Ethel čte z databáze Heliosu, jaká práva potřebuje, hotové SQL pro správce a co si Ethel hlídá sama.</p></section>
 
@@ -51,7 +51,7 @@
 <p>Aktuální <code>Ethel.exe</code> a postup instalace najdete na stránce <a href="/download/">Ke stažení</a>. Ethel instaluje správce s rolí <strong>sysadmin</strong> na SQL Serveru přímo v okně Ethel: <strong>Nastavení → Databáze</strong>. Instalace do vybrané databáze Heliosu vytvoří:</p>
 <ul>
 <li>tabulky <code>Tabx_Ethel_*</code> (nastavení uživatelů, profily práv, audit změn práv, kontext z Heliosu, uživatelská nastavení),</li>
-<li>procedury <code>epx_Ethel_*</code> (uložení kontextu z přehledu, nastavení uživatele a scénáře Akcí <code>epx_Ethel_UseCase_*</code>),</li>
+<li>procedury <code>epx_Ethel_*</code> (uložení kontextu z přehledu, nastavení uživatele a scénáře <code>epx_Ethel_UseCase_*</code>),</li>
 <li>externí akci <strong>Ethel</strong> v menu Heliosu, která okno otevírá.</li>
 </ul>
 <p>Instalace nesahá na žádnou tabulku Heliosu. Aktualizaci databázové části spouští stejný správce ze stejného místa; nic se neděje samo.</p>
@@ -62,7 +62,7 @@
 <p>Login dostane při instalaci:</p>
 <ul>
 <li><code>SELECT</code> na schéma <code>dbo</code> v dané databázi,</li>
-<li><code>EXECUTE</code> na procedury <code>epx_Ethel_*</code> (uživatelská nastavení a scénáře Akcí).</li>
+<li><code>EXECUTE</code> na procedury <code>epx_Ethel_*</code> (uživatelská nastavení a scénáře).</li>
 </ul>
 <p>Nic víc. Zapisovat do tabulek Heliosu nemůže; zápis jde jen přes schválené procedury scénářů, a to až po potvrzení uživatele v okně Ethel.</p>
 <p>Každá databáze s vlastním tokenem má vlastní login, takže dvě instalace na jednom serveru si nepřepisují heslo. Starší instalace (do verze 1.1.11) používaly společný login <code>ethel</code> – aktualizace databáze ho v dané databázi nahradí novým; serverový login <code>ethel</code> zůstává, dokud ho nesmažete sami, až ho nepoužívá žádná databáze.</p>
@@ -88,7 +88,7 @@ EXEC sp_executesql @Sql
 <ul>
 <li><strong>Nastavení → Uživatelé</strong>: kdo smí Ethel používat.</li>
 <li><strong>Nastavení → Přístup k datům</strong>: profily práv a tabulky, které uživatel vidí. Uživatel bez profilu nevidí nic.</li>
-<li><strong>Citlivé moduly</strong> – Mzdy, Personalistika a Banka – jsou vyloučené pro všechny a zapnout je nejde. Ethel nad nimi negeneruje dotazy; postup z nápovědy Heliosu poradí, data ne.</li>
+<li><strong>Citlivé moduly</strong> – Mzdy, Personalistika a Banka – jsou ve výchozím stavu zamčené pro všechny. Zpřístupnit je můžete vybraným uživatelům přes práva a profily. Dokud jsou zamčené, Ethel nad nimi negeneruje dotazy; postup z nápovědy Heliosu poradí, data ne.</li>
 </ul>
 <p>Tohle je aplikační vrstva. Když udělíte účtu širší práva, než Ethel potřebuje, druhý zámek na úrovni databáze Ethel sama nepřidá. Kdo chce tvrdší zámek, může citlivé tabulky zakázat i na SQL Serveru – Ethel se pak k nim nedostane, ani kdyby ji o to model požádal:</p>
 <pre><code class="language-sql">USE [HeliosData]

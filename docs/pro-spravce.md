@@ -7,7 +7,7 @@ Tenhle návod je pro správce Heliosu nebo SQL Serveru. Říká, pod jakým úč
 Aktuální `Ethel.exe` a postup instalace najdete na stránce [Ke stažení](/download/). Ethel instaluje správce s rolí **sysadmin** na SQL Serveru přímo v okně Ethel: **Nastavení → Databáze**. Instalace do vybrané databáze Heliosu vytvoří:
 
 - tabulky `Tabx_Ethel_*` (nastavení uživatelů, profily práv, audit změn práv, kontext z Heliosu, uživatelská nastavení),
-- procedury `epx_Ethel_*` (uložení kontextu z přehledu, nastavení uživatele a scénáře Akcí `epx_Ethel_UseCase_*`),
+- procedury `epx_Ethel_*` (uložení kontextu z přehledu, nastavení uživatele a scénáře `epx_Ethel_UseCase_*`),
 - externí akci **Ethel** v menu Heliosu, která okno otevírá.
 
 Instalace nesahá na žádnou tabulku Heliosu. Aktualizaci databázové části spouští stejný správce ze stejného místa; nic se neděje samo.
@@ -23,7 +23,7 @@ Instalace založí na serveru jeden login pro tuhle instalaci. Jmenuje se `ethel
 Login dostane při instalaci:
 
 - `SELECT` na schéma `dbo` v dané databázi,
-- `EXECUTE` na procedury `epx_Ethel_*` (uživatelská nastavení a scénáře Akcí).
+- `EXECUTE` na procedury `epx_Ethel_*` (uživatelská nastavení a scénáře).
 
 Nic víc. Zapisovat do tabulek Heliosu nemůže; zápis jde jen přes schválené procedury scénářů, a to až po potvrzení uživatele v okně Ethel.
 
@@ -61,7 +61,7 @@ Práva na SQL Serveru říkají, co účet *může*. Co uživatel v Ethel *smí*
 
 - **Nastavení → Uživatelé**: kdo smí Ethel používat.
 - **Nastavení → Přístup k datům**: profily práv a tabulky, které uživatel vidí. Uživatel bez profilu nevidí nic.
-- **Citlivé moduly** – Mzdy, Personalistika a Banka – jsou vyloučené pro všechny a zapnout je nejde. Ethel nad nimi negeneruje dotazy; postup z nápovědy Heliosu poradí, data ne.
+- **Citlivé moduly** – Mzdy, Personalistika a Banka – jsou ve výchozím stavu zamčené pro všechny. Zpřístupnit je můžete vybraným uživatelům přes práva a profily. Dokud jsou zamčené, Ethel nad nimi negeneruje dotazy; postup z nápovědy Heliosu poradí, data ne.
 
 Tohle je aplikační vrstva. Když udělíte účtu širší práva, než Ethel potřebuje, druhý zámek na úrovni databáze Ethel sama nepřidá. Kdo chce tvrdší zámek, může citlivé tabulky zakázat i na SQL Serveru – Ethel se pak k nim nedostane, ani kdyby ji o to model požádal:
 

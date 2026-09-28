@@ -70,7 +70,7 @@ if(heroLog){
  run(0);
 }
 
-/* Pricing: monthly / annual (−17 %) and the optional Akce module on Standard.
+/* Pricing: monthly / annual (−17 %) and the optional Scénáře module on Standard.
    Annual = the yearly price divided by 12. */
 const pricing=document.getElementById('cena');
 if(pricing){
@@ -86,7 +86,7 @@ if(pricing){
    const month=parts.reduce((sum,p)=>sum+perMonth(p),0),year=parts.reduce((sum,p)=>sum+p.annual,0);
    pricing.querySelectorAll(`[data-price="${name}"]`).forEach(el=>{el.textContent=fmt(month)});
    pricing.querySelectorAll(`[data-note="${name}"]`).forEach(el=>{
-    el.textContent=period==='monthly'?(withAkce&&name==='standard'?'měsíční platba, včetně modulu Akce':'měsíční platba'):`${fmt(year)} Kč jednou ročně`;
+    el.textContent=period==='monthly'?(withAkce&&name==='standard'?'měsíční platba, včetně modulu Scénáře':'měsíční platba'):`${fmt(year)} Kč jednou ročně`;
    });
   });
   pricing.querySelectorAll('[data-addon]').forEach(el=>{el.textContent=fmt(perMonth(PRICES.akce))});
