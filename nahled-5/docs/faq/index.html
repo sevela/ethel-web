@@ -39,6 +39,7 @@
 
 <section class="block block-white"><div class="wrap docs-grid">
 <ul class="docs-nav">
+<li class="docs-nav-heading">Nápověda</li>
 <li><a href="/nahled-5/docs/prvni-kroky/">První kroky</a></li>
 <li><a href="/nahled-5/docs/pro-spravce/">Pro správce</a></li>
 <li><a href="/nahled-5/docs/faq/" aria-current="page">FAQ</a></li>
@@ -77,7 +78,7 @@
 <div class="faq-list">
 <details><summary>Uvidí AI naše čísla?</summary><p>Výsledky běžných dotazů zůstávají na vašem serveru. Výjimkou je analytické shrnutí, kde model dostane data, ze kterých píše text. Do cloudu jde otázka, vygenerované SQL a&nbsp;kontext přehledu. Když do otázky sami napíšete jméno nebo částku, je součástí otázky. Celý výčet je na stránce <a href="/nahled-5/bezpecnost/">Bezpečnost</a>.</p></details>
 <details><summary>Co ukládáte a&nbsp;trénuje se na tom AI?</summary><p>V&nbsp;cloudu držíme otázku, vygenerované SQL a&nbsp;spotřebu tokenů. Výsledky dotazů ani obsah příloh neukládáme. Po 180 dnech se otázky a&nbsp;SQL anonymizují. Telemetrie posílá jen verzi programu.</p><p>Anthropic, jehož model Ethel používá, podle své dokumentace ve výchozím nastavení nepoužívá vstupy ani výstupy z&nbsp;API k&nbsp;trénování modelů.</p></details>
-<details><summary>Co moduly Mzdy, Personalistika a&nbsp;Banka?</summary><p>Ve výchozím stavu jsou zamčené: Ethel nad nimi dotaz nesestaví ani nespustí. Správce je může vybraným uživatelům zpřístupnit přes práva a&nbsp;profily ve Správě Ethel. S&nbsp;postupem v&nbsp;těchto modulech poradí podle nápovědy Heliosu i&nbsp;tehdy, když zamčené zůstanou.</p></details>
+<details><summary>Co moduly Mzdy, Personalistika a&nbsp;Banka?</summary><p>Jsou zamčené pro všechny, a&nbsp;to na serveru i&nbsp;u&nbsp;vás. Ethel nad nimi dotaz nesestaví ani nespustí a&nbsp;profilem je povolit nejde. S&nbsp;postupem v&nbsp;těchto modulech poradí podle nápovědy Heliosu, jejich data nečte.</p></details>
 <details><summary>Respektuje Ethel práva jednotlivých uživatelů?</summary><p>Ano. Správce v&nbsp;obrazovce Správa určí, kdo Ethel používá, a&nbsp;každému nastaví buď „vše kromě zakázaného“, nebo „jen povolené oblasti“ přes profily. Každá změna práv jde do auditu.</p></details>
 </div>
 
