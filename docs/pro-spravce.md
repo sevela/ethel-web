@@ -1,7 +1,5 @@
 # Pro správce
 
-Tenhle návod je pro správce Heliosu nebo SQL Serveru. Říká, co instalace v databázi založí, pod jakým účtem Ethel čte, jaká práva k tomu potřebuje a co si hlídá sama. Uživatelský návod je v [Prvních krocích](prvni-kroky.md).
-
 ## Instalace a aktualizace
 
 Aktuální `Ethel.exe` a postup instalace najdete na stránce [Ke stažení](/download/). Do databáze Heliosu Ethel instaluje člen role **sysadmin** na SQL Serveru přímo v okně Ethel: **Nastavení → Správa → Databáze**. Když Ethel spouštíte z Heliosu, správce se nejdřív přihlásí v části **Přihlášení správce**.
@@ -10,11 +8,11 @@ Instalace do vybrané databáze vytvoří:
 
 - tabulky `Tabx_Ethel_*` (nastavení, uživatelé Ethel, profily a přístup k datům, zakázané tabulky, audit změn práv, kontext z Heliosu, provozní záznam dotazů),
 - procedury `epx_Ethel_*` (kontext z přehledu, uživatelská nastavení a scénáře `epx_Ethel_UseCase_*`),
-- externí akci **Ethel** v menu **Doplňky** s klávesou **Ctrl+I** v 51 přehledech Heliosu; zapisuje ji do `TabExtKom`.
+- externí akci **Ethel** v menu **Doplňky** s klávesovou zkratkou **Ctrl+I** v cca 50 přehledech napříč Heliosem; zapisuje ji do `TabExtKom`.
 
 Kromě záznamů externí akce v `TabExtKom` instalace na tabulky Heliosu nesahá.
 
-Novou verzi uvidí správce v proužku pod hlavičkou okna. Jedním kliknutím Ethel stáhne nový `Ethel.exe`, ověří jeho podpis, vymění ho a dohraje databázovou část. Předchozí verze zůstane vedle jako `Ethel.exe.predchozi`.
+Novou verzi Ethel uvidí správce v proužku pod hlavičkou okna. Jedním kliknutím Ethel stáhne nový `Ethel.exe`, ověří jeho podpis, vymění ho a dohraje databázovou část. Předchozí verze zůstane vedle jako `Ethel.exe.predchozi`.
 
 ## Pod jakým účtem Ethel čte
 
