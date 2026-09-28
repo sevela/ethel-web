@@ -1,4 +1,4 @@
-/* ethel.cz: menu, hero demo, use cases, pricing, cookie consent + GA4.
+/* ethel.cz: menu, hero demo with five examples, pricing, cookie consent + GA4.
    Shared by all pages; every block checks that its elements exist. */
 (()=>{
 /* Mobile menu */
@@ -10,93 +10,65 @@ if(menu&&nav){
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.getAttribute('aria-expanded')==='true'){close();menu.focus()}});
 }
 
-/* Hero demo: question, "Ethel hledá data", answer, follow-up, chart. Plays in a loop,
-   shows the final state at once with reduced motion. */
-const chat=document.getElementById('demo-chat');
-if(chat){
- const steps=[...chat.querySelectorAll('.seq')];
- const STEP_MS=[700,900,1500,2600,900,1500],HOLD_MS=7000;
- chat.classList.add('is-playing');
- if(matchMedia('(prefers-reduced-motion: reduce)').matches){
-  steps.filter(s=>!s.classList.contains('seq-transient')).forEach(s=>s.classList.add('is-shown'));
- }else{
-  const play=()=>{
-   steps.forEach(s=>s.classList.remove('is-shown'));
-   let t=0;
-   steps.forEach((step,i)=>{
-    t+=STEP_MS[i]||1000;
-    setTimeout(()=>{
-     const prev=steps[i-1];
-     if(prev&&prev.classList.contains('seq-transient'))prev.classList.remove('is-shown');
-     step.classList.add('is-shown');
-    },t);
-   });
-   setTimeout(play,t+HOLD_MS);
-  };
-  play();
- }
-}
-
-/* "V praxi": pick a question on the left, the Ethel window answers it. Data answers switch table / chart
-   and "save" to Excel / PDF (simulated, nothing is downloaded); help and explanation answers are text.
-   Illustrative content only. */
-const caseDemo=document.getElementById('case-demo');
-if(caseDemo){
- const CASES=[
-  {ctx:'Faktury vydané / přehled',q:'Top 5 zákazníků v maloobchodu za letos',a:'Pět největších odběratelů v maloobchodu odebralo za <strong>13,2 mil. Kč</strong>.',cols:['Odběratel','Obrat bez DPH'],unit:'Kč',rows:[['Alfa trade',4120000],['Delta servis',3080000],['Beta market',2460000],['Gama obchod',1940000],['Omega retail',1610000]]},
-  {kind:'help',ctx:'Faktury vydané / přehled',q:'Jak stornovat fakturu?',a:'Postup podle nápovědy Heliosu Inuvio:',steps:['V přehledu Faktury vydané označte fakturu, kterou chcete stornovat.','Spusťte storno dokladu. Helios k faktuře připraví opravný doklad.','Opravný doklad zkontrolujte a zrealizujte.','Pokud už byla faktura zaplacená, vyřešte i vrácení úhrady.'],source:'Nápověda Helios Inuvio · Faktury vydané, storno dokladu'},
-  {kind:'explain',ctx:'Faktury vydané / přehled',q:'Co počítá sloupec Marže % v tomhle přehledu?',a:'<strong>Marže %</strong> je uživatelský sloupec vaší firmy. Z položek faktury sečte prodejní a nákladové ceny a spočítá, kolik procent z prodeje zůstane.',formula:'(prodej − náklad) ÷ prodej × 100',note:'Když faktura nemá položky s nákladovou cenou, sloupec zůstane prázdný. Proto u služeb uvidíte prázdné místo, ne nulu.'},
-  {ctx:'Skladové karty / přehled',q:'Jaká je volná zásoba položky 51003?',a:'Volná zásoba položky 51003 je <strong>335 ks</strong> na třech skladech.',cols:['Sklad','Volná zásoba'],unit:'ks',rows:[['Hlavní sklad',240],['Brno',60],['Expedice',35]]},
-  {ctx:'Výrobní příkazy / přehled',q:'Jaký normovaný čas odvedli zaměstnanci ve výrobě minulý týden?',a:'Minulý týden odvedli <strong>612 normohodin</strong>, nejvíc ve středu.',cols:['Den','Normohodiny'],unit:'h',rows:[['Pondělí',118],['Úterý',124],['Středa',136],['Čtvrtek',122],['Pátek',112]]}
- ];
- const SEARCH_MS=1800;
- const fmt=(n,unit)=>n.toLocaleString('cs-CZ')+(unit?' '+unit:'');
+/* Hero: five examples (what Ethel does) and one Ethel window. The question is typed into the input row,
+   sent, appended as a bubble, "Ethel hledá…", then the answer; older messages move up, the window keeps
+   its height. Without a click the examples rotate; the first click stops the loop. Illustrative data. */
+const heroLog=document.getElementById('hero-log');
+if(heroLog){
+ const input=document.getElementById('hero-input'),ctx=document.getElementById('hero-context');
+ const send=document.querySelector('.hero .chat-input-send');
+ const buttons=[...document.querySelectorAll('.hero button[data-cap]')];
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
  const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
- const slug=t=>t.toLowerCase().normalize('NFD').replace(/\p{M}/gu,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40);
- let view='table',timer=null,current=0;
- const buttons=[...document.querySelectorAll('button[data-case]')];
- const context=document.getElementById('case-context');
- const table=c=>`<table><thead><tr><th>${c.cols[0]}</th><th class="num">${c.cols[1]}</th></tr></thead><tbody>${c.rows.map(([n,v])=>`<tr><td>${esc(n)}</td><td class="num">${fmt(v,c.unit)}</td></tr>`).join('')}</tbody></table>`;
- const chart=c=>{const max=Math.max(...c.rows.map(r=>r[1]));return `<div class="hbar-chart" role="img" aria-label="${esc(c.cols[1])}: ${c.rows.map(([n,v])=>esc(n)+' '+fmt(v,c.unit)).join(', ')}">${c.rows.map(([n,v])=>`<div class="hbar"><span class="hbar-label">${esc(n)}</span><span class="hbar-track"><i style="width:${Math.max(4,v/max*100)}%"></i></span><span class="hbar-value">${fmt(v,c.unit)}</span></div>`).join('')}</div>`};
- const body=c=>{
-  if(c.kind==='help')return `<ol class="help-steps">${c.steps.map(t=>`<li>${esc(t)}</li>`).join('')}</ol><p class="answer-source">Zdroj: <span>${esc(c.source)}</span> ↗</p>`;
-  if(c.kind==='explain')return `<div class="formula"><span>Jak se počítá</span><code>${esc(c.formula)}</code></div><p class="answer-note">${esc(c.note)}</p>`;
-  return `<div class="answer-tools"><div class="view-toggle" role="group" aria-label="Zobrazení výsledku"><button type="button" data-view="table" aria-pressed="${view==='table'}">Tabulka</button><button type="button" data-view="chart" aria-pressed="${view==='chart'}">Graf</button></div><div class="export-buttons" role="group" aria-label="Uložit výsledek"><button type="button" data-export="xlsx">Excel</button><button type="button" data-export="pdf">PDF</button></div></div><div class="case-view">${view==='table'?table(c):chart(c)}</div><div class="saved-file" aria-live="polite"></div>`;
+ const TYPE_MS=28,SEND_MS=350,SEARCH_MS=1600,HOLD_MS=6500,MAX_NODES=6;
+ const INVOICES={cols:['Odběratel','Po splatnosti'],rows:[['Alfa trade',184200],['Delta servis',96500],['Ostatní',47800]]};
+ const CAPS=[
+  {ctx:'Faktury vydané / přehled',q:'Které faktury jsou víc než 30 dní po splatnosti?',status:'Ethel hledá data',data:INVOICES,
+   a:'<p>Celkem <strong>12 faktur za 328 500 Kč.</strong> Největší část připadá na Alfa trade.</p><div class="answer-tools"><div class="view-toggle" role="group" aria-label="Zobrazení výsledku"><button type="button" data-view="table" aria-pressed="true">Tabulka</button><button type="button" data-view="chart" aria-pressed="false">Graf</button></div><div class="export-buttons" role="group" aria-label="Uložit výsledek"><button type="button" data-export="xlsx">Excel</button><button type="button" data-export="pdf">PDF</button></div></div><div class="case-view"></div><div class="saved-file" aria-live="polite"></div>'},
+  {ctx:'Faktury vydané / přehled',q:'A jak se to vyvíjelo za posledních šest měsíců?',status:'Ethel hledá data',follow:0,
+   a:'<p>Po splatnosti je teď nejvíc za celé pololetí, od srpna <strong>+9 %</strong>.</p><figure class="bar-chart" aria-label="Pohledávky po splatnosti po měsících, v tisících Kč: duben 212, květen 245, červen 198, červenec 263, srpen 301, září 329."><div style="--v:64%"><span>212</span><i></i><b>dub</b></div><div style="--v:74%"><span>245</span><i></i><b>kvě</b></div><div style="--v:60%"><span>198</span><i></i><b>čvn</b></div><div style="--v:80%"><span>263</span><i></i><b>čvc</b></div><div style="--v:91%"><span>301</span><i></i><b>srp</b></div><div class="is-now" style="--v:100%"><span>329</span><i></i><b>zář</b></div></figure><p class="chart-caption">tis. Kč po splatnosti</p>'},
+  {ctx:'Faktury vydané / přehled',q:'Co počítá sloupec Marže % v tomhle přehledu?',status:'Ethel čte definici sloupce',
+   a:'<p><strong>Marže %</strong> je uživatelský sloupec vaší firmy. Z&nbsp;položek faktury sečte prodejní a&nbsp;nákladové ceny a&nbsp;spočítá, kolik procent z&nbsp;prodeje zůstane.</p><div class="formula"><span>Jak se počítá</span><code>(prodej − náklad) ÷ prodej × 100</code></div><p class="answer-note">Když faktura nemá položky s&nbsp;nákladovou cenou, sloupec zůstane prázdný. Proto u&nbsp;služeb uvidíte prázdné místo, ne nulu.</p>'},
+  {ctx:'Faktury vydané / přehled',q:'Jak stornovat fakturu?',status:'Ethel hledá v nápovědě Heliosu',
+   a:'<p>Postup podle nápovědy Heliosu Inuvio:</p><ol class="help-steps"><li>V&nbsp;přehledu Faktury vydané označte fakturu, kterou chcete stornovat.</li><li>Spusťte storno dokladu. Helios k&nbsp;faktuře připraví opravný doklad.</li><li>Opravný doklad zkontrolujte a&nbsp;zrealizujte.</li><li>Pokud už byla faktura zaplacená, vyřešte i&nbsp;vrácení úhrady.</li></ol><p class="answer-source">Zdroj: <span>Nápověda Helios Inuvio · Faktury vydané, storno dokladu</span> ↗</p>'},
+  {ctx:'Organizace / přehled',q:'Založ organizaci s IČO 04997476.',status:'Ethel hledá firmu v ARES',
+   a:'<p>Firmu jsem našla v&nbsp;ARES a&nbsp;v&nbsp;Heliosu ještě není. Zkontrolujte údaje, zapíšu je až po potvrzení.</p><div class="check-card"><dl><div><dt>Název</dt><dd>Ukázková firma s.r.o.</dd><dd class="origin">ARES</dd></div><div><dt>Adresa</dt><dd>Ukázková 12, 602 00 Brno</dd><dd class="origin">ARES</dd></div><div><dt>DIČ</dt><dd>CZ04997476</dd><dd class="origin">ARES</dd></div><div><dt>Splatnost</dt><dd>14 dní</dd><dd class="origin origin-default">výchozí</dd></div></dl><div class="check-card-actions"><span class="check-confirm">Potvrdit</span><span>Zrušit</span></div></div><p class="small">Ilustrační údaje. Do Heliosu se zatím nic nezapsalo.</p>'}
+ ];
+ const fmt=n=>n.toLocaleString('cs-CZ')+' Kč';
+ const table=d=>`<table><thead><tr><th>${d.cols[0]}</th><th class="num">${d.cols[1]}</th></tr></thead><tbody>${d.rows.map(([n,v])=>`<tr><td>${esc(n)}</td><td class="num">${fmt(v)}</td></tr>`).join('')}</tbody></table>`;
+ const chart=d=>{const max=Math.max(...d.rows.map(r=>r[1]));return `<div class="hbar-chart" role="img" aria-label="${d.rows.map(([n,v])=>esc(n)+' '+fmt(v)).join(', ')}">${d.rows.map(([n,v])=>`<div class="hbar"><span class="hbar-label">${esc(n)}</span><span class="hbar-track"><i style="width:${Math.max(4,v/max*100)}%"></i></span><span class="hbar-value">${fmt(v)}</span></div>`).join('')}</div>`};
+ let timers=[],auto=true;
+ const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
+ const append=html=>{heroLog.insertAdjacentHTML('beforeend',html);while(heroLog.children.length>MAX_NODES)heroLog.firstElementChild.remove()};
+ const answer=(i,animate)=>{const c=CAPS[i];append(`<div class="demo-answer${animate?' is-new':''}" data-cap="${i}">${c.a}</div>`);const v=heroLog.lastElementChild.querySelector('.case-view');if(v)v.innerHTML=table(c.data)};
+ const run=i=>{
+  timers.forEach(clearTimeout);timers=[];
+  const c=CAPS[i];
+  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cap===String(i))));
+  ctx.textContent=c.ctx;
+  heroLog.querySelector('.status-line')?.remove();
+  /* A follow-up needs its first question on screen. */
+  const last=heroLog.querySelector('.demo-answer:last-of-type');
+  if(c.follow!==undefined&&(!last||last.dataset.cap!==String(c.follow))){append(`<p class="user-message">${esc(CAPS[c.follow].q)}</p>`);answer(c.follow,false)}
+  if(reduce){append(`<p class="user-message">${esc(c.q)}</p>`);answer(i,false);return}
+  let t=0;input.textContent='';input.classList.add('is-typing');
+  [...c.q].forEach((_,k)=>later(()=>{input.textContent=c.q.slice(0,k+1)},t+=TYPE_MS));
+  later(()=>send.classList.add('is-sending'),t+=SEND_MS);
+  later(()=>{send.classList.remove('is-sending');input.classList.remove('is-typing');input.textContent='Zadej otázku…';append(`<p class="user-message is-new">${esc(c.q)}</p>`)},t+=250);
+  later(()=>append(`<p class="status-line is-new">${c.status}<span class="dots" aria-hidden="true"></span></p>`),t+=500);
+  later(()=>{heroLog.querySelector('.status-line')?.remove();answer(i,true)},t+=SEARCH_MS);
+  if(auto)later(()=>run((i+1)%CAPS.length),t+=HOLD_MS);
  };
- const answer=(i,c)=>`<div class="demo-answer is-new" data-case="${i}"><p>${c.a}</p>${body(c)}</div>`;
- /* Same behaviour as the app: a new question is appended at the bottom, older messages move up.
-    Keep the log short so the masked window never holds more than a few exchanges. */
- const MAX_NODES=6;
- const append=html=>{caseDemo.insertAdjacentHTML('beforeend',html);while(caseDemo.children.length>MAX_NODES)caseDemo.firstElementChild.remove()};
- const show=(i,animate)=>{
-  current=i;const c=CASES[i];
-  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.case===String(i))));
-  context.textContent=c.ctx;
-  clearTimeout(timer);
-  caseDemo.querySelector('.status-line')?.remove();
-  const question=`<p class="user-message is-new">${esc(c.q)}</p>`;
-  if(!animate){caseDemo.innerHTML=question+answer(i,c);return}
-  const status=c.kind==='help'?'Ethel hledá v nápovědě Heliosu':c.kind==='explain'?'Ethel čte definici sloupce':'Ethel hledá data';
-  append(question+`<p class="status-line is-new">${status}<span class="dots" aria-hidden="true"></span></p>`);
-  timer=setTimeout(()=>{caseDemo.querySelector('.status-line')?.remove();append(answer(i,c))},SEARCH_MS);
- };
- buttons.forEach(b=>b.addEventListener('click',()=>show(Number(b.dataset.case),true)));
- caseDemo.addEventListener('click',e=>{
-  const viewBtn=e.target.closest('[data-view]'),exportBtn=e.target.closest('[data-export]');
-  const box=e.target.closest('.demo-answer');
-  if(!box)return;
-  const c=CASES[Number(box.dataset.case)];
-  if(viewBtn){
-   view=viewBtn.dataset.view;
-   box.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===viewBtn)));
-   box.querySelector('.case-view').innerHTML=view==='table'?table(c):chart(c);
-  }
-  if(exportBtn){
-   const ext=exportBtn.dataset.export;
-   box.querySelector('.saved-file').innerHTML=`<span class="file-ext file-${ext}">${ext.toUpperCase()}</span><span><strong>${slug(c.q)}.${ext}</strong><small>Uloženo ve vašem počítači${ext==='xlsx'?', i s listem s otázkou a časem':''}. V ukázce se nic nestahuje.</small></span>`;
-  }
+ buttons.forEach(b=>b.addEventListener('click',()=>{auto=false;run(Number(b.dataset.cap))}));
+ heroLog.addEventListener('click',e=>{
+  const box=e.target.closest('.demo-answer');if(!box)return;
+  const c=CAPS[Number(box.dataset.cap)],vb=e.target.closest('[data-view]'),xb=e.target.closest('[data-export]');
+  if(!c.data||!(vb||xb))return;
+  auto=false;timers.forEach(clearTimeout);timers=[];
+  if(vb){box.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===vb)));box.querySelector('.case-view').innerHTML=vb.dataset.view==='table'?table(c.data):chart(c.data)}
+  if(xb){const ext=xb.dataset.export;box.querySelector('.saved-file').innerHTML=`<span class="file-ext file-${ext}">${ext.toUpperCase()}</span><span><strong>faktury-po-splatnosti.${ext}</strong><small>Uloženo ve vašem počítači${ext==='xlsx'?', i s listem s otázkou a časem':''}. V ukázce se nic nestahuje.</small></span>`}
  });
- show(0,false);
+ run(0);
 }
 
 /* Pricing: monthly / annual (−17 %) and the optional Akce module on Standard.
