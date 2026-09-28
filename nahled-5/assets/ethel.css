@@ -71,10 +71,11 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .button.small{padding:9px 13px;font-size:13px}
 .button-solid,.button-solid:hover,.button-solid:active{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
 
-/* Odkaz se šipkou (→ dál, ↓ na sekci níž): všude stejné písmo, podtržený, na hover jemný rámeček. Okraj -8 px drží text zarovnaný s obsahem. */
-.more{display:inline-block;margin:28px 0 0 -8px;padding:4px 8px;border:1px solid transparent;border-radius:8px;font:650 15px/1.5 var(--font-body);color:var(--brand);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;transition:border-color .15s}
+/* Odkaz se šipkou (→ dál, ↓ na sekci níž): všude stejné písmo, podtržený, na hover jemný rámeček velikosti tlačítka.
+   Odsazení a rámeček jako .button; záporný okraj (odsazení + rámeček) drží text zarovnaný s obsahem. */
+.more{display:inline-block;margin:19px 0 0 -21.5px;padding:13px 20px;border:1.5px solid transparent;border-radius:var(--radius-control);font-size:15px;font-weight:650;color:var(--brand);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;transition:border-color .15s}
 .more:hover{border-color:var(--border)}
-.actions .more{margin-top:0}
+.actions .more{margin:0}
 .block a:not(.button):not(.more){color:var(--brand)}
 
 /* --- 4. Hero --------------------------------------------------------------- */
