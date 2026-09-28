@@ -61,7 +61,7 @@ pre.m-code{margin:14px 0 0;padding:14px 16px;border-radius:8px;background:var(--
 
 <section id="principy" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">01 · Principy</p><h2>Klidný nástroj, který v Heliosu žije.</h2><p>Web vypadá jako aplikace, kterou prodává: světlý, věcný, bez efektů navíc. Pět pravidel, ze kterých plyne všechno ostatní.</p></div>
 <div class="cards cards-2">
-<article class="card"><h3>Světlý základ, jeden tmavý blok</h3><p>Pozadí se střídá světle šedá a bílá. Tmavý inkoust nese na celém webu jediný blok (bezpečnost) a patička. Víc tmavých ploch se nepřidává.</p></article>
+<article class="card"><h3>Světlý základ, jeden tmavý blok</h3><p>Pozadí se střídá světle šedá a bílá. Tmavý inkoust nese na celém webu jediný blok (Akce na úvodu) a patička. Víc tmavých ploch se nepřidává.</p></article>
 <article class="card"><h3>Modrá vede, terakota ukazuje</h3><p>Modrá značky je na všem, na co se kliká: odkazy, tlačítka, ikony, tečka v logu. Terakota má přesně tři role: čárka před štítkem sekce, ručně psaná poznámka a stav (hover, vybráno, zaškrtnuto). Nikdy není plocha, tlačítko, ikona ani štítek.</p></article>
 <article class="card"><h3>Jedna karta, jedno písmo</h3><p>Na celém webu existuje jediný typ karty bez barevných variant; přizpůsobí se jen pozadí. Jediné písmo je Segoe UI, tedy písmo Windows a Heliosu. Ručně psané poznámky mají písmo Caveat a nic jiného se v něm nesází.</p></article>
 <article class="card"><h3>Sekce má pevný tvar</h3><p>Štítek, nadpis, nejvýš dvě věty úvodu, jeden obsahový celek a nejvýš jeden odkaz „… →". Když se do toho sekce nevejde, jsou to dvě sekce.</p></article>
@@ -108,7 +108,7 @@ pre.m-code{margin:14px 0 0;padding:14px 16px;border-radius:8px;background:var(--
 </ul>
 <h3 style="margin-top:32px">Tmavá plocha</h3>
 <ul class="m-swatches" style="margin-top:14px">
-<li class="m-swatch"><i style="background:#172B38"></i><div><strong>ink</strong><code>#172B38</code><span>blok Bezpečnost, patička</span></div></li>
+<li class="m-swatch"><i style="background:#172B38"></i><div><strong>ink</strong><code>#172B38</code><span>blok Akce, patička</span></div></li>
 <li class="m-swatch"><i style="background:#223E50"></i><div><strong>ink-surface</strong><code>#223E50</code><span>karta na tmavé ploše</span></div></li>
 <li class="m-swatch"><i style="background:#3F5D70"></i><div><strong>ink-border</strong><code>#3F5D70</code><span>rámeček karty</span></div></li>
 <li class="m-swatch"><i style="background:#2E4C60"></i><div><strong>ink-icon</strong><code>#2E4C60</code><span>dlaždice ikony</span></div></li>
@@ -224,7 +224,7 @@ pre.m-code{margin:14px 0 0;padding:14px 16px;border-radius:8px;background:var(--
 <article class="card"><span class="tag">Modul Akce</span><h3>Faktura z objednávky</h3><p>Karta se štítkem (katalog Akcí, role na Co umí).</p><p class="small">Drobný text s <strong>důrazem</strong>: podmínka, původ dat.</p></article>
 <article class="card"><h3>Poradí</h3><p>Karta s hesly.</p><ul class="chips"><li>storno faktury</li><li>inventura</li></ul><a class="button" href="#">Tlačítko sedí dole</a></article>
 </div></div>
-<div class="m-demo on-dark"><div class="cards cards-2"><article class="card"><h3><span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>Na tmavé ploše</h3><p>Stejná karta uvnitř <code>.block-dark</code>: ikona nad nadpisem, text 16 px.</p></article><article class="card"><h3>Bez variant</h3><p>Ani tady nejsou barevné varianty.</p></article></div></div>
+<div class="m-demo on-dark"><div class="cards cards-2 cards-icon-top"><article class="card"><h3><span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>Na tmavé ploše</h3><p>Stejná karta uvnitř <code>.block-dark</code>: text 16 px. Ikona nad nadpisem přes <code>.cards-icon-top</code> na mřížce (Bezpečnost na úvodu).</p></article><article class="card"><h3>Bez variant</h3><p>Ani tady nejsou barevné varianty.</p></article></div></div>
 <pre class="m-code">&lt;div class="cards cards-3"&gt;
   &lt;article class="card"&gt;&lt;h3&gt;&lt;span class="card-icon" aria-hidden="true"&gt;&lt;svg…/&gt;&lt;/span&gt;Nadpis&lt;/h3&gt;&lt;p&gt;Text.&lt;/p&gt;&lt;ul class="ask-list"&gt;&lt;li&gt;…&lt;/li&gt;&lt;/ul&gt;&lt;/article&gt;
   &lt;article class="card"&gt;&lt;span class="tag"&gt;Štítek&lt;/span&gt;&lt;h3&gt;Nadpis&lt;/h3&gt;&lt;p&gt;Text.&lt;/p&gt;&lt;p class="small"&gt;Poznámka.&lt;/p&gt;&lt;/article&gt;
@@ -300,7 +300,7 @@ Nápověda:        .page-hero → .docs-grid (.docs-nav | .prose nebo .cards-2) 
 
 <section id="stranky" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">08 · Stránky</p><h2>Šest veřejných stránek, dokumentace a stažení.</h2><p>Každá stránka má stejnou hlavičku a patičku. Liší se jen tím, co je mezi nimi.</p></div>
 <table class="m-spec"><thead><tr><th>Stránka</th><th>Skladba</th></tr></thead><tbody>
-<tr><td>/ úvod</td><td>hero (slogan, text, výzva, pět příkladů, tlačítka + okno Ethel s přehráváním) → Jak to funguje (bílá, 3 kroky) → Bezpečnost (tmavá, 4 karty) → Cena (bílá, přepínač + 2 stejné tarify) → Autor (šedá, fotka + text) → Vyzkoušet (bílá, text + formulář).</td></tr>
+<tr><td>/ úvod</td><td>hero (slogan, text, výzva, pět příkladů, tlačítka + okno Ethel s přehráváním) → Jak to funguje (bílá, 3 kroky) → Akce (tmavá, 4 číslované kroky) → Bezpečnost (šedá, 4 karty) → Cena (bílá, přepínač + 2 stejné tarify) → Autor (šedá, fotka + text) → Vyzkoušet (bílá, text + formulář).</td></tr>
 <tr><td>/funkce/</td><td>page-hero → Kontext a čtyři schopnosti (bílá, 4 karty s ikonou a příklady) → Práce s výsledkem (šedá, 4 karty) → Pro koho (bílá, 4 karty se štítkem a příklady) → CTA pás</td></tr>
 <tr><td>/akce/</td><td>page-hero → Jak Akce funguje (kroky + kontrolní karta) → Katalog (šedá, 6 karet se štítky) → Vlastní scénář → Dostupnost (4 karty s cenou small) → CTA pás</td></tr>
 <tr><td>/bezpecnost/</td><td>page-hero → pět očíslovaných otázek (eyebrow „01 · Cloud" …) v <code>.prose</code>, střídání pozadí → CTA pás</td></tr>
@@ -321,7 +321,7 @@ Nápověda:        .page-hero → .docs-grid (.docs-nav | .prose nebo .cards-2) 
   &lt;div&gt;&lt;h2&gt;Vyzkoušejte Ethel na vlastních datech.&lt;/h2&gt;&lt;p&gt;14 dní zdarma, aktivační klíč do 24 hodin.&lt;/p&gt;&lt;/div&gt;
   &lt;a class="button button-solid" href="/#kontakt"&gt;Vyzkoušet 14 dní zdarma&lt;/a&gt;
 &lt;/div&gt;&lt;/section&gt;</pre>
-<p class="m-note">Hlavní navigace: Co umí · Akce · Bezpečnost · Cena (/#cena) · FAQ, vpravo Vyzkoušet zdarma (/#kontakt). Patička navíc: Nápověda, Ke stažení, Co je nového. Aktivní stránka má <code>aria-current="page"</code>.</p>
+<p class="m-note">Hlavní navigace: Co umí · Akce · Bezpečnost · Cena (/#cena) · FAQ, vpravo Vyzkoušet zdarma (/#kontakt). Patička navíc: Nápověda, Ke stažení, Co je nového, Novinky. Aktivní stránka má <code>aria-current="page"</code>.</p>
 </div></section>
 
 <section id="pohyb" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">09 · Pohyb a přístupnost</p><h2>Hýbe se jen to, co něco říká.</h2></div>
