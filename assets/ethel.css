@@ -229,7 +229,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .block-dark .block-note{color:var(--ink-muted)}
 .block-note+.chips{margin-top:10px}
 /* Výhled pod celou sekcí (co chystáme): ruční poznámka bez šipky, vlevo, dva řádky, bílá. */
-.note-soon{max-width:none;margin:48px 0 0;padding-inline:0;transform:none}
+.note-soon{max-width:none;margin:20px 0 0;padding-inline:0;transform:none}
 .note-soon strong{white-space:nowrap}
 .block-dark .note-soon{color:var(--ink-text)}
 
