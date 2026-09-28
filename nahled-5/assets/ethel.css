@@ -132,11 +132,10 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .chat{padding:16px 14px 6px;min-width:0;flex:1}
 /* Otázka: velmi světle modrá bublina vpravo, bez obrysu. */
 .user-message{align-self:flex-end;width:fit-content;max-width:85%;background:var(--win-bubble-user);border-radius:var(--radius-bubble) var(--radius-bubble) 2px var(--radius-bubble);padding:9px 12px;margin:0 0 14px auto;font-size:14px;line-height:1.6}
-/* Odpověď: světle šedá bublina vlevo; tabulky, grafy i karty jsou uvnitř ní. */
-.demo-answer{align-self:flex-start;width:88%;background:var(--win-bubble-bot);border-radius:var(--radius-bubble) var(--radius-bubble) var(--radius-bubble) 2px;padding:9px 12px;font-size:14px;line-height:1.6;font-variant-numeric:tabular-nums}
+/* Odpověď: bez bubliny, text rovnou na ploše chatu. Na webu záměrně jinak než v aplikaci (tam šedá bublina). */
+.demo-answer{align-self:stretch;font-size:14px;line-height:1.6;font-variant-numeric:tabular-nums}
 .demo-answer p{margin:0 0 10px}
 .demo-answer>:last-child{margin-bottom:0}
-.demo-answer .formula,.demo-answer .hbar-track,.demo-answer .origin-default,.demo-answer .saved-file:not(:empty){background:var(--surface)}
 /* Řádek dotazu: bílé pole, Odeslat = ikona Enteru uvnitř pole vpravo dole, vedle obrysová sponka a mikrofon. */
 .chat-input{display:flex;align-items:flex-end;gap:8px;padding:8px 14px 12px}
 .chat-input-field{position:relative;flex:1;min-width:0;display:flex;align-items:center;min-height:38px;padding:8px 40px 8px 12px;border:1px solid var(--border);border-radius:var(--radius-control);background:var(--surface);font-size:14px;line-height:1.4;color:color-mix(in srgb,var(--text-muted) 80%,var(--page))}
@@ -151,8 +150,10 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .window-status svg{flex:none;width:12px;height:12px;color:color-mix(in srgb,var(--text-muted) 80%,var(--page))}
 
 /* Rozhovor v okně (hero přehrává web.js: otázka se napíše do řádku dotazu, odešle a Ethel odpoví):
-   nové zprávy přibývají dole, starší odjíždějí nahoru a mizí pod maskou, jako v aplikaci. */
-.chat-log{display:flex;flex-direction:column;gap:14px;height:410px;overflow:hidden;justify-content:flex-end;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 48px);mask-image:linear-gradient(to bottom,transparent 0,#000 48px)}
+   první otázka stojí nahoře, další přibývají pod ni; když se okno zaplní, web.js ho posouvá
+   a starší zprávy mizí nahoře pod maskou (.is-scrolled). */
+.chat-log{display:flex;flex-direction:column;gap:14px;height:410px;overflow:hidden}
+.chat-log.is-scrolled{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 48px);mask-image:linear-gradient(to bottom,transparent 0,#000 48px)}
 .chat-log .user-message{margin:0 0 0 auto}
 .hero .chat-log{height:502px}
 .chat-input-text.is-typing{color:var(--text)}
@@ -178,29 +179,6 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .bar-chart div:nth-child(2) i{animation-delay:.08s}.bar-chart div:nth-child(3) i{animation-delay:.16s}.bar-chart div:nth-child(4) i{animation-delay:.24s}.bar-chart div:nth-child(5) i{animation-delay:.32s}.bar-chart div:nth-child(6) i{animation-delay:.4s}
 @keyframes bar-grow{from{transform:scaleY(0)}}
 .chart-caption{margin:2px 0 0!important;font-size:11px;color:var(--text-muted)}
-
-/* Vodorovný graf, přepínač tabulka/graf, exporty, uložený soubor (generuje web.js). */
-.view-toggle{display:inline-flex;gap:2px;margin:0 0 12px;padding:3px;border:1px solid var(--border);border-radius:8px}
-.view-toggle button{border:0;border-radius:6px;padding:5px 12px;background:transparent;font-size:12px;font-weight:600;color:var(--text-muted)}
-.view-toggle button[aria-pressed=true]{background:var(--brand);color:var(--on-brand)}
-.answer-tools{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
-.answer-tools .view-toggle{margin:0}
-.export-buttons{display:flex;gap:6px}
-.export-buttons button{border:1px solid var(--border);border-radius:6px;padding:5px 11px;background:var(--surface);font-size:12px;font-weight:600;color:var(--text-muted)}
-.export-buttons button:hover{border-color:var(--brand);color:var(--brand)}
-.saved-file:not(:empty){display:flex;align-items:center;gap:12px;margin-top:14px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--page);animation:seq-in .35s ease-out}
-.saved-file strong{display:block;font-size:13px}
-.saved-file small{display:block;font-size:11px;color:var(--text-muted)}
-.file-ext{flex:none;padding:5px 6px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.04em;color:#fff}
-.file-xlsx{background:var(--file-xlsx)}
-.file-pdf{background:var(--file-pdf)}
-.hbar-chart{display:grid;gap:10px;padding-top:4px}
-.hbar{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:12px}
-.hbar-label{color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hbar-track{height:14px;border-radius:4px;background:var(--surface-alt);overflow:hidden}
-.hbar-track i{display:block;height:100%;border-radius:4px;background:var(--brand);transform-origin:left;animation:hbar-grow .6s cubic-bezier(.2,.7,.3,1) both}
-.hbar-value{font-variant-numeric:tabular-nums;white-space:nowrap}
-@keyframes hbar-grow{from{transform:scaleX(0)}}
 
 /* Odpověď typu nápověda / vysvětlení. */
 .help-steps{margin:0;padding:0;list-style:none;counter-reset:step}
