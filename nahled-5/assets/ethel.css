@@ -271,8 +271,9 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
    Jako <li> je jen k přečtení, jako <button> (V praxi) je klikací: hover a vybraný stav jsou terakotové. */
 .ask-list>*{position:relative;display:block;width:100%;margin:0;padding:8px 14px 8px 38px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:10px;background:transparent;font:500 14px/1.45 var(--font-body);color:var(--text);text-align:left}
 .ask-list>*::before{content:"";position:absolute;left:14px;top:16px;width:13px;height:11px;border-radius:4px 4px 4px 1px;background:var(--brand)}
-.ask-list button{cursor:pointer;padding:10px 14px 10px 38px;background:var(--surface);transition:border-color .15s,box-shadow .15s}
-.ask-list button::before{top:17px}
+.ask-list button{cursor:pointer;padding:10px 14px;background:var(--surface);transition:border-color .15s,box-shadow .15s}
+/* Klikací příklad (hero) nemá bublinovou odrážku, odrážkou je štítek .tag. */
+.ask-list button::before{display:none}
 .ask-list button:hover{border-color:var(--accent-line)}
 .ask-list button[aria-pressed=true]{border-color:var(--accent-line);background:var(--accent-tint)}
 .ask-list .tag{display:inline-block;min-width:74px;margin:0 10px 0 0;text-align:center}
