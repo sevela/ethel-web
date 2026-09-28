@@ -52,7 +52,7 @@ Pár dotazů z praxe, ať vidíte rozsah:
 
 ## Scénáře: Ethel i zapisuje
 
-Když má vaše firma scénáře zapnuté, Ethel umí i zapsat. Napíšete třeba „Založ organizaci s IČO 04997476“, Ethel dohledá údaje v ARES, na chybějící se zeptá a hodnoty z číselníků nabídne k výběru klikáním. Nakonec ukáže kontrolní kartu se všemi údaji a do Heliosu zapíše až po kliknutí na **Potvrdit a založit**.
+Když má vaše firma scénáře zapnuté, Ethel umí i zapsat. Napíšete třeba „Založ organizaci s IČO 12345678“, Ethel dohledá údaje v ARES, na chybějící se zeptá a hodnoty z číselníků nabídne k výběru klikáním. Nakonec ukáže kontrolní kartu se všemi údaji a do Heliosu zapíše až po kliknutí na **Potvrdit a založit**.
 
 ## Co Ethel neumí
 
