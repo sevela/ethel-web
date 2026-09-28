@@ -29,7 +29,7 @@ if(heroLog){
    a:'<p>Celkem <strong>12 faktur za 328 500 Kč.</strong> Největší část připadá na Alfa trade.</p>'},
   {q:'A jak se to vyvíjelo za posledních šest měsíců?',status:'Ethel hledá data',follow:0,
    a:'<p>Po splatnosti je teď nejvíc za celé pololetí, od srpna <strong>+9 %</strong>.</p><figure class="bar-chart" aria-label="Pohledávky po splatnosti po měsících, v tisících Kč: duben 212, květen 245, červen 198, červenec 263, srpen 301, září 329."><div style="--v:64%"><span>212</span><i></i><b>dub</b></div><div style="--v:74%"><span>245</span><i></i><b>kvě</b></div><div style="--v:60%"><span>198</span><i></i><b>čvn</b></div><div style="--v:80%"><span>263</span><i></i><b>čvc</b></div><div style="--v:91%"><span>301</span><i></i><b>srp</b></div><div class="is-now" style="--v:100%"><span>329</span><i></i><b>zář</b></div></figure><p class="chart-caption">tis. Kč po splatnosti</p>'},
-  {q:'Co počítá sloupec Marže % v tomhle přehledu?',status:'Ethel čte definici sloupce',
+  {q:'Jak se počítá sloupec Marže % v tomhle přehledu?',status:'Ethel čte definici sloupce',
    a:'<p><strong>Marže %</strong> je uživatelský sloupec vaší firmy. Z&nbsp;položek faktury sečte prodejní a&nbsp;nákladové ceny a&nbsp;spočítá, kolik procent z&nbsp;prodeje zůstane.</p><div class="formula"><span>Jak se počítá</span><code>(prodej − náklad) ÷ prodej × 100</code></div><p class="answer-note">Když faktura nemá položky s&nbsp;nákladovou cenou, sloupec zůstane prázdný. Proto u&nbsp;služeb uvidíte prázdné místo, ne nulu.</p>'},
   {q:'Jak stornovat fakturu?',status:'Ethel hledá v nápovědě Heliosu',
    a:'<p>Postup podle nápovědy Heliosu Inuvio:</p><ol class="help-steps"><li>V&nbsp;přehledu Faktury vydané označte fakturu, kterou chcete stornovat.</li><li>Spusťte storno dokladu. Helios k&nbsp;faktuře připraví opravný doklad.</li><li>Opravný doklad zkontrolujte a&nbsp;zrealizujte.</li><li>Pokud už byla faktura zaplacená, vyřešte i&nbsp;vrácení úhrady.</li></ol><p class="answer-source">Zdroj: <span>Nápověda Helios Inuvio · Faktury vydané, storno dokladu</span> ↗</p>'},
@@ -92,7 +92,7 @@ if(pricing){
    const month=parts.reduce((sum,p)=>sum+perMonth(p),0),year=parts.reduce((sum,p)=>sum+p.annual,0);
    pricing.querySelectorAll(`[data-price="${name}"]`).forEach(el=>{el.textContent=fmt(month)});
    pricing.querySelectorAll(`[data-note="${name}"]`).forEach(el=>{
-    el.textContent=period==='monthly'?(withAkce&&name==='standard'?'měsíční platba, včetně modulu Scénáře':'měsíční platba'):`${fmt(year)} Kč jednou ročně`;
+    el.textContent=period==='monthly'?(withAkce&&name==='standard'?'Při měsíční platbě, včetně modulu Scénáře':'Při měsíční platbě'):`Při roční platbě, ${fmt(year)} Kč jednou ročně`;
    });
   });
   pricing.querySelectorAll('[data-addon]').forEach(el=>{el.textContent=fmt(perMonth(PRICES.akce))});
