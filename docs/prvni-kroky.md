@@ -23,9 +23,9 @@ Když na odpověď najedete myší, ukážou se pod ní ikony:
 - **?** – Ethel vysvětlí, jak k výsledku došla a z jakých dat čerpá
 - **Kopírovat** – tabulku zkopíruje tak, že ji rovnou vložíte do Excelu
 - **Zobrazit jako graf** – sloupce, čára nebo koláč ze stejných dat
-- **Stáhnout tabulku** – CSV, Excel nebo PDF; soubor vzniká ve vašem počítači
+- **Stáhnout tabulku** – CSV, Excel nebo PDF. Soubor vzniká ve vašem počítači
 - **Zobrazit SQL dotaz** – ukáže dotaz, který Ethel použila
-- **Palec nahoru / dolů** – dáte nám vědět, jestli odpověď sedí; u palce dolů můžete napsat, co bylo špatně
+- **Palec nahoru / dolů** – dáte nám vědět, jestli odpověď sedí. U palce dolů můžete napsat, co bylo špatně
 
 ## Otevřete ji nad sestavou
 
