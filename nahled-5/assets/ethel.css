@@ -78,13 +78,14 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 
 /* --- 4. Hero --------------------------------------------------------------- */
 
-.hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);gap:56px;align-items:center;padding-block:68px 86px}
-.hero-copy{position:relative;padding-bottom:30px}
-.hero h1{font-size:clamp(44px,5vw,64px);line-height:1.08;letter-spacing:-.025em}
-.hero .lead{font-size:18px;line-height:1.75;margin-top:28px;max-width:425px}
-.hero .actions{gap:16px 22px}
+/* Hero úvodu = slogan, text, výzva, pět příkladů a tlačítka vlevo; okno Ethel s pevnou výškou vpravo. */
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start;padding-block:56px 72px}
+.hero-copy{position:relative;min-width:0}
+.hero h1{font-size:clamp(38px,4vw,52px);line-height:1.08;letter-spacing:-.025em}
+.hero .lead{font-size:17px;line-height:1.75;margin-top:20px;max-width:470px}
+.hero .actions{gap:16px 22px;margin-top:44px}
 .hero .text-link{font-size:14px;border-bottom-color:var(--brand)}
-.hero-demo{position:relative;min-width:0;width:100%;max-width:none;padding-bottom:30px}
+.hero-demo{position:relative;min-width:0;width:100%}
 
 /* Ručně psaná poznámka (Caveat, terakota, mírně natočená). */
 .demo-note{display:block;position:relative;width:fit-content;max-width:320px;margin:18px 18px 0 auto;padding:4px 8px;font:600 24px/1.18 var(--font-hand);letter-spacing:0;color:var(--accent);transform:rotate(-2deg);transform-origin:center;z-index:1}
@@ -96,6 +97,9 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .demo-note.note-up::before{content:"";position:absolute;left:2px;top:-10px;width:36px;height:54px;background:var(--hand-arrow-up) no-repeat center/contain;transform:rotate(-10deg)}
 .demo-note.note-down{padding-right:50px}
 .demo-note.note-down::after{content:"";position:absolute;right:0;bottom:-20px;width:36px;height:54px;background:var(--hand-arrow-down) no-repeat center/contain;transform:rotate(-10deg)}
+/* Výzva nad příklady v hero: jediná ručně psaná poznámka na webu, šipka dolů na seznam. */
+.hero-note{margin:34px 0 22px 4px}
+.hero-note strong{font-size:27px;margin:0}
 
 /* --- 5. Okno Ethel a chat -------------------------------------------------- */
 
@@ -119,13 +123,15 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .chat-input-field{flex:1;min-width:0;padding:9px 11px;border:1px solid var(--border);border-radius:var(--radius-control);background:var(--page);font-size:13px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chat-input-send{flex:none;padding:9px 16px;border:1px solid color-mix(in srgb,var(--brand) 35%,transparent);border-radius:var(--radius-control);background:var(--brand-tint);color:var(--brand);font-size:12px;font-weight:600}
 
-/* Rozhovor v okně (hero přehrává web.js ve smyčce, V praxi přidává otázky po kliknutí):
+/* Rozhovor v okně (hero přehrává web.js: otázka se napíše do řádku dotazu, odešle a Ethel odpoví):
    nové zprávy přibývají dole, starší odjíždějí nahoru a mizí pod maskou, jako v aplikaci. */
 .chat-log{display:flex;flex-direction:column;gap:14px;height:410px;overflow:hidden;justify-content:flex-end;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 48px);mask-image:linear-gradient(to bottom,transparent 0,#000 48px)}
 .chat-log .user-message{margin:0 0 0 auto}
-.seq-transient,.chat-log.is-playing .seq{display:none}
-.chat-log.is-playing .seq.is-shown{display:block;animation:seq-in .45s ease-out}
-.chat-log.is-playing .status-line.is-shown{display:flex}
+.hero .chat-log{height:489px}
+.chat-input-field.is-typing{color:var(--text)}
+.chat-input-field.is-typing::after{content:"";display:inline-block;width:1px;height:14px;margin-left:1px;vertical-align:-2px;background:var(--text);animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.chat-input-send.is-sending{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
 .is-new{animation:seq-in .4s ease-out}
 @keyframes seq-in{from{opacity:0;transform:translateY(8px)}}
 .status-line{display:flex;align-items:center;gap:9px;margin:0;font-size:13px;color:var(--text-muted)}
@@ -141,7 +147,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .bar-chart .is-now i{background:var(--brand)}
 .bar-chart span{font-size:10px;color:var(--text-muted);font-variant-numeric:tabular-nums}
 .bar-chart b{font-size:11px;font-weight:500;color:var(--text-muted)}
-.seq.is-shown .bar-chart i{animation:bar-grow .8s cubic-bezier(.2,.7,.3,1) both}
+.demo-answer.is-new .bar-chart i{animation:bar-grow .8s cubic-bezier(.2,.7,.3,1) both}
 .bar-chart div:nth-child(2) i{animation-delay:.08s}.bar-chart div:nth-child(3) i{animation-delay:.16s}.bar-chart div:nth-child(4) i{animation-delay:.24s}.bar-chart div:nth-child(5) i{animation-delay:.32s}.bar-chart div:nth-child(6) i{animation-delay:.4s}
 @keyframes bar-grow{from{transform:scaleY(0)}}
 .chart-caption{margin:2px 0 0!important;font-size:11px;color:var(--text-muted)}
@@ -191,6 +197,9 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .check-card-actions{display:flex;gap:8px;margin-top:6px}
 .check-card-actions span{font-size:12px;font-weight:600;border:1px solid var(--border);border-radius:var(--radius-control);padding:6px 14px;color:var(--text-muted)}
 .check-card-actions .check-confirm{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.demo-answer .check-card{margin-top:4px}
+.demo-answer .check-card dl>div{font-size:12px}
+.demo-answer .small{margin:10px 0 0;font-size:12px;color:var(--text-muted)}
 
 /* --- 6. Bloky a karty ------------------------------------------------------ */
 
@@ -248,11 +257,11 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
    Jako <li> je jen k přečtení, jako <button> (V praxi) je klikací: hover a vybraný stav jsou terakotové. */
 .ask-list>*{position:relative;display:block;width:100%;margin:0;padding:8px 14px 8px 38px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:10px;background:transparent;font:500 14px/1.45 var(--font-body);color:var(--text);text-align:left}
 .ask-list>*::before{content:"";position:absolute;left:14px;top:16px;width:13px;height:11px;border-radius:4px 4px 4px 1px;background:var(--brand)}
-.ask-list button{cursor:pointer;padding:12px 16px 12px 40px;transition:border-color .15s,box-shadow .15s}
-.ask-list button::before{top:15px}
+.ask-list button{cursor:pointer;padding:10px 14px 10px 38px;background:var(--surface);transition:border-color .15s,box-shadow .15s}
+.ask-list button::before{top:17px}
 .ask-list button:hover{border-color:var(--accent-line)}
 .ask-list button[aria-pressed=true]{border-style:solid;border-color:var(--accent-line);box-shadow:var(--shadow-lift)}
-.ask-list .tag{display:block;margin-bottom:6px}
+.ask-list .tag{display:inline-block;min-width:74px;margin:0 10px 0 0;text-align:center}
 
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
 .prose{max-width:760px}
@@ -396,8 +405,13 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  nav{display:none;order:5;flex-basis:100%;margin:5px 0 0;padding-top:15px;border-top:1px solid var(--border);justify-content:space-between;flex-wrap:wrap}
  nav.is-open{display:flex}
  .cards-3,.split,.qa-group{grid-template-columns:1fr}
- .usecase{scroll-snap-align:start}
- .contact-grid{gap:8px}
+ .hero .chat-log{height:400px}
+ .hero-note{margin:24px 0 18px 2px}
+ .hero-note strong{font-size:23px}
+ .hero .ask-list{grid-auto-flow:column;grid-auto-columns:min(78%,300px);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+ .hero .ask-list button{scroll-snap-align:start}
+ .hero .ask-list .tag{display:block;margin:0 0 6px;text-align:left;min-width:0;width:fit-content}
+ .hero .actions{margin-top:30px}
  .author{grid-template-columns:140px minmax(0,1fr);gap:28px}
  .author-photo{width:140px;height:140px}
  .page-hero{padding-block:48px 40px}
@@ -417,7 +431,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  .user-message{margin-left:12px}
  .chat-meta{gap:10px}
  .window-bar{gap:8px;font-size:11px}
- .chat-log.is-playing{height:360px}
+ .hero .chat-log{height:360px}
  .demo-note{max-width:min(100%,300px);padding-inline:5px;margin-top:18px;margin-right:5px}
  .demo-note strong{font-size:27px}
  .demo-note>span{font-size:23px}
