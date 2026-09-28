@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ethel.cz — styl webu (grafický manuál v2.0, 27. 9. 2026)
+   ethel.cz — styl webu (grafický manuál v3.2, 28. 9. 2026)
    Načítá se za tokens.css. Formuláře jsou v forms.css (jen stránky s formulářem).
 
    Obsah:
@@ -103,35 +103,62 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 
 /* --- 5. Okno Ethel a chat -------------------------------------------------- */
 
-.hero-product{border:1px solid var(--border);background:var(--surface);border-radius:var(--radius-card);overflow:hidden;box-shadow:var(--shadow-window);min-width:0}
-.window-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;background:var(--surface-alt);border-bottom:1px solid var(--border);color:var(--text-muted);font-size:12px}
+/* Okno kreslí skutečnou aplikaci Ethel (ethel-app): neutrální šedé plochy (--win-*
+   v tokens.css přepíšou --page, --surface-alt a --border jen uvnitř okna), lišta
+   s logem a ovládáním okna, sbalený levý pás, bubliny, pole s Enterem, spodní lišta. */
+.hero-product{--page:var(--win-page);--surface-alt:var(--win-chrome);--border:var(--win-border);border:1px solid var(--border);background:var(--page);border-radius:var(--radius-card);overflow:hidden;box-shadow:var(--shadow-window);min-width:0}
+/* Tmavý motiv aplikace (jen ukázka v manuálu): tytéž komponenty, jiné hodnoty proměnných. */
+.hero-product.window-dark{--page:var(--win-dark-page);--surface:var(--win-dark-surface);--surface-alt:var(--win-dark-chrome);--border:var(--win-dark-border);--text:var(--ink-text);--text-muted:var(--ink-muted);--brand:var(--ink-link);--brand-tint:var(--win-dark-tint);--win-bubble-bot:var(--win-dark-bubble-bot);--win-bubble-user:var(--win-dark-bubble-user);color:var(--text)}
+.hero-product svg{display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.window-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 14px;background:var(--surface-alt);border-bottom:1px solid var(--border)}
 .window-brand{display:block;flex:none}
 .window-brand img{display:block;width:62px;height:auto}
+.window-controls{display:flex;gap:4px;color:var(--text-muted)}
+.window-controls span{display:flex;align-items:center;justify-content:center;width:28px;height:28px}
+.window-controls svg{width:13px;height:13px}
 .product-inner{display:flex}
-.app-rail{width:46px;flex:none;background:var(--surface-alt);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:24px;padding:17px 6px;color:var(--text-muted);font-size:20px}
-.app-rail .rail-active{color:var(--brand);background:var(--brand-tint);border-radius:6px;width:32px;height:32px;text-align:center}
-/* Sloupec chatu = zprávy + řádek pro dotaz dole, stejně jako v aplikaci Ethel. */
+/* Levý pás sbalený jako v aplikaci: ikony 16 px, aktivní Chat modře, sekce BRZY zašedlé, Nastavení dole. */
+.app-rail{width:50px;flex:none;display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 8px 0;background:var(--surface-alt);border-right:1px solid var(--border);color:var(--text-muted)}
+.app-rail>span{display:flex;align-items:center;justify-content:center;width:34px;height:32px;border-radius:var(--radius-control)}
+.app-rail svg{width:16px;height:16px}
+.app-rail .rail-new{margin:4px 0 10px;border:1px dashed color-mix(in srgb,var(--border) 70%,var(--text-muted))}
+.app-rail .rail-active{color:var(--brand);background:var(--brand-tint)}
+.app-rail .rail-soon{opacity:.45}
+.app-rail .rail-peek{opacity:.6}
+.app-rail .rail-gap{height:14px}
+.app-rail .rail-settings{width:calc(100% + 16px);height:45px;margin-top:auto;border-top:1px solid var(--border);border-radius:0}
+/* Sloupec chatu = zprávy + řádek pro dotaz + spodní lišta, stejně jako v aplikaci Ethel. */
 .chat-col{display:flex;flex-direction:column;flex:1;min-width:0}
-.chat{padding:18px 20px;min-width:0;flex:1}
-.chat-meta{display:flex;justify-content:space-between;gap:8px;color:var(--text-muted);font-size:12px;margin-bottom:18px}
-.chat-meta span{font-size:11px}
-/* Otázka uživatele: bublina vpravo s rámečkem, jako v aplikaci. */
-.user-message{align-self:flex-end;max-width:86%;background:var(--brand-tint);border:1px solid color-mix(in srgb,var(--brand) 22%,transparent);border-radius:var(--radius-bubble) var(--radius-bubble) 2px var(--radius-bubble);padding:11px 14px;margin:0 0 18px auto;font-size:14px;line-height:1.65}
-.demo-answer{font-size:14px;line-height:1.75}
-.demo-answer p{margin:0 0 12px}
-.chat-input{display:flex;align-items:center;gap:8px;padding:10px 14px 12px;border-top:1px solid var(--border);background:var(--surface)}
-.chat-input-field{flex:1;min-width:0;padding:9px 11px;border:1px solid var(--border);border-radius:var(--radius-control);background:var(--page);font-size:13px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chat-input-send{flex:none;padding:9px 16px;border:1px solid color-mix(in srgb,var(--brand) 35%,transparent);border-radius:var(--radius-control);background:var(--brand-tint);color:var(--brand);font-size:12px;font-weight:600}
+.chat{padding:16px 14px 6px;min-width:0;flex:1}
+/* Otázka: velmi světle modrá bublina vpravo, bez obrysu. */
+.user-message{align-self:flex-end;width:fit-content;max-width:85%;background:var(--win-bubble-user);border-radius:var(--radius-bubble) var(--radius-bubble) 2px var(--radius-bubble);padding:9px 12px;margin:0 0 14px auto;font-size:14px;line-height:1.6}
+/* Odpověď: světle šedá bublina vlevo; tabulky, grafy i karty jsou uvnitř ní. */
+.demo-answer{align-self:flex-start;width:88%;background:var(--win-bubble-bot);border-radius:var(--radius-bubble) var(--radius-bubble) var(--radius-bubble) 2px;padding:9px 12px;font-size:14px;line-height:1.6;font-variant-numeric:tabular-nums}
+.demo-answer p{margin:0 0 10px}
+.demo-answer>:last-child{margin-bottom:0}
+.demo-answer .formula,.demo-answer .hbar-track,.demo-answer .origin-default,.demo-answer .saved-file:not(:empty){background:var(--surface)}
+/* Řádek dotazu: bílé pole, Odeslat = ikona Enteru uvnitř pole vpravo dole, vedle obrysová sponka a mikrofon. */
+.chat-input{display:flex;align-items:flex-end;gap:8px;padding:8px 14px 12px}
+.chat-input-field{position:relative;flex:1;min-width:0;display:flex;align-items:center;min-height:38px;padding:8px 40px 8px 12px;border:1px solid var(--border);border-radius:var(--radius-control);background:var(--surface);font-size:14px;line-height:1.4;color:color-mix(in srgb,var(--text-muted) 80%,var(--page))}
+.chat-input-text{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-input-send{position:absolute;right:5px;bottom:4px;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;color:var(--text-muted);transition:background .15s,color .15s}
+.chat-input-send svg{width:16px;height:16px}
+.chat-input-btn{flex:none;display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid color-mix(in srgb,var(--brand) 36%,transparent);border-radius:var(--radius-control);color:var(--brand)}
+.chat-input-btn svg{width:18px;height:18px}
+/* Spodní lišta: kdo je přihlášený a ke které databázi; v ukázce „Ukázková data". */
+.window-status{display:flex;align-items:center;gap:12px;height:45px;padding:0 14px;background:var(--surface-alt);border-top:1px solid var(--border);font-size:12.5px;color:var(--text-muted);white-space:nowrap;overflow:hidden}
+.window-status span{display:inline-flex;align-items:center;gap:6px;min-width:0}
+.window-status svg{flex:none;width:12px;height:12px;color:color-mix(in srgb,var(--text-muted) 80%,var(--page))}
 
 /* Rozhovor v okně (hero přehrává web.js: otázka se napíše do řádku dotazu, odešle a Ethel odpoví):
    nové zprávy přibývají dole, starší odjíždějí nahoru a mizí pod maskou, jako v aplikaci. */
 .chat-log{display:flex;flex-direction:column;gap:14px;height:410px;overflow:hidden;justify-content:flex-end;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 48px);mask-image:linear-gradient(to bottom,transparent 0,#000 48px)}
 .chat-log .user-message{margin:0 0 0 auto}
-.hero .chat-log{height:489px}
-.chat-input-field.is-typing{color:var(--text)}
-.chat-input-field.is-typing::after{content:"";display:inline-block;width:1px;height:14px;margin-left:1px;vertical-align:-2px;background:var(--text);animation:caret 1s steps(1) infinite}
+.hero .chat-log{height:502px}
+.chat-input-text.is-typing{color:var(--text)}
+.chat-input-text.is-typing::after{content:"";display:inline-block;width:1px;height:14px;margin-left:1px;vertical-align:-2px;background:var(--text);animation:caret 1s steps(1) infinite}
 @keyframes caret{50%{opacity:0}}
-.chat-input-send.is-sending{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+.chat-input-send.is-sending{background:var(--win-bubble-bot);color:var(--text)}
 .is-new{animation:seq-in .4s ease-out}
 @keyframes seq-in{from{opacity:0;transform:translateY(8px)}}
 .status-line{display:flex;align-items:center;gap:9px;margin:0;font-size:13px;color:var(--text-muted)}
@@ -400,7 +427,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  .hero-demo{max-width:610px}
  .hero-product{width:100%}
  .demo-note{margin-right:18px}
- .window-close{display:none}
+ .window-controls{display:none}
  .nav-row{flex-wrap:wrap;gap:16px;padding-block:19px}
  nav{gap:17px}
  .menu-toggle{display:block;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text);padding:6px 11px;font-size:15px;font-weight:var(--weight-ui);margin-left:auto}
@@ -431,7 +458,6 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  .hero-product .chat{padding:17px 14px}
  .app-rail{display:none}
  .user-message{margin-left:12px}
- .chat-meta{gap:10px}
  .window-bar{gap:8px;font-size:11px}
  .hero .chat-log{height:360px}
  .demo-note{max-width:min(100%,300px);padding-inline:5px;margin-top:18px;margin-right:5px}
