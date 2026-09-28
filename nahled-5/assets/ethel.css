@@ -265,10 +265,6 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .card .small{font-size:13px;line-height:1.6;color:var(--text-muted)}
 .card .small strong,.card p strong{color:var(--text)}
 .card-num{display:flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border-radius:50%;background:var(--brand-tint);color:var(--brand);font:600 13px var(--font-code)}
-/* .cards-flow: šipka mezi kartami postupu, jen když stojí všechny v jedné řadě. */
-.cards-flow .card{position:relative}
-.cards-flow .card:not(:last-child)::after{content:"→";position:absolute;top:50%;right:-17px;width:14px;transform:translateY(-50%);font:600 16px/1 var(--font-body);text-align:center;color:var(--text-muted)}
-.block-dark .cards-flow .card:not(:last-child)::after{color:var(--ink-muted)}
 .card-steps-list{grid-template-columns:1fr}
 .card-steps-list .card{flex-direction:row;align-items:flex-start;gap:16px}
 .card-steps-list h3{font-size:17px}
@@ -423,7 +419,6 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 @media(max-width:1150px){.header-cta{display:none}}
 @media(max-width:1100px){
  .cards-4{grid-template-columns:repeat(2,minmax(0,1fr))}
- .cards-flow .card:not(:last-child)::after{display:none}
  .hero{gap:36px}
  .hero .actions{align-items:flex-start;flex-direction:column;gap:10px}
 }
