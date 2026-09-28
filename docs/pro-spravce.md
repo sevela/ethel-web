@@ -1,16 +1,20 @@
 # Ethel pro správce: účty a práva
 
-Tenhle návod je pro správce Heliosu nebo SQL Serveru. Říká, pod jakým účtem Ethel čte z databáze, jaká práva k tomu potřebuje a co si hlídá sama. Uživatelský návod je v [Prvních krocích](prvni-kroky.md).
+Tenhle návod je pro správce Heliosu nebo SQL Serveru. Říká, co instalace v databázi založí, pod jakým účtem Ethel čte, jaká práva k tomu potřebuje a co si hlídá sama. Uživatelský návod je v [Prvních krocích](prvni-kroky.md).
 
-## Co instalace udělá
+## Instalace a aktualizace
 
-Aktuální `Ethel.exe` a postup instalace najdete na stránce [Ke stažení](/download/). Ethel instaluje správce s rolí **sysadmin** na SQL Serveru přímo v okně Ethel: **Nastavení → Databáze**. Instalace do vybrané databáze Heliosu vytvoří:
+Aktuální `Ethel.exe` a postup instalace najdete na stránce [Ke stažení](/download/). Do databáze Heliosu Ethel instaluje člen role **sysadmin** na SQL Serveru přímo v okně Ethel: **Nastavení → Správa → Databáze**. Když Ethel spouštíte z Heliosu, správce se nejdřív přihlásí v části **Přihlášení správce**.
 
-- tabulky `Tabx_Ethel_*` (nastavení uživatelů, profily práv, audit změn práv, kontext z Heliosu, uživatelská nastavení),
-- procedury `epx_Ethel_*` (uložení kontextu z přehledu, nastavení uživatele a scénáře `epx_Ethel_UseCase_*`),
-- externí akci **Ethel** v menu Heliosu, která okno otevírá.
+Instalace do vybrané databáze vytvoří:
 
-Instalace nesahá na žádnou tabulku Heliosu. Aktualizaci databázové části spouští stejný správce ze stejného místa; nic se neděje samo.
+- tabulky `Tabx_Ethel_*` (nastavení, uživatelé Ethel, profily a přístup k datům, zakázané tabulky, audit změn práv, kontext z Heliosu, provozní záznam dotazů),
+- procedury `epx_Ethel_*` (kontext z přehledu, uživatelská nastavení a scénáře `epx_Ethel_UseCase_*`),
+- externí akci **ET/HEL** s klávesou **Ctrl+I** v 51 přehledech Heliosu; zapisuje ji do `TabExtKom`.
+
+Kromě záznamů externí akce v `TabExtKom` instalace na tabulky Heliosu nesahá.
+
+Novou verzi uvidí správce v proužku pod hlavičkou okna. Jedním kliknutím Ethel stáhne nový `Ethel.exe`, ověří jeho podpis, vymění ho a dohraje databázovou část. Předchozí verze zůstane vedle jako `Ethel.exe.predchozi`.
 
 ## Pod jakým účtem Ethel čte
 
@@ -23,11 +27,11 @@ Instalace založí na serveru jeden login pro tuhle instalaci. Jmenuje se `ethel
 Login dostane při instalaci:
 
 - `SELECT` na schéma `dbo` v dané databázi,
-- `EXECUTE` na procedury `epx_Ethel_*` (uživatelská nastavení a scénáře).
+- `EXECUTE` na procedury Ethel, které volá za provozu (uživatelská nastavení, kontext z přehledu, scénáře).
 
-Nic víc. Zapisovat do tabulek Heliosu nemůže; zápis jde jen přes schválené procedury scénářů, a to až po potvrzení uživatele v okně Ethel.
+Do tabulek Heliosu přímo zapisovat nemůže. Zápis jde jen přes procedury scénářů, a to až po potvrzení uživatele v okně Ethel. `SELECT` na `dbo` technicky pokrývá všechny tabulky; které z nich Ethel smí číst, hlídá sama (viz níže).
 
-Každá databáze s vlastním tokenem má vlastní login, takže dvě instalace na jednom serveru si nepřepisují heslo. Starší instalace (do verze 1.1.11) používaly společný login `ethel` – aktualizace databáze ho v dané databázi nahradí novým; serverový login `ethel` zůstává, dokud ho nesmažete sami, až ho nepoužívá žádná databáze.
+Každá databáze s vlastním tokenem má vlastní login, takže dvě instalace na jednom serveru si nepřepisují heslo. Starší instalace (do verze 1.1.11) používaly společný login `ethel`. Aktualizace databáze ho v dané databázi nahradí novým; do té doby ho nová verze Ethel.exe používá jako zálohu. Serverový login `ethel` smažete sami, až budou všechny databáze na serveru aktualizované.
 
 ### Přihlášení účtem Windows
 
@@ -35,7 +39,11 @@ Každá databáze s vlastním tokenem má vlastní login, takže dvě instalace 
 
 ### Spuštění bez Heliosu
 
-Ethel jde spustit i dvojklikem na `Ethel.exe` mimo Helios (jiný stroj, zástupce na ploše; soubory Heliosu musí být vedle). Uživatel se přihlásí stejným jménem a heslem jako do Heliosu, nebo účtem Windows, a **dotazy běží pod tímhle účtem**, ne pod účtem Ethel. Kdo v Ethel není povolený, dovnitř nejde. Člen role `sysadmin` je zároveň správcem Ethel a vidí v Nastavení sekce správy.
+Ethel jde spustit i dvojklikem na `Ethel.exe` mimo Helios. `Helios.INI` a `Licence.ini` musí být vedle programu nebo o složku výš. Uživatel se přihlásí stejným jménem a heslem jako do Heliosu, nebo účtem Windows, a **dotazy běží pod tímhle účtem**, ne pod účtem Ethel. Kdo v Ethel není povolený, dovnitř nejde.
+
+Jak se bez Heliosu přihlašuje, nastavíte v **Nastavení → Správa → Licence a token → Přihlášení bez Heliosu** (v `Ethel.ini` klíč `prihlaseni`): uživatel si vybere sám (výchozí), vždy účtem Windows, nebo vždy jménem a heslem.
+
+Člen role `sysadmin`, i přes skupinu Windows, je zároveň správcem Ethel a vidí v Nastavení sekce správy.
 
 ## Minimální práva – hotové SQL
 
@@ -59,11 +67,13 @@ Když právo chybí, Ethel to neskryje: u dotazu na tabulku bez práva odpoví, 
 
 Práva na SQL Serveru říkají, co účet *může*. Co uživatel v Ethel *smí*, se nastavuje v okně Ethel a hlídá to Ethel sama, dotaz po dotazu:
 
-- **Nastavení → Uživatelé**: kdo smí Ethel používat.
-- **Nastavení → Přístup k datům**: profily práv a tabulky, které uživatel vidí. Uživatel bez profilu nevidí nic.
-- **Citlivé moduly** – Mzdy, Personalistika a Banka – jsou ve výchozím stavu zamčené pro všechny. Zpřístupnit je můžete vybraným uživatelům přes práva a profily. Dokud jsou zamčené, Ethel nad nimi negeneruje dotazy; postup z nápovědy Heliosu poradí, data ne.
+- **Nastavení → Správa → Uživatelé**: kdo smí Ethel používat. Odškrtnutý uživatel Ethel nespustí.
+- **Nastavení → Správa → Přístup k datům**: každý uživatel má jeden ze dvou režimů – *vidí všechno kromě zakázaného*, nebo *vidí jen tabulky z přiřazených profilů*. Nově přidaný uživatel začíná ve druhém režimu, takže bez profilu nevidí nic. Uživatelé z instalací před zavedením profilů mají první režim; zkontrolujte, jestli vám tak vyhovuje. Profil může tabulky povolovat i zakazovat.
+- **Nastavení → Správa → Audit**: každá změna práv s tím, kdo ji udělal.
+- **Zakázané tabulky pro všechny**: Mzdy, Personalistika a Banka, dále uživatelé, role a práva Heliosu, e-maily, datové schránky a několik systémových tabulek. Profilem je povolit nejde a dotazy nad nimi blokuje i služba Ethel v cloudu. S postupem v těchto modulech Ethel poradí podle nápovědy Heliosu, jejich data nečte.
+- **Jen jeden dotaz SELECT**: program Ethel u vás pustí do databáze jen jediný čtecí dotaz, nic jiného.
 
-Tohle je aplikační vrstva. Když udělíte účtu širší práva, než Ethel potřebuje, druhý zámek na úrovni databáze Ethel sama nepřidá. Kdo chce tvrdší zámek, může citlivé tabulky zakázat i na SQL Serveru – Ethel se pak k nim nedostane, ani kdyby ji o to model požádal:
+Tohle je aplikační vrstva. Když udělíte účtu širší práva, než Ethel potřebuje, druhý zámek na úrovni databáze Ethel sama nepřidá. Kdo chce tvrdší zámek, může zakázané tabulky zakázat i na SQL Serveru:
 
 ```sql
 USE [HeliosData]
@@ -74,16 +84,21 @@ FROM sys.tables
 WHERE name LIKE N'TabMz%' OR name LIKE N'TabZamMzd%' OR name = N'TabZamDan'
    OR name LIKE N'TabZamRPr%' OR name = N'TabZamVyp' OR name LIKE N'TabTar%'
    OR name LIKE N'TabZadVyp%' OR name LIKE N'TabPer%' OR name = N'TabCisZam'
-   OR name LIKE N'TabBankVypis%' OR name LIKE N'TabPlatPrik%'
+   OR name IN (N'TabBankVypisH', N'TabBankVypisR', N'TabDefPlatPrik', N'TabSTDLeaUhradyB')
+   OR name LIKE N'TabPlat%'
+   OR name IN (N'TabUziv', N'TabUserCfg', N'TabRole', N'TabSouhlasy', N'TabDatoveSchranky', N'TabEmail', N'TabEMailProfil')
+   OR name LIKE N'TabPrava%'
 EXEC sp_executesql @Sql
 ```
 
-Vzory odpovídají tomu, co Ethel vylučuje sama; upravte je podle svého Heliosu.
+Vzory odpovídají tomu, co Ethel zakazuje sama; upravte je podle svého Heliosu.
 
 ## Odinstalace
 
-**Nastavení → Databáze → Odinstalovat** smaže tabulky a procedury Ethel z databáze a databázového uživatele loginu Ethel. Serverový login `ethel_…` zůstává – smažete ho příkazem `DROP LOGIN`, až ho nepoužívá žádná databáze. Externí akci v menu Heliosu odebere odinstalace také.
+V **Nastavení → Správa → Databáze** je u každé databáze tlačítko **Odinstalovat**; potvrdíte ho jménem databáze. Odinstalace smaže externí akci ET/HEL, procedury, funkce a tabulky Ethel a databázového uživatele loginu Ethel. Nevratně tím zmizí i nastavená práva, audit a provozní záznam dotazů. Serverový login `ethel_…` zůstává – smažete ho příkazem `DROP LOGIN`, až ho nepoužívá žádná databáze.
 
-## Co Ethel z databáze zapisuje a kam
+## Co Ethel zapisuje a co odchází do cloudu
 
-Do databáze Heliosu Ethel zapisuje jen do vlastních tabulek `Tabx_Ethel_*` a přes procedury scénářů. Do cloudu odchází dotaz uživatele, vygenerované SQL a spotřeba tokenů; výsledek dotazu nikdy. Podrobně na stránce [Bezpečnost](/bezpecnost).
+Do databáze Heliosu Ethel zapisuje do vlastních tabulek `Tabx_Ethel_*`, při instalaci externí akci do `TabExtKom` a přes procedury scénářů po potvrzení uživatele to, co scénář zakládá (třeba novou organizaci).
+
+Do cloudu odchází dotaz uživatele, vygenerované SQL a spotřeba tokenů. Výsledky běžných dotazů ne. Výjimky: při vysvětlení sestavy, sloupce nebo databázového objektu jde k modelu jeho definice, a k modelu jdou i přílohy, které uživatel sám vloží. Podrobně na stránce [Bezpečnost](/bezpecnost/).
