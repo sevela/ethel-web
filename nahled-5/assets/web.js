@@ -15,7 +15,7 @@ if(menu&&nav){
    its height. Without a click the examples rotate; the first click stops the loop. Illustrative data. */
 const heroLog=document.getElementById('hero-log');
 if(heroLog){
- const input=document.getElementById('hero-input'),ctx=document.getElementById('hero-context');
+ const input=document.getElementById('hero-input');
  const send=document.querySelector('.hero .chat-input-send');
  const buttons=[...document.querySelectorAll('.hero button[data-cap]')];
  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -23,15 +23,15 @@ if(heroLog){
  const TYPE_MS=28,SEND_MS=350,SEARCH_MS=1600,HOLD_MS=6500,MAX_NODES=6;
  const INVOICES={cols:['Odběratel','Po splatnosti'],rows:[['Alfa trade',184200],['Delta servis',96500],['Ostatní',47800]]};
  const CAPS=[
-  {ctx:'Faktury vydané / přehled',q:'Které faktury jsou víc než 30 dní po splatnosti?',status:'Ethel hledá data',data:INVOICES,
+  {q:'Které faktury jsou víc než 30 dní po splatnosti?',status:'Ethel hledá data',data:INVOICES,
    a:'<p>Celkem <strong>12 faktur za 328 500 Kč.</strong> Největší část připadá na Alfa trade.</p><div class="answer-tools"><div class="view-toggle" role="group" aria-label="Zobrazení výsledku"><button type="button" data-view="table" aria-pressed="true">Tabulka</button><button type="button" data-view="chart" aria-pressed="false">Graf</button></div><div class="export-buttons" role="group" aria-label="Uložit výsledek"><button type="button" data-export="xlsx">Excel</button><button type="button" data-export="pdf">PDF</button></div></div><div class="case-view"></div><div class="saved-file" aria-live="polite"></div>'},
-  {ctx:'Faktury vydané / přehled',q:'A jak se to vyvíjelo za posledních šest měsíců?',status:'Ethel hledá data',follow:0,
+  {q:'A jak se to vyvíjelo za posledních šest měsíců?',status:'Ethel hledá data',follow:0,
    a:'<p>Po splatnosti je teď nejvíc za celé pololetí, od srpna <strong>+9 %</strong>.</p><figure class="bar-chart" aria-label="Pohledávky po splatnosti po měsících, v tisících Kč: duben 212, květen 245, červen 198, červenec 263, srpen 301, září 329."><div style="--v:64%"><span>212</span><i></i><b>dub</b></div><div style="--v:74%"><span>245</span><i></i><b>kvě</b></div><div style="--v:60%"><span>198</span><i></i><b>čvn</b></div><div style="--v:80%"><span>263</span><i></i><b>čvc</b></div><div style="--v:91%"><span>301</span><i></i><b>srp</b></div><div class="is-now" style="--v:100%"><span>329</span><i></i><b>zář</b></div></figure><p class="chart-caption">tis. Kč po splatnosti</p>'},
-  {ctx:'Faktury vydané / přehled',q:'Co počítá sloupec Marže % v tomhle přehledu?',status:'Ethel čte definici sloupce',
+  {q:'Co počítá sloupec Marže % v tomhle přehledu?',status:'Ethel čte definici sloupce',
    a:'<p><strong>Marže %</strong> je uživatelský sloupec vaší firmy. Z&nbsp;položek faktury sečte prodejní a&nbsp;nákladové ceny a&nbsp;spočítá, kolik procent z&nbsp;prodeje zůstane.</p><div class="formula"><span>Jak se počítá</span><code>(prodej − náklad) ÷ prodej × 100</code></div><p class="answer-note">Když faktura nemá položky s&nbsp;nákladovou cenou, sloupec zůstane prázdný. Proto u&nbsp;služeb uvidíte prázdné místo, ne nulu.</p>'},
-  {ctx:'Faktury vydané / přehled',q:'Jak stornovat fakturu?',status:'Ethel hledá v nápovědě Heliosu',
+  {q:'Jak stornovat fakturu?',status:'Ethel hledá v nápovědě Heliosu',
    a:'<p>Postup podle nápovědy Heliosu Inuvio:</p><ol class="help-steps"><li>V&nbsp;přehledu Faktury vydané označte fakturu, kterou chcete stornovat.</li><li>Spusťte storno dokladu. Helios k&nbsp;faktuře připraví opravný doklad.</li><li>Opravný doklad zkontrolujte a&nbsp;zrealizujte.</li><li>Pokud už byla faktura zaplacená, vyřešte i&nbsp;vrácení úhrady.</li></ol><p class="answer-source">Zdroj: <span>Nápověda Helios Inuvio · Faktury vydané, storno dokladu</span> ↗</p>'},
-  {ctx:'Organizace / přehled',q:'Založ organizaci s IČO 04997476.',status:'Ethel hledá firmu v ARES',
+  {q:'Založ organizaci s IČO 04997476.',status:'Ethel hledá firmu v ARES',
    a:'<p>Firmu jsem našla v&nbsp;ARES a&nbsp;v&nbsp;Heliosu ještě není. Zkontrolujte údaje, zapíšu je až po potvrzení.</p><div class="check-card"><dl><div><dt>Název</dt><dd>Ukázková firma s.r.o.</dd><dd class="origin">ARES</dd></div><div><dt>Adresa</dt><dd>Ukázková 12, 602 00 Brno</dd><dd class="origin">ARES</dd></div><div><dt>DIČ</dt><dd>CZ04997476</dd><dd class="origin">ARES</dd></div><div><dt>Splatnost</dt><dd>14 dní</dd><dd class="origin origin-default">výchozí</dd></div></dl><div class="check-card-actions"><span class="check-confirm">Potvrdit</span><span>Zrušit</span></div></div><p class="small">Ilustrační údaje. Do Heliosu se zatím nic nezapsalo.</p>'}
  ];
  const fmt=n=>n.toLocaleString('cs-CZ')+' Kč';
@@ -45,7 +45,6 @@ if(heroLog){
   timers.forEach(clearTimeout);timers=[];
   const c=CAPS[i];
   buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cap===String(i))));
-  ctx.textContent=c.ctx;
   heroLog.querySelector('.status-line')?.remove();
   /* A follow-up needs its first question on screen. */
   const last=heroLog.querySelector('.demo-answer:last-of-type');

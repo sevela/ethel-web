@@ -65,6 +65,27 @@
   --sister-feedco-dark: #B5D385;   /* tečka feedco. v patičce */
   --sister-jakub-dark:  #E4B777;   /* tečka jakub.ševela v patičce */
 
+  /* --- Okno Ethel = aplikace ------------------------------------------- */
+  /* Ukázka okna kreslí skutečnou aplikaci (ethel-app, src/tokens.css): plochy
+     jsou v ní NEUTRÁLNÍ šedé, ne namodralé jako stránka kolem. Uvnitř
+     .hero-product tyhle hodnoty přepíšou --page, --surface-alt a --border. */
+  --win-page:        #F7F7F8;   /* pozadí chatu */
+  --win-chrome:      #EDEDEF;   /* lišta okna, levý pás, spodní lišta */
+  --win-border:      #D6D8DC;   /* linky a rámečky v okně */
+  --win-bubble-bot:  #EBEBED;   /* bublina Ethel */
+  --win-bubble-user: #EEF4F9;   /* bublina uživatele, bez obrysu */
+
+  /* Tmavý motiv aplikace = zrcadlo světlého: neutrální plochy, text a modrá
+     z tmavé palety (--ink-text, --ink-muted, --ink-link), plné tlačítko #326C92.
+     Na webu jen v ukázce okna s třídou .window-dark (manuál, sekce 07). */
+  --win-dark-page:        #1A1C1F;   /* pozadí chatu */
+  --win-dark-surface:     #232529;   /* pole, karty, nabídky */
+  --win-dark-chrome:      #141518;   /* lišta okna, levý pás, spodní lišta */
+  --win-dark-border:      #33363B;
+  --win-dark-bubble-bot:  #2B2D31;   /* bublina Ethel */
+  --win-dark-bubble-user: #20313D;   /* bublina uživatele (26 % #326C92) */
+  --win-dark-tint:        #213441;   /* aktivní položka, podklad štítků (30 % #326C92) */
+
   /* --- Písmo ----------------------------------------------------------- */
   /* Segoe UI = písmo Windows a Heliosu; web má vypadat jako nástroj, který
      v Heliosu žije. Mimo Windows padá na systémové písmo platformy. */
