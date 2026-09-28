@@ -71,10 +71,10 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .button.small{padding:9px 13px;font-size:13px}
 .button-solid,.button-solid:hover,.button-solid:active{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
 
-/* Odkaz se šipkou (→ dál, ↓ na sekci níž): všude stejné písmo, podtržený, na hover jemný čárkovaný rámeček velikosti tlačítka (stejný jako u .ask-list a .addon).
-   Odsazení a rámeček jako .button; záporný okraj (odsazení + rámeček) drží text zarovnaný s obsahem. */
-.more{display:inline-block;margin:19px 0 0 -21.5px;padding:13px 20px;border:1.5px dashed transparent;border-radius:var(--radius-control);font-size:15px;font-weight:650;color:var(--brand);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;transition:border-color .15s}
-.more:hover{border-color:color-mix(in srgb,var(--brand) 45%,transparent)}
+/* Odkaz se šipkou (→ dál, ↓ na sekci níž): obrysové tlačítko s čárkovaným rámečkem (jako .ask-list a .addon), bez podtržení,
+   levý okraj rámečku zarovnaný s obsahem; na hover plná modrá čára a modrý podklad. */
+.more{display:inline-block;margin:28px 0 0;padding:13px 20px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:var(--radius-control);font-size:15px;font-weight:650;color:var(--brand);text-decoration:none;transition:border-color .15s,background .15s}
+.more:hover{border-color:var(--brand);background:var(--brand-tint)}
 .actions .more{margin:0}
 .block a:not(.button):not(.more){color:var(--brand)}
 
@@ -221,7 +221,8 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .block-dark .eyebrow{color:var(--ink-link)}
 .block-dark .block-head>p:not(.eyebrow){color:var(--ink-muted)}
 .block-dark .more{color:var(--ink-link)}
-.block-dark .more:hover{border-color:color-mix(in srgb,var(--ink-link) 45%,transparent)}
+.block-dark .more{border-color:color-mix(in srgb,var(--ink-link) 45%,transparent)}
+.block-dark .more:hover{border-color:var(--ink-link);background:var(--ink-icon)}
 .block-note{margin:20px 0 0;font-size:14px;color:var(--text-muted)}
 .block-dark .block-note{color:var(--ink-muted)}
 .block-note+.chips{margin-top:10px}
@@ -321,6 +322,8 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .author{display:grid;grid-template-columns:200px minmax(0,1fr);gap:48px;align-items:start}
 .author-photo{width:200px;height:200px;object-fit:cover;border-radius:var(--radius-card);display:block}
 .author .block-head{margin-bottom:18px}
+/* Nadpis sekce stojí nad fotkou (zarovnaný jako ostatní), vedle fotky jsou jen odstavce. */
+.author .block-head>p:first-child{margin-top:0}
 .author-sign{margin:0;font-size:14px;color:var(--text-muted)}
 /* Přímý kontakt vedle formuláře: ruční poznámka terakotově bez šipky (musí přebít .block-head>p), pod ní e-mail a telefon velkým písmem s ikonou. */
 .block-head>p.contact-note{max-width:none;margin:48px 0 0 -8px;font-size:24px;line-height:1.18;color:var(--accent)}
