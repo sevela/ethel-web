@@ -60,8 +60,6 @@
   --chart-muted: #BFD6E6;   /* sloupce grafu mimo aktuální období */
   --pulse-blue:  #348FEA;   /* rozsvícená tečka, 1. fáze */
   --pulse-warm:  #E66E4D;   /* rozsvícená tečka, 2. fáze (= --accent-line) */
-  --file-xlsx:   #1F7A4C;
-  --file-pdf:    #B64722;
 
   /* --- Okno Ethel = aplikace ------------------------------------------- */
   /* Ukázka okna kreslí skutečnou aplikaci (ethel-app, src/tokens.css): plochy

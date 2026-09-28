@@ -11,8 +11,10 @@ if(menu&&nav){
 }
 
 /* Hero: five examples (what Ethel does) and one Ethel window. The question is typed into the input row,
-   sent, appended as a bubble, "Ethel hledá…", then the answer; older messages move up, the window keeps
-   its height. Without a click the examples rotate; the first click stops the loop. Illustrative data. */
+   sent, appended as a bubble, "Ethel hledá…", then the answer. The conversation starts at the top and
+   grows downwards; once the window is full it scrolls and messages above the view are dropped, the
+   window keeps its height. Without a click the examples rotate; the first click stops the loop.
+   Illustrative data. */
 const heroLog=document.getElementById('hero-log');
 if(heroLog){
  const input=document.getElementById('hero-input');
@@ -20,11 +22,11 @@ if(heroLog){
  const buttons=[...document.querySelectorAll('.hero button[data-cap]')];
  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
  const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
- const TYPE_MS=28,SEND_MS=350,SEARCH_MS=1600,HOLD_MS=6500,MAX_NODES=6;
+ const TYPE_MS=28,SEND_MS=350,SEARCH_MS=1600,HOLD_MS=6500;
  const INVOICES={cols:['Odběratel','Po splatnosti'],rows:[['Alfa trade',184200],['Delta servis',96500],['Ostatní',47800]]};
  const CAPS=[
   {q:'Které faktury jsou víc než 30 dní po splatnosti?',status:'Ethel hledá data',data:INVOICES,
-   a:'<p>Celkem <strong>12 faktur za 328 500 Kč.</strong> Největší část připadá na Alfa trade.</p><div class="answer-tools"><div class="view-toggle" role="group" aria-label="Zobrazení výsledku"><button type="button" data-view="table" aria-pressed="true">Tabulka</button><button type="button" data-view="chart" aria-pressed="false">Graf</button></div><div class="export-buttons" role="group" aria-label="Uložit výsledek"><button type="button" data-export="xlsx">Excel</button><button type="button" data-export="pdf">PDF</button></div></div><div class="case-view"></div><div class="saved-file" aria-live="polite"></div>'},
+   a:'<p>Celkem <strong>12 faktur za 328 500 Kč.</strong> Největší část připadá na Alfa trade.</p>'},
   {q:'A jak se to vyvíjelo za posledních šest měsíců?',status:'Ethel hledá data',follow:0,
    a:'<p>Po splatnosti je teď nejvíc za celé pololetí, od srpna <strong>+9 %</strong>.</p><figure class="bar-chart" aria-label="Pohledávky po splatnosti po měsících, v tisících Kč: duben 212, květen 245, červen 198, červenec 263, srpen 301, září 329."><div style="--v:64%"><span>212</span><i></i><b>dub</b></div><div style="--v:74%"><span>245</span><i></i><b>kvě</b></div><div style="--v:60%"><span>198</span><i></i><b>čvn</b></div><div style="--v:80%"><span>263</span><i></i><b>čvc</b></div><div style="--v:91%"><span>301</span><i></i><b>srp</b></div><div class="is-now" style="--v:100%"><span>329</span><i></i><b>zář</b></div></figure><p class="chart-caption">tis. Kč po splatnosti</p>'},
   {q:'Co počítá sloupec Marže % v tomhle přehledu?',status:'Ethel čte definici sloupce',
@@ -36,11 +38,23 @@ if(heroLog){
  ];
  const fmt=n=>n.toLocaleString('cs-CZ')+' Kč';
  const table=d=>`<table><thead><tr><th>${d.cols[0]}</th><th class="num">${d.cols[1]}</th></tr></thead><tbody>${d.rows.map(([n,v])=>`<tr><td>${esc(n)}</td><td class="num">${fmt(v)}</td></tr>`).join('')}</tbody></table>`;
- const chart=d=>{const max=Math.max(...d.rows.map(r=>r[1]));return `<div class="hbar-chart" role="img" aria-label="${d.rows.map(([n,v])=>esc(n)+' '+fmt(v)).join(', ')}">${d.rows.map(([n,v])=>`<div class="hbar"><span class="hbar-label">${esc(n)}</span><span class="hbar-track"><i style="width:${Math.max(4,v/max*100)}%"></i></span><span class="hbar-value">${fmt(v)}</span></div>`).join('')}</div>`};
  let timers=[],auto=true;
  const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
- const append=html=>{heroLog.insertAdjacentHTML('beforeend',html);while(heroLog.children.length>MAX_NODES)heroLog.firstElementChild.remove()};
- const answer=(i,animate)=>{const c=CAPS[i];append(`<div class="demo-answer${animate?' is-new':''}" data-cap="${i}">${c.a}</div>`);const v=heroLog.lastElementChild.querySelector('.case-view');if(v)v.innerHTML=table(c.data)};
+ /* Drop messages that are fully above the view (keeping the visible part in place), append, then
+    scroll so the newest message is visible. */
+ const append=html=>{
+  const top=heroLog.getBoundingClientRect().top;
+  let first=heroLog.firstElementChild;
+  while(first&&first.nextElementSibling&&first.getBoundingClientRect().bottom<=top){
+   const shift=first.nextElementSibling.getBoundingClientRect().top-first.getBoundingClientRect().top;
+   first.remove();heroLog.scrollTop-=shift;first=heroLog.firstElementChild;
+  }
+  heroLog.insertAdjacentHTML('beforeend',html);
+  const full=heroLog.scrollHeight>heroLog.clientHeight;
+  heroLog.classList.toggle('is-scrolled',full);
+  if(full)heroLog.scrollTop=heroLog.scrollHeight;
+ };
+ const answer=(i,animate)=>append(`<div class="demo-answer${animate?' is-new':''}" data-cap="${i}">${CAPS[i].a}${CAPS[i].data?table(CAPS[i].data):''}</div>`);
  const run=i=>{
   timers.forEach(clearTimeout);timers=[];
   const c=CAPS[i];
@@ -59,14 +73,6 @@ if(heroLog){
   if(auto)later(()=>run((i+1)%CAPS.length),t+=HOLD_MS);
  };
  buttons.forEach(b=>b.addEventListener('click',()=>{auto=false;run(Number(b.dataset.cap))}));
- heroLog.addEventListener('click',e=>{
-  const box=e.target.closest('.demo-answer');if(!box)return;
-  const c=CAPS[Number(box.dataset.cap)],vb=e.target.closest('[data-view]'),xb=e.target.closest('[data-export]');
-  if(!c.data||!(vb||xb))return;
-  auto=false;timers.forEach(clearTimeout);timers=[];
-  if(vb){box.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===vb)));box.querySelector('.case-view').innerHTML=vb.dataset.view==='table'?table(c.data):chart(c.data)}
-  if(xb){const ext=xb.dataset.export;box.querySelector('.saved-file').innerHTML=`<span class="file-ext file-${ext}">${ext.toUpperCase()}</span><span><strong>faktury-po-splatnosti.${ext}</strong><small>Uloženo ve vašem počítači${ext==='xlsx'?', i s listem s otázkou a časem':''}. V ukázce se nic nestahuje.</small></span>`}
- });
  run(0);
 }
 
