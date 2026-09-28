@@ -1,10 +1,10 @@
-# První kroky s Ethel
+# První kroky
 
 Ethel je AI asistentka přímo v Heliosu. Zeptáte se přirozeně, jako kolegy, a ona data vyhledá, spočítá nebo vám je vysvětlí. Tady je vše, co potřebujete na začátek.
 
 ## Jak Ethel spustit
 
-V Heliosu stiskněte **Ctrl+I** nebo v menu přehledu zvolte **ET/HEL**. Funguje to v 51 přehledech, mimo jiné v organizacích, kmenových kartách, dokladech a sestavách. Ethel ví, ve kterém přehledu jste a které záznamy máte označené.
+V Heliosu stiskněte **Ctrl+I** nebo v menu zvolte **Doplňky → Ethel**. Funguje to v 51 přehledech, mimo jiné v organizacích, kmenových kartách, dokladech a sestavách. Ethel ví, ve kterém přehledu jste a které záznamy máte označené.
 
 Ethel jde spustit i bez Heliosu dvojklikem na `Ethel.exe`. Pak se přihlásíte stejným jménem a heslem jako do Heliosu, nebo účtem Windows.
 
@@ -59,7 +59,7 @@ Když má vaše firma scénáře zapnuté, Ethel umí i zapsat. Napíšete třeb
 - **Měnit data mimo scénáře.** Běžné dotazy data jen čtou. Scénář zapíše jen to, co dovoluje, a až po vašem potvrzení.
 - **Číst soubory, e-maily ani jiné aplikace.** Pracuje s databází Heliosu. Při zakládání organizace se ptá veřejného rejstříku ARES.
 - **Spustit cokoliv jiného než jeden čtecí dotaz.** Program Ethel u vás to kontroluje před každým spuštěním.
-- **Pracovat s Mzdami, Personalistikou a Bankou.** Tyto tabulky jsou zamčené pro všechny. S postupem v těchto modulech poradí podle nápovědy Heliosu.
+- **Pracovat s Mzdami, Personalistikou a Bankou,** dokud je pro vaši firmu nezapneme. S postupem v těchto modulech poradí podle nápovědy Heliosu i tak.
 - **Vidět tabulky, které vám správce nepovolil.**
 
 Více o tom, co odchází do cloudu, najdete na stránce [Bezpečnost](/bezpecnost/).
@@ -85,6 +85,10 @@ Po první odpovědi můžete pokračovat. Ethel si pamatuje, o čem spolu mluví
 > „Najdi top 10 zákazníků v segmentu maloobchod v roce 2026." → „A z jakých jsou měst?"
 
 Když chcete začít znovu, zvolte v levém panelu **Nový chat**.
+
+### Přiložte soubor
+
+K dotazu můžete přiložit soubor, třeba snímek chybové hlášky.
 
 ### Nadiktujte dotaz
 

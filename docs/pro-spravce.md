@@ -1,4 +1,4 @@
-# Ethel pro správce: účty a práva
+# Pro správce
 
 Tenhle návod je pro správce Heliosu nebo SQL Serveru. Říká, co instalace v databázi založí, pod jakým účtem Ethel čte, jaká práva k tomu potřebuje a co si hlídá sama. Uživatelský návod je v [Prvních krocích](prvni-kroky.md).
 
@@ -10,7 +10,7 @@ Instalace do vybrané databáze vytvoří:
 
 - tabulky `Tabx_Ethel_*` (nastavení, uživatelé Ethel, profily a přístup k datům, zakázané tabulky, audit změn práv, kontext z Heliosu, provozní záznam dotazů),
 - procedury `epx_Ethel_*` (kontext z přehledu, uživatelská nastavení a scénáře `epx_Ethel_UseCase_*`),
-- externí akci **ET/HEL** s klávesou **Ctrl+I** v 51 přehledech Heliosu; zapisuje ji do `TabExtKom`.
+- externí akci **Ethel** v menu **Doplňky** s klávesou **Ctrl+I** v 51 přehledech Heliosu; zapisuje ji do `TabExtKom`.
 
 Kromě záznamů externí akce v `TabExtKom` instalace na tabulky Heliosu nesahá.
 
@@ -70,10 +70,11 @@ Práva na SQL Serveru říkají, co účet *může*. Co uživatel v Ethel *smí*
 - **Nastavení → Správa → Uživatelé**: kdo smí Ethel používat. Odškrtnutý uživatel Ethel nespustí.
 - **Nastavení → Správa → Přístup k datům**: každý uživatel má jeden ze dvou režimů – *vidí všechno kromě zakázaného*, nebo *vidí jen tabulky z přiřazených profilů*. Nově přidaný uživatel začíná ve druhém režimu, takže bez profilu nevidí nic. Uživatelé z instalací před zavedením profilů mají první režim; zkontrolujte, jestli vám tak vyhovuje. Profil může tabulky povolovat i zakazovat.
 - **Nastavení → Správa → Audit**: každá změna práv s tím, kdo ji udělal.
-- **Zakázané tabulky pro všechny**: Mzdy, Personalistika a Banka, dále uživatelé, role a práva Heliosu, e-maily, datové schránky a několik systémových tabulek. Profilem je povolit nejde a dotazy nad nimi blokuje i služba Ethel v cloudu. S postupem v těchto modulech Ethel poradí podle nápovědy Heliosu, jejich data nečte.
+- **Citlivé moduly**: Mzdy, Personalistika a Banka jsou ve výchozím stavu zamčené, a to v programu u vás i ve službě Ethel v cloudu. Na žádost firmy je zapneme. Dokud jsou zamčené, Ethel s postupem v nich poradí podle nápovědy Heliosu, jejich data nečte.
+- **Zakázané tabulky pro všechny**: uživatelé, role a práva Heliosu, e-maily, datové schránky a několik systémových tabulek. Profilem je povolit nejde.
 - **Jen jeden dotaz SELECT**: program Ethel u vás pustí do databáze jen jediný čtecí dotaz, nic jiného.
 
-Tohle je aplikační vrstva. Když udělíte účtu širší práva, než Ethel potřebuje, druhý zámek na úrovni databáze Ethel sama nepřidá. Kdo chce tvrdší zámek, může zakázané tabulky zakázat i na SQL Serveru:
+Tohle je aplikační vrstva. Když udělíte účtu širší práva, než Ethel potřebuje, druhý zámek na úrovni databáze Ethel sama nepřidá. Kdo chce tvrdší zámek, může citlivé a zakázané tabulky zakázat i na SQL Serveru:
 
 ```sql
 USE [HeliosData]
@@ -95,7 +96,7 @@ Vzory odpovídají tomu, co Ethel zakazuje sama; upravte je podle svého Heliosu
 
 ## Odinstalace
 
-V **Nastavení → Správa → Databáze** je u každé databáze tlačítko **Odinstalovat**; potvrdíte ho jménem databáze. Odinstalace smaže externí akci ET/HEL, procedury, funkce a tabulky Ethel a databázového uživatele loginu Ethel. Nevratně tím zmizí i nastavená práva, audit a provozní záznam dotazů. Serverový login `ethel_…` zůstává – smažete ho příkazem `DROP LOGIN`, až ho nepoužívá žádná databáze.
+V **Nastavení → Správa → Databáze** je u každé databáze tlačítko **Odinstalovat**; potvrdíte ho jménem databáze. Odinstalace smaže externí akci Ethel, procedury, funkce a tabulky Ethel a databázového uživatele loginu Ethel. Nevratně tím zmizí i nastavená práva, audit a provozní záznam dotazů. Serverový login `ethel_…` zůstává – smažete ho příkazem `DROP LOGIN`, až ho nepoužívá žádná databáze.
 
 ## Co Ethel zapisuje a co odchází do cloudu
 

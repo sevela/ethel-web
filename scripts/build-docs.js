@@ -21,16 +21,14 @@ const PAGES = [
     slug: 'prvni-kroky',
     src: 'prvni-kroky.md',
     title: 'První kroky',
-    description:
-      'Jak začít s Ethel v Helios Inuvio: spuštění, příklady dotazů, tipy a klávesové zkratky.',
+    description: 'Jak Ethel spustit, na co se ptát a co s odpovědí dělat.',
     activeKey: 'PRVNI_KROKY',
   },
   {
     slug: 'pro-spravce',
     src: 'pro-spravce.md',
-    title: 'Pro správce: účty a práva',
-    description:
-      'Pod jakým účtem Ethel čte z databáze Heliosu, jaká práva potřebuje, hotové SQL pro správce a co si Ethel hlídá sama.',
+    title: 'Pro správce',
+    description: 'Instalace, účty a práva k databázi Heliosu.',
     activeKey: 'PRO_SPRAVCE',
   },
 ];

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="cs"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pro správce: účty a práva · Ethel, AI asistentka pro Helios Inuvio</title>
-<meta name="description" content="Pod jakým účtem Ethel čte z databáze Heliosu, jaká práva potřebuje, hotové SQL pro správce a co si Ethel hlídá sama.">
+<title>Pro správce · Ethel, AI asistentka pro Helios Inuvio</title>
+<meta name="description" content="Instalace, účty a práva k databázi Heliosu.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Jakub Ševela">
 <link rel="canonical" href="https://ethel.cz/docs/pro-spravce/">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Pro správce: účty a práva · Ethel, AI asistentka pro Helios Inuvio">
-<meta property="og:description" content="Pod jakým účtem Ethel čte z databáze Heliosu, jaká práva potřebuje, hotové SQL pro správce a co si Ethel hlídá sama.">
+<meta property="og:title" content="Pro správce · Ethel, AI asistentka pro Helios Inuvio">
+<meta property="og:description" content="Instalace, účty a práva k databázi Heliosu.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ethel.cz/docs/pro-spravce/">
 <meta property="og:locale" content="cs_CZ">
@@ -17,14 +17,14 @@
 <meta property="og:image" content="https://ethel.cz/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Pro správce: účty a práva · Ethel, AI asistentka pro Helios Inuvio">
+<meta property="og:image:alt" content="Pro správce · Ethel, AI asistentka pro Helios Inuvio">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pro správce: účty a práva · Ethel, AI asistentka pro Helios Inuvio">
-<meta name="twitter:description" content="Pod jakým účtem Ethel čte z databáze Heliosu, jaká práva potřebuje, hotové SQL pro správce a co si Ethel hlídá sama.">
+<meta name="twitter:title" content="Pro správce · Ethel, AI asistentka pro Helios Inuvio">
+<meta name="twitter:description" content="Instalace, účty a práva k databázi Heliosu.">
 <meta name="twitter:image" content="https://ethel.cz/og-image.png">
-<meta name="twitter:image:alt" content="Pro správce: účty a práva · Ethel, AI asistentka pro Helios Inuvio">
+<meta name="twitter:image:alt" content="Pro správce · Ethel, AI asistentka pro Helios Inuvio">
 
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -36,7 +36,7 @@
 <a class="skip" href="#obsah">Přejít k obsahu</a>
 <header class="site-header"><div class="wrap nav-row"><a class="logo" href="/" aria-label="Ethel, úvod"><img src="/assets/logos/ethel-light-animated.svg" alt="Ethel" width="105" height="29"></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu</button><nav id="main-nav" aria-label="Hlavní navigace"><a href="/#jak">Jak to funguje</a><a href="/#scenare">Scénáře</a><a href="/#kontrola">Bezpečnost</a><a href="/#cena">Cena</a><a href="/#autor">Kontakt</a></nav><a class="button small button-solid header-cta" href="/#kontakt">Vyzkoušet zdarma</a></div></header>
 <main id="obsah">
-<section class="page-hero wrap"><p class="eyebrow">Nápověda</p><h1>Ethel pro správce: účty a práva</h1><p class="lead">Pod jakým účtem Ethel čte z databáze Heliosu, jaká práva potřebuje, hotové SQL pro správce a co si Ethel hlídá sama.</p></section>
+<section class="page-hero wrap"><p class="eyebrow">Nápověda</p><h1>Pro správce</h1><p class="lead">Instalace, účty a práva k databázi Heliosu.</p></section>
 
 <section class="block block-white"><div class="wrap docs-grid">
 <ul class="docs-nav">
@@ -54,7 +54,7 @@
 <ul>
 <li>tabulky <code>Tabx_Ethel_*</code> (nastavení, uživatelé Ethel, profily a přístup k datům, zakázané tabulky, audit změn práv, kontext z Heliosu, provozní záznam dotazů),</li>
 <li>procedury <code>epx_Ethel_*</code> (kontext z přehledu, uživatelská nastavení a scénáře <code>epx_Ethel_UseCase_*</code>),</li>
-<li>externí akci <strong>ET/HEL</strong> s klávesou <strong>Ctrl+I</strong> v 51 přehledech Heliosu; zapisuje ji do <code>TabExtKom</code>.</li>
+<li>externí akci <strong>Ethel</strong> v menu <strong>Doplňky</strong> s klávesou <strong>Ctrl+I</strong> v 51 přehledech Heliosu; zapisuje ji do <code>TabExtKom</code>.</li>
 </ul>
 <p>Kromě záznamů externí akce v <code>TabExtKom</code> instalace na tabulky Heliosu nesahá.</p>
 <p>Novou verzi uvidí správce v proužku pod hlavičkou okna. Jedním kliknutím Ethel stáhne nový <code>Ethel.exe</code>, ověří jeho podpis, vymění ho a dohraje databázovou část. Předchozí verze zůstane vedle jako <code>Ethel.exe.predchozi</code>.</p>
@@ -94,10 +94,11 @@ EXEC sp_executesql @Sql
 <li><strong>Nastavení → Správa → Uživatelé</strong>: kdo smí Ethel používat. Odškrtnutý uživatel Ethel nespustí.</li>
 <li><strong>Nastavení → Správa → Přístup k datům</strong>: každý uživatel má jeden ze dvou režimů – <em>vidí všechno kromě zakázaného</em>, nebo <em>vidí jen tabulky z přiřazených profilů</em>. Nově přidaný uživatel začíná ve druhém režimu, takže bez profilu nevidí nic. Uživatelé z instalací před zavedením profilů mají první režim; zkontrolujte, jestli vám tak vyhovuje. Profil může tabulky povolovat i zakazovat.</li>
 <li><strong>Nastavení → Správa → Audit</strong>: každá změna práv s tím, kdo ji udělal.</li>
-<li><strong>Zakázané tabulky pro všechny</strong>: Mzdy, Personalistika a Banka, dále uživatelé, role a práva Heliosu, e-maily, datové schránky a několik systémových tabulek. Profilem je povolit nejde a dotazy nad nimi blokuje i služba Ethel v cloudu. S postupem v těchto modulech Ethel poradí podle nápovědy Heliosu, jejich data nečte.</li>
+<li><strong>Citlivé moduly</strong>: Mzdy, Personalistika a Banka jsou ve výchozím stavu zamčené, a to v programu u vás i ve službě Ethel v cloudu. Na žádost firmy je zapneme. Dokud jsou zamčené, Ethel s postupem v nich poradí podle nápovědy Heliosu, jejich data nečte.</li>
+<li><strong>Zakázané tabulky pro všechny</strong>: uživatelé, role a práva Heliosu, e-maily, datové schránky a několik systémových tabulek. Profilem je povolit nejde.</li>
 <li><strong>Jen jeden dotaz SELECT</strong>: program Ethel u vás pustí do databáze jen jediný čtecí dotaz, nic jiného.</li>
 </ul>
-<p>Tohle je aplikační vrstva. Když udělíte účtu širší práva, než Ethel potřebuje, druhý zámek na úrovni databáze Ethel sama nepřidá. Kdo chce tvrdší zámek, může zakázané tabulky zakázat i na SQL Serveru:</p>
+<p>Tohle je aplikační vrstva. Když udělíte účtu širší práva, než Ethel potřebuje, druhý zámek na úrovni databáze Ethel sama nepřidá. Kdo chce tvrdší zámek, může citlivé a zakázané tabulky zakázat i na SQL Serveru:</p>
 <pre><code class="language-sql">USE [HeliosData]
 DECLARE @Ucet sysname = N&#39;ethel_xxxxxxxx&#39;
 DECLARE @Sql nvarchar(max) = N&#39;&#39;
@@ -114,7 +115,7 @@ EXEC sp_executesql @Sql
 </code></pre>
 <p>Vzory odpovídají tomu, co Ethel zakazuje sama; upravte je podle svého Heliosu.</p>
 <h2 id="odinstalace">Odinstalace</h2>
-<p>V <strong>Nastavení → Správa → Databáze</strong> je u každé databáze tlačítko <strong>Odinstalovat</strong>; potvrdíte ho jménem databáze. Odinstalace smaže externí akci ET/HEL, procedury, funkce a tabulky Ethel a databázového uživatele loginu Ethel. Nevratně tím zmizí i nastavená práva, audit a provozní záznam dotazů. Serverový login <code>ethel_…</code> zůstává – smažete ho příkazem <code>DROP LOGIN</code>, až ho nepoužívá žádná databáze.</p>
+<p>V <strong>Nastavení → Správa → Databáze</strong> je u každé databáze tlačítko <strong>Odinstalovat</strong>; potvrdíte ho jménem databáze. Odinstalace smaže externí akci Ethel, procedury, funkce a tabulky Ethel a databázového uživatele loginu Ethel. Nevratně tím zmizí i nastavená práva, audit a provozní záznam dotazů. Serverový login <code>ethel_…</code> zůstává – smažete ho příkazem <code>DROP LOGIN</code>, až ho nepoužívá žádná databáze.</p>
 <h2 id="co-ethel-zapisuje-a-co-odchazi-do-cloudu">Co Ethel zapisuje a co odchází do cloudu</h2>
 <p>Do databáze Heliosu Ethel zapisuje do vlastních tabulek <code>Tabx_Ethel_*</code>, při instalaci externí akci do <code>TabExtKom</code> a přes procedury scénářů po potvrzení uživatele to, co scénář zakládá (třeba novou organizaci).</p>
 <p>Do cloudu odchází dotaz uživatele, vygenerované SQL a spotřeba tokenů. Výsledky běžných dotazů ne. Výjimky: při vysvětlení sestavy, sloupce nebo databázového objektu jde k modelu jeho definice, a k modelu jdou i přílohy, které uživatel sám vloží. Podrobně na stránce <a href="/bezpecnost/">Bezpečnost</a>.</p>
