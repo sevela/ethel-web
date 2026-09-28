@@ -265,6 +265,10 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .card .small{font-size:13px;line-height:1.6;color:var(--text-muted)}
 .card .small strong,.card p strong{color:var(--text)}
 .card-num{display:flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border-radius:50%;background:var(--brand-tint);color:var(--brand);font:600 13px var(--font-code)}
+/* .cards-flow: šipka mezi kartami postupu, jen když stojí všechny v jedné řadě. */
+.cards-flow .card{position:relative}
+.cards-flow .card:not(:last-child)::after{content:"→";position:absolute;top:50%;right:-17px;width:14px;transform:translateY(-50%);font:600 16px/1 var(--font-body);text-align:center;color:var(--text-muted)}
+.block-dark .cards-flow .card:not(:last-child)::after{color:var(--ink-muted)}
 .card-steps-list{grid-template-columns:1fr}
 .card-steps-list .card{flex-direction:row;align-items:flex-start;gap:16px}
 .card-steps-list h3{font-size:17px}
@@ -316,7 +320,9 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .card-plan:hover .ticks li::before{color:var(--accent)}
 .card-plan:hover .button{border-color:var(--accent-line);color:var(--accent);background:var(--accent-tint)}
 .card-plan:hover .tag{color:var(--accent);background:var(--accent-tint)}
-.card-plan:hover .addon{border-color:var(--accent-line)}
+.card-plan:hover .addon{border-color:var(--accent-line);background:var(--accent-tint)}
+.card-plan:hover .addon-price{color:var(--accent)}
+.card-plan:hover .addon input{accent-color:var(--accent)}
 .plan-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .plan-top h3{font-size:22px}
 .addon{display:flex;gap:12px;align-items:flex-start;margin:0 0 14px;padding:14px 16px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:10px;background:var(--brand-tint);cursor:pointer;transition:background .15s,border-color .15s}
@@ -333,6 +339,10 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .author-photo{width:200px;height:200px;object-fit:cover;border-radius:var(--radius-card);display:block}
 .author .block-head{margin-bottom:18px}
 .author-sign{margin:0;font-size:14px;color:var(--text-muted)}
+/* Přímý kontakt vedle formuláře: e-mail a telefon velkým písmem. */
+.block-head .contact-direct{display:grid;gap:2px;margin-top:22px}
+.contact-direct a{width:fit-content;font:600 26px/1.4 var(--font-body);letter-spacing:-.02em;color:var(--text);text-decoration:none}
+.contact-direct a:hover{color:var(--brand)}
 .author-sign strong{color:var(--text)}
 
 /* --- 9. Podstránky --------------------------------------------------------- */
@@ -394,16 +404,11 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .footer-contact{display:flex;flex-wrap:wrap;gap:6px 18px;margin:6px 0 0;font-size:14px}
 .footer-contact a{text-decoration:none;color:var(--ink-text)}
 .footer-contact a:hover,.footer-links a:hover{color:var(--ink-link)}
-.related{display:grid;gap:14px}
-.footer-top .related-label{margin:0;font:700 11px/1.6 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
-.related-links{display:flex;gap:55px}
-.related a{text-decoration:none}
-.related strong{font-size:20px;letter-spacing:-.6px;color:var(--ink-text)}
-.related a>span{display:block;color:var(--ink-muted);font-size:12px;margin-top:8px}
-.feed-dot{color:var(--sister-feedco-dark)}
-.jakub-dot{color:var(--sister-jakub-dark)}
-.footer-links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:28px;font-size:14px}
+/* Odkazy patičky: tři řádky (Nápověda, Ethel, Další weby), každý se štítkem vlevo. */
+.footer-links{display:grid;gap:10px;margin-top:28px}
+.footer-links>*{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0;font-size:14px;line-height:1.6}
 .footer-links a{text-decoration:none;color:var(--ink-text-2)}
+.footer-label{flex:0 0 100px;font-weight:600;color:var(--ink-muted)}
 .footer-bottom{display:flex;flex-direction:column;gap:2px;flex-wrap:wrap;border-top:1px solid var(--ink-rule);padding-top:24px;margin-top:30px;color:var(--ink-muted);font-size:12px}
 .footer-bottom p{margin:0;font-size:12px;line-height:1.6;color:var(--ink-muted)}
 .site-footer a:focus-visible{outline-color:var(--ink-link)}
@@ -418,6 +423,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 @media(max-width:1150px){.header-cta{display:none}}
 @media(max-width:1100px){
  .cards-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .cards-flow .card:not(:last-child)::after{display:none}
  .hero{gap:36px}
  .hero .actions{align-items:flex-start;flex-direction:column;gap:10px}
 }
@@ -472,7 +478,8 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  .author-photo{width:112px;height:112px}
  .check-card dl>div{grid-template-columns:minmax(0,1fr) auto;gap:2px 10px}
  .check-card dt{grid-column:1/-1}
- .related-links{gap:30px;flex-wrap:wrap}
+ .footer-label{flex-basis:100%}
+ .contact-direct a{font-size:22px}
  .footer-top{gap:24px}
  .footer-brand img{width:130px}
  .cookie-banner{flex-direction:column;align-items:flex-start}
