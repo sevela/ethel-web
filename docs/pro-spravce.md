@@ -4,7 +4,7 @@ Tenhle návod je pro správce Heliosu nebo SQL Serveru. Říká, pod jakým úč
 
 ## Co instalace udělá
 
-Ethel instaluje správce s rolí **sysadmin** na SQL Serveru přímo v okně Ethel: **Nastavení → Databáze**. Instalace do vybrané databáze Heliosu vytvoří:
+Aktuální `Ethel.exe` a postup instalace najdete na stránce [Ke stažení](/download/). Ethel instaluje správce s rolí **sysadmin** na SQL Serveru přímo v okně Ethel: **Nastavení → Databáze**. Instalace do vybrané databáze Heliosu vytvoří:
 
 - tabulky `Tabx_Ethel_*` (nastavení uživatelů, profily práv, audit změn práv, kontext z Heliosu, uživatelská nastavení),
 - procedury `epx_Ethel_*` (uložení kontextu z přehledu, nastavení uživatele a scénáře Akcí `epx_Ethel_UseCase_*`),
