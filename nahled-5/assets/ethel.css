@@ -269,14 +269,13 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .tag{display:inline-block;align-self:flex-start;width:fit-content;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:var(--brand-tint);color:var(--brand)}
 .ask-list{display:grid;gap:8px;margin:6px 0 0;padding:0;list-style:none}
 /* Příklad otázky: to, co uživatel napíše Ethel. Modrý čárkovaný rámeček (stejný jako .addon) a modrá odrážka.
-   Jako <li> je jen k přečtení, jako <button> (V praxi) je klikací: hover a vybraný stav jsou terakotové. */
+   Jako <li> je jen k přečtení, jako <button> (hero) je klikací: hover a vybraný stav mají modrý rámeček a světle modrý podklad. */
 .ask-list>*{position:relative;display:block;width:100%;margin:0;padding:8px 14px 8px 38px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:10px;background:transparent;font:500 14px/1.45 var(--font-body);color:var(--text);text-align:left}
 .ask-list>*::before{content:"";position:absolute;left:14px;top:16px;width:13px;height:11px;border-radius:4px 4px 4px 1px;background:var(--brand)}
-.ask-list button{cursor:pointer;padding:10px 14px;background:var(--surface);transition:border-color .15s,box-shadow .15s}
+.ask-list button{cursor:pointer;padding:10px 14px;background:var(--surface);transition:border-color .15s,background .15s}
 /* Klikací příklad (hero) nemá bublinovou odrážku, odrážkou je štítek .tag. */
 .ask-list button::before{display:none}
-.ask-list button:hover{border-color:var(--accent-line)}
-.ask-list button[aria-pressed=true]{border-color:var(--accent-line);background:var(--accent-tint)}
+.ask-list button:hover,.ask-list button[aria-pressed=true]{border-color:var(--brand);background:var(--brand-tint)}
 .ask-list .tag{display:inline-block;min-width:74px;margin:0 10px 0 0;text-align:center}
 
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
@@ -298,19 +297,15 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .card .card-price .per{font-size:15px;font-weight:400;letter-spacing:0;color:var(--text-muted)}
 .card .card-price.small{font-size:26px}
 .plans .card{padding:30px}
-/* Oba tarify vypadají stejně; hover přebarví rámeček, odrážky a tlačítko na terakotu. */
-.card-plan{transition:border-color .15s}
-.card-plan:hover{border-color:var(--accent-line)}
-.card-plan:hover .ticks li::before{color:var(--accent)}
-.card-plan:hover .button{border-color:var(--accent-line);color:var(--accent);background:var(--accent-tint)}
-.card-plan:hover .tag{color:var(--accent);background:var(--accent-tint)}
-.card-plan:hover .addon{border-color:var(--accent-line);background:var(--accent-tint)}
-.card-plan:hover .addon-price{color:var(--accent)}
-.card-plan:hover .addon input{accent-color:var(--accent)}
+/* Oba tarify vypadají stejně; hover podbarví celou kartu světle modrou. */
+.card-plan{transition:background .15s,border-color .15s}
+.card-plan:hover{background:var(--brand-tint);border-color:color-mix(in srgb,var(--brand) 45%,transparent)}
+/* Na podbarvené kartě dostanou štítek a doplněk bílý podklad, jinak by splynuly. */
+.card-plan:hover .tag,.card-plan:hover .addon{background:var(--surface)}
 .plan-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .plan-top h3{font-size:22px}
 .addon{display:flex;gap:12px;align-items:flex-start;margin:0 0 14px;padding:14px 16px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:10px;background:var(--brand-tint);cursor:pointer;transition:background .15s,border-color .15s}
-.addon:has(input:checked){border-style:solid;border-color:var(--accent-line);background:var(--surface)}
+.addon:has(input:checked){border-style:solid;border-color:var(--brand);background:var(--surface)}
 .addon input{width:18px;height:18px;margin:3px 0 0;flex:none;accent-color:var(--brand);cursor:pointer}
 .addon strong{font-size:15px}
 .addon-price{margin-left:4px;font-size:14px;font-weight:650;color:var(--brand);white-space:nowrap}
