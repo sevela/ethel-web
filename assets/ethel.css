@@ -228,9 +228,10 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .block-note{margin:20px 0 0;font-size:14px;color:var(--text-muted)}
 .block-dark .block-note{color:var(--ink-muted)}
 .block-note+.chips{margin-top:10px}
-/* Výhled pod celou sekcí (co chystáme): ruční poznámka bez šipky, zarovnaná vlevo; na tmavé ploše světlejší terakota. */
-.note-soon{max-width:none;margin:48px 0 0 -8px}
-.block-dark .demo-note{color:var(--accent-on-ink)}
+/* Výhled pod celou sekcí (co chystáme): ruční poznámka bez šipky, vlevo, dva řádky, bílá. */
+.note-soon{max-width:none;margin:48px 0 0;padding-inline:0;transform:none}
+.note-soon strong{white-space:nowrap}
+.block-dark .note-soon{color:var(--ink-text)}
 
 /* Jedna karta pro celý web: nadpis, text, volitelně ikona nebo štítek, volitelně jeden seznam. Na šedém bloku bez rámečku, na tmavém tmavší. */
 .cards{display:grid;gap:20px;margin:0;padding:0;list-style:none}
@@ -447,6 +448,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  .docs-nav-heading{display:none}
 }
 @media(max-width:600px){
+ .note-soon strong{white-space:normal}
  h2{font-size:34px}
  .hero{padding-top:36px;gap:28px}
  .hero .lead{font-size:17px}
