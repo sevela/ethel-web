@@ -98,7 +98,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .demo-note.note-down{padding-right:50px}
 .demo-note.note-down::after{content:"";position:absolute;right:0;bottom:-20px;width:36px;height:54px;background:var(--hand-arrow-down) no-repeat center/contain;transform:rotate(-10deg)}
 /* Výzva nad příklady v hero: jediná ručně psaná poznámka na webu, šipka dolů na seznam. */
-.hero-note{margin:34px 0 22px 4px}
+.hero-note{margin:34px 0 22px -8px}
 .hero-note strong{font-size:27px;margin:0}
 
 /* --- 5. Okno Ethel a chat -------------------------------------------------- */
@@ -136,6 +136,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .demo-answer{align-self:stretch;font-size:14px;line-height:1.6;font-variant-numeric:tabular-nums}
 .demo-answer p{margin:0 0 10px}
 .demo-answer>:last-child{margin-bottom:0}
+.chat-log .demo-answer{margin-right:80px}
 /* Řádek dotazu: bílé pole, Odeslat = ikona Enteru uvnitř pole vpravo dole, vedle obrysová sponka a mikrofon. */
 .chat-input{display:flex;align-items:flex-end;gap:8px;padding:8px 14px 12px}
 .chat-input-field{position:relative;flex:1;min-width:0;display:flex;align-items:center;min-height:38px;padding:8px 40px 8px 12px;border:1px solid var(--border);border-radius:var(--radius-control);background:var(--surface);font-size:14px;line-height:1.4;color:color-mix(in srgb,var(--text-muted) 80%,var(--page))}
@@ -247,6 +248,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .card-steps-list .card{flex-direction:row;align-items:flex-start;gap:16px}
 .card-steps-list h3{font-size:17px}
 .card-steps-list .card p{color:var(--text-muted);font-size:14px;margin-top:4px}
+.block-dark .card-steps-list .card p{color:var(--ink-body)}
 
 /* Ikona v nadpisu karty (vždy modrá), štítek .tag, chipy pro hesla, příklady otázek .ask-list. */
 .card-icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;flex:none;border-radius:10px;background:var(--brand-tint)}
@@ -258,6 +260,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .block-dark .card-num{background:var(--ink-icon);color:var(--ink-link)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 0;padding:0;list-style:none}
 .chips li{padding:7px 13px;border-radius:var(--radius-pill);background:var(--brand-tint);font-size:14px;line-height:1.4}
+.block-dark .chips li{background:var(--ink-icon);color:var(--ink-text)}
 /* Štítek: kategorie položky (tarif, modul, role, datum vydání). Jeden styl pro celý web. */
 .tag{display:inline-block;align-self:flex-start;width:fit-content;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:var(--brand-tint);color:var(--brand)}
 .ask-list{display:grid;gap:8px;margin:6px 0 0;padding:0;list-style:none}
@@ -268,7 +271,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .ask-list button{cursor:pointer;padding:10px 14px 10px 38px;background:var(--surface);transition:border-color .15s,box-shadow .15s}
 .ask-list button::before{top:17px}
 .ask-list button:hover{border-color:var(--accent-line)}
-.ask-list button[aria-pressed=true]{border-style:solid;border-color:var(--accent-line);box-shadow:var(--shadow-lift)}
+.ask-list button[aria-pressed=true]{border-color:var(--accent-line);background:var(--accent-tint)}
 .ask-list .tag{display:inline-block;min-width:74px;margin:0 10px 0 0;text-align:center}
 
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
@@ -313,11 +316,14 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .author-photo{width:200px;height:200px;object-fit:cover;border-radius:var(--radius-card);display:block}
 .author .block-head{margin-bottom:18px}
 .author-sign{margin:0;font-size:14px;color:var(--text-muted)}
-/* Přímý kontakt vedle formuláře: ruční poznámka se šipkou dolů, pod ní telefon a e-mail velkým písmem s ikonou. */
-.contact-note{margin:30px 0 14px 4px}
-.contact-direct{display:grid;gap:12px;margin:0;padding:0;list-style:none}
-.contact-direct a{display:inline-flex;align-items:center;gap:14px;font:600 24px/1.3 var(--font-body);letter-spacing:-.02em;color:var(--text);text-decoration:none}
-.contact-direct a:hover{color:var(--brand)}
+/* Přímý kontakt vedle formuláře: ruční poznámka bez šipky, pod ní e-mail a telefon terakotově velkým písmem s ikonou. */
+.contact-note{max-width:none;margin:36px 0 0 -8px}
+.contact-note strong{white-space:nowrap}
+.contact-direct{display:grid;gap:12px;margin:24px 0 0;padding:0;list-style:none}
+.block-head .contact-direct a:not(.button):not(.more){display:inline-flex;align-items:center;gap:14px;font:600 24px/1.3 var(--font-body);letter-spacing:-.02em;color:var(--accent);text-decoration:none}
+.block-head .contact-direct a:not(.button):not(.more):hover{text-decoration:underline;text-underline-offset:4px}
+.contact-direct .card-icon{background:var(--accent-tint)}
+.contact-direct .card-icon svg{stroke:var(--accent)}
 .author-sign strong{color:var(--text)}
 
 /* --- 9. Podstránky --------------------------------------------------------- */
@@ -457,7 +463,8 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  .check-card dl>div{grid-template-columns:minmax(0,1fr) auto;gap:2px 10px}
  .check-card dt{grid-column:1/-1}
  .footer-sites{padding:18px 0 0;border-left:0;border-top:1px solid var(--ink-rule);width:100%}
- .contact-direct a{font-size:21px}
+ .block-head .contact-direct a:not(.button):not(.more){font-size:21px}
+ .chat-log .demo-answer{margin-right:24px}
  .footer-top{gap:24px}
  .footer-brand img{width:130px}
  .cookie-banner{flex-direction:column;align-items:flex-start}
