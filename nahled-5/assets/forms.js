@@ -1,6 +1,7 @@
 /* Contact form: shared backend of all three sites, edge function web-lead (Supabase).
    JSON mode (Accept: application/json) returns {ok, error}; 429 = rate limit. Honeypot field "mail".
-   Prefill of the message works from a CTA on the same page (data-prefill) or via ?tema= in the URL. */
+   Prefill of the message works from a CTA on the same page (data-prefill) or via ?tema= in the URL.
+   The optional plan select (name=topic) goes to the backend as `type`; empty = general question. */
 (()=>{
 const ENDPOINT='https://gygwfcattcunbikootbx.supabase.co/functions/v1/web-lead';
 const PREFILLS={
@@ -17,7 +18,7 @@ const topic=document.querySelector('#contact-topic');
 function prefill(key){
  if(!PREFILLS[key]||!message||message.value.trim())return;
  message.value=PREFILLS[key];
- if(topic&&key!=='demo')topic.value=key==='nasazeni'||key==='scenar'?'dotaz':'trial';
+ if(topic&&key==='nasazeni')topic.value='Enterprise';
 }
 document.addEventListener('click',e=>{
  const trigger=e.target.closest&&e.target.closest('[data-prefill]');
@@ -36,6 +37,7 @@ const limit=document.querySelector('#contact-limit');
 const success=document.querySelector('#contact-success');
 const submit=form.querySelector('[type="submit"]');
 const submitLabel=submit.querySelector('span');
+const submitText=submitLabel.textContent;
 
 function validate(field){
  let msg='';
@@ -55,7 +57,7 @@ form.addEventListener('submit',event=>{
  failed.hidden=true;limit.hidden=true;
  if(invalid.length){invalid[0].focus();return}
  const value=name=>(form.elements[name]?.value||'').trim();
- const type=value('topic')||'trial';
+ const type=value('topic')||'dotaz';
  submit.disabled=true;submitLabel.textContent='Odesílám…';
  fetch(ENDPOINT,{
   method:'POST',
@@ -70,6 +72,6 @@ form.addEventListener('submit',event=>{
   else{failed.hidden=false}
  })
  .catch(()=>{failed.hidden=false})
- .finally(()=>{submit.disabled=false;submitLabel.textContent='Chci vyzkoušet Ethel'});
+ .finally(()=>{submit.disabled=false;submitLabel.textContent=submitText});
 });
 })();

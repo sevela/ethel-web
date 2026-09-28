@@ -62,8 +62,6 @@
   --pulse-warm:  #E66E4D;   /* rozsvícená tečka, 2. fáze (= --accent-line) */
   --file-xlsx:   #1F7A4C;
   --file-pdf:    #B64722;
-  --sister-feedco-dark: #B5D385;   /* tečka feedco. v patičce */
-  --sister-jakub-dark:  #E4B777;   /* tečka jakub.ševela v patičce */
 
   /* --- Okno Ethel = aplikace ------------------------------------------- */
   /* Ukázka okna kreslí skutečnou aplikaci (ethel-app, src/tokens.css): plochy
