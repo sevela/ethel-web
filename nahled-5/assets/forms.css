@@ -23,7 +23,7 @@
 .form-submit:disabled{opacity:.5;cursor:not-allowed}
 .form-note{font-size:12px;line-height:1.6;margin-top:14px;color:var(--text-muted)}
 .contact-form-panel .form-note{font-size:13px;margin:14px 0 0}
-.contact-form-panel .form-note+.form-note{margin-top:4px}
+.contact-form-panel .form-note-links{line-height:1.5}
 .form-success{padding:28px 0;outline:none}
 .form-success h3{font-size:24px}
 .form-success p{font-size:15px;color:var(--text-muted)}

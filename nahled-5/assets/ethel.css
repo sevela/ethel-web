@@ -313,9 +313,10 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .author-photo{width:200px;height:200px;object-fit:cover;border-radius:var(--radius-card);display:block}
 .author .block-head{margin-bottom:18px}
 .author-sign{margin:0;font-size:14px;color:var(--text-muted)}
-/* Přímý kontakt vedle formuláře: e-mail a telefon velkým písmem. */
-.block-head .contact-direct{display:grid;gap:2px;margin-top:22px}
-.contact-direct a{width:fit-content;font:600 26px/1.4 var(--font-body);letter-spacing:-.02em;color:var(--text);text-decoration:none}
+/* Přímý kontakt vedle formuláře: ruční poznámka se šipkou dolů, pod ní telefon a e-mail velkým písmem s ikonou. */
+.contact-note{margin:30px 0 14px 4px}
+.contact-direct{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.contact-direct a{display:inline-flex;align-items:center;gap:14px;font:600 24px/1.3 var(--font-body);letter-spacing:-.02em;color:var(--text);text-decoration:none}
 .contact-direct a:hover{color:var(--brand)}
 .author-sign strong{color:var(--text)}
 
@@ -379,10 +380,14 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .footer-contact a{text-decoration:none;color:var(--ink-text)}
 .footer-contact a:hover,.footer-links a:hover{color:var(--ink-link)}
 /* Odkazy patičky: tři řádky (Nápověda, Ethel, Další weby), každý se štítkem vlevo. */
-.footer-links{display:grid;gap:10px;margin-top:28px}
+/* Odkazy patičky: dva řádky bez nadpisů (web, nápověda). Další weby vpravo nahoře, oddělené čarou. */
+.footer-links{display:grid;gap:8px;margin-top:28px}
 .footer-links>*{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0;font-size:14px;line-height:1.6}
-.footer-links a{text-decoration:none;color:var(--ink-text-2)}
-.footer-label{flex:0 0 100px;font-weight:600;color:var(--ink-muted)}
+.footer-links a,.footer-sites a{text-decoration:none;color:var(--ink-text-2)}
+.footer-sites a:hover{color:var(--ink-link)}
+.footer-sites{display:grid;gap:8px;padding-left:28px;border-left:1px solid var(--ink-rule)}
+.footer-top .footer-sites-label{margin:0;font:700 11px/1.6 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
+.footer-sites-links{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:14px}
 .footer-bottom{display:flex;flex-direction:column;gap:2px;flex-wrap:wrap;border-top:1px solid var(--ink-rule);padding-top:24px;margin-top:30px;color:var(--ink-muted);font-size:12px}
 .footer-bottom p{margin:0;font-size:12px;line-height:1.6;color:var(--ink-muted)}
 .site-footer a:focus-visible{outline-color:var(--ink-link)}
@@ -451,8 +456,8 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  .author-photo{width:112px;height:112px}
  .check-card dl>div{grid-template-columns:minmax(0,1fr) auto;gap:2px 10px}
  .check-card dt{grid-column:1/-1}
- .footer-label{flex-basis:100%}
- .contact-direct a{font-size:22px}
+ .footer-sites{padding:18px 0 0;border-left:0;border-top:1px solid var(--ink-rule);width:100%}
+ .contact-direct a{font-size:21px}
  .footer-top{gap:24px}
  .footer-brand img{width:130px}
  .cookie-banner{flex-direction:column;align-items:flex-start}
