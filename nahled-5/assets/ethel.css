@@ -276,6 +276,8 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 /* Klikací příklad (hero) nemá bublinovou odrážku, odrážkou je štítek .tag. */
 .ask-list button::before{display:none}
 .ask-list button:hover,.ask-list button[aria-pressed=true]{border-color:var(--brand);background:var(--brand-tint)}
+/* Ve zvýrazněném (světle modrém) bloku dostane to, co bylo světle modré, podklad bílý, jinak by splynulo. */
+.ask-list button:hover .tag,.ask-list button[aria-pressed=true] .tag{background:var(--surface)}
 .ask-list .tag{display:inline-block;min-width:74px;margin:0 10px 0 0;text-align:center}
 
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
@@ -300,8 +302,8 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 /* Oba tarify vypadají stejně; hover podbarví celou kartu světle modrou. */
 .card-plan{transition:background .15s,border-color .15s}
 .card-plan:hover{background:var(--brand-tint);border-color:color-mix(in srgb,var(--brand) 45%,transparent)}
-/* Na podbarvené kartě dostanou štítek a doplněk bílý podklad, jinak by splynuly. */
-.card-plan:hover .tag,.card-plan:hover .addon{background:var(--surface)}
+/* Na podbarvené kartě dostanou štítek, doplněk a obrysové tlačítko (i na hover) bílý podklad, jinak by splynuly. */
+.card-plan:hover .tag,.card-plan:hover .addon,.card-plan:hover .button:not(.button-solid){background:var(--surface)}
 .plan-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .plan-top h3{font-size:22px}
 .addon{display:flex;gap:12px;align-items:flex-start;margin:0 0 14px;padding:14px 16px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:10px;background:var(--brand-tint);cursor:pointer;transition:background .15s,border-color .15s}
