@@ -16,19 +16,25 @@ const TEMPLATE = readFileSync(resolve(__dirname, '_docs-template.html'), 'utf8')
 
 const SITE = 'https://ethel.cz';
 
+// title = cely <title> (i og/twitter), description = meta popis,
+// lead = podtitulek pod H1. H1 bere uvodni `# Nadpis` z Markdownu.
 const PAGES = [
   {
     slug: 'prvni-kroky',
     src: 'prvni-kroky.md',
-    title: 'První kroky',
-    description: 'Jak Ethel spustit, na co se ptát a co s odpovědí dělat.',
+    title: 'První kroky s Ethel v Heliosu | Návod pro uživatele',
+    description:
+      'Jak spustit Ethel v Heliosu, položit první otázku, zobrazit graf nebo uložit tabulku. Praktický návod k používání a práci se scénáři.',
+    lead: 'Jak Ethel spustit, na co se zeptat a co můžete dělat s odpovědí.',
     activeKey: 'PRVNI_KROKY',
   },
   {
     slug: 'pro-spravce',
     src: 'pro-spravce.md',
-    title: 'Pro správce',
-    description: 'Instalace, účty a práva k databázi Heliosu.',
+    title: 'Instalace a správa Ethel | Účty a oprávnění v Heliosu',
+    description:
+      'Návod pro správce Ethel: instalace do databáze Heliosu, SQL a Windows účty, přístupová práva, aktualizace a odinstalace.',
+    lead: 'Nastavení aplikace, přihlašovací účty a oprávnění k databázi Heliosu.',
     activeKey: 'PRO_SPRAVCE',
   },
 ];
@@ -71,7 +77,7 @@ function renderMarkdown(md) {
 }
 
 function fillTemplate(opts) {
-  const { title, heading, description, slug, html, activeKey } = opts;
+  const { title, heading, description, lead, slug, html, activeKey } = opts;
   const activeMarkers = {
     PRVNI_KROKY: '',
     PRO_SPRAVCE: '',
@@ -80,6 +86,7 @@ function fillTemplate(opts) {
   return TEMPLATE.replaceAll('{{TITLE}}', title)
     .replaceAll('{{HEADING}}', heading || title)
     .replaceAll('{{DESCRIPTION}}', description.replace(/"/g, '&quot;'))
+    .replaceAll('{{LEAD}}', lead)
     .replaceAll('{{CANONICAL}}', `${SITE}/docs/${slug}/`)
     .replaceAll('{{ACTIVE_PRVNI_KROKY}}', activeMarkers.PRVNI_KROKY)
     .replaceAll('{{ACTIVE_PRO_SPRAVCE}}', activeMarkers.PRO_SPRAVCE)
@@ -101,6 +108,7 @@ function main() {
       title: page.title,
       heading,
       description: page.description,
+      lead: page.lead,
       slug: page.slug,
       html: rawHtml,
       activeKey: page.activeKey,
