@@ -35,10 +35,6 @@
   --accent-tint: #FBEDE7;   /* podklad štítků a čísel kroků */
   --accent-on-ink: #FFAA83; /* akcent na inkoustovém podkladu (aktivní přepínač ceny) */
 
-  /* Ručně kreslené šipky k poznámce (barva = --accent, v data URI nejde použít proměnná) */
-  --hand-arrow-up:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 60' fill='none' stroke='%23B64722' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 56C11 45 30 30 17 9'/%3E%3Cpath d='M8 17l9-9 10 6'/%3E%3C/svg%3E");
-  --hand-arrow-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 60' fill='none' stroke='%23B64722' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 4C29 15 10 30 23 51'/%3E%3Cpath d='M32 43l-9 9-10-6'/%3E%3C/svg%3E");
-
   /* --- Tmavá plocha (jeden blok na webu + patička) --------------------- */
   --ink:         #172B38;
   --ink-surface: #223E50;   /* karta na tmavé ploše */

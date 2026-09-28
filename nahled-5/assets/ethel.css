@@ -71,9 +71,10 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .button.small{padding:9px 13px;font-size:13px}
 .button-solid,.button-solid:hover,.button-solid:active{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
 
-.text-link{font-size:15px;font-weight:500;text-decoration:none;color:var(--brand);display:inline-block;padding:5px 0;border-bottom:1px solid var(--border)}
-.more{display:inline-block;margin-top:28px;font-size:15px;font-weight:650;color:var(--brand);text-decoration:none}
-.more:hover{text-decoration:underline;text-underline-offset:4px}
+/* Odkaz se šipkou (→ dál, ↓ na sekci níž): všude stejné písmo, podtržený, na hover jemný rámeček. Okraj -8 px drží text zarovnaný s obsahem. */
+.more{display:inline-block;margin:28px 0 0 -8px;padding:4px 8px;border:1px solid transparent;border-radius:8px;font:650 15px/1.5 var(--font-body);color:var(--brand);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;transition:border-color .15s}
+.more:hover{border-color:var(--border)}
+.actions .more{margin-top:0}
 .block a:not(.button):not(.more){color:var(--brand)}
 
 /* --- 4. Hero --------------------------------------------------------------- */
@@ -84,20 +85,14 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .hero h1{font-size:clamp(38px,4vw,52px);line-height:1.08;letter-spacing:-.025em}
 .hero .lead{font-size:17px;line-height:1.75;margin-top:20px;max-width:470px}
 .hero .actions{gap:16px 22px;margin-top:44px}
-.hero .text-link{font-size:14px;border-bottom-color:var(--brand)}
 .hero-demo{position:relative;min-width:0;width:100%}
 
-/* Ručně psaná poznámka (Caveat, terakota, mírně natočená). */
-.demo-note{display:block;position:relative;width:fit-content;max-width:320px;margin:18px 18px 0 auto;padding:4px 8px;font:600 24px/1.18 var(--font-hand);letter-spacing:0;color:var(--accent);transform:rotate(-2deg);transform-origin:center;z-index:1}
+/* Ručně psaná poznámka (Caveat, terakota, vodorovně, bez kreslených šipek; šipka je případně znak ↓ v textu). */
+.demo-note{display:block;position:relative;width:fit-content;max-width:320px;margin:18px 18px 0 auto;padding:4px 8px;font:600 24px/1.18 var(--font-hand);letter-spacing:0;color:var(--accent);z-index:1}
 .demo-note strong,.demo-note>span{display:block;font:inherit;color:inherit}
 .demo-note strong{font-size:29px;line-height:1.14;margin-bottom:5px}
 .demo-note>span{font-size:24px;line-height:1.2;margin:0}
-/* Varianty se šipkou: .note-up ukazuje na prvek nad poznámkou (šipka vlevo), .note-down na prvek pod ní (šipka vpravo dole). */
-.demo-note.note-up{padding-left:50px}
-.demo-note.note-up::before{content:"";position:absolute;left:2px;top:-10px;width:36px;height:54px;background:var(--hand-arrow-up) no-repeat center/contain;transform:rotate(-10deg)}
-.demo-note.note-down{padding-right:50px}
-.demo-note.note-down::after{content:"";position:absolute;right:0;bottom:-20px;width:36px;height:54px;background:var(--hand-arrow-down) no-repeat center/contain;transform:rotate(-10deg)}
-/* Výzva nad příklady v hero: jediná ručně psaná poznámka na webu, šipka dolů na seznam. */
+/* Výzva nad příklady v hero: šipka dolů na seznam je znak ↓ v textu. */
 .hero-note{margin:34px 0 22px -8px}
 .hero-note strong{font-size:27px;margin:0}
 
@@ -225,11 +220,12 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .block-dark .eyebrow{color:var(--ink-link)}
 .block-dark .block-head>p:not(.eyebrow){color:var(--ink-muted)}
 .block-dark .more{color:var(--ink-link)}
+.block-dark .more:hover{border-color:var(--ink-border)}
 .block-note{margin:20px 0 0;font-size:14px;color:var(--text-muted)}
 .block-dark .block-note{color:var(--ink-muted)}
 .block-note+.chips{margin-top:10px}
 /* Výhled pod celou sekcí (co chystáme): ruční poznámka bez šipky, vlevo, dva řádky, světlá terakota; záporný okraj ji přitáhne k obsahu nad ní. */
-.note-soon{max-width:none;margin:-30px 0 0;padding-inline:0;transform:none}
+.note-soon{max-width:none;margin:-30px 0 0;padding-inline:0}
 .note-soon strong{white-space:nowrap}
 .block-dark .note-soon{color:var(--accent-on-ink)}
 
