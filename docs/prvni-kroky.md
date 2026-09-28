@@ -93,10 +93,3 @@ Dejte palec nahoru – pomáhá nám to poznat, které dotazy fungují dobře a 
 ## Něco nefunguje? Máte nápad?
 
 Napište na [info@ethel.cz](mailto:info@ethel.cz). Reagujeme rychle a každá zpětná vazba pomáhá.
-
----
-
-**Další čtení:**
-
-- [Bezpečnost](/bezpecnost) – pro ředitele a IT manažery
-- [Changelog](/docs/changelog) – co se nově přidává
