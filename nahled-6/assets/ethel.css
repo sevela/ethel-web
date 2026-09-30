@@ -213,6 +213,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .block-grey{background:var(--surface-alt)}
 .block-dark{background:var(--ink);color:var(--ink-text)}
 .block-head{max-width:720px;margin-bottom:36px}
+.block-head:has(+.more){margin-bottom:0}
 .block-head .eyebrow{margin-bottom:18px}
 .block-head h2{font-size:clamp(30px,3.2vw,42px);line-height:1.15;letter-spacing:-.025em}
 .block-head>p:not(.eyebrow){margin:16px 0 0;font-size:17px;line-height:1.7;color:var(--text-muted)}
@@ -227,7 +228,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .block-dark .block-note{color:var(--ink-muted)}
 .block-note+.chips{margin-top:10px}
 /* Výhled pod celou sekcí (co chystáme): ruční poznámka bez šipky, vlevo, dva řádky, světlá terakota; záporný okraj ji přitáhne k obsahu nad ní. */
-.note-soon{max-width:none;margin:-30px 0 0;padding-inline:0}
+.note-soon{max-width:none;margin:28px 0 0;padding-inline:0}
 .note-soon strong{white-space:nowrap}
 .block-dark .note-soon{color:var(--accent-on-ink)}
 
