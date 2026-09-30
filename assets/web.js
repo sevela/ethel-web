@@ -108,6 +108,14 @@ if(pricing){
  render();
 }
 
+/* GA: every link to the contact form counts as a CTA click (as on the old site). data-prefill says
+   which offer it was, plain "Vyzkoušet zdarma" links are the trial. Runs on all pages. */
+document.addEventListener('click',e=>{
+ const trigger=e.target.closest&&e.target.closest('[data-prefill],a[href$="#kontakt"]');
+ if(!trigger||typeof gtag!=='function')return;
+ gtag('event','cta_click',{cta_type:trigger.getAttribute('data-prefill')||'trial',cta_location:location.pathname});
+});
+
 /* Cookie consent + GA4: analytics only after explicit consent. */
 const GA_MEASUREMENT_ID='G-5YGP0D48W7',CONSENT_KEY='ethel_cookie_consent_v1';
 const banner=document.getElementById('cookie-banner');

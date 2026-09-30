@@ -24,7 +24,6 @@ document.addEventListener('click',e=>{
  const trigger=e.target.closest&&e.target.closest('[data-prefill]');
  if(!trigger)return;
  prefill(trigger.getAttribute('data-prefill'));
- if(typeof gtag==='function')gtag('event','cta_click',{cta_type:trigger.getAttribute('data-prefill')});
 });
 const tema=new URLSearchParams(location.search).get('tema');
 if(tema)prefill(tema);
