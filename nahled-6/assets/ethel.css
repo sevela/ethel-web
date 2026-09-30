@@ -239,6 +239,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .cards+.cards{margin-top:20px}
 .card{--card-bg:var(--surface);--card-border:var(--border);display:flex;flex-direction:column;gap:10px;min-width:0;padding:24px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-card)}
 .block-grey .card{border-color:transparent}
+.cards-soft .card{--card-bg:var(--surface-alt);--card-border:transparent}
 .block-dark .card{--card-bg:var(--ink-surface);--card-border:var(--ink-border);color:var(--ink-text)}
 .card h3{display:flex;align-items:center;gap:10px;font:650 19px/1.35 var(--font-body);letter-spacing:-.01em}
 .card p{margin:0;font-size:15px;line-height:1.7;color:var(--text-muted)}
