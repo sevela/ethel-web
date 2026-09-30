@@ -91,26 +91,6 @@ SQL Server určuje technická oprávnění účtu. Další pravidla pro jednotli
 - **Trvale zakázané tabulky:** zahrnují uživatele, role a oprávnění Heliosu, e-maily, datové schránky a vybrané systémové tabulky. Přístup k nim nelze povolit profilem.
 - **Kontrola čtecích dotazů:** běžný dotaz smí obsahovat jediný příkaz `SELECT` (případně uvozený `WITH`). Zápisy probíhají odděleně přes připravené scénáře.
 
-Tato pravidla fungují na úrovni aplikace. Pokud má účet na SQL Serveru širší oprávnění, Ethel je sama neodebere. Přístup k vybraným tabulkám můžete navíc zakázat přímo v databázi:
-
-```sql
-USE [HeliosData]
-DECLARE @Ucet sysname = N'ethel_xxxxxxxx'
-DECLARE @Sql nvarchar(max) = N''
-SELECT @Sql = @Sql + N'DENY SELECT ON dbo.' + QUOTENAME(name) + N' TO ' + QUOTENAME(@Ucet) + N';'
-FROM sys.tables
-WHERE name LIKE N'TabMz%' OR name LIKE N'TabZamMzd%' OR name = N'TabZamDan'
-   OR name LIKE N'TabZamRPr%' OR name = N'TabZamVyp' OR name LIKE N'TabTar%'
-   OR name LIKE N'TabZadVyp%' OR name LIKE N'TabPer%' OR name = N'TabCisZam'
-   OR name IN (N'TabBankVypisH', N'TabBankVypisR', N'TabDefPlatPrik', N'TabSTDLeaUhradyB')
-   OR name LIKE N'TabPlat%'
-   OR name IN (N'TabUziv', N'TabUserCfg', N'TabRole', N'TabSouhlasy', N'TabDatoveSchranky', N'TabEmail', N'TabEMailProfil')
-   OR name LIKE N'TabPrava%'
-EXEC sp_executesql @Sql
-```
-
-Použité vzory odpovídají tabulkám blokovaným aplikací. Před použitím je zkontrolujte podle své databáze Heliosu.
-
 ## Odinstalace
 
 V **Nastavení → Správa → Databáze** zvolte u příslušné databáze **Odinstalovat**. Akci potvrdíte v dialogu, který uvádí název databáze.

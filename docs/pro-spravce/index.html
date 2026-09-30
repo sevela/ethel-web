@@ -110,22 +110,6 @@ EXEC sp_executesql @Sql
 <li><strong>Trvale zakázané tabulky:</strong> zahrnují uživatele, role a oprávnění Heliosu, e-maily, datové schránky a vybrané systémové tabulky. Přístup k nim nelze povolit profilem.</li>
 <li><strong>Kontrola čtecích dotazů:</strong> běžný dotaz smí obsahovat jediný příkaz <code>SELECT</code> (případně uvozený <code>WITH</code>). Zápisy probíhají odděleně přes připravené scénáře.</li>
 </ul>
-<p>Tato pravidla fungují na úrovni aplikace. Pokud má účet na SQL Serveru širší oprávnění, Ethel je sama neodebere. Přístup k vybraným tabulkám můžete navíc zakázat přímo v databázi:</p>
-<pre><code class="language-sql">USE [HeliosData]
-DECLARE @Ucet sysname = N&#39;ethel_xxxxxxxx&#39;
-DECLARE @Sql nvarchar(max) = N&#39;&#39;
-SELECT @Sql = @Sql + N&#39;DENY SELECT ON dbo.&#39; + QUOTENAME(name) + N&#39; TO &#39; + QUOTENAME(@Ucet) + N&#39;;&#39;
-FROM sys.tables
-WHERE name LIKE N&#39;TabMz%&#39; OR name LIKE N&#39;TabZamMzd%&#39; OR name = N&#39;TabZamDan&#39;
-   OR name LIKE N&#39;TabZamRPr%&#39; OR name = N&#39;TabZamVyp&#39; OR name LIKE N&#39;TabTar%&#39;
-   OR name LIKE N&#39;TabZadVyp%&#39; OR name LIKE N&#39;TabPer%&#39; OR name = N&#39;TabCisZam&#39;
-   OR name IN (N&#39;TabBankVypisH&#39;, N&#39;TabBankVypisR&#39;, N&#39;TabDefPlatPrik&#39;, N&#39;TabSTDLeaUhradyB&#39;)
-   OR name LIKE N&#39;TabPlat%&#39;
-   OR name IN (N&#39;TabUziv&#39;, N&#39;TabUserCfg&#39;, N&#39;TabRole&#39;, N&#39;TabSouhlasy&#39;, N&#39;TabDatoveSchranky&#39;, N&#39;TabEmail&#39;, N&#39;TabEMailProfil&#39;)
-   OR name LIKE N&#39;TabPrava%&#39;
-EXEC sp_executesql @Sql
-</code></pre>
-<p>Použité vzory odpovídají tabulkám blokovaným aplikací. Před použitím je zkontrolujte podle své databáze Heliosu.</p>
 <h2 id="odinstalace">Odinstalace</h2>
 <p>V <strong>Nastavení → Správa → Databáze</strong> zvolte u příslušné databáze <strong>Odinstalovat</strong>. Akci potvrdíte v dialogu, který uvádí název databáze.</p>
 <p>Odinstalace odstraní externí akci Ethel, její procedury, funkce, pohledy, tabulky a databázového uživatele účtu Ethel. Nevratně se tím odstraní také nastavená oprávnění, audit a provozní záznamy uložené v těchto tabulkách.</p>
