@@ -8,7 +8,6 @@
 (function () {
   var ENDPOINT = 'https://proxy.ethel.cz/api/agent/latest';
   var verze = document.getElementById('dl-version');
-  var poznamky = document.getElementById('dl-notes');
   if (!verze) return;
 
   function datumCs(iso) {
@@ -26,11 +25,8 @@
     .then(function (v) {
       if (!v || !v.version) return selhani();
       var datum = datumCs(v.published_at);
+      // Release notes are written for the team (ticket numbers), so the page shows only version and date.
       verze.textContent = 'Verze ' + v.version + (datum ? ' · vydáno ' + datum : '');
-      if (poznamky && v.notes) {
-        poznamky.textContent = v.notes;
-        poznamky.hidden = false;
-      }
     })
     .catch(selhani);
 })();
