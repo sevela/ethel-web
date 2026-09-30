@@ -60,7 +60,7 @@ Při analytickém shrnutí Ethel posílá modelu data, ze kterých má napsat vy
 
 Pokud má vaše firma zapnuté scénáře, můžete Ethel zadat i konkrétní úkol. Například:
 
-> **„Založ organizaci s IČO 12345678.“**
+> **„Založ organizaci Ukázková s.r.o.“**
 
 Ethel dohledá údaje v ARES a zeptá se na to, co chybí. Hodnoty z číselníků nabídne k výběru. Nakonec zobrazí kontrolní kartu a do Heliosu zapíše až po kliknutí na **Potvrdit a založit**.
 
