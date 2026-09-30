@@ -234,6 +234,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .cards-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .cards-4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .cards+.cards{margin-top:20px}
+.split>.cards+.cards{margin-top:0}
 .card{--card-bg:var(--surface);--card-border:var(--border);display:flex;flex-direction:column;gap:10px;min-width:0;padding:24px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-card)}
 .block-grey .card{border-color:transparent}
 .cards-soft .card{--card-bg:var(--surface-alt);--card-border:transparent}
