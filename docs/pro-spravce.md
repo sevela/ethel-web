@@ -11,7 +11,7 @@ Ve vybrané databázi instalace vytvoří:
 - tabulky `Tabx_Ethel_*` pro nastavení, uživatele, přístupové profily, zakázané tabulky, audit oprávnění, kontext z Heliosu a provozní záznamy,
 - procedury `epx_Ethel_*` pro práci s kontextem, uživatelským nastavením a scénáři `epx_Ethel_UseCase_*`,
 - pohled `hvw_Ethel_Employees`, který z karty zaměstnance zpřístupní jen ID, osobní číslo a jméno,
-- externí akci **Ethel** v nabídce **Doplňky → Ethel** se zkratkou **Ctrl+I** přibližně v 50 přehledech Heliosu. Její záznamy se ukládají do `TabExtKom`.
+- externí akci **Ethel** v nabídce **Doplňky / Ethel** se zkratkou **Ctrl+I** přibližně v 50 přehledech Heliosu. Její záznamy se ukládají do `TabExtKom`.
 
 Kromě záznamů externí akce v `TabExtKom` instalace tabulky Heliosu nemění.
 

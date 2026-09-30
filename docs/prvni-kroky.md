@@ -4,7 +4,7 @@ Ethel vám pomůže dohledat data v Heliosu, porozumět sestavám a zjistit, jak
 
 ## Jak Ethel spustit
 
-V podporovaném přehledu Heliosu stiskněte **Ctrl+I** nebo zvolte **Doplňky → Ethel**. K dispozici je přibližně v 50 přehledech, například u organizací, kmenových karet, dokladů a sestav.
+V podporovaném přehledu Heliosu stiskněte **Ctrl+I** nebo zvolte **Doplňky / Ethel**. K dispozici je přibližně v 50 přehledech, například u organizací, kmenových karet, dokladů a sestav.
 
 Ethel ví, který přehled máte otevřený a které záznamy jste označili.
 
