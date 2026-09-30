@@ -1,102 +1,137 @@
 # První kroky s Ethel
 
-Ethel je AI asistentka přímo v Heliosu. Zeptáte se přirozeně – jako kolegy – a ona data vyhledá, spočítá nebo vám je vysvětlí. Tady je vše, co potřebujete na začátek.
+Ethel vám pomůže dohledat data v Heliosu, porozumět sestavám a zjistit, jak postupovat. Otázky píšete vlastními slovy. Tady najdete vše potřebné pro první použití.
 
 ## Jak Ethel spustit
 
-V Heliosu stiskněte **CTRL+I** nebo zvolte akci **Ethel** v menu – obojí je po instalaci k dispozici automaticky, ve všech podporovaných přehledech. Otevře se okno chatu; ovládáte ho klávesnicí i myší, jako messenger.
+V podporovaném přehledu Heliosu stiskněte **Ctrl+I** nebo zvolte **Doplňky / Ethel**. K dispozici je přibližně v 50 přehledech, například u organizací, kmenových karet, dokladů a sestav.
 
-## První dotaz
+Ethel ví, který přehled máte otevřený a které záznamy jste označili.
 
-Napište cokoliv, na co byste se jinak ptali kolegy nebo zdlouhavě hledali v sestavě:
+Spustit ji můžete také samostatně dvojklikem na `Ethel.exe`. Potom se přihlásíte svým jménem a heslem jako do Heliosu nebo účtem Windows. Podmínky samostatného spuštění najdete v [návodu pro správce](/docs/pro-spravce/).
 
-> **„Kolik máme faktur vydaných v roce 2026 a jaká je jejich celková hodnota?"**
+## První otázka
 
-Ethel za 2–5 sekund vrátí odpověď s číslem, případně i SQL, který použila. Pokud něco vypadá divně, dejte palec dolů – pomáhá nám to ladit.
+Zkuste se zeptat na něco, co byste jinak hledali v přehledu nebo sestavě:
 
-## Co s odpovědí můžete dělat
+> **„Kolik máme vydaných faktur za rok 2026 a jaká je jejich celková hodnota?“**
 
-U každé odpovědi s daty najdete řádek ikon:
+Otázku odešlete klávesou **Enter**. Nový řádek vložíte pomocí **Shift+Enter**.
 
-- **?** – Ethel vysvětlí, jak k výsledku došla a z jakých dat čerpá
-- **Analyzovat výkon** – u definice databázového objektu (procedura, trigger, pohled) Ethel rozebere výkon jeho SQL kódu a poradí, kde zrychlit
-- **Kopírovat** – zkopíruje odpověď do schránky
-- **Stáhnout CSV** – uloží tabulku jako soubor pro Excel (jen u tabulkových výsledků)
-- **Zobrazit SQL** – ukáže dotaz, který Ethel použila
-- **Palec nahoru / dolů** – dáte nám vědět, jestli odpověď sedí
+Během zpracování uvidíte, co Ethel právě dělá. Výsledek zobrazí jako text nebo tabulku.
 
-## Na co se zeptat
+## Co můžete dělat s odpovědí
 
-Pár dotazů z praxe, ať vidíte rozsah:
+Když na odpověď najedete myší, zobrazí se dostupné možnosti:
 
-- „Kolik faktur po splatnosti?"
-- „Top 10 nejprodávanějších položek za květen."
-- „Jakou mám skladovou zásobu na jednotlivých skladech?"
-- „Vypiš tržby po měsících a střediscích za rok 2026."
-- „Najdi top 10 zákazníků v segmentu maloobchod v roce 2026."
-- „Které položky mají největší marži?"
-- „Vypiš telefonní čísla a e-maily organizací."
-- „Porovnej tržby za Q1 2026 a Q1 2025 po měsících."
-- „Které aktivní položky nemají přiřazenou cenu v ceníku?"
-- „Shrň, co se dělo ve skladu za poslední rok – příjmy, výdeje, saldo."
+- **?** – vysvětlí, jak Ethel k výsledku došla a z jakých dat vycházela.
+- **Kopírovat** – zkopíruje tabulku tak, abyste ji mohli rovnou vložit do Excelu.
+- **Zobrazit jako graf** – vytvoří ze stejných dat sloupcový, čárový nebo koláčový graf.
+- **Stáhnout tabulku** – uloží výsledek do CSV, Excelu nebo PDF. Soubor vzniká ve vašem počítači.
+- **Zobrazit SQL dotaz** – ukáže dotaz, kterým Ethel data získala.
+- **Palec nahoru / dolů** – odešle hodnocení odpovědi. U palce dolů můžete připsat, co nebylo správně.
 
-## Co Ethel **neumí** (a proč)
+## Vysvětlení sestavy nebo sloupce
 
-Ze záměru – bezpečnost vašich dat je priorita.
+Označte sestavu, uživatelský sloupec nebo externí akci a otevřete Ethel. Vysvětlí, k čemu slouží a jak funguje.
 
-- ❌ **Mazat ani měnit data v Heliosu.** Ethel umí pouze číst.
-- ❌ **Přistupovat k datům mimo Helios** (souborový systém, jiné aplikace, e-maily).
-- ❌ **Spouštět vlastní SQL** mimo schválený rozsah.
-- ❌ **Pracovat s Mzdami, Personalistikou a Bankou.** Tyto moduly nejsou ve znalostní bázi.
-- ❌ **Posílat data ven** bez vašeho vědomí. Více v sekci [Bezpečnost](/bezpecnost).
+U databázových objektů, například procedur, pohledů a triggerů, můžete použít tlačítko **Analyzovat výkon**. Ethel rozebere SQL kód a navrhne, kde hledat možnosti zrychlení.
 
-Ethel je tu na čtení a vyhledávání. Pro úpravy dat slouží standardní postupy v Heliosu.
+## Pomoc s postupy v Heliosu
+
+Nevíte, jak stornovat fakturu nebo vytvořit uložený filtr? Zeptejte se Ethel. Postup popíše podle oficiální nápovědy Heliosu a přidá odkaz na zdroj.
+
+## Na co se můžete zeptat
+
+- Kolik máme faktur po splatnosti?
+- Kterých deset položek se v květnu prodávalo nejvíc?
+- Jaká je zásoba na jednotlivých skladech?
+- Vypiš tržby po měsících a střediscích za rok 2026
+- Najdi deset největších zákazníků v maloobchodu za rok 2026
+- Které položky mají největší marži?
+- Vypiš telefonní čísla a e-maily organizací
+- Porovnej tržby za Q1 2026 a Q1 2025 po měsících
+- Které aktivní položky nemají přiřazenou cenu v ceníku?
+- Shrň příjmy, výdeje a saldo skladu za poslední rok
+
+Při analytickém shrnutí Ethel posílá modelu data, ze kterých má napsat vyhodnocení. Podrobnosti najdete na stránce [Bezpečnost](/bezpecnost/).
+
+## Zápis pomocí scénářů
+
+Pokud má vaše firma zapnuté scénáře, můžete Ethel zadat i konkrétní úkol. Například:
+
+> **„Založ organizaci Ukázková s.r.o.“**
+
+Ethel dohledá údaje v ARES a zeptá se na to, co chybí. Hodnoty z číselníků nabídne k výběru. Nakonec zobrazí kontrolní kartu a do Heliosu zapíše až po kliknutí na **Potvrdit a založit**.
+
+Do potvrzení můžete scénář zrušit.
+
+## Jaká má Ethel omezení
+
+- **Data mění pouze pomocí scénářů.** Běžné otázky data jen čtou. Scénář může zapsat pouze to, k čemu je připravený, a čeká na vaše potvrzení.
+- **Nemá samostatný přístup k vašim souborům, e-mailům ani jiným aplikacím.** Pracuje s databází Heliosu a se soubory, které jí sami přiložíte. Při zakládání organizace vyhledává také ve veřejném rejstříku ARES.
+- **Běžný dotaz na data musí být jediný čtecí příkaz SELECT.** Program to před spuštěním kontroluje. Zápisy probíhají odděleně prostřednictvím scénářů.
+- **Mzdy, Personalistika a Banka jsou ve výchozím nastavení zamknuté.** Přístup k jejich datům zapneme na žádost firmy. S používáním těchto modulů Ethel poradí podle nápovědy i bez odemčení.
+- **Přístup k datům určuje správce.** Ethel nemůže zpřístupnit oblasti, které máte zakázané.
+
+[Jak Ethel pracuje s daty](/bezpecnost/)
 
 ## Tipy do začátku
 
-### Pište česky a přirozeně
+### Pište vlastními slovy
 
-„Najdi mi faktury od září" funguje stejně dobře jako „Vrať mi všechny vydané faktury od 1. 9. do 30. 9.". Ethel rozumí obojímu.
+Nemusíte znát názvy tabulek ani SQL. Stačí například „Ukaž mi vydané faktury za září 2026“.
 
-### Buďte konkrétní
+### Doplňte podrobnosti
 
-Čím přesnější dotaz, tím lepší odpověď. Přidejte třeba:
+Pokud záleží na období, firmě nebo měně, napište je rovnou:
 
-- období – „za tento týden", „od minulého úterý"
-- subjekt – „od dodavatele [název]", „pro středisko 110"
-- měnu – „v CZK", „v EUR"
+- období: „za tento týden“ nebo „od minulého úterý“,
+- firma či středisko: „od dodavatele [název]“ nebo „pro středisko 110“,
+- měna: „v CZK“ nebo „v EUR“.
 
 ### Ptejte se dál
 
-Po první odpovědi můžete pokračovat – Ethel si pamatuje kontext konverzace, takže nemusíte opakovat předchozí podmínky:
+Na odpověď můžete navázat bez opakování celého zadání:
 
-> „Najdi top 10 zákazníků v segmentu maloobchod v roce 2026." → „A z jakých jsou měst?"
+> „Najdi deset největších zákazníků v maloobchodu za rok 2026.“
+>
+> „A z jakých jsou měst?“
 
-### Když si nevíte rady
+Pokud chcete začít nové téma, zvolte v levém panelu **Nový chat**.
 
-Nevíte, jak se na něco zeptat? Napište to vlastními slovy. Když si Ethel nebude jistá, sama se doptá nebo nabídne, jak dotaz upřesnit.
+### Přiložte soubor
 
-## Když Ethel odpoví špatně
+K otázce můžete přidat například snímek chybové hlášky. Obsah přílohy se předává AI modelu, aby s ním mohl pracovat.
 
-Stává se to – ne často, ale stává. Co s tím:
+### Nadiktujte otázku
 
-1. **Klikněte na ikonu „?"** u odpovědi – Ethel vysvětlí, jak k výsledku došla a z jakých dat čerpá.
-2. **Zkontrolujte SQL,** který Ethel zobrazila – nesrovnalost je často vidět hned (např. špatný filtr na datum).
-3. **Dejte palec dolů** a napište, co bylo špatně – pomáhá nám to ladit.
-4. **Přeformulujte dotaz** konkrétněji („myslel jsem vydané faktury, ne přijaté").
-5. **U kritických rozhodnutí** (audit, daňové přiznání) berte odpověď jako prvotní vodítko a ověřte ji standardní cestou v sestavách Heliosu.
+Klikněte na mikrofon a otázku řekněte. V **Nastavení** vyberete, jestli se nadiktovaný text jen přepíše, nebo také rovnou odešle.
 
-## Když dotaz vyjde dobře
+### Popište, co potřebujete
 
-Dejte palec nahoru – pomáhá nám to poznat, které dotazy fungují dobře a kam Ethel dál rozvíjet.
+Nevíte, jak otázku formulovat? Napište, čeho chcete dosáhnout. Pokud bude Ethel potřebovat další informace, doptá se.
 
-## Něco nefunguje? Máte nápad?
+## Nastavení
 
-Napište na [info@ethel.cz](mailto:info@ethel.cz). Reagujeme rychle a každá zpětná vazba pomáhá.
+**Nastavení** najdete vlevo dole. Změníte v něm velikost písma, světlý nebo tmavý vzhled, způsob diktování i to, zda má okno zůstávat nad Heliosem.
 
----
+Ve spodní liště okna vidíte, pod kterým jménem a ve které databázi pracujete. Kliknutím na název databáze přepnete na jinou databázi, ve které máte Ethel povolenou. Pokud jste Ethel spustili samostatně, odhlásíte se kliknutím na své jméno v liště.
 
-**Další čtení:**
+## Když odpověď nesedí
 
-- [Bezpečnost](/bezpecnost) – pro ředitele a IT manažery
-- [Changelog](/docs/changelog) – co se nově přidává
+Ethel se může splést. Pokud výsledek neodpovídá tomu, co očekáváte:
+
+1. Klikněte na **?** a nechte si vysvětlit postup i použitá data.
+2. Upřesněte zadání, například „Myslel jsem vydané faktury, ne přijaté“.
+3. Pokud pracujete s SQL, zobrazte použitý dotaz a zkontrolujte například období nebo filtry.
+4. Dejte odpovědi palec dolů a stručně popište problém.
+5. Výsledky pro důležitá rozhodnutí, například audit nebo daňové přiznání, ověřte také v sestavách Heliosu.
+
+## Když vám odpověď pomůže
+
+Dejte jí palec nahoru. Pomůže nám to poznat, které odpovědi fungují dobře a co má smysl dál rozvíjet.
+
+## Napište nám, když něco nefunguje nebo vás napadne zlepšení
+
+Ozvěte se na [info@ethel.cz](mailto:info@ethel.cz). Pomůže nám popis situace i toho, jaký výsledek jste očekávali.

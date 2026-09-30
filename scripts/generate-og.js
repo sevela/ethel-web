@@ -1,6 +1,6 @@
 // Vygeneruje og-image.png (1200×630) ze scripts/og-image.html.
 //
-// Šablona tahá /brand/fonts.css a /brand/tokens.css absolutními cestami, takže
+// Šablona tahá /assets/tokens.css a logo absolutními cestami, takže
 // se nedá otevřít přes file://. Skript proto na chvíli zvedne statický server
 // nad rootem repa a načte stránku přes http://127.0.0.1.
 //

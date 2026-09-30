@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /brand/
 Disallow: /nahled/
 Disallow: /nahled-2/
 Disallow: /nahled-3/

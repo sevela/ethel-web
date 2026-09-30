@@ -1,195 +1,71 @@
 <!DOCTYPE html>
-<html lang="cs">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bezpečnost – ET/HEL</title>
-<meta name="description" content="Kde v Ethel zůstávají data z Heliosu, co vidí jazykový model a tři výjimky, kdy do cloudu odchází víc než dotaz a SQL.">
+<html lang="cs"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bezpečnost a ochrana dat v Heliosu | Ethel</title>
+<meta name="description" content="Zjistěte, jak Ethel pracuje s daty Heliosu, co posílá do cloudu a jak fungují přístupová práva, potvrzování zápisů a uchovávání záznamů.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Jakub Ševela">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="canonical" href="https://ethel.cz/bezpecnost/">
 
-<meta property="og:title" content="Bezpečnost – ET/HEL">
-<meta property="og:description" content="Kde v Ethel zůstávají data z Heliosu, co vidí jazykový model a tři výjimky, kdy do cloudu odchází víc než dotaz a SQL.">
+<!-- Open Graph -->
+<meta property="og:title" content="Bezpečnost a ochrana dat v Heliosu | Ethel">
+<meta property="og:description" content="Zjistěte, jak Ethel pracuje s daty Heliosu, co posílá do cloudu a jak fungují přístupová práva, potvrzování zápisů a uchovávání záznamů.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ethel.cz/bezpecnost/">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Ethel">
 <meta property="og:image" content="https://ethel.cz/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bezpečnost a ochrana dat v Heliosu | Ethel">
+
+<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Bezpečnost – ET/HEL">
-<meta name="twitter:description" content="Kde v Ethel zůstávají data z Heliosu, co vidí jazykový model a tři výjimky, kdy do cloudu odchází víc než dotaz a SQL.">
+<meta name="twitter:title" content="Bezpečnost a ochrana dat v Heliosu | Ethel">
+<meta name="twitter:description" content="Zjistěte, jak Ethel pracuje s daty Heliosu, co posílá do cloudu a jak fungují přístupová práva, potvrzování zápisů a uchovávání záznamů.">
 <meta name="twitter:image" content="https://ethel.cz/og-image.png">
+<meta name="twitter:image:alt" content="Bezpečnost a ochrana dat v Heliosu | Ethel">
 
-<link rel="preload" href="/fonts/sora-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/sora-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/docs/_assets/docs.css">
-
-<style>
-.sec-section {
-  margin-bottom: 3rem;
-}
-.sec-section h2 {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 1.4rem;
-  padding-bottom: 0.7rem;
-  border-bottom: 1px solid var(--border);
-  scroll-margin-top: 88px;
-}
-.sec-section h3 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--text);
-  margin: 1.4rem 0 0.6rem;
-  scroll-margin-top: 88px;
-}
-.sec-section p {
-  color: var(--text-secondary);
-  line-height: 1.75;
-  margin-bottom: 0.7rem;
-}
-.sec-section p:last-child { margin-bottom: 0; }
-.sec-section strong { color: var(--text); font-weight: 600; }
-.sec-section a {
-  color: var(--accent-light);
-  text-decoration: underline;
-  text-decoration-color: rgba(143, 179, 204, 0.4);
-  text-underline-offset: 3px;
-  transition: color 0.2s, text-decoration-color 0.2s;
-}
-.sec-section a:hover { color: var(--accent); text-decoration-color: var(--accent); }
-.rev-date {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  color: var(--text-dim);
-  margin: -0.5rem 0 2.5rem;
-}
-@media (max-width: 768px) {
-  .sec-page { padding: 5rem 1.25rem 3rem; }
-}
-</style>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Bezpečnost",
-  "description": "Kde v Ethel zůstávají data z Heliosu, co vidí jazykový model a tři výjimky, kdy do cloudu odchází víc než dotaz a SQL.",
-  "url": "https://ethel.cz/bezpecnost/",
-  "inLanguage": "cs",
-  "datePublished": "2026-06-10",
-  "dateModified": "2026-09-26",
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "Ethel",
-    "url": "https://ethel.cz"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Jakub Ševela",
-    "url": "https://jakubsevela.cz"
-  }
-}
-</script>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/ethel.css">
 </head>
 <body>
+<a class="skip" href="#obsah">Přejít k obsahu</a>
+<header class="site-header"><div class="wrap nav-row"><a class="logo" href="/" aria-label="Ethel, úvod"><img src="/assets/logos/ethel-light-animated.svg" alt="Ethel" width="105" height="29"></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu</button><nav id="main-nav" aria-label="Hlavní navigace"><a href="/#jak">Jak Ethel funguje</a><a href="/#scenare">Scénáře</a><a href="/#bezpecnost">Bezpečnost</a><a href="/#cena">Cena</a><a href="/#kontakt">Kontakt</a></nav><a class="button small button-solid header-cta" href="/#kontakt">Vyzkoušet zdarma</a></div></header>
+<main id="obsah">
+<section class="page-hero wrap"><p class="eyebrow">Bezpečnost</p><h1>Jak Ethel pracuje s&nbsp;vašimi daty</h1><p class="lead">Co zůstává u&nbsp;vás, co se posílá do cloudu a&nbsp;kdo určuje přístup k&nbsp;datům. Tady najdete podrobný popis i&nbsp;výjimky pro jednotlivé funkce.</p></section>
 
-<header>
-<nav id="nav">
-  <a href="/" class="nav-logo"><span class="et">ET</span><span class="sep">/</span><span class="hel">HEL</span></a>
-  <div class="nav-links">
-    <a href="/#produkt">Produkt</a>
-    <a href="/bezpecnost" class="active">Bezpečnost</a>
-    <a href="/faq">FAQ</a>
-    <a href="/docs/">Nápověda</a>
-    <a href="/#cena">Cena</a>
-    <a href="/#kontakt">Kontakt</a>
-    <a href="/#kontakt" class="nav-cta">Vyzkoušet zdarma</a>
-  </div>
-</nav>
-</header>
+<section id="cloud" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">01 · Cloud</p><h2>Co odchází do cloudu</h2></div><div class="prose"><p>Výsledky běžných dotazů, například čísla, jména a&nbsp;částky z&nbsp;tabulek, zůstávají ve vašem prostředí. Ethel spustí SQL dotaz na vašem serveru a&nbsp;výsledek zobrazí uživateli. Databázi nikam nekopírujeme.</p></div>
+<div class="prose"><h3>Analytické shrnutí potřebuje data pro vyhodnocení</h3><p>Pokud požádáte například o&nbsp;analýzu obchodu, Ethel předá modelu data, ze kterých má napsat shrnutí. U&nbsp;běžné otázky na číslo nebo tabulku se výsledky modelu neposílají.</p><h3>Použití dat k&nbsp;trénování modelu</h3><p>Ethel používá model společnosti Anthropic. Podle její dokumentace se vstupy a&nbsp;výstupy z&nbsp;komerčních produktů a&nbsp;API ve výchozím nastavení nepoužívají k&nbsp;trénování modelů.</p></div>
+<div class="prose"><h3 id="co-se-posila">Co se posílá do cloudu, kdy a&nbsp;k&nbsp;čemu to slouží</h3><p>Některé informace se posílají cloudové službě Ethel a&nbsp;AI modelu. Záleží na tom, kterou funkci používáte:</p></div>
+<div class="data-table-wrap"><table class="data-table" aria-labelledby="co-se-posila"><thead><tr><th>Co se posílá</th><th>Kdy</th><th>K&nbsp;čemu to slouží</th></tr></thead><tbody>
+<tr><td>Vaše otázka</td><td>Při každém dotazu</td><td>Aby Ethel porozuměla zadání. Pokud do otázky napíšete jméno nebo částku, odešlou se jako její součást.</td></tr>
+<tr><td>Vygenerované SQL</td><td>U&nbsp;dotazů na data</td><td>Ke kontrole před spuštěním a&nbsp;do provozního záznamu.</td></tr>
+<tr><td>Název přehledu, filtr a&nbsp;sloupce</td><td>Když Ethel otevřete z&nbsp;přehledu Heliosu</td><td>Aby věděla, kde pracujete a&nbsp;k&nbsp;čemu se otázka vztahuje.</td></tr>
+<tr><td>Definice sestavy, sloupce nebo kód procedury</td><td>Když požádáte o&nbsp;vysvětlení</td><td>Aby mohla popsat, co sestava, sloupec nebo procedura dělá.</td></tr>
+<tr><td>Údaje z&nbsp;ARES a&nbsp;hodnoty číselníků</td><td>Při práci se scénáři</td><td>K&nbsp;přípravě kontrolní karty a&nbsp;možností výběru.</td></tr>
+<tr><td>Názvy označeného zboží</td><td>Při překladu názvů, se souhlasem se zapnutím scénáře</td><td>Aby je AI model mohl přeložit.</td></tr>
+<tr><td>Přílohy, například snímek obrazovky, CSV nebo SQL</td><td>Když je k&nbsp;otázce sami přiložíte</td><td>Aby model mohl pracovat s&nbsp;jejich obsahem. Obsah příloh v&nbsp;provozních záznamech Ethel neukládáme.</td></tr>
+<tr><td>Data pro analytické shrnutí</td><td>Když požádáte o&nbsp;analytické shrnutí</td><td>Aby z&nbsp;nich model mohl napsat slovní vyhodnocení.</td></tr>
+<tr><td>Druh chyby a&nbsp;název objektu</td><td>Když SQL dotaz selže</td><td>Aby Ethel mohla dotaz opravit. Původní databázová chybová hláška, která může obsahovat konkrétní hodnoty, se neposílá.</td></tr>
+</tbody></table></div></div></section>
 
-<main class="docs-shell">
+<section id="zamky" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">02 · Zámky</p><h2>K&nbsp;jakým datům má Ethel přístup</h2></div><div class="prose"><p>Mzdy, Personalistika a&nbsp;Banka jsou ve výchozím nastavení zamknuté. Kontrola funguje v&nbsp;cloudové službě i&nbsp;v&nbsp;programu u&nbsp;vás: Ethel dotaz nad jejich tabulkami nesestaví ani nespustí. Přístup zapneme jen na žádost vaší firmy.</p><p>S&nbsp;používáním těchto modulů vám Ethel může poradit podle nápovědy Heliosu, i&nbsp;když jejich data číst nesmí.</p><p>Při běžném přihlášení přes SQL používá Ethel vlastní účet, který správce vytvoří při instalaci. Účet má právo číst data a&nbsp;spouštět potřebné procedury Ethel, nikoli přímo zapisovat do tabulek Heliosu.</p><p>Při přihlášení účtem Windows se samostatný SQL účet nezakládá. Ethel pracuje pod účtem přihlášeného uživatele. Při samostatném spuštění mimo Helios používá účet, kterým se uživatel přihlásil.</p><p>Každý běžný dotaz na data musí být jediný čtecí příkaz SELECT, případně uvozený částí WITH. Před spuštěním ho kontroluje cloudová služba i&nbsp;program u&nbsp;vás.</p><p>Přístup k&nbsp;citlivým tabulkám můžete navíc omezit přímo na SQL Serveru. Když pak účtu potřebné oprávnění chybí, Ethel to oznámí. Podrobný popis účtů, oprávnění a&nbsp;příklady SQL najdete v&nbsp;návodu pro správce.</p><p><a href="/docs/pro-spravce/">Účty a&nbsp;oprávnění pro správce</a></p></div></div></section>
 
-  <aside class="docs-sidebar">
-    <div class="sidebar-heading">Návody</div>
-    <ul>
-      <li><a href="/docs/prvni-kroky/">První kroky</a></li>
-      <li><a href="/bezpecnost" class="active">Bezpečnost</a></li>
-      <li><a href="/faq">FAQ</a></li>
-      <li><a href="/docs/changelog/">Co je nového</a></li>
-    </ul>
-  </aside>
+<section id="prava" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">03 · Práva</p><h2>Kdo nastavuje oprávnění</h2></div><div class="prose"><p>Správce určí, kdo může Ethel používat a&nbsp;ke kterým oblastem má přístup. Každému uživateli nastaví jeden ze dvou režimů:</p></div><div class="cards cards-2 cards-soft cards-prose"><article class="card"><h3>Vše kromě zakázaného</h3><p>Uživatel má přístup k&nbsp;oblastem, které nejsou zablokované.</p></article><article class="card"><h3>Jen povolené oblasti</h3><p>Uživatel má přístup pouze k&nbsp;oblastem z&nbsp;přiřazených profilů.</p></article></div><div class="prose"><p>Každá změna režimu a&nbsp;přiřazených profilů u&nbsp;uživatele se zaznamená do auditu, včetně toho, kdo ji provedl.</p></div></div></section>
 
-  <article>
-    <div class="docs-breadcrumb">
-      <a href="/">ethel.cz</a><span class="sep">/</span><a href="/docs/">návody</a><span class="sep">/</span>bezpečnost
-    </div>
-    <div class="docs-content">
+<section id="zapis" class="block block-grey"><div class="wrap"><div class="block-head"><p class="eyebrow">04 · Zápis</p><h2>Co může Ethel zapsat</h2></div><div class="prose"><p>Běžné otázky data v&nbsp;Heliosu nemění. Zapisovat může pouze zapnutý <a href="/funkce/#scenare">scénář</a>, a&nbsp;to v&nbsp;předem určeném rozsahu.</p><p>Před zápisem vám Ethel ukáže kontrolní kartu se všemi údaji a&nbsp;jejich původem. Zapíše je až po kliknutí na Potvrdit. Do té doby můžete scénář zrušit.</p><p>Zápis kontroluje cloudová služba, program Ethel u&nbsp;vás i&nbsp;oprávnění SQL účtu. Pokud zadání neodpovídá žádnému zapnutému scénáři, nemůže vést k&nbsp;zápisu.</p><p>Texty v&nbsp;databázi Ethel zpracovává jako obsah, nikoli jako pokyny k&nbsp;ovládání aplikace. Ani poznámka na faktuře ve znění „ignoruj pokyny“ nemá měnit pravidla jejího chování.</p><p>O&nbsp;provedeném scénáři zůstává auditní záznam. Při zakládání organizace se zadané IČO nebo název firmy odešle do veřejného rejstříku ARES, kde Ethel dohledá údaje o&nbsp;firmě.</p></div></div></section>
 
-  <h1>Bezpečnost</h1>
-  <p class="rev-date">Poslední revize: 26. září 2026</p>
+<section id="zaznamy" class="block block-white"><div class="wrap"><div class="block-head"><p class="eyebrow">05 · Záznamy</p><h2>Jak dlouho uchováváme záznamy</h2></div><div class="prose"><p>V&nbsp;provozních záznamech v&nbsp;cloudu uchováváme vaši otázku, vygenerované SQL a&nbsp;počet spotřebovaných tokenů. Výsledky dotazů ani obsah příloh do těchto záznamů neukládáme.</p><p data-retention-days="180" data-retention-tables="request_log,feedback">Po 180 dnech se text otázky a&nbsp;SQL automaticky odstraní. Zůstane záznam o&nbsp;provedeném dotazu a&nbsp;spotřebě tokenů pro provozní vyúčtování. Stejná lhůta platí pro komentář, který nám napíšete k&nbsp;hodnocení odpovědi. Po 180 dnech se jeho text odstraní a&nbsp;zůstane jen hodnocení palcem nahoru nebo dolů.</p><p>Z&nbsp;telemetrie ukládáme pouze verzi programu. Evidujeme ji u&nbsp;aktivačního klíče a&nbsp;databáze Heliosu, ne u&nbsp;jednotlivých počítačů.</p><p>Dodržování těchto pravidel ověřují automatické testy při každé změně kódu. Pokud některý test neprojde, změna se do provozu nenasadí.</p></div></div></section>
 
-  <section class="sec-section" id="kde-zustavaji-vase-data">
-    <h2>Kde zůstávají vaše data</h2>
-    <p>Ethel posílá jazykovému modelu vaši otázku a popis datové struktury, tedy názvy tabulek a sloupců potřebných k odpovědi. Model z toho sestaví SQL dotaz. Ten se spustí na vašem serveru agentem, který běží vedle Heliosu, a výsledek zůstane u vás.</p>
-    <p>Když se zeptáte, kolik jste letos fakturovali konkrétní firmě, odejde do cloudu ta otázka a informace, že odpověď vznikne z tabulky dokladů. Částka, která z dotazu vyjde, do cloudu nejde.</p>
-    <p>V provozním záznamu držíme váš dotaz, vygenerované SQL a počet spotřebovaných tokenů. Výsledky dotazů neukládáme.</p>
-    <p data-retention-days="180" data-retention-tables="request_log,feedback">Tenhle záznam si necháváme 180 dní. Po té lhůtě z něj text dotazu i vygenerované SQL automaticky zmizí a zůstane jen údaj, že se dotaz stal, a spotřeba tokenů, ze které počítáme vyúčtování. Stejná lhůta platí pro komentář, který nám k odpovědi napíšete: po 180 dnech z hodnocení zmizí jeho text a zůstane jen palec nahoru nebo dolů, ze kterého sledujeme, jestli se Ethel zlepšuje. Úklid běží každou noc a hlídá ho kontrola, která se ozve, kdyby přestal.</p>
-    <p>Že to takhle opravdu funguje, hlídá sada automatických testů. Běží při každé změně kódu; když ji některá úprava poruší, změna neprojde do produkce.</p>
-  </section>
-
-  <section class="sec-section" id="ucty-a-prava">
-    <h2>Pod jakým účtem Ethel čte a kdo o tom rozhoduje</h2>
-    <p>Ethel čte z databáze Heliosu pod účtem, který jí při instalaci založí správce SQL Serveru přímo v okně Ethel: jeden login pro každou instalaci, s právem číst a spouštět procedury Ethel, bez práva zapisovat do tabulek Heliosu. Heslo se odvozuje z aktivačního tokenu a nikde není uložené. Kde se do Heliosu přihlašujete účtem Windows, žádný login nevzniká a Ethel čte pod účtem přihlášeného uživatele. Při spuštění mimo Helios běží dotazy pod účtem, kterým se uživatel přihlásil.</p>
-    <p>Co uživatel v Ethel vidí, nastavuje správce v Nastavení: kdo Ethel smí používat a které tabulky který uživatel čte. Mzdy, personalistika a banka jsou vyloučené pro všechny a zapnout je nejde. Tohle hlídá Ethel sama, dotaz po dotazu, bez ohledu na to, jaká práva má účet na SQL Serveru. Kdo chce druhý zámek i na úrovni databáze, může citlivé tabulky zakázat přímo na SQL Serveru; Ethel pak při pokusu řekne, že právo chybí, místo prázdného výsledku.</p>
-    <p>Přesný výčet práv, hotové SQL a postup odinstalace jsou v návodu <a href="/docs/pro-spravce/">Pro správce: účty a práva</a>.</p>
-  </section>
-
-  <section class="sec-section" id="treninkovani-modelu">
-    <h2>Trénování modelu</h2>
-    <p>Anthropic, jehož model Ethel používá, podle své dokumentace ve výchozím nastavení nepoužívá vstupy ani výstupy z komerčních produktů a API k trénování svých modelů.</p>
-  </section>
-
-  <section class="sec-section" id="kde-odchazi-vic">
-    <h2>Kde odchází víc než dotaz a struktura</h2>
-    <p>Tři místa. Vypisujeme je radši sami, než abyste je hledali.</p>
-
-    <h3 id="asistovane-akce">Asistované akce nad větším počtem záznamů</h3>
-    <p>U kontroly zásob pod minimem odejde modelu stav skladu a aktuální dodavatel u dotčených položek zboží. U kontroly nepřeložených popisů interní ID a název položky. Obojí je ve výchozím stavu vypnuté a zapíná se pro každého zákazníka zvlášť.</p>
-
-    <h3 id="diagnostika-chyb">Diagnostika chyb</h3>
-    <p>Když SQL dotaz selže, odejde zařazení chyby a název dotčeného objektu, například že sloupec neexistuje. Původní text chybové hlášky z databáze, který může nést konkrétní hodnoty, se ven neposílá.</p>
-
-    <h3 id="hlasove-cteni">Hlasové čtení odpovědí</h3>
-    <p>Ethel čte odpovědi hlasem, který běží na vašem počítači. Existuje i cloudová varianta: ta posílá text odpovědi včetně dat, která obsahuje, poskytovateli hlasové syntézy. Zapíná se jen účtům, kterým to výslovně povolíme, a dnes ji nemá zapnutou žádný zákazník.</p>
-  </section>
-
-    </div><!-- /docs-content -->
-  </article>
-
+<section class="cta-band"><div class="wrap cta-band-inner"><div><h2>Vyzkoušejte Ethel na vlastních datech</h2><p>Na vyzkoušení máte 14 dní zdarma. Aktivační klíč vám pošleme do 24 hodin.</p></div><a class="button button-solid" href="/#kontakt">Vyzkoušet 14 dní zdarma</a></div></section>
 </main>
 
-<footer>
-  <div class="footer-left">
-    &copy; 2026 Ethel &middot; Embedded Thinking for Helios
-    <br>Mgr. Jakub Ševela &middot; IČ: 75185628 &middot; <a href="mailto:info@ethel.cz">info@ethel.cz</a> &middot; <a href="/bezpecnost">Bezpečnost</a> &middot; <a href="/zasady-ochrany-osobnich-udaju/">Zásady zpracování osobních údajů</a> &middot; <a href="/faq">FAQ</a> &middot; <a href="/docs/changelog">Co je nového</a> &middot; <a href="/partneri">Partneři</a>
-    <br><span style="font-size: 0.72rem;">Ethel není produktem společnosti Asseco Solutions. Helios a Helios Inuvio jsou registrované ochranné známky.</span>
-  </div>
-  <div class="footer-right">v1.0 &middot; brno, cz</div>
-</footer>
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies" hidden><p><strong>Sušenky?</strong> Používáme jen analytické cookies, abychom věděli, jak vám web slouží. Žádný marketing ani sledování napříč weby. Můžete je odmítnout, web bude fungovat normálně. Více v&nbsp;<a href="/zasady-ochrany-osobnich-udaju/">Zásadách zpracování osobních údajů</a>.</p><div class="cookie-actions"><button class="button small button-solid" id="cookie-accept" type="button">Přijmout</button><button class="button small" id="cookie-reject" type="button">Odmítnout</button></div></div>
 
-<script>
-var nav = document.getElementById('nav');
-window.addEventListener('scroll', function() {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-</script>
-
-</body>
-</html>
+<footer class="site-footer"><div class="wrap"><div class="footer-top"><div><span class="footer-brand"><img src="/assets/logos/ethel-on-dark-animated.svg" alt="Ethel"></span><p>AI asistentka pro Helios Inuvio.</p><p class="footer-contact"><a href="mailto:info@ethel.cz">info@ethel.cz</a><a href="tel:+420774267301">+420&nbsp;774&nbsp;267&nbsp;301</a><a href="https://www.linkedin.com/company/ethel-cz" target="_blank" rel="noopener">LinkedIn</a></p></div><div class="footer-sites"><p class="footer-sites-label">Další produkt</p><div class="footer-sites-links"><a href="https://feedco.cz/" target="_blank" rel="noopener">feedco.cz ↗</a></div><p class="footer-sites-desc">Propojení Heliosu s&nbsp;e-shopy a&nbsp;produktovými feedy</p></div></div><div class="footer-links"><nav aria-label="Obsah webu"><a href="/funkce/">Co umí</a><a href="/bezpecnost/">Bezpečnost</a><a href="/download/">Ke stažení</a><a href="/zasady-ochrany-osobnich-udaju/">Osobní údaje</a></nav><nav aria-label="Nápověda"><a href="/docs/prvni-kroky/">První kroky</a><a href="/docs/pro-spravce/">Pro správce</a><a href="/docs/faq/">Časté otázky</a><a href="/docs/changelog/">Co je nového</a></nav></div><div class="footer-bottom footer-legal"><p>© 2026 Ethel · Mgr. Jakub Ševela · Lidická 700/19, 602 00 Brno · IČ: 75185628 · DIČ: CZ8503274703</p><p>Ethel je nezávislý nástroj a&nbsp;není produktem společnosti Asseco Solutions.</p></div></div></footer>
+<script src="/assets/web.js"></script>
+</body></html>

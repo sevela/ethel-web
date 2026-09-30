@@ -4,104 +4,79 @@
 <meta charset="UTF-8">
 <title>OG image – ethel.cz</title>
 <!-- Načítá se přes lokální server ze scripts/generate-og.js, ne přes file://,
-     aby fungovaly absolutní cesty k fontům a tokenům. -->
-<link rel="stylesheet" href="/brand/fonts.css">
-<link rel="stylesheet" href="/brand/tokens.css">
+     aby fungovaly absolutní cesty k tokenům a logu. Vizuál podle grafického
+     manuálu webu (brand/index.html): světlá plocha, Segoe UI, modrá značky,
+     terakotová čárka před štítkem, okno Ethel se šedou bublinou. -->
+<link rel="stylesheet" href="/assets/tokens.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
   body {
-    background: var(--bg);
+    background: var(--page);
     color: var(--text);
     font-family: var(--font-body);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 76px 88px;
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    gap: 56px;
+    align-items: center;
+    padding: 0 80px;
   }
 
-  /* jantarové záře – stejný princip jako hero na webu */
-  body::before {
-    content: '';
-    position: absolute;
-    top: -240px; right: -200px;
-    width: 760px; height: 760px;
-    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.20) 0%, rgba(var(--accent-rgb), 0) 66%);
-  }
-  body::after {
-    content: '';
-    position: absolute;
-    bottom: -280px; left: -180px;
-    width: 620px; height: 620px;
-    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.10) 0%, rgba(var(--accent-rgb), 0) 66%);
-  }
+  .logo { display: block; width: 190px; height: auto; margin-bottom: 52px; }
 
-  .grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(var(--accent-rgb), 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(var(--accent-rgb), 0.035) 1px, transparent 1px);
-    background-size: 48px 48px;
+  .eyebrow {
+    display: flex; align-items: center; gap: 16px;
+    font-weight: 700; font-size: 18px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 22px;
   }
+  .eyebrow::before { content: ''; width: 44px; height: 3px; background: var(--accent-line); }
 
-  .container { position: relative; z-index: 1; }
+  h1 { font-weight: 700; font-size: 76px; line-height: 1.08; letter-spacing: -.02em; }
 
-  .wordmark {
-    font-family: var(--font-wordmark);
-    font-weight: 500;
-    font-size: 34px;
-    text-transform: lowercase;
-    margin-bottom: 44px;
+  .lead { margin-top: 26px; font-size: 26px; line-height: 1.45; color: var(--text-muted); max-width: 560px; }
+
+  .window {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    box-shadow: 0 24px 60px rgba(23, 43, 56, .10);
+    overflow: hidden;
   }
-  .wordmark .dot { color: var(--accent); font-weight: 700; font-size: 1.25em; line-height: 1; }
-
-  h1 {
-    font-family: var(--font-display);
-    font-weight: var(--weight-display);
-    font-size: 64px; /* delší headline – 78px by přeteklo šířku 1200 */
-    line-height: 1.24;
-  }
-  h1 em { font-style: italic; color: var(--accent-l); }
-
-  .label {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 20px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent-l);
-    padding: 8px 18px;
-    border: 1px solid var(--accent-border);
-    background: var(--accent-tint);
-    border-radius: 8px;
-    margin-bottom: 30px;
-  }
-
-  .footer-row {
-    position: absolute;
-    bottom: 76px; left: 88px; right: 88px;
-    z-index: 1;
-    display: flex; align-items: center; justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 22px;
-    color: var(--accent-l);
-  }
-  .rule { flex: 1; height: 1px; background: var(--border-2); margin-left: 28px; }
+  .bar { height: 46px; background: var(--surface-alt); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 18px; }
+  .bar img { height: 20px; }
+  .chat { padding: 26px 24px 28px; display: grid; gap: 18px; font-size: 19px; line-height: 1.45; }
+  .user { justify-self: end; max-width: 88%; background: var(--win-bubble-user); padding: 12px 16px; border-radius: 12px 12px 3px 12px; }
+  .status { display: flex; align-items: center; gap: 10px; font-size: 16px; font-style: italic; color: var(--text-muted); }
+  .status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
+  .answer strong { color: var(--text); }
+  table { width: 100%; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; margin-top: 4px; }
+  td { padding: 8px 0; border-bottom: 1px solid var(--border); }
+  td:last-child { text-align: right; }
+  tr:last-child td { border-bottom: 0; }
 </style>
 </head>
 <body>
-  <div class="grid"></div>
-
-  <div class="container">
-    <div class="wordmark">ethel<span class="dot">.</span></div>
-    <div class="label">AI asistentka pro Helios Inuvio</div>
-    <h1>Rozumí vašemu Heliosu<br>a umí v&nbsp;něm pracovat</h1>
+  <div>
+    <img class="logo" src="/assets/logos/ethel-light.svg" alt="ethel.">
+    <div class="eyebrow">AI asistentka pro Helios Inuvio</div>
+    <h1>Zeptejte se Heliosu</h1>
+    <p class="lead">Najde čísla, vysvětlí sestavy, poradí s&nbsp;postupem a&nbsp;po potvrzení zapíše údaje.</p>
   </div>
 
-  <div class="footer-row">
-    <span>ethel.cz</span>
-    <span class="rule"></span>
+  <div class="window">
+    <div class="bar"><img src="/assets/logos/ethel-light.svg" alt=""></div>
+    <div class="chat">
+      <div class="user">Které faktury jsou víc než 30&nbsp;dní po splatnosti?</div>
+      <div class="status">Sbírám data z&nbsp;Heliosu</div>
+      <div class="answer">Celkem <strong>12</strong> faktur za <strong>328&nbsp;500&nbsp;Kč</strong>.
+        <table>
+          <tr><td>Alfa trade</td><td>184&nbsp;200&nbsp;Kč</td></tr>
+          <tr><td>Delta servis</td><td>96&nbsp;500&nbsp;Kč</td></tr>
+          <tr><td>Ostatní</td><td>47&nbsp;800&nbsp;Kč</td></tr>
+        </table>
+      </div>
+    </div>
   </div>
 </body>
 </html>
