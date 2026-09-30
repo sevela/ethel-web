@@ -441,9 +441,6 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
  .hero .chat-log{height:400px}
  .hero-note{margin:24px 0 18px 2px}
  .hero-note strong{font-size:23px}
- .hero .ask-list{grid-auto-flow:column;grid-auto-columns:min(78%,300px);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
- .hero .ask-list button{scroll-snap-align:start}
- .hero .ask-list .tag{display:block;margin:0 0 6px;text-align:left;min-width:0;width:fit-content}
  .hero .actions{margin-top:30px}
  .author{grid-template-columns:140px minmax(0,1fr);gap:28px}
  .author-photo{width:140px;height:140px}
