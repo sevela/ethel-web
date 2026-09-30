@@ -76,6 +76,8 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .more{display:inline-block;margin:33px 0 0;padding:13px 20px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:var(--radius-control);font-size:15px;font-weight:650;color:var(--brand);text-decoration:none;transition:border-color .15s,background .15s}
 .more:hover{border-color:var(--brand);background:var(--brand-tint)}
 .actions .more{margin:0}
+.prose+.actions{margin-top:24px}
+.actions+.prose{margin-top:36px}
 .block a:not(.button):not(.more){color:var(--brand)}
 
 /* --- 4. Hero --------------------------------------------------------------- */
