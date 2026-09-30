@@ -73,7 +73,7 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 
 /* Odkaz se šipkou (→ dál, ↓ na sekci níž): obrysové tlačítko s čárkovaným rámečkem (jako .ask-list a .addon), bez podtržení,
    levý okraj rámečku zarovnaný s obsahem; na hover plná modrá čára a modrý podklad. */
-.more{display:inline-block;margin:28px 0 0;padding:13px 20px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:var(--radius-control);font-size:15px;font-weight:650;color:var(--brand);text-decoration:none;transition:border-color .15s,background .15s}
+.more{display:inline-block;margin:33px 0 0;padding:13px 20px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:var(--radius-control);font-size:15px;font-weight:650;color:var(--brand);text-decoration:none;transition:border-color .15s,background .15s}
 .more:hover{border-color:var(--brand);background:var(--brand-tint)}
 .actions .more{margin:0}
 .block a:not(.button):not(.more){color:var(--brand)}
