@@ -87,7 +87,7 @@ SQL Server určuje technická oprávnění účtu. Další pravidla pro jednotli
 - **Nastavení → Správa → Uživatelé:** určuje, kdo smí Ethel používat. Uživatel s vypnutým přístupem ji nespustí.
 - **Nastavení → Správa → Přístup k datům:** uživatel může mít přístup ke všemu kromě zakázaných oblastí, nebo pouze k tabulkám z přiřazených profilů. Noví uživatelé začínají ve druhém režimu a bez profilu nemají přístup k datům. Uživatelé ze starších instalací mohou mít první režim, proto zkontrolujte, zda vám vyhovuje. Profily mohou tabulky povolovat i zakazovat.
 - **Nastavení → Správa → Audit:** zaznamenává změny režimu a přiřazených profilů u jednotlivých uživatelů včetně toho, kdo je provedl.
-- **Citlivé moduly:** Mzdy, Personalistika a Banka jsou ve výchozím nastavení zamčené v programu i cloudové službě. Odemkneme je na žádost firmy. Nápovědu k jejich používání může Ethel poskytovat i bez přístupu k datům.
+- **Citlivé moduly:** Mzdy, Personalistika a Banka jsou ve výchozím nastavení zamknuté v programu i cloudové službě. Odemkneme je na žádost firmy. Nápovědu k jejich používání může Ethel poskytovat i bez přístupu k datům.
 - **Trvale zakázané tabulky:** zahrnují uživatele, role a oprávnění Heliosu, e-maily, datové schránky a vybrané systémové tabulky. Přístup k nim nelze povolit profilem.
 - **Kontrola čtecích dotazů:** běžný dotaz smí obsahovat jediný příkaz `SELECT` (případně uvozený `WITH`). Zápisy probíhají odděleně přes připravené scénáře.
 

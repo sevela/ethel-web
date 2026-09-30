@@ -71,7 +71,7 @@ Do potvrzení můžete scénář zrušit.
 - **Data mění pouze pomocí scénářů.** Běžné otázky data jen čtou. Scénář může zapsat pouze to, k čemu je připravený, a čeká na vaše potvrzení.
 - **Nemá samostatný přístup k vašim souborům, e-mailům ani jiným aplikacím.** Pracuje s databází Heliosu a se soubory, které jí sami přiložíte. Při zakládání organizace vyhledává také ve veřejném rejstříku ARES.
 - **Běžný dotaz na data musí být jediný čtecí příkaz SELECT.** Program to před spuštěním kontroluje. Zápisy probíhají odděleně prostřednictvím scénářů.
-- **Mzdy, Personalistika a Banka jsou ve výchozím nastavení zamčené.** Přístup k jejich datům zapneme na žádost firmy. S používáním těchto modulů Ethel poradí podle nápovědy i bez odemčení.
+- **Mzdy, Personalistika a Banka jsou ve výchozím nastavení zamknuté.** Přístup k jejich datům zapneme na žádost firmy. S používáním těchto modulů Ethel poradí podle nápovědy i bez odemčení.
 - **Přístup k datům určuje správce.** Ethel nemůže zpřístupnit oblasti, které máte zakázané.
 
 [Jak Ethel pracuje s daty](/bezpecnost/)
