@@ -5,13 +5,20 @@
 
 ## Struktura repa
 
-- `index.html`, `faq/`, `bezpecnost/`, `brand/`, `nahled/` — statický marketingový/dokumentační
-  obsah (landing page, dokumentace, brand materiály). Deploy na **ethel.cz** přes GitHub Pages
-  (`CNAME`).
-- `scripts/build-docs.js` — renderuje `docs/*.md` do `docs/<slug>/index.html` přes `marked`.
-  **Po každé změně `docs/*.md` spusť `npm run build:docs` a commitni i vygenerovaný
-  `docs/<slug>/index.html`** — jinak se na ethel.cz nic nezmění (viz `README.md`).
-- `scripts/build-fonts.js`, `scripts/generate-og.js` — pomocné build skripty.
+- `index.html`, `funkce/`, `akce/`, `bezpecnost/`, `faq/` — veřejné stránky; `docs/` — nápověda
+  (rozcestník, generované návody, ručně psaný `changelog/`); `download/` — stažení Ethel.exe.
+  Deploy na **ethel.cz** přes GitHub Pages (`CNAME`).
+- `assets/` — jediné místo se vzhledem: `tokens.css`, `ethel.css`, `forms.css`, `web.js`, `forms.js`,
+  `download.js`, loga (`assets/logos/`) a písmo Caveat (`assets/fonts/`).
+- `brand/index.html` — živý grafický manuál webu (v2.0). **Vzhled webu řídí grafický manuál
+  `brand/index.html`; nový prvek nejdřív do manuálu, pak na web. Žádné inline styly, žádný
+  `<style>` ve stránkách.**
+- `scripts/build-docs.js` + `scripts/_docs-template.html` — renderují `docs/*.md` do
+  `docs/<slug>/index.html` přes `marked`. **Po každé změně `docs/*.md` nebo šablony spusť
+  `npm run build:docs` a commitni i vygenerovaný `docs/<slug>/index.html`** — jinak se na
+  ethel.cz nic nezmění (viz `README.md`).
+- `scripts/generate-og.js` + `scripts/og-image.html` — generátor OG obrázku (zatím v předchozím
+  vizuálu, řeší se zvlášť).
 - `scripts/quality/` — nástroje pro CI kvalitu (viz níže).
 - `.github/workflows/ci.yml` — vlastní ETH-270, ostatní dávky do něj nesahají bez konzultace.
 
