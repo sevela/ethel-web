@@ -343,6 +343,8 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .data-table td{padding:14px 20px;vertical-align:top;color:var(--text-muted)}
 .data-table td:first-child{font-weight:600;color:var(--text)}
 .data-table tbody tr:last-child td{border-bottom:0}
+/* .cards-prose: cards inside a text page, as wide as the text column. */
+.cards-prose{max-width:760px;margin:4px 0 20px}
 .qa-group{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:24px 70px}
 .qa-group .block-head{margin:0}
 .qa-group .block-head h2{font-size:28px}
