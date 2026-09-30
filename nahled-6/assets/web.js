@@ -25,16 +25,16 @@ if(heroLog){
  const TYPE_MS=28,SEND_MS=350,SEARCH_MS=1600,HOLD_MS=6500;
  const INVOICES={cols:['Odběratel','Po splatnosti'],rows:[['Alfa trade',184200],['Delta servis',96500],['Ostatní',47800]]};
  const CAPS=[
-  {q:'Které faktury jsou víc než 30 dní po splatnosti?',status:'Ethel hledá data',data:INVOICES,
-   a:'<p>Celkem <strong>12 faktur za 328 500 Kč.</strong> Největší část připadá na Alfa trade.</p>'},
-  {q:'A jaký byl vývoj za posledních šest měsíců?',status:'Ethel hledá data',follow:0,
+  {q:'Které faktury jsou víc než 30 dní po splatnosti?',status:'Sbírám data z Heliosu',data:INVOICES,
+   a:'<p>Celkem <strong>12</strong> faktur za <strong>328 500 Kč</strong>. Největší část připadá na Alfa trade.</p>'},
+  {q:'A jaký byl vývoj za posledních šest měsíců?',status:'Sbírám data z Heliosu',follow:0,
    a:'<p>Po splatnosti je teď nejvíc za celé pololetí, od srpna <strong>+9 %</strong>.</p><figure class="bar-chart" aria-label="Pohledávky po splatnosti po měsících, v tisících Kč: duben 212, květen 245, červen 198, červenec 263, srpen 301, září 329."><div style="--v:64%"><span>212</span><i></i><b>dub</b></div><div style="--v:74%"><span>245</span><i></i><b>kvě</b></div><div style="--v:60%"><span>198</span><i></i><b>čvn</b></div><div style="--v:80%"><span>263</span><i></i><b>čvc</b></div><div style="--v:91%"><span>301</span><i></i><b>srp</b></div><div class="is-now" style="--v:100%"><span>329</span><i></i><b>zář</b></div></figure><p class="chart-caption">tis. Kč po splatnosti</p>'},
-  {q:'Jak se počítá sloupec Marže % v tomhle přehledu?',status:'Ethel čte definici sloupce',
-   a:'<p><strong>Marže %</strong> je uživatelský sloupec vaší firmy. Z&nbsp;položek faktury sečte prodejní a&nbsp;nákladové ceny a&nbsp;spočítá, kolik procent z&nbsp;prodeje zůstane.</p><div class="formula"><span>Jak se počítá</span><code>(prodej − náklad) ÷ prodej × 100</code></div><p class="answer-note">Když faktura nemá položky s&nbsp;nákladovou cenou, sloupec zůstane prázdný. Proto u&nbsp;služeb uvidíte prázdné místo, ne nulu.</p>'},
-  {q:'Jak stornovat fakturu?',status:'Ethel hledá v nápovědě Heliosu',
-   a:'<p>Postup podle nápovědy Heliosu Inuvio:</p><ol class="help-steps"><li>V&nbsp;přehledu Faktury vydané označte fakturu, kterou chcete stornovat.</li><li>Spusťte storno dokladu. Helios k&nbsp;faktuře připraví opravný doklad.</li><li>Opravný doklad zkontrolujte a&nbsp;zrealizujte.</li><li>Pokud už byla faktura zaplacená, vyřešte i&nbsp;vrácení úhrady.</li></ol><p class="answer-source">Zdroj: <span>Nápověda Helios Inuvio · Faktury vydané, storno dokladu</span> ↗</p>'},
-  {q:'Založ organizaci Ukázková s.r.o.',status:'Ethel hledá firmu v ARES',
-   a:'<p>Firmu jsem našla v&nbsp;ARES a&nbsp;v&nbsp;Heliosu ještě není. Zkontrolujte údaje, zapíšu je až po potvrzení.</p><div class="check-card"><dl><div><dt>Název</dt><dd>Ukázková s.r.o.</dd><dd class="origin">ARES</dd></div><div><dt>Adresa</dt><dd>Ukázková 12, 602 00 Brno</dd><dd class="origin">ARES</dd></div><div><dt>DIČ</dt><dd>CZ12345678</dd><dd class="origin">ARES</dd></div><div><dt>Splatnost</dt><dd>14 dní</dd><dd class="origin origin-default">výchozí</dd></div></dl><div class="check-card-actions"><span class="check-confirm">Potvrdit</span><span>Zrušit</span></div></div><p class="small">Ilustrační údaje. Do Heliosu se zatím nic nezapsalo.</p>'}
+  {q:'Jak se počítá sloupec Marže % v tomhle přehledu?',status:'Čtu definici sloupce',
+   a:'<p>Marže % je uživatelský sloupec vaší firmy. Z&nbsp;položek faktury sečte prodejní a&nbsp;nákladové ceny a&nbsp;spočítá, kolik procent z&nbsp;prodeje zůstane:</p><pre class="answer-code"><code>(prodej − náklad) ÷ prodej × 100</code></pre><p>Když faktura nemá položky s&nbsp;nákladovou cenou, sloupec zůstane prázdný. Proto u&nbsp;služeb uvidíte prázdné místo, ne nulu.</p>'},
+  {q:'Jak stornovat fakturu?',status:'Hledám v nápovědě',
+   a:'<p>Pokud je faktura jen vystavená (ještě nebyla realizována ani zaúčtována), stačí ji v&nbsp;přehledu označit a&nbsp;použít akci Zrušit – systém se zeptá, jestli chceš záznam smazat, a&nbsp;potvrdíš Ano.</p><p>Pokud je faktura realizovaná nebo zaúčtovaná, smazat ji takhle nejde. Musíš vystavit opravný doklad:</p><ol class="help-steps"><li>Označ fakturu v&nbsp;přehledu.</li><li>Použij akci Generovat dobropis – tím vznikne storno (dobropis) k&nbsp;celé faktuře.</li><li>Pokud chceš stornovat jen část, použij na záložce Položky akci Převod položek, Vydané faktury a&nbsp;vyber, které položky se mají převést.</li></ol>'},
+  {q:'Založ organizaci Ukázková s.r.o.',status:'Hledám v ARESu',
+   a:'<p>Firmu jsem našla v&nbsp;ARES a&nbsp;v&nbsp;Heliosu ještě není. Zkontrolujte údaje, zapíšu je až po potvrzení.</p><div class="check-card"><dl><div><dt>Název</dt><dd>Ukázková s.r.o.</dd><dd class="origin">ARES</dd></div><div><dt>Adresa</dt><dd>Ukázková 12, 602 00 Brno</dd><dd class="origin">ARES</dd></div><div><dt>DIČ</dt><dd>CZ12345678</dd><dd class="origin">ARES</dd></div><div><dt>Splatnost</dt><dd>14 dní</dd><dd class="origin origin-default">výchozí</dd></div></dl><div class="check-card-actions"><span class="check-confirm">Potvrdit</span><span>Zrušit</span></div></div>'}
  ];
  const fmt=n=>n.toLocaleString('cs-CZ')+' Kč';
  const table=d=>`<table><thead><tr><th>${d.cols[0]}</th><th class="num">${d.cols[1]}</th></tr></thead><tbody>${d.rows.map(([n,v])=>`<tr><td>${esc(n)}</td><td class="num">${fmt(v)}</td></tr>`).join('')}</tbody></table>`;
@@ -68,7 +68,7 @@ if(heroLog){
   [...c.q].forEach((_,k)=>later(()=>{input.textContent=c.q.slice(0,k+1)},t+=TYPE_MS));
   later(()=>send.classList.add('is-sending'),t+=SEND_MS);
   later(()=>{send.classList.remove('is-sending');input.classList.remove('is-typing');input.textContent='Zadej otázku…';append(`<p class="user-message is-new">${esc(c.q)}</p>`)},t+=250);
-  later(()=>append(`<p class="status-line is-new">${c.status}<span class="dots" aria-hidden="true"></span></p>`),t+=500);
+  later(()=>append(`<p class="status-line is-new">${c.status}</p>`),t+=500);
   later(()=>{heroLog.querySelector('.status-line')?.remove();answer(i,true)},t+=SEARCH_MS);
   if(auto)later(()=>run((i+1)%CAPS.length),t+=HOLD_MS);
  };

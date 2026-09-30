@@ -159,14 +159,12 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .chat-input-send.is-sending{background:var(--win-bubble-bot);color:var(--text)}
 .is-new{animation:seq-in .4s ease-out}
 @keyframes seq-in{from{opacity:0;transform:translateY(8px)}}
-.status-line{display:flex;align-items:center;gap:9px;margin:0;font-size:13px;color:var(--text-muted)}
-.status-line::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand);animation:status-pulse 1s ease-in-out infinite}
-.dots::after{content:"…";animation:dots 1.2s steps(1) infinite}
-@keyframes status-pulse{50%{opacity:.3;transform:scale(.7)}}
-@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"…"}}
+.status-line{display:flex;align-items:center;gap:7px;margin:0;font-size:13px;font-style:italic;color:var(--text-muted)}
+.status-line::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--brand);animation:status-pulse 1.3s ease-in-out infinite}
+@keyframes status-pulse{0%,100%{transform:scale(.7);opacity:.45}50%{transform:scale(1);opacity:1}}
 
 /* Sloupcový graf v odpovědi. */
-.bar-chart{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;align-items:end;height:136px;margin:8px 0 0}
+.bar-chart{display:grid;grid-template-columns:repeat(6,34px);justify-content:start;gap:8px;align-items:end;height:136px;margin:8px 0 0}
 .bar-chart div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
 .bar-chart i{display:block;width:100%;max-width:36px;height:calc(var(--v) * .7);border-radius:5px 5px 2px 2px;background:var(--chart-muted);transform-origin:bottom}
 .bar-chart .is-now i{background:var(--brand)}
@@ -183,17 +181,15 @@ nav a:hover,nav a[aria-current=page]{color:var(--brand)}
 .help-steps li::before{content:counter(step);position:absolute;left:0;top:8px;width:24px;height:24px;border-radius:50%;background:var(--brand-tint);color:var(--brand);font:600 12px/24px var(--font-body);text-align:center}
 .answer-source{margin:12px 0 0!important;font-size:12px;color:var(--text-muted)}
 .answer-source span{color:var(--brand);text-decoration:underline;text-underline-offset:3px}
-.formula{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:8px;background:var(--surface-alt)}
-.formula span{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
-.formula code{font:500 16px/1.4 var(--font-code);color:var(--text)}
-.answer-note{margin:12px 0 0!important;font-size:13px;color:var(--text-muted)}
+.answer-code{margin:0 0 10px;padding:8px 12px;border-radius:6px;background:var(--surface-alt);overflow-x:auto}
+.answer-code code{font:400 13px/1.5 var(--font-code);color:var(--text)}
 
 /* Kontrolní karta akce (uvnitř .card). */
 .check-card dl{margin:0}
-.check-card dl>div{display:grid;grid-template-columns:minmax(80px,.8fr) minmax(0,1.6fr) auto;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.check-card dl>div{display:grid;grid-template-columns:minmax(80px,.8fr) minmax(0,1.6fr) 76px;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
 .check-card dt{color:var(--text-muted)}
 .check-card dd{margin:0;min-width:0;overflow-wrap:anywhere}
-.check-card .origin{font-size:10px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--brand-tint);color:var(--brand);white-space:nowrap}
+.check-card .origin{justify-self:end;font-size:10px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--brand-tint);color:var(--brand);white-space:nowrap}
 .check-card .origin-you{background:var(--brand-tint);color:var(--brand)}
 .check-card .origin-default{background:var(--surface-alt);color:var(--text-muted)}
 .check-card-actions{display:flex;gap:8px;margin-top:6px}
