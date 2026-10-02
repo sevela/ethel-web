@@ -48,7 +48,24 @@ Pokud potřebná práva nemá, je nutné mu přidělit `SELECT` na schéma `dbo`
 
 ### Spuštění bez Heliosu
 
-Ethel lze spustit dvojklikem na `Ethel.exe`. Soubory `Helios.INI` a `Licence.ini` musí být vedle programu nebo o složku výš.
+Ethel lze spustit dvojklikem na `Ethel.exe`. Server a licenci si Ethel přečte ze souborů `Helios.INI` a `Licence.ini` vedle programu nebo o složku výš.
+
+Když `Ethel.exe` leží jinde, například na jiném počítači nebo mimo složku Heliosu, zkopírujte do `Ethel.ini` beze změny sekci `[SQLServer]` ze souboru `Helios.INI` a sekci `[HELIOS]` ze souboru `Licence.ini`:
+
+```ini
+[ethel]
+token = …
+
+[SQLServer]
+Server=SQL01\HELIOS
+SystemDB=HeliosSys
+LoginMode=2
+
+[HELIOS]
+Licence=HEXX0000-00000
+```
+
+Pokud Ethel soubory Heliosu najde, mají přednost před kopií v `Ethel.ini`. Počítač musí mít síťový přístup k SQL Serveru a nainstalovaný ODBC ovladač pro SQL Server. Funguje to od verze 1.1.28.
 
 Uživatel se přihlásí svým jménem a heslem jako do Heliosu nebo účtem Windows. Dotazy v tomto režimu běží pod jeho účtem, nikoli pod SQL účtem Ethel. Uživatel zároveň musí mít používání Ethel povolené.
 
