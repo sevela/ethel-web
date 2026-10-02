@@ -77,7 +77,20 @@
 <p>Samostatný SQL login se nevytváří. Ethel pracuje pod účtem Windows přihlášeného uživatele a používá jeho databázová oprávnění.</p>
 <p>Pokud potřebná práva nemá, je nutné mu přidělit <code>SELECT</code> na schéma <code>dbo</code> a <code>EXECUTE</code> na příslušné procedury <code>epx_Ethel_*</code>.</p>
 <h3 id="spusteni-bez-heliosu">Spuštění bez Heliosu</h3>
-<p>Ethel lze spustit dvojklikem na <code>Ethel.exe</code>. Soubory <code>Helios.INI</code> a <code>Licence.ini</code> musí být vedle programu nebo o složku výš.</p>
+<p>Ethel lze spustit dvojklikem na <code>Ethel.exe</code>. Server a licenci si Ethel přečte ze souborů <code>Helios.INI</code> a <code>Licence.ini</code> vedle programu nebo o složku výš.</p>
+<p>Když <code>Ethel.exe</code> leží jinde, například na jiném počítači nebo mimo složku Heliosu, zkopírujte do <code>Ethel.ini</code> beze změny sekci <code>[SQLServer]</code> ze souboru <code>Helios.INI</code> a sekci <code>[HELIOS]</code> ze souboru <code>Licence.ini</code>:</p>
+<pre><code class="language-ini">[ethel]
+token = …
+
+[SQLServer]
+Server=SQL01\HELIOS
+SystemDB=HeliosSys
+LoginMode=2
+
+[HELIOS]
+Licence=HEXX0000-00000
+</code></pre>
+<p>Pokud Ethel soubory Heliosu najde, mají přednost před kopií v <code>Ethel.ini</code>. Počítač musí mít síťový přístup k SQL Serveru a nainstalovaný ODBC ovladač pro SQL Server. Funguje to od verze 1.1.28.</p>
 <p>Uživatel se přihlásí svým jménem a heslem jako do Heliosu nebo účtem Windows. Dotazy v tomto režimu běží pod jeho účtem, nikoli pod SQL účtem Ethel. Uživatel zároveň musí mít používání Ethel povolené.</p>
 <p>Způsob přihlášení nastavíte v <strong>Nastavení → Správa → Licence a token → Přihlášení bez Heliosu</strong>. V souboru <code>Ethel.ini</code> mu odpovídá klíč <code>prihlaseni</code>.</p>
 <p>Na výběr jsou tři možnosti:</p>
